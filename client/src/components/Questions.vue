@@ -1,8 +1,11 @@
 <template lang="html">
 <div class="">
-  <div class="question">
-    <h1>{{randomQuestion.question}}</h1>
-    <answer v-for="(option, index) in shuffle(randomQuestion.options)" :key='index' :option="option"></answer>
+  <div class="question-wrapper">
+    <h1 class="question">{{randomQuestion.question}}</h1>
+    </div>
+    <div class="list-container">
+      <answer class='list' v-for="(option, index) in shuffle(randomQuestion.options)" :key='index' :option="option"></answer>
+
   </div>
 </div>
 
@@ -20,7 +23,7 @@ export default {
 
   },
   mounted(){
-  
+
 
 },
 
@@ -48,4 +51,35 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.question{
+  font-family: 'Permanent Marker', cursive;
+  border-style: solid;
+  border-color: yellow
+}
+.question-wrapper{
+  border-style: solid;
+  border-color: red;
+  width: 100;
+  margin:0;
+  padding: 0;
+
+}
+.list-container {
+  border-color: black;
+  border-style: solid;
+  display: block;
+  text-align: center;
+  margin:0;
+  padding: 0;
+
+}
+
+.list {
+  border-color: purple;
+  border-style: solid;
+  margin:0;
+  padding: 0;
+  width: 100%;
+  display: inline-block;
+}
 </style>

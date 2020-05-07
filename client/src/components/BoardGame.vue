@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="">
     <questions v-if="selectedCategory":randomQuestion="randomQuestion"></questions>
-    {{score}}
+    <p>{{score}}</p>
     <div class="button">
-    <button type="button" name="button" v-on:click="randomQuest">Generate</button>
+    <button v-if="!answeredQuestions.length"type="button" name="button" v-on:click="randomQuest">Generate</button>
     </div>
   </div>
 
@@ -51,7 +51,7 @@ export default {
       options: options,
       question: query.question,
       correct_answer: query.correct_answer,
-      category: query.category}
+      category: query.category} //so we can push it to the player wins
       const newObject = {};
 //want the category value of random question as a key of the new object
       this.answeredQuestions.push(newObject[this.randomQuestion.category]= this.randomQuestion.question)
@@ -72,56 +72,19 @@ export default {
       console.log(`${category} loaded`);
   },
 
-//     loadSport: function(){
-//       const url = 'https://opentdb.com/api.php?amount=50&category=21&type=multiple'
-//       fetch(url).then(response=> response.json())
-//       .then(data => this.sport = data.results)
-//   },
-//
-//   loadGeograpy: function(){
-//     const url = 'https://opentdb.com/api.php?amount=50&category=22&type=multiple'
-//     fetch(url).then(response=> response.json())
-//     .then(data => this.geography = data.results)
-// },
-// loadGeneralKnowledge: function(){
-//     const url = 'https://opentdb.com/api.php?amount=50&category=9&type=multiple'
-//     fetch(url).then(response=> response.json())
-//     .then(data => this.general_knowledge = data.results)
-// },
-// loadHistory: function(){
-//     const url = 'https://opentdb.com/api.php?amount=50&category=23&type=multiple'
-//     fetch(url).then(response=> response.json())
-//     .then(data => this.history = data.results)
-// },
-// loadAnimal: function(){
-//     const url = 'https://opentdb.com/api.php?amount=50&category=27&type=multiple'
-//     fetch(url).then(response=> response.json())
-//     .then(data => this.animal = data.results)
-// },
-// loadCelebrity: function(){
-//     const url = 'https://opentdb.com/api.php?amount=50&category=27&type=multiple'
-//     fetch(url).then(response=> response.json())
-//     .then(data => this.celebrity = data.results)
-// },
 //JUST FOR TESTING PURPOSE
 loadSelected: function(){
 const url = 'https://opentdb.com/api.php?amount=50&category=21&type=multiple'
 fetch(url).then(response=> response.json())
 .then(data => this.selectedCategory = data.results)
 },
-
+//
 
 },
 mounted(){
   //JUST FOR TESTING
   this.loadSelected();
-  //
-  // this.loadSport();
-  // this.loadGeograpy();
-  // this.loadGeneralKnowledge();
-  // this.loadHistory();
-  // this.loadAnimal();
-  // this.loadCelebrity();
+//
   this.loadCategory('sport', 21);
   this.loadCategory('geography', 22);
   this.loadCategory('general_knowledge', 9);
@@ -133,7 +96,7 @@ mounted(){
   eventBus.$on('selected-option', (option) =>
   { if (option === this.randomQuestion.correct_answer){
   alert("well done");
-  this.randomQuest();
+  this.randomQuest();//create a new question in either cases
   this.score = this.score + 1
 
   }else{
@@ -147,8 +110,12 @@ mounted(){
 </script>
 
 <style lang="css" scoped>
-button{ position:absolute;
-    transition: .5s ease;
+body{
+  margin: 0;
+  padding: 0;
+}
+button{
+  position:absolute;
     top: 50%;
     left: 50%;
 }
