@@ -1,5 +1,5 @@
 <template lang="html">
-
+<p>BoardGAME</p>
 </template>
 
 <script>
@@ -17,8 +17,8 @@ export default {
   },
   components:{
 
-  }
   },
+
   methods:{
 
   //   loadCategory: function(category, category_id){
