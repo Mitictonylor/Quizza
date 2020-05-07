@@ -1,12 +1,12 @@
 <template lang="html">
   <div class="">
-    <category :selectedCategory="selectedCategory"></category>
+    <questions :selectedCategory="selectedCategory"></questions>
   </div>
 
 </template>
 
 <script>
-import Category from "@/components/Category.vue"
+import Questions from "@/components/Questions.vue"
 export default {
   data(){
     return{
@@ -16,11 +16,11 @@ export default {
       history:[],
       animal:[],
       celebrity:[],
-      selectedCategory: null
+      selectedCategory: []
     }
   },
   components:{
-"category": Category
+"questions": Questions
   },
 
   methods:{
@@ -60,10 +60,22 @@ loadCelebrity: function(){
     const url = 'https://opentdb.com/api.php?amount=50&category=27&type=multiple'
     fetch(url).then(response=> response.json())
     .then(data => this.celebrity = data.results)
-}
+},
+//JUST FOR TESTING PURPOSE
+loadSelected: function(){
+const url = 'https://opentdb.com/api.php?amount=50&category=21&type=multiple'
+fetch(url).then(response=> response.json())
+.then(data => this.selectedCategory = data.results)
+},
 
 },
+
+
+
 mounted(){
+  //JUST FOR TESTING
+  this.loadSelected()
+  //
   this.loadSport()
   this.loadGeograpy()
   this.loadGeneralKnowledge()

@@ -1,13 +1,14 @@
 <template lang="html">
-<div class="">
-  
+<div >
+
+    
 </div>
 </template>
 
 <script>
 export default {
-  name: 'Category',
-  props: ['selectedCategory']
+  name:"QuestionsItem",
+  props:['question']
 }
 </script>
 
