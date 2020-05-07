@@ -3,6 +3,7 @@
     <questions v-if="selectedCategory":randomQuestion="randomQuestion"></questions>
     {{score}}
     <button type="button" name="button" v-on:click="randomQuest">Generate</button>
+
   </div>
 
 </template>
@@ -21,6 +22,7 @@ export default {
   celebrity:[],
   score: 0,
   selectedCategory: [],//will be filled when the token will end up to a piece of the board
+  answeredQuestions:[],
   randomQuestion: {
         question: 'In the 2014 FIFA World Cup, what was the final score in the match Brazil - Germany?',
         options: [ "1-5", "1-6", "2-6", "1-7" ],
@@ -41,10 +43,19 @@ export default {
     const query = this.selectedCategory[Math.floor(Math.random() * this.selectedCategory.length)]
     const options = query.incorrect_answers.map(answer => answer)
     options.push(query.correct_answer)
-    this.randomQuestion = {
-    options: options,
-    question: query,
-    correct_answer: query.correct_answer}
+    if(!this.answeredQuestions.includes(query.question)){
+
+      this.randomQuestion = {
+      options: options,
+      question: query.question,
+      correct_answer: query.correct_answer}
+      this.answeredQuestions.push(this.randomQuestion.question)
+    }else if(this.answeredQuestions.length === 49){
+      this.loadSelected();
+    }else{
+      this.randomQuest()
+    }
+
   },
   //   loadCategory: function(category, category_id){
   //     const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`
@@ -112,10 +123,13 @@ mounted(){
 //Check if the clicked answer is right if yes should update the score
   eventBus.$on('selected-option', (option) =>
   { if (option === this.randomQuestion.correct_answer){
-  alert("well done")
-  this.score = this.score + 1
+  alert("well done");
+  this.randomQuest();
+  this.score = this.score + 1  
+
   }else{
   alert("boooo")
+  this.randomQuest();
   }})
 
 }
