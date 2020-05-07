@@ -1,6 +1,8 @@
 <template lang="html">
   <div class="">
     <questions v-if="selectedCategory":randomQuestion="randomQuestion"></questions>
+    {{score}}
+    <button type="button" name="button" v-on:click="randomQuest">Generate</button>
   </div>
 
 </template>
@@ -27,23 +29,23 @@ export default {
     }
   },
   computed:{
-    //will be invoked when the token end up to a piece of the board
-    // randomQuest: function(){
-    // const query = this.selectedCategory[Math.floor(Math.random() * this.selectedCategory.length)]
-    // const options = query.incorrect_answers.map(answer => answer)
-    // options.push(query.correct_answer)
-    // this.randomQuestion = {
-    // options: options,
-    // question: query,
-    // correct_answer: query.correct_answer}
-    // }
+
   },
 
   components:{
 "questions": Questions
   },
   methods:{
-
+    //will be invoked when the token end up to a piece of the board
+    randomQuest: function(){
+    const query = this.selectedCategory[Math.floor(Math.random() * this.selectedCategory.length)]
+    const options = query.incorrect_answers.map(answer => answer)
+    options.push(query.correct_answer)
+    this.randomQuestion = {
+    options: options,
+    question: query,
+    correct_answer: query.correct_answer}
+  },
   //   loadCategory: function(category, category_id){
   //     const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`
   //     fetch(url).then(response=> response.json())
