@@ -15,12 +15,14 @@ import Questions from "@/components/Questions.vue"
 export default {
   data(){
     return{
-  sport:[],
-  geography:[],
-  general_knowledge:[],
-  history:[],
-  animal:[],
-  celebrity:[],
+      categories:{
+        sport:[],
+        geography:[],
+        general_knowledge:[],
+        history:[],
+        animal:[],
+        science_and_nature:[]
+      },
   score: 0,
   selectedCategory: [],//will be filled when the token will end up to a piece of the board
   answeredQuestions:[],
@@ -45,56 +47,62 @@ export default {
     const options = query.incorrect_answers.map(answer => answer)
     options.push(query.correct_answer)
     if(!this.answeredQuestions.includes(query.question)){
-
       this.randomQuestion = {
       options: options,
       question: query.question,
-      correct_answer: query.correct_answer}
-      this.answeredQuestions.push(this.randomQuestion.question)
-    }else if(this.answeredQuestions.length === 49){
+      correct_answer: query.correct_answer,
+      category: query.category}
+      const newObject = {};
+//want the category value of random question as a key of the new object
+      this.answeredQuestions.push(newObject[this.randomQuestion.category]= this.randomQuestion.question)
+    }else if(
+      //need review because there will be more category involved not, only one, or we could
+      //just use the same 50 all over again by cleaning up answered questions
+      this.answeredQuestions.length === 49){
       this.loadSelected();
     }else{
       this.randomQuest()
     }
 
   },
-  //   loadCategory: function(category, category_id){
-  //     const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`
-  //     fetch(url).then(response=> response.json())
-  //     .then(data => this.categories[category] = data.results)
-  // },
-
-    loadSport: function(){
-      const url = 'https://opentdb.com/api.php?amount=50&category=21&type=multiple'
+    loadCategory: function(category, category_id){
+      const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`
       fetch(url).then(response=> response.json())
-      .then(data => this.sport = data.results)
+      .then(data => this.categories[category] = data.results)
+      console.log(`${category} loaded`);
   },
 
-  loadGeograpy: function(){
-    const url = 'https://opentdb.com/api.php?amount=50&category=22&type=multiple'
-    fetch(url).then(response=> response.json())
-    .then(data => this.geography = data.results)
-},
-loadGeneralKnowledge: function(){
-    const url = 'https://opentdb.com/api.php?amount=50&category=9&type=multiple'
-    fetch(url).then(response=> response.json())
-    .then(data => this.general_knowledge = data.results)
-},
-loadHistory: function(){
-    const url = 'https://opentdb.com/api.php?amount=50&category=23&type=multiple'
-    fetch(url).then(response=> response.json())
-    .then(data => this.history = data.results)
-},
-loadAnimal: function(){
-    const url = 'https://opentdb.com/api.php?amount=50&category=27&type=multiple'
-    fetch(url).then(response=> response.json())
-    .then(data => this.animal = data.results)
-},
-loadCelebrity: function(){
-    const url = 'https://opentdb.com/api.php?amount=50&category=27&type=multiple'
-    fetch(url).then(response=> response.json())
-    .then(data => this.celebrity = data.results)
-},
+//     loadSport: function(){
+//       const url = 'https://opentdb.com/api.php?amount=50&category=21&type=multiple'
+//       fetch(url).then(response=> response.json())
+//       .then(data => this.sport = data.results)
+//   },
+//
+//   loadGeograpy: function(){
+//     const url = 'https://opentdb.com/api.php?amount=50&category=22&type=multiple'
+//     fetch(url).then(response=> response.json())
+//     .then(data => this.geography = data.results)
+// },
+// loadGeneralKnowledge: function(){
+//     const url = 'https://opentdb.com/api.php?amount=50&category=9&type=multiple'
+//     fetch(url).then(response=> response.json())
+//     .then(data => this.general_knowledge = data.results)
+// },
+// loadHistory: function(){
+//     const url = 'https://opentdb.com/api.php?amount=50&category=23&type=multiple'
+//     fetch(url).then(response=> response.json())
+//     .then(data => this.history = data.results)
+// },
+// loadAnimal: function(){
+//     const url = 'https://opentdb.com/api.php?amount=50&category=27&type=multiple'
+//     fetch(url).then(response=> response.json())
+//     .then(data => this.animal = data.results)
+// },
+// loadCelebrity: function(){
+//     const url = 'https://opentdb.com/api.php?amount=50&category=27&type=multiple'
+//     fetch(url).then(response=> response.json())
+//     .then(data => this.celebrity = data.results)
+// },
 //JUST FOR TESTING PURPOSE
 loadSelected: function(){
 const url = 'https://opentdb.com/api.php?amount=50&category=21&type=multiple'
@@ -108,18 +116,18 @@ mounted(){
   //JUST FOR TESTING
   this.loadSelected();
   //
-  this.loadSport();
-  this.loadGeograpy();
-  this.loadGeneralKnowledge();
-  this.loadHistory();
-  this.loadAnimal();
-  this.loadCelebrity();
-  // this.loadCategory('sport', 21);
-  // this.loadCategory('geography', 22);
-  // this.loadCategory('general_knowledge', 9);
-  // this.loadCategory('history', 23);
-  // this.loadCategory('animal', 27);
-  // this.loadCategory('celebrity', 26);
+  // this.loadSport();
+  // this.loadGeograpy();
+  // this.loadGeneralKnowledge();
+  // this.loadHistory();
+  // this.loadAnimal();
+  // this.loadCelebrity();
+  this.loadCategory('sport', 21);
+  this.loadCategory('geography', 22);
+  this.loadCategory('general_knowledge', 9);
+  this.loadCategory('history', 23);
+  this.loadCategory('animal', 27);
+  this.loadCategory('science_and_nature', 17);
 
 //Check if the clicked answer is right if yes should update the score
   eventBus.$on('selected-option', (option) =>
