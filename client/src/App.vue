@@ -4,7 +4,7 @@
       <!--  name:home is from the router.js-->
       <!-- we can pass props through the params in links to stile treat hem as a -->
 <router-link :to="{name: 'home'}">Home</router-link>
-<router-link :to="{name: 'about', params: {message}}">About</router-link>
+<router-link :to="{name: 'about'}">About</router-link>
     </nav>
     <!-- in order to say i want to rendere this computer will replace router view with whatever component we told to render -->
     <router-view id="view"></router-view>
@@ -16,7 +16,7 @@ export default {
   name: 'app',
   data(){
     return{
-      message: "Hello World!"
+      
     }
   }
 }

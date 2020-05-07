@@ -1,14 +1,15 @@
 <template>
   <div id="">
-    <main-header title='Home' />
+<board-game></board-game>
   </div>
 </template>
 <script>
-import MainHeader from '@/components/MainHeader';
 
+import BoardGame from '@/components/BoardGame.vue'
 export default {
   components: {
-    'main-header': MainHeader
+    'board-game': BoardGame
+
   }
 }
 </script>
