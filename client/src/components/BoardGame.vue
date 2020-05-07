@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import {eventBus} from'../main.js'
 import Questions from "@/components/Questions.vue"
 export default {
   data(){
@@ -89,25 +90,32 @@ fetch(url).then(response=> response.json())
 
 
 },
-
-
-
 mounted(){
   //JUST FOR TESTING
-  this.loadSelected()
+  this.loadSelected();
   //
-  this.loadSport()
-  this.loadGeograpy()
-  this.loadGeneralKnowledge()
-  this.loadHistory()
-  this.loadAnimal()
-  this.loadCelebrity()
+  this.loadSport();
+  this.loadGeograpy();
+  this.loadGeneralKnowledge();
+  this.loadHistory();
+  this.loadAnimal();
+  this.loadCelebrity();
   // this.loadCategory('sport', 21);
   // this.loadCategory('geography', 22);
   // this.loadCategory('general_knowledge', 9);
   // this.loadCategory('history', 23);
   // this.loadCategory('animal', 27);
   // this.loadCategory('celebrity', 26);
+
+//Check if the clicked answer is right if yes should update the score
+  eventBus.$on('selected-option', (option) =>
+  { if (option === this.randomQuestion.correct_answer){
+  alert("well done")
+  this.score = this.score + 1
+  }else{
+  alert("boooo")
+  }})
+
 }
 
 }
