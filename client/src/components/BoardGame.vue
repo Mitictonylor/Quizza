@@ -63,10 +63,8 @@ mounted(){
   this.loadHistory()
   this.loadAnimal()
   this.loadCelebrity()
-<<<<<<< HEAD
+
   // this.loadCategory(this.sport, 21);
-=======
->>>>>>> 16791da66ca7201941976dedec8049410ff38126
   // this.loadCategory(this.geography, 22);
   // this.loadCategory(this.general_knowledge, 9);
   // this.loadCategory(this.history, 23);
