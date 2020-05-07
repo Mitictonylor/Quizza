@@ -20,12 +20,7 @@ export default {
 
   },
   mounted(){
-    eventBus.$on('selected-option', (option) =>
-    { if (option === this.randomQuestion.correct_answer){
-    alert("well done")
-    }else{
-    alert("boooo")
-    }})
+  
 
 },
 
