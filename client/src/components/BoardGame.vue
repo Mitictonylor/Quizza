@@ -2,8 +2,9 @@
   <div class="">
     <questions v-if="selectedCategory":randomQuestion="randomQuestion"></questions>
     {{score}}
+    <div class="button">
     <button type="button" name="button" v-on:click="randomQuest">Generate</button>
-
+    </div>
   </div>
 
 </template>
@@ -125,7 +126,7 @@ mounted(){
   { if (option === this.randomQuestion.correct_answer){
   alert("well done");
   this.randomQuest();
-  this.score = this.score + 1  
+  this.score = this.score + 1
 
   }else{
   alert("boooo")
@@ -138,4 +139,9 @@ mounted(){
 </script>
 
 <style lang="css" scoped>
+button{ position:absolute;
+    transition: .5s ease;
+    top: 50%;
+    left: 50%;
+}
 </style>
