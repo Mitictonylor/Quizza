@@ -20,7 +20,11 @@ export default {
   //   loadCategory: function(category, category_id){
   //     const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`
   //     fetch(url).then(response=> response.json())
+<<<<<<< HEAD
   //     .then(data => category = data.results)
+=======
+  //     .then(data => this.category = data.results)
+>>>>>>> 16791da66ca7201941976dedec8049410ff38126
   // }
     loadSport: function(){
       const url = 'https://opentdb.com/api.php?amount=50&category=21&type=multiple'
@@ -62,7 +66,10 @@ mounted(){
   this.loadHistory()
   this.loadAnimal()
   this.loadCelebrity()
+<<<<<<< HEAD
   // this.loadCategory(this.sport, 21);
+=======
+>>>>>>> 16791da66ca7201941976dedec8049410ff38126
   // this.loadCategory(this.geography, 22);
   // this.loadCategory(this.general_knowledge, 9);
   // this.loadCategory(this.history, 23);
