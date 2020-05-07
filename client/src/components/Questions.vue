@@ -21,13 +21,11 @@ export default {
   },
   mounted(){
     eventBus.$on('selected-option', (option) =>
-  { if (option === this.randomQuestion.correct_answer){
+    { if (option === this.randomQuestion.correct_answer){
     alert("well done")
-
-    eventBus.$emit("add-point", 1)
-  }else{
+    }else{
     alert("boooo")
-  }})
+    }})
 
 },
 

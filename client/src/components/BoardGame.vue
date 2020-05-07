@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import {eventBus} from'../main.js'
 import Questions from "@/components/Questions.vue"
 export default {
   data(){
@@ -108,6 +109,8 @@ mounted(){
   // this.loadCategory('history', 23);
   // this.loadCategory('animal', 27);
   // this.loadCategory('celebrity', 26);
+
+
 }
 
 }
