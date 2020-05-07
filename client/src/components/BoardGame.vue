@@ -1,8 +1,12 @@
 <template lang="html">
-<p>BoardGAME</p>
+  <div class="">
+    <category :selectedCategory="selectedCategory"></category>
+  </div>
+
 </template>
 
 <script>
+import Category from "@/components/Category.vue"
 export default {
   data(){
     return{
@@ -12,11 +16,11 @@ export default {
       history:[],
       animal:[],
       celebrity:[],
-      SelectCategory: null
+      selectedCategory: null
     }
   },
   components:{
-
+"category": Category
   },
 
   methods:{
@@ -66,7 +70,7 @@ mounted(){
   this.loadHistory()
   this.loadAnimal()
   this.loadCelebrity()
-  // this.loadCategory(this.sport, 21);
+  // this.loadCategory('sport', 21);
   // this.loadCategory(this.geography, 22);
   // this.loadCategory(this.general_knowledge, 9);
   // this.loadCategory(this.history, 23);

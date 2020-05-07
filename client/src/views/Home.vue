@@ -1,6 +1,7 @@
 <template>
-  <div id="">
+  <div >
 <board-game></board-game>
+
 
   </div>
 </template>
