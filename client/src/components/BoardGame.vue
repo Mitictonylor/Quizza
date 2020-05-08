@@ -3,39 +3,39 @@
     <div class="page-container">
       <div class="game-board-container">
         <div class="game-board">
-          <div id="a1" class="tile"></div>
-          <div id="a2" class="tile"></div>
-          <div id="a3" class="tile"></div>
-          <div id="a4" class="tile"></div>
-          <div id="a5" class="tile"></div>
-          <div id="a6" class="tile"></div>
-          <div id="a7" class="tile"></div>
-          <div id="b1" class="tile"></div>
-          <div id="b4" class="tile"></div>
-          <div id="b7" class="tile"></div>
-          <div id="c1" class="tile"></div>
-          <div id="c4" class="tile"></div>
-          <div id="c7" class="tile"></div>
-          <div id="d1" class="tile"></div>
-          <div id="d2" class="tile"></div>
-          <div id="d3" class="tile"></div>
-          <div id="d4" class="tile"></div>
-          <div id="d5" class="tile"></div>
-          <div id="d6" class="tile"></div>
-          <div id="d7" class="tile"></div>
-          <div id="e1" class="tile"></div>
-          <div id="e4" class="tile"></div>
-          <div id="e7" class="tile"></div>
-          <div id="f1" class="tile"></div>
-          <div id="f4" class="tile"></div>
-          <div id="f7" class="tile"></div>
-          <div id="g1" class="tile"></div>
-          <div id="g2" class="tile"></div>
-          <div id="g3" class="tile"></div>
-          <div id="g4" class="tile"></div>
-          <div id="g5" class="tile"></div>
-          <div id="g6" class="tile"></div>
-          <div id="g7" class="tile"></div>
+          <div id="a1" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="a2" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="a3" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="a4" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="a5" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="a6" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="a7" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="b1" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="b4" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="b7" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="c1" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="c4" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="c7" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="d1" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="d2" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="d3" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="d4" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="d5" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="d6" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="d7" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="e1" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="e4" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="e7" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="f1" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="f4" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="f7" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="g1" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="g2" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="g3" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="g4" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="g5" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="g6" class="tile" v-on:click="checkActive($event)"></div>
+          <div id="g7" class="tile" v-on:click="checkActive($event)"></div>
 
           <div class="board-content-top-left">
             <div class="dice-container">
@@ -190,6 +190,13 @@
         this.player.currentPosition = event.currentTarget.id;
         this.resetMoveOptions();
         this.generateQuestion();
+      },
+      checkActive(event) {
+        for (let option of this.getMoveOptions()) {
+          if (option === event.currentTarget.id) {
+            return this.movePlayer(event)
+          }
+        }
       },
     //Create a random question from the selected Category
     //will be invoked when the token end up to a piece of the board
