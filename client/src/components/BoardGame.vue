@@ -1,39 +1,39 @@
 <template lang="html">
   <div>
-    <div>
-      <div id="a1"></div>
-      <div id="a2"></div>
-      <div id="a3"></div>
-      <div id="a4"></div>
-      <div id="a5"></div>
-      <div id="a6"></div>
-      <div id="a7"></div>
-      <div id="b1"></div>
-      <div id="b4"></div>
-      <div id="b7"></div>
-      <div id="c1"></div>
-      <div id="c4"></div>
-      <div id="c7"></div>
-      <div id="d1"></div>
-      <div id="d2"></div>
-      <div id="d3"></div>
-      <div id="d4"></div>
-      <div id="d5"></div>
-      <div id="d6"></div>
-      <div id="d7"></div>
-      <div id="e1"></div>
-      <div id="e4"></div>
-      <div id="e7"></div>
-      <div id="f1"></div>
-      <div id="f4"></div>
-      <div id="f7"></div>
-      <div id="g1"></div>
-      <div id="g2"></div>
-      <div id="g3"></div>
-      <div id="g4"></div>
-      <div id="g5"></div>
-      <div id="g6"></div>
-      <div id="g7"></div>
+    <div class="game-board">
+      <div id="a1" class="tile"></div>
+      <div id="a2" class="tile"></div>
+      <div id="a3" class="tile"></div>
+      <div id="a4" class="tile"></div>
+      <div id="a5" class="tile"></div>
+      <div id="a6" class="tile"></div>
+      <div id="a7" class="tile"></div>
+      <div id="b1" class="tile"></div>
+      <div id="b4" class="tile"></div>
+      <div id="b7" class="tile"></div>
+      <div id="c1" class="tile"></div>
+      <div id="c4" class="tile"></div>
+      <div id="c7" class="tile"></div>
+      <div id="d1" class="tile"></div>
+      <div id="d2" class="tile"></div>
+      <div id="d3" class="tile"></div>
+      <div id="d4" class="tile"></div>
+      <div id="d5" class="tile"></div>
+      <div id="d6" class="tile"></div>
+      <div id="d7" class="tile"></div>
+      <div id="e1" class="tile"></div>
+      <div id="e4" class="tile"></div>
+      <div id="e7" class="tile"></div>
+      <div id="f1" class="tile"></div>
+      <div id="f4" class="tile"></div>
+      <div id="f7" class="tile"></div>
+      <div id="g1" class="tile"></div>
+      <div id="g2" class="tile"></div>
+      <div id="g3" class="tile"></div>
+      <div id="g4" class="tile"></div>
+      <div id="g5" class="tile"></div>
+      <div id="g6" class="tile"></div>
+      <div id="g7" class="tile"></div>
     </div>
 
     <!-- <div>
@@ -205,6 +205,24 @@
 </script>
 
 <style lang="css" scoped>
+.game-board {
+  border-style: solid;
+  display: inline-grid;
+  position: relative;
+}
+
+.tile {
+  border-style: solid;
+  box-sizing: border-box;
+  width: 80px;
+  height: 80px;
+}
+
+.tile:hover {
+  cursor: pointer;
+  color: blue;
+}
+
 .player{
   border-style: solid;
   border-color: pink;
