@@ -1,6 +1,6 @@
 <template lang="html">
 <div class = 'options-container'>
-<li class="options"v-on:click="checkOption">{{option}}</li>
+<li v-html="option" class="options" v-on:click="checkOption">{{option}}</li>
 
 </div>
 </template>
