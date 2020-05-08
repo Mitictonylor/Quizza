@@ -183,6 +183,14 @@
         const index = TileObjects.map(x => x.id).indexOf(divID);
         return TileObjects[index]['column'];
       },
+      movePlayer(event) {
+        const activePlayer = document.querySelector('#player1');
+        activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
+                                      grid-column-start: ${this.getNewColPosition(event)};`
+        this.player.currentPosition = event.currentTarget.id;
+        this.resetMoveOptions();
+        this.generateQuestion();
+      },
     //Create a random question from the selected Category
     //will be invoked when the token end up to a piece of the board
       randomQuest() {
