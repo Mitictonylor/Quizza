@@ -1,7 +1,7 @@
 <template lang="html">
 <div class="">
   <div class="question-wrapper">
-    <h1 class="question">{{randomQuestion.question}}</h1>
+    <h1 v-html="randomQuestion.question" class="question">{{randomQuestion.question}}</h1>
     </div>
     <div class="list-container">
       <answer class='list' v-for="(option, index) in shuffle(randomQuestion.options)" :key='index' :option="option"></answer>

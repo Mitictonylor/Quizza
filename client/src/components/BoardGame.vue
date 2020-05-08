@@ -53,6 +53,7 @@ export default {
       correct_answer: query.correct_answer,
       category: query.category} //so we can push it to the player wins
       const newObject = {};
+
 //want the category value of random question as a key of the new object
       this.answeredQuestions.push(newObject[this.randomQuestion.category]= this.randomQuestion.question)
     }else if(
