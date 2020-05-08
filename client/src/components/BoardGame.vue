@@ -1,7 +1,42 @@
 <template lang="html">
   <div>
-
     <div>
+      <div id="a1"></div>
+      <div id="a2"></div>
+      <div id="a3"></div>
+      <div id="a4"></div>
+      <div id="a5"></div>
+      <div id="a6"></div>
+      <div id="a7"></div>
+      <div id="b1"></div>
+      <div id="b4"></div>
+      <div id="b7"></div>
+      <div id="c1"></div>
+      <div id="c4"></div>
+      <div id="c7"></div>
+      <div id="d1"></div>
+      <div id="d2"></div>
+      <div id="d3"></div>
+      <div id="d4"></div>
+      <div id="d5"></div>
+      <div id="d6"></div>
+      <div id="d7"></div>
+      <div id="e1"></div>
+      <div id="e4"></div>
+      <div id="e7"></div>
+      <div id="f1"></div>
+      <div id="f4"></div>
+      <div id="f7"></div>
+      <div id="g1"></div>
+      <div id="g2"></div>
+      <div id="g3"></div>
+      <div id="g4"></div>
+      <div id="g5"></div>
+      <div id="g6"></div>
+      <div id="g7"></div>
+    </div>
+
+    <!-- <div>
       <player-form v-if="!players[0].name && !players[1].name"></player-form>
     </div>
 
@@ -16,7 +51,7 @@
 
     <div class="button">
       <button v-if="players[0].name && players[1].name" type="button" name="button" v-on:click="randomQuest">{{activePlayer(players).name}}THROW THE DICE</button>
-    </div>
+    </div> -->
 
   </div>
 </template>
