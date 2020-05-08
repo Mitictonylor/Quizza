@@ -79,7 +79,7 @@
   import PlayerForm from '@/components/PlayerForm.vue';
   import {eventBus} from '../main.js';
   import Questions from "@/components/Questions.vue";
-  import {TileObjects} from '@/helpers/TileObjects.js';
+  import {TileObjects} from '@/config/TileObjects.js';
 
   export default {
     name: 'board-game',
@@ -149,16 +149,22 @@
     },
     methods: {
       randomDice() {
-      this.diceResult = this.dice[Math.floor(Math.random() * 6)];
+        this.diceResult = this.dice[Math.floor(Math.random() * 6)];
       },
       getDiceFace() {
-      return require('@/assets/dice/' + this.diceResult + '.png');
+        return require('@/assets/dice/' + this.diceResult + '.png');
       },
       getMoveOptions() {
-      const res = 'roll' + this.diceResult;
-      const index = TileObjects.map(x => x.id).indexOf(this.player.currentPosition);
-      this.moveOptions = TileObjects[index][res]
-      return this.moveOptions;
+        const res = 'roll' + this.diceResult;
+        const index = TileObjects.map(x => x.id).indexOf(this.player.currentPosition);
+        this.moveOptions = TileObjects[index][res]
+        return this.moveOptions;
+      },
+      showMoveOptions() {
+        for (let option of this.getMoveOptions()) {
+          const moveOption = document.querySelector(`#${option}`);
+          moveOption.style.color = 'red';
+        }
       },
     //Create a random question from the selected Category
     //will be invoked when the token end up to a piece of the board
