@@ -1,41 +1,44 @@
 <template lang="html">
   <div>
-    <div class="game-board">
-      <div id="a1" class="tile"></div>
-      <div id="a2" class="tile"></div>
-      <div id="a3" class="tile"></div>
-      <div id="a4" class="tile"></div>
-      <div id="a5" class="tile"></div>
-      <div id="a6" class="tile"></div>
-      <div id="a7" class="tile"></div>
-      <div id="b1" class="tile"></div>
-      <div id="b4" class="tile"></div>
-      <div id="b7" class="tile"></div>
-      <div id="c1" class="tile"></div>
-      <div id="c4" class="tile"></div>
-      <div id="c7" class="tile"></div>
-      <div id="d1" class="tile"></div>
-      <div id="d2" class="tile"></div>
-      <div id="d3" class="tile"></div>
-      <div id="d4" class="tile"></div>
-      <div id="d5" class="tile"></div>
-      <div id="d6" class="tile"></div>
-      <div id="d7" class="tile"></div>
-      <div id="e1" class="tile"></div>
-      <div id="e4" class="tile"></div>
-      <div id="e7" class="tile"></div>
-      <div id="f1" class="tile"></div>
-      <div id="f4" class="tile"></div>
-      <div id="f7" class="tile"></div>
-      <div id="g1" class="tile"></div>
-      <div id="g2" class="tile"></div>
-      <div id="g3" class="tile"></div>
-      <div id="g4" class="tile"></div>
-      <div id="g5" class="tile"></div>
-      <div id="g6" class="tile"></div>
-      <div id="g7" class="tile"></div>
+    <div class="page-container">
+      <div class="game-board-container">
+        <div class="game-board">
+          <div id="a1" class="tile"></div>
+          <div id="a2" class="tile"></div>
+          <div id="a3" class="tile"></div>
+          <div id="a4" class="tile"></div>
+          <div id="a5" class="tile"></div>
+          <div id="a6" class="tile"></div>
+          <div id="a7" class="tile"></div>
+          <div id="b1" class="tile"></div>
+          <div id="b4" class="tile"></div>
+          <div id="b7" class="tile"></div>
+          <div id="c1" class="tile"></div>
+          <div id="c4" class="tile"></div>
+          <div id="c7" class="tile"></div>
+          <div id="d1" class="tile"></div>
+          <div id="d2" class="tile"></div>
+          <div id="d3" class="tile"></div>
+          <div id="d4" class="tile"></div>
+          <div id="d5" class="tile"></div>
+          <div id="d6" class="tile"></div>
+          <div id="d7" class="tile"></div>
+          <div id="e1" class="tile"></div>
+          <div id="e4" class="tile"></div>
+          <div id="e7" class="tile"></div>
+          <div id="f1" class="tile"></div>
+          <div id="f4" class="tile"></div>
+          <div id="f7" class="tile"></div>
+          <div id="g1" class="tile"></div>
+          <div id="g2" class="tile"></div>
+          <div id="g3" class="tile"></div>
+          <div id="g4" class="tile"></div>
+          <div id="g5" class="tile"></div>
+          <div id="g6" class="tile"></div>
+          <div id="g7" class="tile"></div>
+        </div>
+      </div>
     </div>
-
     <!-- <div>
       <player-form v-if="!players[0].name && !players[1].name"></player-form>
     </div>
@@ -205,6 +208,19 @@
 </script>
 
 <style lang="css" scoped>
+.page-container {
+  display: block;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.game-board-container {
+  display: inline-block;
+  width: 650px;
+  height: 650px;
+}
+
 .game-board {
   border-style: solid;
   display: inline-grid;
@@ -223,6 +239,58 @@
   color: blue;
 }
 
+/* RIGHT Y COL */
+#a7, #b7, #c7, #d7, #e7, #f7, #g7 {
+  grid-column-start: 7;
+}
+
+/* BOTTOM X ROW */
+#g1, #g2, #g3, #g4, #g5, #g6, #g7 {
+  grid-row-start: 7;
+}
+
+/* LEFT Y COL */
+#a1, #b1, #c1, #d1, #e1, #f1, #g1 {
+  grid-column-start: 1;
+}
+
+#f1 {
+  grid-row-start: 6;
+}
+
+#e1 {
+  grid-row-start: 5;
+}
+
+#d1 {
+  grid-row-start: 4;
+}
+
+#c1 {
+  grid-row-start: 3;
+}
+
+#b1 {
+  grid-row-start: 2;
+}
+/* LEFT Y COL END */
+
+
+/* CROSS SECTION X */
+#d1, #d2, #d3, #d4, #d5, #d6, #d7  {
+  grid-row-start: 4;
+}
+
+#d4{
+  grid-column-start: 4;
+}
+
+
+/* CROSS SECTION Y */
+#a4, #b4, #c4, #d4, #e4, #f4, #g4   {
+  grid-column-start: 4;
+}
+
 .player{
   border-style: solid;
   border-color: pink;
@@ -230,13 +298,16 @@
   top: 5%;
   left: 5%;
 }
-body{
-  margin: 0;
-  padding: 0;
-}
+
 button{
   position:absolute;
   top: 80%;
   left: 50%;
 }
+</style>
+
+<style>
+  body{
+    overflow: hidden;
+  }
 </style>
