@@ -13,7 +13,7 @@
     </div>
 
     <div class="button">
-    <button type="button" name="button" v-on:click="randomQuest">THROW THE DICE</button>
+    <button v-if="players[0].name && players[1].name" type="button" name="button" v-on:click="randomQuest">{{activePlayer(players).name}}THROW THE DICE</button>
     </div>
   </div>
 
@@ -112,8 +112,23 @@ export default {
     },
 
     addPoints: function(player) {
-
-
+      player.score = player.score + 1
+    },
+    findIndexOfPlayer:function(player){
+      const index = this.players.findIndex(play => play.alias === player.alias)
+      return index
+    },
+    //find me the index of the active player, and change it's acrive to false,
+    //and based on the lenght of the array add one to the player index or start from 0 and turn it to active true
+    switchActivePlayer:function(player, players){
+      const index = this.findIndexOfPlayer(player)
+      console.log(index);
+      console.log(players.length);
+      players[index].active = false;
+      if (index < (players.length -1)){
+      players[(index + 1)].active = true;
+    }else {
+    players[0].active = true}
     }
   },
     mounted() {
@@ -129,14 +144,15 @@ export default {
 
       //Check if the clicked answer is right if yes should update the score
       eventBus.$on('selected-option', (option) => {
+
         if (option === this.randomQuestion.correct_answer) {
           alert("well done");
+          this.addPoints(this.activePlayer(this.players))
           this.randomQuest(); //create a new question in either cases
-
-          this.playerscore = this.score + 1
         } else {
           alert("boooo")
-          this.randomQuest();
+          this.switchActivePlayer(this.activePlayer(this.players),this.players)
+          this.randomQuestion = null;
         }
       });
       //takes the name from the form
@@ -144,6 +160,7 @@ export default {
         console.log('Hello from add playert');
         this.players[0].name = players[0];
         this.players[1].name = players[1];
+        this.players[0].active = true
       })
 
     }
