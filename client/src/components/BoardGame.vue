@@ -47,6 +47,11 @@
           <div class="board-content-bottom-right"></div>
           <div class="board-content-bottom-left"></div>
 
+          <div id="player1" class="player1"></div>
+          <div id="player2" class="player2"></div>
+          <div id="player3" class="player3"></div>
+          <div id="player4" class="player4"></div>
+
         </div>
       </div>
     </div>
@@ -360,6 +365,62 @@
 
   input:focus {
     outline: none;
+  }
+
+  .player1 {
+    border-style: solid;
+    border-radius: 50%;
+    background-color: purple;
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    z-index: 2;
+    position: absolute;
+    grid-row-start: 4;
+    grid-column-start: 4;
+  }
+
+  .player2 {
+    border-style: solid;
+    border-radius: 50%;
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    margin-top: 40px;
+    z-index: 2;
+    position: absolute;
+    grid-row-start: 4;
+    grid-column-start: 4;
+  }
+  
+  .player3 {
+    border-style: solid;
+    border-radius: 50%;
+    background-color: orange;
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    margin-left: 40px;
+    z-index: 2;
+    position: absolute;
+    grid-row-start: 4;
+    grid-column-start: 4;
+  }
+
+  .player4 {
+    border-style: solid;
+    border-radius: 50%;
+    background-color: blue;
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    margin-left: 40px;
+    margin-top: 40px;
+    z-index: 2;
+    position: absolute;
+    grid-row-start: 4;
+    grid-column-start: 4;
   }
 
   /* .player{
