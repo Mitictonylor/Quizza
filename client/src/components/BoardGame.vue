@@ -219,6 +219,7 @@
   display: inline-block;
   width: 650px;
   height: 650px;
+  margin-top: 100px;
 }
 
 .game-board {
