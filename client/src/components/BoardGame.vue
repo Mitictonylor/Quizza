@@ -79,6 +79,7 @@
   import PlayerForm from '@/components/PlayerForm.vue';
   import {eventBus} from '../main.js';
   import Questions from "@/components/Questions.vue";
+  import {TileObjects} from '@/helpers/TileObjects.js';
 
   export default {
     name: 'board-game',
@@ -86,6 +87,7 @@
       return {
         dice: [1,2,3,4,5,6],
         diceResult: 6,
+        moveOptions: null,
         categories: {
             sport: [],
             geography: [],
@@ -152,103 +154,109 @@
       getDiceFace() {
       return require('@/assets/dice/' + this.diceResult + '.png');
       },
+      getMoveOptions() {
+      const res = 'roll' + this.diceResult;
+      const index = TileObjects.map(x => x.id).indexOf(this.player.currentPosition);
+      this.moveOptions = TileObjects[index][res]
+      return this.moveOptions;
+      },
     //Create a random question from the selected Category
     //will be invoked when the token end up to a piece of the board
-    randomQuest() {
-      this.loadRandomForSelected(this.categoriesAndId);
-      const query = this.selectedCategory[Math.floor(Math.random() * this.selectedCategory.length)];
-      const options = query.incorrect_answers.map(answer => answer);
-      options.push(query.correct_answer);
-      if (!this.answeredQuestions.includes(query.question)) {
-          this.randomQuestion = {
-            options: options,
-            question: query.question,
-            correct_answer: query.correct_answer,
-            category: query.category
-          } //so we can push it to the player wins
-        this.answeredQuestions.push(this.randomQuestion.question);
-      } else if (this.answeredQuestions.length === 49) { //needs to change when we gonna randomize the sel cat
-          this.loadSelected();
-      } else {
-          this.randomQuest();
-      }
-    },
-    // fetch a category
-    loadCategory(category, category_id) {
-      const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`;
-      fetch(url).then(response => response.json())
-      .then(data => this.categories[category] = data.results)
-    },
-    // fetches all the categories
-    loadAllCategories(categoryArray) {
-      categoryArray.map(element => this.loadCategory(element[0], element[1]));
-    },
-    //JUST FOR TESTING PURPOSE
-    loadRandomForSelected(categoryArray) {
-      const index = Math.floor(Math.random() * 6);
-      const catId = categoryArray[index][1];
-      const url = `https://opentdb.com/api.php?amount=50&category=${catId}&type=multiple`;
-      fetch(url).then(response => response.json())
-      .then(data => this.selectedCategory = data.results)
-    },
-    //find active player
-    activePlayer(players) {
-      const activePlayer = players.find(player => player.active === true);
-      return activePlayer;
-    },
-    //add won categories
-    addWonCategory(player, question, arrayOfplayers) {
-      const index = this.findIndexOfPlayer(player);
-      if (!arrayOfplayers[index].score.includes(question)) {
-          arrayOfplayers[index].score.push(question);
-      }
-    },
-    //find index of player
-    findIndexOfPlayer(player) {
-      const index = this.players.indexOf(player);
-      return index;
-    },
-    //find me the index of the active player, and change it's acrive to false,
-    //and based on the lenght of the array add one to the player index or start from 0 and turn it to active true
-    switchActivePlayer(player, players) {
-      const index = this.findIndexOfPlayer(player);
-      players[index].active = false;
-      if (index < (players.length - 1)) {
-          players[(index + 1)].active = true;
+      randomQuest() {
+        this.loadRandomForSelected(this.categoriesAndId);
+        const query = this.selectedCategory[Math.floor(Math.random() * this.selectedCategory.length)];
+        const options = query.incorrect_answers.map(answer => answer);
+        options.push(query.correct_answer);
+        if (!this.answeredQuestions.includes(query.question)) {
+            this.randomQuestion = {
+              options: options,
+              question: query.question,
+              correct_answer: query.correct_answer,
+              category: query.category
+            } //so we can push it to the player wins
+          this.answeredQuestions.push(this.randomQuestion.question);
+        } else if (this.answeredQuestions.length === 49) { //needs to change when we gonna randomize the sel cat
+            this.loadSelected();
         } else {
-            players[0].active = true
+            this.randomQuest();
         }
-    }
-    },
-    mounted() {
-      //JUST FOR TESTING
-      this.loadRandomForSelected(this.categoriesAndId);
-
-      this.loadAllCategories(this.categoriesAndId);
-
-      //Check if the clicked answer is right if yes should update the score
-      eventBus.$on('selected-option', (option) => {
-        const playerActive = this.activePlayer(this.players);
-        const question = this.randomQuestion;
-
-        if (option === question.correct_answer) {
-          alert("well done");
-          this.addWonCategory(playerActive, question.category, this.players);
-          this.randomQuestion = null;
-          alert("Throw the dice again"); //create a new question in either cases
-        } else {
-          alert("boooo");
-          this.switchActivePlayer(playerActive, this.players);
-          this.randomQuestion = null;
+      },
+      // fetch a category
+      loadCategory(category, category_id) {
+        const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`;
+        fetch(url).then(response => response.json())
+        .then(data => this.categories[category] = data.results)
+      },
+      // fetches all the categories
+      loadAllCategories(categoryArray) {
+        categoryArray.map(element => this.loadCategory(element[0], element[1]));
+      },
+      //JUST FOR TESTING PURPOSE
+      loadRandomForSelected(categoryArray) {
+        const index = Math.floor(Math.random() * 6);
+        const catId = categoryArray[index][1];
+        const url = `https://opentdb.com/api.php?amount=50&category=${catId}&type=multiple`;
+        fetch(url).then(response => response.json())
+        .then(data => this.selectedCategory = data.results)
+      },
+      //find active player
+      activePlayer(players) {
+        const activePlayer = players.find(player => player.active === true);
+        return activePlayer;
+      },
+      //add won categories
+      addWonCategory(player, question, arrayOfplayers) {
+        const index = this.findIndexOfPlayer(player);
+        if (!arrayOfplayers[index].score.includes(question)) {
+            arrayOfplayers[index].score.push(question);
         }
-      });
+      },
+      //find index of player
+      findIndexOfPlayer(player) {
+        const index = this.players.indexOf(player);
+        return index;
+      },
+      //find me the index of the active player, and change it's acrive to false,
+      //and based on the lenght of the array add one to the player index or start from 0 and turn it to active true
+      switchActivePlayer(player, players) {
+        const index = this.findIndexOfPlayer(player);
+        players[index].active = false;
+        if (index < (players.length - 1)) {
+            players[(index + 1)].active = true;
+          } else {
+              players[0].active = true
+          }
+      }
+      },
+      mounted() {
+        //JUST FOR TESTING
+        this.loadRandomForSelected(this.categoriesAndId);
 
-      //takes the name from the form
-      eventBus.$on('add-players', (players) => {
-        this.players[0].name = players[0];
-        this.players[1].name = players[1];
-        this.players[0].active = true;
-      });
+        this.loadAllCategories(this.categoriesAndId);
+
+        //Check if the clicked answer is right if yes should update the score
+        eventBus.$on('selected-option', (option) => {
+          const playerActive = this.activePlayer(this.players);
+          const question = this.randomQuestion;
+
+          if (option === question.correct_answer) {
+            alert("well done");
+            this.addWonCategory(playerActive, question.category, this.players);
+            this.randomQuestion = null;
+            alert("Throw the dice again"); //create a new question in either cases
+          } else {
+            alert("boooo");
+            this.switchActivePlayer(playerActive, this.players);
+            this.randomQuestion = null;
+          }
+        });
+
+        //takes the name from the form
+        eventBus.$on('add-players', (players) => {
+          this.players[0].name = players[0];
+          this.players[1].name = players[1];
+          this.players[0].active = true;
+        });
      }
    }
 </script>
