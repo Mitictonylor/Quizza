@@ -37,7 +37,12 @@
           <div id="g6" class="tile"></div>
           <div id="g7" class="tile"></div>
 
-          <div class="board-content-top-left"></div>
+          <div class="board-content-top-left">
+            <div class="dice-container">
+              <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()"></input>
+            </div>
+          </div>
+
           <div class="board-content-top-right"></div>
           <div class="board-content-bottom-right"></div>
           <div class="board-content-bottom-left"></div>
@@ -74,6 +79,8 @@
     name: 'board-game',
     data() {
       return {
+        dice: [1,2,3,4,5,6],
+        diceResult: 6,
         categories: {
           sport: [],
           geography: [],
@@ -112,6 +119,12 @@
       'player-form': PlayerForm
     },
     methods: {
+      randomDice() {
+      this.diceResult = this.dice[Math.floor(Math.random() * 6)];
+      },
+      getDiceFace() {
+      return require('@/assets/dice/' + this.diceResult + '.png');
+      },
     //Create a random question from the selected Category
     //will be invoked when the token end up to a piece of the board
     randomQuest() {
@@ -214,143 +227,154 @@
 </script>
 
 <style lang="css" scoped>
-.page-container {
-  display: block;
-  text-align: center;
-  width: 100vw;
-  height: 100vh;
-}
+  .page-container {
+    display: block;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+  }
 
-.game-board-container {
-  display: inline-block;
-  width: 650px;
-  height: 650px;
-  margin-top: 100px;
-}
+  .game-board-container {
+    display: inline-block;
+    width: 650px;
+    height: 650px;
+    margin-top: 100px;
+  }
 
-.game-board {
-  border-style: solid;
-  display: inline-grid;
-  position: relative;
-}
+  .game-board {
+    border-style: solid;
+    display: inline-grid;
+    position: relative;
+  }
 
-.tile {
-  border-style: solid;
-  box-sizing: border-box;
-  width: 80px;
-  height: 80px;
-}
+  .tile {
+    border-style: solid;
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+  }
 
-.tile:hover {
-  cursor: pointer;
-  color: blue;
-}
+  .tile:hover {
+    cursor: pointer;
+    color: blue;
+  }
 
-/* RIGHT Y COL */
-#a7, #b7, #c7, #d7, #e7, #f7, #g7 {
-  grid-column-start: 7;
-}
+  /* RIGHT Y COL */
+  #a7, #b7, #c7, #d7, #e7, #f7, #g7 {
+    grid-column-start: 7;
+  }
 
-/* BOTTOM X ROW */
-#g1, #g2, #g3, #g4, #g5, #g6, #g7 {
-  grid-row-start: 7;
-}
+  /* BOTTOM X ROW */
+  #g1, #g2, #g3, #g4, #g5, #g6, #g7 {
+    grid-row-start: 7;
+  }
 
-/* LEFT Y COL */
-#a1, #b1, #c1, #d1, #e1, #f1, #g1 {
-  grid-column-start: 1;
-}
+  /* LEFT Y COL */
+  #a1, #b1, #c1, #d1, #e1, #f1, #g1 {
+    grid-column-start: 1;
+  }
 
-#f1 {
-  grid-row-start: 6;
-}
+  #f1 {
+    grid-row-start: 6;
+  }
 
-#e1 {
-  grid-row-start: 5;
-}
+  #e1 {
+    grid-row-start: 5;
+  }
 
-#d1 {
-  grid-row-start: 4;
-}
+  #d1 {
+    grid-row-start: 4;
+  }
 
-#c1 {
-  grid-row-start: 3;
-}
+  #c1 {
+    grid-row-start: 3;
+  }
 
-#b1 {
-  grid-row-start: 2;
-}
-/* LEFT Y COL END */
+  #b1 {
+    grid-row-start: 2;
+  }
+  /* LEFT Y COL END */
 
+  /* CROSS SECTION X */
+  #d1, #d2, #d3, #d4, #d5, #d6, #d7  {
+    grid-row-start: 4;
+  }
 
-/* CROSS SECTION X */
-#d1, #d2, #d3, #d4, #d5, #d6, #d7  {
-  grid-row-start: 4;
-}
+  #d4{
+    grid-column-start: 4;
+  }
 
-#d4{
-  grid-column-start: 4;
-}
+  /* CROSS SECTION Y */
+  #a4, #b4, #c4, #d4, #e4, #f4, #g4   {
+    grid-column-start: 4;
+  }
 
+  .board-content-top-left {
+    border-style: solid;
+    width: 160px;
+    height: 160px;
+    z-index: 2;
+    position: absolute;
+    margin: 80px;
+  }
 
-/* CROSS SECTION Y */
-#a4, #b4, #c4, #d4, #e4, #f4, #g4   {
-  grid-column-start: 4;
-}
+  .board-content-top-right {
+    border-style: solid;
+    width: 160px;
+    height: 160px;
+    z-index: 2;
+    position: absolute;
+    margin: 80px;
+    right: 0;
+  }
 
-.board-content-top-left {
-  border-style: solid;
-  width: 160px;
-  height: 160px;
-  z-index: 2;
-  position: absolute;
-  margin: 80px;
-}
+  .board-content-bottom-right {
+    border-style: solid;
+    width: 160px;
+    height: 160px;
+    z-index: 2;
+    position: absolute;
+    margin: 80px;
+    bottom: 0;
+    right: 0;
+  }
 
-.board-content-top-right {
-  border-style: solid;
-  width: 160px;
-  height: 160px;
-  z-index: 2;
-  position: absolute;
-  margin: 80px;
-  right: 0;
-}
+  .board-content-bottom-left {
+    border-style: solid;
+    width: 160px;
+    height: 160px;
+    z-index: 2;
+    position: absolute;
+    margin: 80px;
+    bottom: 0;
+  }
 
-.board-content-bottom-right {
-  border-style: solid;
-  width: 160px;
-  height: 160px;
-  z-index: 2;
-  position: absolute;
-  margin: 80px;
-  bottom: 0;
-  right: 0;
-}
+  .dice-container {
+    margin-top: 40px;
+  }
 
-.board-content-bottom-left {
-  border-style: solid;
-  width: 160px;
-  height: 160px;
-  z-index: 2;
-  position: absolute;
-  margin: 80px;
-  bottom: 0;
-}
+  .dice {
+    width: 80px;
+    height: 80px;
+  }
 
-.player{
-  border-style: solid;
-  border-color: pink;
-  position: absolute;
-  top: 5%;
-  left: 5%;
-}
+  input:focus {
+    outline: none;
+  }
 
-button{
-  position:absolute;
-  top: 80%;
-  left: 50%;
-}
+  /* .player{
+    border-style: solid;
+    border-color: pink;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+  }
+
+  button{
+    position:absolute;
+    top: 80%;
+    left: 50%;
+  } */
 </style>
 
 <style>
