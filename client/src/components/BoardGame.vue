@@ -130,6 +130,10 @@
               currentPosition: 'd4'
             }
         ],
+        player: {
+          id: 1,
+          currentPosition: 'd4'
+        },
         selectedCategory: [], //will be filled when the token will end up to a piece of the board
         answeredQuestions: [], //all the question showed will end up here to avoid duplicates
         randomQuestion: null, //when the dice will be throwed it will be filled by the event
@@ -150,6 +154,7 @@
     methods: {
       randomDice() {
         this.diceResult = this.dice[Math.floor(Math.random() * 6)];
+        this.showMoveOptions();
       },
       getDiceFace() {
         return require('@/assets/dice/' + this.diceResult + '.png');
@@ -189,7 +194,6 @@
                                       grid-column-start: ${this.getNewColPosition(event)};`
         this.player.currentPosition = event.currentTarget.id;
         this.resetMoveOptions();
-        this.generateQuestion();
       },
       checkActive(event) {
         for (let option of this.getMoveOptions()) {
