@@ -8,8 +8,8 @@
     <questions v-if="selectedCategory.length > 0 && randomQuestion":randomQuestion="randomQuestion"></questions>
     </div>
     <div class="player" >
-      <p v-if="players[0].name && players[1].name">{{players[0].name}} score:{{players[0].score}} win streak:{{players[0].winStreak}}</p>
-      <p v-if="players[0].name && players[1].name">{{players[1].name}} score:{{players[1].score}} win streak:{{players[1].winStreak}}</p>
+      <p v-if="players[0].name && players[1].name">{{players[0].name}} categories:{{players[0].score}} </p>
+      <p v-if="players[0].name && players[1].name">{{players[1].name}} categories:{{players[1].score}} </p>
     </div>
 
     <div class="button">
@@ -34,37 +34,29 @@ export default {
         animal: [],
         science_and_nature: []
       },
-
-      //as soon as we click generate the player1 active will
-      // became true, as soon as he is wrong, his active became false,
-      // and then the player 2 active became true and can play.
-      // so based on the active, the generate will work
-
-      players:[
-        {alias: "player1",
-        name: '',
-        score: 0,
-        winStreak: 0,
-        active: false
-      },
-      {
-        alias:"player2",
-        name: '',
-        score: 0,
-        winStreak: 0,
-        active: false
-      }],
+      players: [{
+          alias: "player1",
+          name: '',
+          score: [],
+          winStreak: 0,
+          active: false
+        },
+        {
+          alias: "player2",
+          name: '',
+          score: [],
+          winStreak: 0,
+          active: false
+        }
+      ],
 
       score: 0,
       selectedCategory: [], //will be filled when the token will end up to a piece of the board
       answeredQuestions: [],
-      randomQuestion: null
+      randomQuestion: null,
+      categoriesAndId:[['sport', 21],['geography', 22], ['general_knowledge', 9], ['history', 23], ['animal', 27], ['science_and_nature', 17]]
     }
   },
-  computed: {
-
-  },
-
   components: {
     "questions": Questions,
     'player-form': PlayerForm
@@ -72,6 +64,7 @@ export default {
   methods: {
     //will be invoked when the token end up to a piece of the board
     randomQuest: function() {
+      this.loadRandomForSelected(this.categoriesAndId)
       const query = this.selectedCategory[Math.floor(Math.random() * this.selectedCategory.length)]
       const options = query.incorrect_answers.map(answer => answer)
       options.push(query.correct_answer)
@@ -82,7 +75,6 @@ export default {
           correct_answer: query.correct_answer,
           category: query.category
         } //so we can push it to the player wins
-
         this.answeredQuestions.push(this.randomQuestion.question)
       } else if (
         this.answeredQuestions.length === 49) { //needs to change when we gonna randomize the sel cat
@@ -92,6 +84,8 @@ export default {
       }
 
     },
+
+
     loadCategory: function(category, category_id) {
       const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`
       fetch(url).then(response => response.json())
@@ -99,79 +93,105 @@ export default {
       console.log(`${category} loaded`);
     },
 
+    loadAllCategories:function(categoryArray){
+    categoryArray.map((element)  => {this.loadCategory(element[0],element[1])})
+  },
+
     //JUST FOR TESTING PURPOSE
-    loadSelected: function() {
-      const url = 'https://opentdb.com/api.php?amount=50&category=21&type=multiple'
-      fetch(url).then(response => response.json())
-        .then(data => this.selectedCategory = data.results)
-    },
-    //
+    // loadSelected: function() {
+    //   const url = 'https://opentdb.com/api.php?amount=50&category=21&type=multiple'
+    //   fetch(url).then(response => response.json())
+    //     .then(data => this.selectedCategory = data.results)
+    // },
+    loadRandomForSelected: function(categoryArray){
+    const index = Math.floor(Math.random() * 6)
+    const catId = categoryArray[index][1]
+
+    const url = `https://opentdb.com/api.php?amount=50&category=${catId}&type=multiple`
+    fetch(url).then(response => response.json())
+      .then(data => this.selectedCategory = data.results)},
+
+
+
+
+
+    //find active player
     activePlayer: function(players) {
       const activePlayer = players.find(player => player.active === true)
       return activePlayer
     },
+    //add points
+    addWonCategory: function(player, question, arrayOfplayers) {
+      const index = this.findIndexOfPlayer(player)
+      if (!arrayOfplayers[index].score.includes(question)) {
+        arrayOfplayers[index].score.push(question)
+      }
 
-    addPoints: function(player) {
-      player.score = player.score + 1
+
+
     },
-    findIndexOfPlayer:function(player){
-      const index = this.players.findIndex(play => play.alias === player.alias)
+    //find index of player
+    findIndexOfPlayer: function(player) {
+      const index = this.players.indexOf(player)
       return index
     },
     //find me the index of the active player, and change it's acrive to false,
     //and based on the lenght of the array add one to the player index or start from 0 and turn it to active true
-    switchActivePlayer:function(player, players){
+    switchActivePlayer: function(player, players) {
       const index = this.findIndexOfPlayer(player)
       console.log(index);
       console.log(players.length);
       players[index].active = false;
-      if (index < (players.length -1)){
-      players[(index + 1)].active = true;
-    }else {
-    players[0].active = true}
+      if (index < (players.length - 1)) {
+        players[(index + 1)].active = true;
+      } else {
+        players[0].active = true
+      }
     }
   },
-    mounted() {
-      //JUST FOR TESTING
-      this.loadSelected();
-      //
-      this.loadCategory('sport', 21);
-      this.loadCategory('geography', 22);
-      this.loadCategory('general_knowledge', 9);
-      this.loadCategory('history', 23);
-      this.loadCategory('animal', 27);
-      this.loadCategory('science_and_nature', 17);
+  mounted() {
+    //JUST FOR TESTING
+    // this.loadSelected();
+    this.loadRandomForSelected(this.categoriesAndId)
+    //
+    this.loadAllCategories(this.categoriesAndId)
 
-      //Check if the clicked answer is right if yes should update the score
-      eventBus.$on('selected-option', (option) => {
 
-        if (option === this.randomQuestion.correct_answer) {
-          alert("well done");
-          this.addPoints(this.activePlayer(this.players))
-          this.randomQuest(); //create a new question in either cases
-        } else {
-          alert("boooo")
-          this.switchActivePlayer(this.activePlayer(this.players),this.players)
-          this.randomQuestion = null;
-        }
-      });
-      //takes the name from the form
-      eventBus.$on('add-players', (players) => {
-        console.log('Hello from add playert');
-        this.players[0].name = players[0];
-        this.players[1].name = players[1];
-        this.players[0].active = true
-      })
+    //Check if the clicked answer is right if yes should update the score
+    eventBus.$on('selected-option', (option) => {
+      const playerActive = this.activePlayer(this.players)
+      const question = this.randomQuestion
 
-    }
+      if (option === question.correct_answer) {
+        alert("well done");
+        this.addWonCategory(playerActive, question.category, this.players)
+        this.randomQuestion = null;
+        alert("Throw the dice again"); //create a new question in either cases
+      } else {
+        alert("boooo")
+        this.switchActivePlayer(playerActive, this.players)
+        this.randomQuestion = null;
+      }
+    });
+    //takes the name from the form
+    eventBus.$on('add-players', (players) => {
+      this.players[0].name = players[0];
+      this.players[1].name = players[1];
+      this.players[0].active = true
+    })
+
+  }
 
 }
 </script>
 
 <style lang="css" scoped>
-.players{
+.player{
   border-style: solid;
-  border-color: pink
+  border-color: pink;
+  position: absolute;
+  top: 5%;
+  left: 5%;
 }
 body{
   margin: 0;

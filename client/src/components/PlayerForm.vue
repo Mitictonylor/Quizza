@@ -17,15 +17,15 @@
 <script>
 import {eventBus} from '../main.js'
 export default {
-  name:'playerForm',
-  data(){
-    return{
-      player1:'',
-      player2:''
+  name: 'playerForm',
+  data() {
+    return {
+      player1: '',
+      player2: ''
     }
   },
-  methods:{
-    addPlayers: function(){
+  methods: {
+    addPlayers: function() {
       eventBus.$emit('add-players', [this.player1, this.player2])
     }
   }
