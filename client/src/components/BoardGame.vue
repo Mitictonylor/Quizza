@@ -166,6 +166,23 @@
           moveOption.style.color = 'red';
         }
       },
+      resetMoveOptions() {
+        for (let option of this.moveOptions) {
+          const moveOption = document.querySelector(`#${option}`);
+          moveOption.style.color = 'black';
+        }
+        this.moveOptions = null;
+      },
+      getNewRowPosition(event) {
+        const divID = event.currentTarget.id;
+        const index = TileObjects.map(x => x.id).indexOf(divID);
+        return TileObjects[index]['row'];
+      },
+      getNewColPosition(event) {
+        const divID = event.currentTarget.id;
+        const index = TileObjects.map(x => x.id).indexOf(divID);
+        return TileObjects[index]['column'];
+      },
     //Create a random question from the selected Category
     //will be invoked when the token end up to a piece of the board
       randomQuest() {
