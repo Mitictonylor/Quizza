@@ -87,24 +87,46 @@
         dice: [1,2,3,4,5,6],
         diceResult: 6,
         categories: {
-          sport: [],
-          geography: [],
-          general_knowledge: [],
-          history: [],
-          animal: [],
-          science_and_nature: []
+            sport: [],
+            geography: [],
+            general_knowledge: [],
+            history: [],
+            animal: [],
+            science_and_nature: []
         },
         players: [
-        { alias: "player1",
-          name: '',
-          score: [],
-          winStreak: 0,
-          active: false },
-        { alias: "player2",
-          name: '',
-          score: [],
-          winStreak: 0,
-          active: false }
+            {
+              alias: "player1",
+              name: '',
+              score: [],
+              winStreak: 0,
+              active: false,
+              currentPosition: 'd4'
+            },
+            {
+              alias: "player2",
+              name: '',
+              score: [],
+              winStreak: 0,
+              active: false,
+              currentPosition: 'd4'
+            },
+            {
+              alias: "player3",
+              name: '',
+              score: [],
+              winStreak: 0,
+              active: false,
+              currentPosition: 'd4'
+            },
+            {
+              alias: "player4",
+              name: '',
+              score: [],
+              winStreak: 0,
+              active: false,
+              currentPosition: 'd4'
+            }
         ],
         selectedCategory: [], //will be filled when the token will end up to a piece of the board
         answeredQuestions: [], //all the question showed will end up here to avoid duplicates
@@ -393,7 +415,7 @@
     grid-row-start: 4;
     grid-column-start: 4;
   }
-  
+
   .player3 {
     border-style: solid;
     border-radius: 50%;
