@@ -20,11 +20,12 @@ export default {
   name: 'playerForm',
   data() {
     return {
-      player1: '',
+      player1: '',//fills those from the input
       player2: ''
     }
   },
   methods: {
+    // create an event bus when the submit has been clicked. Brings the player name to BoardGame
     addPlayers: function() {
       eventBus.$emit('add-players', [this.player1, this.player2])
     }

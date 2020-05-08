@@ -49,12 +49,17 @@ export default {
           active: false
         }
       ],
-
-      score: 0,
       selectedCategory: [], //will be filled when the token will end up to a piece of the board
-      answeredQuestions: [],
-      randomQuestion: null,
-      categoriesAndId:[['sport', 21],['geography', 22], ['general_knowledge', 9], ['history', 23], ['animal', 27], ['science_and_nature', 17]]
+      answeredQuestions: [], //all the question showed will end up here to avoid duplicates
+      randomQuestion: null, //when the dice will be throwed it will be filled by the event
+      categoriesAndId: [
+        ['sport', 21],
+        ['geography', 22],
+        ['general_knowledge', 9],
+        ['history', 23],
+        ['animal', 27],
+        ['science_and_nature', 17]
+      ]
     }
   },
   components: {
@@ -62,6 +67,7 @@ export default {
     'player-form': PlayerForm
   },
   methods: {
+    //Create a random question from the selected Category
     //will be invoked when the token end up to a piece of the board
     randomQuest: function() {
       this.loadRandomForSelected(this.categoriesAndId)
@@ -85,50 +91,40 @@ export default {
 
     },
 
-
+    // fetch a category
     loadCategory: function(category, category_id) {
       const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`
       fetch(url).then(response => response.json())
         .then(data => this.categories[category] = data.results)
       console.log(`${category} loaded`);
     },
-
-    loadAllCategories:function(categoryArray){
-    categoryArray.map((element)  => {this.loadCategory(element[0],element[1])})
-  },
+    // fetches all the categories
+    loadAllCategories: function(categoryArray) {
+      categoryArray.map((element) => {
+        this.loadCategory(element[0], element[1])
+      })
+    },
 
     //JUST FOR TESTING PURPOSE
-    // loadSelected: function() {
-    //   const url = 'https://opentdb.com/api.php?amount=50&category=21&type=multiple'
-    //   fetch(url).then(response => response.json())
-    //     .then(data => this.selectedCategory = data.results)
-    // },
-    loadRandomForSelected: function(categoryArray){
-    const index = Math.floor(Math.random() * 6)
-    const catId = categoryArray[index][1]
-
-    const url = `https://opentdb.com/api.php?amount=50&category=${catId}&type=multiple`
-    fetch(url).then(response => response.json())
-      .then(data => this.selectedCategory = data.results)},
-
-
-
-
+    loadRandomForSelected: function(categoryArray) {
+      const index = Math.floor(Math.random() * 6)
+      const catId = categoryArray[index][1]
+      const url = `https://opentdb.com/api.php?amount=50&category=${catId}&type=multiple`
+      fetch(url).then(response => response.json())
+        .then(data => this.selectedCategory = data.results)
+    },
 
     //find active player
     activePlayer: function(players) {
       const activePlayer = players.find(player => player.active === true)
       return activePlayer
     },
-    //add points
+    //add won categories
     addWonCategory: function(player, question, arrayOfplayers) {
       const index = this.findIndexOfPlayer(player)
       if (!arrayOfplayers[index].score.includes(question)) {
         arrayOfplayers[index].score.push(question)
       }
-
-
-
     },
     //find index of player
     findIndexOfPlayer: function(player) {
@@ -151,7 +147,6 @@ export default {
   },
   mounted() {
     //JUST FOR TESTING
-    // this.loadSelected();
     this.loadRandomForSelected(this.categoriesAndId)
     //
     this.loadAllCategories(this.categoriesAndId)

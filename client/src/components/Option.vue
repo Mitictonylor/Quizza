@@ -11,6 +11,8 @@ export default {
   name: "Option",
   props: ['option'],
   methods: {
+    //create an event bus based on the clicked option, and
+    // brings them to Boardgame to check if is the right answer
     checkOption: function() {
       eventBus.$emit('selected-option', this.option)
 

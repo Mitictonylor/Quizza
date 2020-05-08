@@ -28,6 +28,9 @@ export default {
   },
 
   methods: {
+
+    //randomize the position of the item in an array,
+    //so the correct answer won't be alwasy at the same position
     shuffle: function(arra1) {
       let ctr = arra1.length
       let temp
