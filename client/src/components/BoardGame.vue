@@ -36,6 +36,12 @@
           <div id="g5" class="tile"></div>
           <div id="g6" class="tile"></div>
           <div id="g7" class="tile"></div>
+
+          <div class="board-content-top-left"></div>
+          <div class="board-content-top-right"></div>
+          <div class="board-content-bottom-right"></div>
+          <div class="board-content-bottom-left"></div>
+
         </div>
       </div>
     </div>
@@ -290,6 +296,46 @@
 /* CROSS SECTION Y */
 #a4, #b4, #c4, #d4, #e4, #f4, #g4   {
   grid-column-start: 4;
+}
+
+.board-content-top-left {
+  border-style: solid;
+  width: 160px;
+  height: 160px;
+  z-index: 2;
+  position: absolute;
+  margin: 80px;
+}
+
+.board-content-top-right {
+  border-style: solid;
+  width: 160px;
+  height: 160px;
+  z-index: 2;
+  position: absolute;
+  margin: 80px;
+  right: 0;
+}
+
+.board-content-bottom-right {
+  border-style: solid;
+  width: 160px;
+  height: 160px;
+  z-index: 2;
+  position: absolute;
+  margin: 80px;
+  bottom: 0;
+  right: 0;
+}
+
+.board-content-bottom-left {
+  border-style: solid;
+  width: 160px;
+  height: 160px;
+  z-index: 2;
+  position: absolute;
+  margin: 80px;
+  bottom: 0;
 }
 
 .player{
