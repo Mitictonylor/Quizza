@@ -115,6 +115,7 @@
             animal: [],
             science_and_nature: []
         },
+        gamePlayers:[],
         players: [
             {
               alias: "player1",
@@ -166,6 +167,7 @@
         ]
       }
     },
+
     components: {
       "questions": Questions,
       'player-form': PlayerForm
@@ -175,6 +177,7 @@
         this.diceResult = this.dice[Math.floor(Math.random() * 6)];
         this.showMoveOptions();
         this.disableTheDice();
+
       },
       getDiceFace() {
         return require('@/assets/dice/' + this.diceResult + '.png');
@@ -252,7 +255,12 @@
         const dice = document.querySelector(".dice")
         dice.style.pointerEvents = 'auto';
       },
-
+      filteredPlayers() {
+        const playersWithName = this.players.filter((player) => {
+          return player.name !== '' });
+        this.gamePlayers = playersWithName;
+      }
+,
     //Create a random question from the selected Category
     //will be invoked when the token end up to a piece of the board
       randomQuest() {
@@ -358,6 +366,7 @@
           this.players[1].name = players[1];
           this.players[2].name = players[2];
           this.players[3].name = players[3];
+          this.filteredPlayers();
           this.players[0].active = true;
         });
      }
