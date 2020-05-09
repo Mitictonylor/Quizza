@@ -1,6 +1,7 @@
 <template lang="html">
   <div>
     <div class="page-container">
+      <div class="playing-area">
 
       <div class="questions-container">
         <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
@@ -79,8 +80,8 @@
           <p v-if="players[3].name">Collected: {{players[1].score}}</p>
         </div>
       </div>
-
     </div>
+  </div>
 
     <div>
       <player-form v-if="!players[0].name && !players[1].name"></player-form>
@@ -330,29 +331,33 @@
     text-align: center;
     margin-top: 70px;
     width: 100%;
-    height: 570px;
+  }
+
+  .playing-area {
+    border-style: solid;
+    display: inline-block;
+    width: 90%;
   }
 
   .questions-container {
     border-style: solid;
     border-color: red;
     float: left;
-    width: 25%;
+    width: 29%;
     height: 565px;
+    margin-right: 0.5%;
   }
 
   .players-container {
     border-style: solid;
-    border-color: pink;
+    border-color: red;
     float: left;
-    width: 25%;
-    height: 565px;
+    width: 29%;
+    margin-left: 0.55%;
   }
 
   .game-board-container {
-    border-style: solid;
-    display: inline-block;
-    width: 48.5%;
+    width: 40%;
     float: left;
   }
 
