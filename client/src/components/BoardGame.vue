@@ -80,6 +80,10 @@
           <p v-if="players[3].name">Collected: {{players[1].score}}</p>
         </div>
       </div>
+
+      <div class="player-prompt">
+          <p v-if="players[0].name && players[1].name">YOUR TURN - {{activePlayer(players).name.toUpperCase()}}</p>
+      </div>
     </div>
   </div>
 
@@ -87,10 +91,7 @@
       <player-form v-if="!players[0].name && !players[1].name"></player-form>
     </div>
 
-    <!-- <div class="button">
-      <button v-if="players[0].name && players[1].name" type="button" name="button" v-on:click="randomQuest">{{activePlayer(players).name}}THROW THE DICE</button>
-    </div> -->
-
+<!-- randomQuest -->
   </div>
 </template>
 
@@ -213,6 +214,7 @@
                                       grid-column-start: ${this.getNewColPosition(event)};`
         this.player.currentPosition = event.currentTarget.id;
         this.resetMoveOptions();
+        this.randomQuest();
       },
       checkActive(event) {
         for (let option of this.getMoveOptions()) {
@@ -353,7 +355,16 @@
     border-color: red;
     float: left;
     width: 29%;
+    height: 565px;
     margin-left: 0.55%;
+  }
+
+  .player-prompt {
+    border-style: solid;
+    float: left;
+    height: 40px;
+    width: 100%;
+    text-align: center;
   }
 
   .game-board-container {
