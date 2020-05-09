@@ -15,7 +15,7 @@
       </div>
       <div class="player4">
         <label for="player4">Player 4: </label>
-        <input type="text" v-model="player4" placeholder="Insert name" required/>
+        <input type="text" v-model="player4" placeholder="Insert name"/>
       </div>
       <input type="submit"   value="SUBMIT">
     </form>
