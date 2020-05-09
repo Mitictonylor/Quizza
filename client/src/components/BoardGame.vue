@@ -174,6 +174,7 @@
       randomDice() {
         this.diceResult = this.dice[Math.floor(Math.random() * 6)];
         this.showMoveOptions();
+        this.disableTheDice();
       },
       getDiceFace() {
         return require('@/assets/dice/' + this.diceResult + '.png');
@@ -242,6 +243,14 @@
           }
 
         }
+      },// Find the Dice class and disable the click event
+      disableTheDice(){
+        const dice = document.querySelector(".dice")
+        dice.style.pointerEvents = 'none';
+      },//Find the Dice class and re-enable the click event
+      enableTheDice(){
+        const dice = document.querySelector(".dice")
+        dice.style.pointerEvents = 'auto';
       },
 
     //Create a random question from the selected Category
@@ -334,10 +343,12 @@
             this.checkWinCondition(playerActive);
             this.randomQuestion = null;
             alert("Throw the dice again"); //create a new question in either cases
+            this.enableTheDice();
           } else {
             alert("boooo");
             this.switchActivePlayer(playerActive, this.players);
             this.randomQuestion = null;
+            this.enableTheDice();
           }
         });
 
