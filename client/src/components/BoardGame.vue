@@ -61,8 +61,23 @@
       </div>
 
       <div class="players-container">
-        <p v-if="players[0].name && players[1].name">{{players[0].name}} categories:{{players[0].score}} </p>
-        <p v-if="players[0].name && players[1].name">{{players[1].name}} categories:{{players[1].score}} </p>
+        <p>PLAYERS</p>
+        <div class="player1-deets">
+          <p v-if="players[0].name && players[1].name">Player 1: {{players[0].name}}</p>
+          <p v-if="players[0].name && players[1].name">Collected: {{players[0].score}}</p>
+        </div>
+        <div class="player2-deets">
+          <p v-if="players[0].name && players[1].name">Player 2: {{players[1].name}}</p>
+          <p v-if="players[0].name && players[1].name">Collected: {{players[1].score}}</p>
+        </div>
+        <div class="player3-deets">
+          <p v-if="players[2].name">Player 3: {{players[2].name}}</p>
+          <p v-if="players[2].name">Collected: {{players[2].score}}</p>
+        </div>
+        <div class="player4-deets">
+          <p v-if="players[3].name">Player 4: {{players[1].name}}</p>
+          <p v-if="players[3].name">Collected: {{players[1].score}}</p>
+        </div>
       </div>
 
     </div>
@@ -71,9 +86,9 @@
       <player-form v-if="!players[0].name && !players[1].name"></player-form>
     </div>
 
-    <div class="button">
+    <!-- <div class="button">
       <button v-if="players[0].name && players[1].name" type="button" name="button" v-on:click="randomQuest">{{activePlayer(players).name}}THROW THE DICE</button>
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -300,6 +315,8 @@
         eventBus.$on('add-players', (players) => {
           this.players[0].name = players[0];
           this.players[1].name = players[1];
+          this.players[2].name = players[2];
+          this.players[3].name = players[3];
           this.players[0].active = true;
         });
      }
@@ -311,7 +328,7 @@
     border-style: solid;
     display: block;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 70px;
     width: 100%;
     height: 570px;
   }
