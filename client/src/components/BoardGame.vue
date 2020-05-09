@@ -6,7 +6,7 @@
         <div class="questions-container">
           <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
         </div>
-
+<!-- at the click of the mouse it create the click event, and gives back the id of the cell we clicked -->
         <div class="game-board-container">
           <div class="game-board">
             <div id="a1" class="tile" v-on:click="checkActive($event)"></div>
@@ -178,18 +178,22 @@
       getDiceFace() {
         return require('@/assets/dice/' + this.diceResult + '.png');
       },
-      getMoveOptions() {
-        const res = 'roll' + this.diceResult;
+      // gives u the options where the player could move on the board
+      getMoveOptions() {//dice is
+        const res = 'roll' + this.diceResult; //roll3
+        //trova lindex della posizione attuale del giocatore d4
         const index = TileObjects.map(x => x.id).indexOf(this.player.currentPosition);
-        this.moveOptions = TileObjects[index][res]
+        this.moveOptions = TileObjects[index][res]// takes all the possible future position for roll 3
         return this.moveOptions;
       },
+      // shows the possible position from the array and gets them colored in red
       showMoveOptions() {
         for (let option of this.getMoveOptions()) {
           const moveOption = document.querySelector(`#${option}`);
           moveOption.style.color = 'red';
         }
       },
+      //make the blocks black again
       resetMoveOptions() {
         for (let option of this.moveOptions) {
           const moveOption = document.querySelector(`#${option}`);
@@ -197,29 +201,33 @@
         }
         this.moveOptions = null;
       },
-      getNewRowPosition(event) {
-        const divID = event.currentTarget.id;
-        const index = TileObjects.map(x => x.id).indexOf(divID);
-        return TileObjects[index]['row'];
+      //brings the raw position for the css
+      getNewRowPosition(event) {//click on d1
+        const divID = event.currentTarget.id;//d1
+        const index = TileObjects.map(x => x.id).indexOf(divID); //12
+        return TileObjects[index]['row']; //4
       },
-      getNewColPosition(event) {
-        const divID = event.currentTarget.id;
-        const index = TileObjects.map(x => x.id).indexOf(divID);
-        return TileObjects[index]['column'];
+      //brings the column position for the css
+      getNewColPosition(event) {//d1
+        const divID = event.currentTarget.id;//d1
+        const index = TileObjects.map(x => x.id).indexOf(divID);//12
+        return TileObjects[index]['column'];//1
       },
       movePlayer(event) {
         const activePlayer = document.querySelector('#player1');
         activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
-                                      grid-column-start: ${this.getNewColPosition(event)};`
-        this.player.currentPosition = event.currentTarget.id;
+                                      grid-column-start: ${this.getNewColPosition(event)};`//row 4 colomn 1
+        this.player.currentPosition = event.currentTarget.id;//assign the position we clicked on the player d1
         this.resetMoveOptions();
         this.randomQuest();
       },
-      checkActive(event) {
+      checkActive(event) { //event posizione pedina d4
         for (let option of this.getMoveOptions()) {
+          //if the position is the same as the one where the token is
           if (option === event.currentTarget.id) {
             return this.movePlayer(event)
           }
+          console.log(event)
         }
       },
     //Create a random question from the selected Category
