@@ -1,6 +1,11 @@
 <template lang="html">
   <div>
     <div class="page-container">
+
+      <div class="questions-container">
+        <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
+      </div>
+
       <div class="game-board-container">
         <div class="game-board">
           <div id="a1" class="tile" v-on:click="checkActive($event)"></div>
@@ -54,23 +59,21 @@
 
         </div>
       </div>
-    </div>
-    <!-- <div>
-      <player-form v-if="!players[0].name && !players[1].name"></player-form>
+
+      <div class="players-container">
+        <p v-if="players[0].name && players[1].name">{{players[0].name}} categories:{{players[0].score}} </p>
+        <p v-if="players[0].name && players[1].name">{{players[1].name}} categories:{{players[1].score}} </p>
+      </div>
+
     </div>
 
     <div>
-      <questions v-if="selectedCategory.length > 0 && randomQuestion":randomQuestion="randomQuestion"></questions>
-    </div>
-
-    <div class="player" >
-      <p v-if="players[0].name && players[1].name">{{players[0].name}} categories:{{players[0].score}} </p>
-      <p v-if="players[0].name && players[1].name">{{players[1].name}} categories:{{players[1].score}} </p>
+      <player-form v-if="!players[0].name && !players[1].name"></player-form>
     </div>
 
     <div class="button">
       <button v-if="players[0].name && players[1].name" type="button" name="button" v-on:click="randomQuest">{{activePlayer(players).name}}THROW THE DICE</button>
-    </div> -->
+    </div>
 
   </div>
 </template>
@@ -305,17 +308,35 @@
 
 <style lang="css" scoped>
   .page-container {
+    border-style: solid;
     display: block;
     text-align: center;
-    width: 100vw;
-    height: 100vh;
+    margin-top: 50px;
+    width: 100%;
+    height: 570px;
+  }
+
+  .questions-container {
+    border-style: solid;
+    border-color: red;
+    float: left;
+    width: 25%;
+    height: 565px;
+  }
+
+  .players-container {
+    border-style: solid;
+    border-color: pink;
+    float: left;
+    width: 25%;
+    height: 565px;
   }
 
   .game-board-container {
+    border-style: solid;
     display: inline-block;
-    width: 650px;
-    height: 650px;
-    margin-top: 100px;
+    width: 48.5%;
+    float: left;
   }
 
   .game-board {
@@ -495,23 +516,15 @@
     grid-column-start: 4;
   }
 
-  /* .player{
-    border-style: solid;
-    border-color: pink;
-    position: absolute;
-    top: 5%;
-    left: 5%;
-  }
-
   button{
     position:absolute;
     top: 80%;
     left: 50%;
-  } */
+  }
 </style>
 
 <style>
-  body{
+  /* body{
     overflow: hidden;
-  }
+  } */
 </style>
