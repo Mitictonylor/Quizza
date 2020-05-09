@@ -174,6 +174,7 @@
       randomDice() {
         this.diceResult = this.dice[Math.floor(Math.random() * 6)];
         this.showMoveOptions();
+        this.disableTheDice();
       },
       getDiceFace() {
         return require('@/assets/dice/' + this.diceResult + '.png');
@@ -218,22 +219,44 @@
         activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
                                       grid-column-start: ${this.getNewColPosition(event)};`//row 4 colomn 1
         this.player.currentPosition = event.currentTarget.id;//assign the position we clicked on the player d1
+        //Needs to load the category of the grid
+        this.selectGridCategory();
         this.resetMoveOptions();
         this.randomQuest();
       },
+      selectGridCategory(){//Find index of the actual player position
+        const index = TileObjects.map(x => x.id).indexOf(this.player.currentPosition);
+        //Put in selected category the category of the grid
+        console.log(index);
+        const category = TileObjects[index].category
+        console.log(category);
+        this.selectedCategory = this.categories[category]
+        console.log(this.selectedCategory);
+      },
       checkActive(event) { //event posizione pedina d4
+
+
         for (let option of this.getMoveOptions()) {
           //if the position is the same as the one where the token is
           if (option === event.currentTarget.id) {
             return this.movePlayer(event)
           }
-          console.log(event)
+
         }
+      },// Find the Dice class and disable the click event
+      disableTheDice(){
+        const dice = document.querySelector(".dice")
+        dice.style.pointerEvents = 'none';
+      },//Find the Dice class and re-enable the click event
+      enableTheDice(){
+        const dice = document.querySelector(".dice")
+        dice.style.pointerEvents = 'auto';
       },
+
     //Create a random question from the selected Category
     //will be invoked when the token end up to a piece of the board
       randomQuest() {
-        this.loadRandomForSelected(this.categoriesAndId);
+        // this.loadRandomForSelected(this.categoriesAndId);
         const query = this.selectedCategory[Math.floor(Math.random() * this.selectedCategory.length)];
         const options = query.incorrect_answers.map(answer => answer);
         options.push(query.correct_answer);
@@ -262,13 +285,13 @@
         categoryArray.map(element => this.loadCategory(element[0], element[1]));
       },
       //JUST FOR TESTING PURPOSE
-      loadRandomForSelected(categoryArray) {
-        const index = Math.floor(Math.random() * 6);
-        const catId = categoryArray[index][1];
-        const url = `https://opentdb.com/api.php?amount=50&category=${catId}&type=multiple`;
-        fetch(url).then(response => response.json())
-        .then(data => this.selectedCategory = data.results)
-      },
+      // loadRandomForSelected(categoryArray) {
+      //   const index = Math.floor(Math.random() * 6);
+      //   const catId = categoryArray[index][1];
+      //   const url = `https://opentdb.com/api.php?amount=50&category=${catId}&type=multiple`;
+      //   fetch(url).then(response => response.json())
+      //   .then(data => this.selectedCategory = data.results)
+      // },
       //find active player
       activePlayer(players) {
         const activePlayer = players.find(player => player.active === true);
@@ -305,7 +328,7 @@
       },
       mounted() {
         //JUST FOR TESTING
-        this.loadRandomForSelected(this.categoriesAndId);
+        // this.loadRandomForSelected(this.categoriesAndId);
 
         this.loadAllCategories(this.categoriesAndId);
 
@@ -320,10 +343,12 @@
             this.checkWinCondition(playerActive);
             this.randomQuestion = null;
             alert("Throw the dice again"); //create a new question in either cases
+            this.enableTheDice();
           } else {
             alert("boooo");
             this.switchActivePlayer(playerActive, this.players);
             this.randomQuestion = null;
+            this.enableTheDice();
           }
         });
 
