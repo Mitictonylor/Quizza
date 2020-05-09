@@ -44,7 +44,7 @@
 
           <div class="board-content-top-left">
             <div class="dice-container">
-              <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()"></input>
+              <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()" v-if="players[0].name && players[1].name"></input>
             </div>
           </div>
 
@@ -52,10 +52,10 @@
           <div class="board-content-bottom-right"></div>
           <div class="board-content-bottom-left"></div>
 
-          <div id="player1" class="player1"></div>
-          <div id="player2" class="player2"></div>
-          <div id="player3" class="player3"></div>
-          <div id="player4" class="player4"></div>
+          <div id="player1" class="player1" v-if="players[0].name"></div>
+          <div id="player2" class="player2" v-if="players[1].name"></div>
+          <div id="player3" class="player3" v-if="players[2].name"></div>
+          <div id="player4" class="player4" v-if="players[3].name"></div>
 
         </div>
       </div>
