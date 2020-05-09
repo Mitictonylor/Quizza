@@ -30,4 +30,4 @@ const router = new Router({
   ]
 });
 //export the router object in line 9
-export default router
+export default router;

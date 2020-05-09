@@ -9,7 +9,8 @@ export const TileObjects =  [
     roll3: ['a4', 'd1'],
     roll4: ['a5', 'b4', 'd2', 'e1'],
     roll5: ['a6', 'c4', 'd3', 'f1'],
-    roll6: ['a7', 'd4', 'g1']
+    roll6: ['a7', 'd4', 'g1'],
+    category: 'sport'
   },
 
   {
@@ -22,6 +23,7 @@ export const TileObjects =  [
     roll4: ['a6', 'c4', 'd1'],
     roll5: ['a7', 'e1', 'd2', 'd4'],
     roll6: ['b7', 'f1', 'd3', 'd5', 'e4'],
+    category: 'general_knowledge'
   },
 
   {
@@ -34,6 +36,7 @@ export const TileObjects =  [
     roll4: ['a7', 'c1', 'd4'],
     roll5: ['b7', 'd1', 'd3', 'd5', 'e4'],
     roll6: ['c7', 'e1', 'd2', 'f4', 'd6'],
+    category: 'geography'
   },
 
   {
@@ -46,6 +49,7 @@ export const TileObjects =  [
     roll4: ['b1', 'b7', 'd3', 'd5', 'e4'],
     roll5: ['c1', 'c7', 'd2', 'd6', 'f4'],
     roll6: ['d1', 'd7', 'g4'],
+    category: 'history'
   },
 
   {
@@ -58,6 +62,7 @@ export const TileObjects =  [
     roll4: ['a1', 'c7', 'd4'],
     roll5: ['b1', 'd7', 'd3', 'd5', 'e4'],
     roll6: ['c1', 'e7', 'd2', 'd6', 'f4'],
+    category: 'animal'
   },
 
   {
@@ -70,6 +75,7 @@ export const TileObjects =  [
     roll4: ['a2', 'c4', 'd7'],
     roll5: ['a1', 'd4', 'd6', 'e7'],
     roll6: ['b1', 'd3', 'd5', 'e4', 'f7'],
+    category: 'sport'
   },
 
   {
@@ -82,6 +88,7 @@ export const TileObjects =  [
     roll4: ['a3', 'b4', 'd6', 'e7'],
     roll5: ['a2', 'c4', 'd5', 'f7'],
     roll6: ['a1', 'd4', 'g7'],
+    category: 'science_and_nature'
   },
 
   {
@@ -94,6 +101,7 @@ export const TileObjects =  [
     roll4: ['a4', 'f1', 'd3'],
     roll5: ['a5', 'b4', 'd4', 'g1'],
     roll6: ['a6', 'c4', 'd5', 'e4', 'g2'],
+    category: 'animal'
   },
 
   {
@@ -106,6 +114,7 @@ export const TileObjects =  [
     roll4: ['a1', 'a7', 'd2', 'd6', 'f4'],
     roll5: ['b1', 'b7', 'd4', 'd7', 'g4'],
     roll6: ['c1', 'c7', 'e1', 'e7', 'g3', 'g5'],
+    category: 'sport'
   },
 
   {
@@ -118,6 +127,7 @@ export const TileObjects =  [
     roll4: ['a4', 'f7', 'd5'],
     roll5: ['a3', 'b4', 'd4', 'g7'],
     roll6: ['a2', 'c4', 'd3', 'e4', 'g6'],
+    category: 'geography'
   },
 
   {
@@ -130,6 +140,7 @@ export const TileObjects =  [
     roll4: ['a3', 'd4', 'g1'],
     roll5: ['a4', 'c4', 'd5', 'e4', 'g2'],
     roll6: ['a5', 'b4', 'd6', 'f4', 'g3'],
+    category: 'history'
   },
 
   {
@@ -142,6 +153,7 @@ export const TileObjects =  [
     roll4: ['a2', 'a6', 'd1', 'd7', 'g4'],
     roll5: ['a1', 'a7', 'c1', 'e1', 'c7', 'e7', 'g3', 'g5'],
     roll6: ['b1', 'b7', 'f1', 'f7', 'g2', 'g6'],
+    category: 'general_knowledge'
   },
 
   {
@@ -154,6 +166,7 @@ export const TileObjects =  [
     roll4: ['a5', 'd4', 'g7'],
     roll5: ['a4', 'c4', 'd3', 'e4', 'g6'],
     roll6: ['a3', 'b4', 'd2', 'f4', 'g5'],
+    category: 'history'
   },
 
   {
@@ -166,6 +179,7 @@ export const TileObjects =  [
     roll4: ['a2', 'c4', 'd5', 'e4', 'g2'],
     roll5: ['a3', 'b4', 'd6', 'f4', 'g3'],
     roll6: ['a4', 'd7', 'g4'],
+    category: 'general_knowledge'
   },
 
   {
@@ -178,6 +192,7 @@ export const TileObjects =  [
     roll4: ['a1', 'g1', 'b4', 'f4', 'd6'],
     roll5: ['a2', 'g2', 'a4', 'g4', 'd7'],
     roll6: ['a3', 'g3', 'a5', 'g5', 'c7', 'e7'],
+    category: 'sport'
   },
 
   {
@@ -190,6 +205,7 @@ export const TileObjects =  [
     roll4: ['b1', 'f1', 'a4', 'g4', 'd7'],
     roll5: ['a1', 'g1', 'a3', 'a5', 'g3', 'g5', 'c7', 'e7'],
     roll6: ['a2', 'g2', 'a6', 'g6', 'b7', 'f7'],
+    category: 'animal'
   },
 
   {
@@ -202,6 +218,7 @@ export const TileObjects =  [
     roll4: ['a3', 'a5', 'c7', 'e7', 'g3', 'g5', 'c1', 'e1'],
     roll5: ['a2', 'a6', 'b7', 'f7', 'g6', 'g2', 'f1', 'b1'],
     roll6: ['a1', 'a7', 'g7', 'g1'],
+    category: 'history'
   },
 
   {
@@ -214,6 +231,7 @@ export const TileObjects =  [
     roll4: ['a4', 'd1', 'g4', 'b7', 'f7'],
     roll5: ['c1', 'e1', 'a3', 'a5', 'g3', 'g5', 'a7', 'g7'],
     roll6: ['b1', 'f1', 'a2', 'a6', 'g2', 'g6'],
+    category: 'geography'
   },
 
   {
@@ -226,6 +244,7 @@ export const TileObjects =  [
     roll4: ['d2', 'b4', 'f4', 'a7', 'g7'],
     roll5: ['d1', 'a4', 'g4', 'a6', 'g6'],
     roll6: ['c1', 'e1', 'a3', 'a5', 'g3', 'g5'],
+    category: 'science_and_nature'
   },
 
   {
@@ -238,6 +257,7 @@ export const TileObjects =  [
     roll4: ['a6', 'c4', 'd3', 'e4', 'g6'],
     roll5: ['b4', 'd2', 'f4', 'a5', 'g5'],
     roll6: ['a4', 'g4', 'd1'],
+    category: 'general_knowledge'
   },
 
   {
@@ -250,6 +270,7 @@ export const TileObjects =  [
     roll4: ['a1', 'd4', 'g3'],
     roll5: ['a2', 'c4', 'd5', 'e4', 'g4'],
     roll6: ['a3', 'b4', 'd6', 'f4', 'g5'],
+    category: 'geography'
   },
 
   {
@@ -262,6 +283,7 @@ export const TileObjects =  [
     roll4: ['a4', 'd1', 'd7', 'g2', 'g6'],
     roll5: ['a3', 'a5', 'c1', 'e1', 'c7', 'e7', 'g1', 'g7'],
     roll6: ['a2', 'a6', 'b1', 'f1', 'b7', 'f7'],
+    category: 'science_and_nature'
   },
 
   {
@@ -274,6 +296,7 @@ export const TileObjects =  [
     roll4: ['d4', 'a7', 'g5'],
     roll5: ['c4', 'd3', 'e4', 'a6', 'g4'],
     roll6: ['b4', 'd2', 'f4', 'a5', 'g3'],
+    category: 'animal'
   },
 
   {
@@ -286,6 +309,7 @@ export const TileObjects =  [
     roll4: ['b1', 'd3', 'g4'],
     roll5: ['a1', 'd4', 'f4', 'g5'],
     roll6: ['a2', 'c4', 'd5', 'e4', 'g6'],
+    category: 'science_and_nature'
   },
 
   {
@@ -298,6 +322,7 @@ export const TileObjects =  [
     roll4: ['b4', 'd2', 'd6', 'g1', 'g7'],
     roll5: ['a4', 'd1', 'd7', 'f1', 'f7'],
     roll6: ['a3', 'a5', 'c1', 'e1', 'c7', 'e7'],
+    category: 'history'
   },
 
   {
@@ -310,6 +335,7 @@ export const TileObjects =  [
     roll4: ['b7', 'd5', 'g4'],
     roll5: ['a7', 'd4', 'f4', 'g3'],
     roll6: ['a6', 'c4', 'd3', 'e4', 'g2'],
+    category: 'sport'
   },
 
   {
@@ -322,6 +348,7 @@ export const TileObjects =  [
     roll4: ['c1', 'd2', 'f4', 'g5'],
     roll5: ['b1', 'd3', 'e4', 'g6'],
     roll6: ['a1', 'd4', 'g7'],
+    category: 'history'
   },
 
   {
@@ -334,6 +361,7 @@ export const TileObjects =  [
     roll4: ['d1', 'e4', 'g6'],
     roll5: ['c1', 'd2', 'd4', 'g7'],
     roll6: ['b1', 'd3', 'c4', 'd5', 'f7'],
+    category: 'geography'
   },
 
   {
@@ -346,6 +374,7 @@ export const TileObjects =  [
     roll4: ['e1', 'd4', 'g7'],
     roll5: ['d1', 'c4', 'd3', 'd5', 'f7'],
     roll6: ['c1', 'd2', 'b4', 'd6', 'e7'],
+    category: 'sport'
   },
 
   {
@@ -358,6 +387,7 @@ export const TileObjects =  [
     roll4: ['c4', 'd3', 'd5', 'f1', 'f7'],
     roll5: ['b4', 'd2', 'd6', 'e1', 'e7'],
     roll6: ['a4', 'd1', 'd7'],
+    category: 'general_knowledge'
   },
 
   {
@@ -370,6 +400,7 @@ export const TileObjects =  [
     roll4: ['d4', 'g1', 'e7'],
     roll5: ['c4', 'd3', 'd5', 'f1', 'd7'],
     roll6: ['b4', 'd2', 'd6', 'e1', 'c7'],
+    category: 'animal'
   },
 
   {
@@ -382,6 +413,7 @@ export const TileObjects =  [
     roll4: ['e4', 'g2', 'd7'],
     roll5: ['d4', 'g1', 'c7', 'd6'],
     roll6: ['f1', 'c4', 'd3', 'd5', 'b7'],
+    category: 'geography'
   },
 
   {
@@ -394,5 +426,6 @@ export const TileObjects =  [
     roll4: ['c7', 'd6', 'f4', 'g3'],
     roll5: ['b7', 'd5', 'e4', 'g2'],
     roll6: ['a7', 'd4', 'g1'],
+    category: 'science_and_nature'
   }
 ]
