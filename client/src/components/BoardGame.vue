@@ -3,95 +3,94 @@
     <div class="page-container">
       <div class="playing-area">
 
-      <div class="questions-container">
-        <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
-      </div>
+        <div class="questions-container">
+          <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
+        </div>
 
-      <div class="game-board-container">
-        <div class="game-board">
-          <div id="a1" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="a2" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="a3" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="a4" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="a5" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="a6" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="a7" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="b1" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="b4" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="b7" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="c1" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="c4" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="c7" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="d1" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="d2" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="d3" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="d4" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="d5" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="d6" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="d7" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="e1" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="e4" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="e7" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="f1" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="f4" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="f7" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="g1" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="g2" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="g3" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="g4" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="g5" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="g6" class="tile" v-on:click="checkActive($event)"></div>
-          <div id="g7" class="tile" v-on:click="checkActive($event)"></div>
+        <div class="game-board-container">
+          <div class="game-board">
+            <div id="a1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a2" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a3" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a4" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a5" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a6" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="b1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="b4" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="b7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="c1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="c4" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="c7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="d1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="d2" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="d3" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="d4" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="d5" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="d6" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="d7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="e1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="e4" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="e7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f4" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="g1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="g2" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="g3" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="g4" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="g5" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="g6" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="g7" class="tile" v-on:click="checkActive($event)"></div>
 
-          <div class="board-content-top-left">
-            <div class="dice-container">
-              <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()" v-if="players[0].name && players[1].name"></input>
+            <div class="board-content-top-left">
+              <div class="dice-container">
+                <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()" v-if="players[0].name && players[1].name"></input>
+              </div>
             </div>
+
+            <div class="board-content-top-right"></div>
+            <div class="board-content-bottom-right"></div>
+            <div class="board-content-bottom-left"></div>
+
+            <div id="player1" class="player1" v-if="players[0].name"></div>
+            <div id="player2" class="player2" v-if="players[1].name"></div>
+            <div id="player3" class="player3" v-if="players[2].name"></div>
+            <div id="player4" class="player4" v-if="players[3].name"></div>
+
           </div>
-
-          <div class="board-content-top-right"></div>
-          <div class="board-content-bottom-right"></div>
-          <div class="board-content-bottom-left"></div>
-
-          <div id="player1" class="player1" v-if="players[0].name"></div>
-          <div id="player2" class="player2" v-if="players[1].name"></div>
-          <div id="player3" class="player3" v-if="players[2].name"></div>
-          <div id="player4" class="player4" v-if="players[3].name"></div>
-
         </div>
-      </div>
 
-      <div class="players-container">
-        <p>PLAYERS</p>
-        <div class="player1-deets">
-          <p v-if="players[0].name && players[1].name">Player 1: {{players[0].name}}</p>
-          <p v-if="players[0].name && players[1].name">Collected: {{players[0].score}}</p>
+        <div class="players-container">
+          <p>PLAYERS</p>
+          <div class="player1-deets">
+            <p v-if="players[0].name && players[1].name">Player 1: {{players[0].name}}</p>
+            <p v-if="players[0].name && players[1].name">Collected: {{players[0].score}}</p>
+          </div>
+          <div class="player2-deets">
+            <p v-if="players[0].name && players[1].name">Player 2: {{players[1].name}}</p>
+            <p v-if="players[0].name && players[1].name">Collected: {{players[1].score}}</p>
+          </div>
+          <div class="player3-deets">
+            <p v-if="players[2].name">Player 3: {{players[2].name}}</p>
+            <p v-if="players[2].name">Collected: {{players[2].score}}</p>
+          </div>
+          <div class="player4-deets">
+            <p v-if="players[3].name">Player 4: {{players[1].name}}</p>
+            <p v-if="players[3].name">Collected: {{players[1].score}}</p>
+          </div>
         </div>
-        <div class="player2-deets">
-          <p v-if="players[0].name && players[1].name">Player 2: {{players[1].name}}</p>
-          <p v-if="players[0].name && players[1].name">Collected: {{players[1].score}}</p>
-        </div>
-        <div class="player3-deets">
-          <p v-if="players[2].name">Player 3: {{players[2].name}}</p>
-          <p v-if="players[2].name">Collected: {{players[2].score}}</p>
-        </div>
-        <div class="player4-deets">
-          <p v-if="players[3].name">Player 4: {{players[1].name}}</p>
-          <p v-if="players[3].name">Collected: {{players[1].score}}</p>
-        </div>
-      </div>
 
-      <div class="player-prompt">
+        <div class="player-prompt">
           <p v-if="players[0].name && players[1].name">YOUR TURN - {{activePlayer(players).name.toUpperCase()}}</p>
+        </div>
       </div>
     </div>
-  </div>
 
     <div>
       <player-form v-if="!players[0].name && !players[1].name"></player-form>
     </div>
 
-<!-- randomQuest -->
   </div>
 </template>
 
@@ -547,12 +546,6 @@
     position: absolute;
     grid-row-start: 4;
     grid-column-start: 4;
-  }
-
-  button{
-    position:absolute;
-    top: 80%;
-    left: 50%;
   }
 </style>
 
