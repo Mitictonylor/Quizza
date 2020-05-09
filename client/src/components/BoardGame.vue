@@ -493,6 +493,21 @@
   .player2 {
     border-style: solid;
     border-radius: 50%;
+    background-color: blue;
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    margin-left: 40px;
+    margin-top: 40px;
+    z-index: 2;
+    position: absolute;
+    grid-row-start: 4;
+    grid-column-start: 4;
+  }
+
+  .player3 {
+    border-style: solid;
+    border-radius: 50%;
     background-color: red;
     width: 25px;
     height: 25px;
@@ -504,7 +519,7 @@
     grid-column-start: 4;
   }
 
-  .player3 {
+  .player4 {
     border-style: solid;
     border-radius: 50%;
     background-color: orange;
@@ -512,21 +527,6 @@
     height: 25px;
     margin: 5px;
     margin-left: 40px;
-    z-index: 2;
-    position: absolute;
-    grid-row-start: 4;
-    grid-column-start: 4;
-  }
-
-  .player4 {
-    border-style: solid;
-    border-radius: 50%;
-    background-color: blue;
-    width: 25px;
-    height: 25px;
-    margin: 5px;
-    margin-left: 40px;
-    margin-top: 40px;
     z-index: 2;
     position: absolute;
     grid-row-start: 4;
