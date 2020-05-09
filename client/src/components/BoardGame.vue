@@ -296,6 +296,11 @@
           } else {
               players[0].active = true
           }
+      },// Check if the Player reaches the win target
+      checkWinCondition(activePlayer){
+        if(activePlayer.score.length === 6){
+          alert("You won") //The game finish here
+        }
       }
       },
       mounted() {
@@ -312,6 +317,7 @@
           if (option === question.correct_answer) {
             alert("well done");
             this.addWonCategory(playerActive, question.category, this.players);
+            this.checkWinCondition(playerActive);
             this.randomQuestion = null;
             alert("Throw the dice again"); //create a new question in either cases
           } else {
