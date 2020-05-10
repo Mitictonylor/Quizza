@@ -108,8 +108,6 @@ export default {
   position: absolute;
   z-index: 1;
   border-style: solid;
-  margin: 0;
-  padding: 0;
 }
 
 .form {
