@@ -97,8 +97,7 @@ export default {
     },
     directives: {
       resize,
-    },
-
+    }
   }
 </script>
 
@@ -117,7 +116,6 @@ export default {
     overflow: auto;
     display: block;
     text-align: center;
-    border-style: solid;
     position: absolute;
     z-index: 1;
 
@@ -154,7 +152,6 @@ export default {
     margin-top: 110px;
     animation: 4s delayEffect;
     animation-fill-mode: forwards;
-
     visibility: hidden;
   }
 
@@ -201,9 +198,9 @@ export default {
 </style>
 
 <style>
-body {
-  margin: 0;
-  overflow-x: hidden;
-  user-select: none;
-}
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    user-select: none;
+  }
 </style>
