@@ -21,7 +21,7 @@
     </form>
     <p>FRANCESCO's IDEA PUT PICTURE OF THE BOARD GAME ON THE LINKS</p>
     <nav v-if="player1 && player2">
-      <router-link :to="{name: 'classic', params:{newPlayers}}">Classic</router-link>
+      <router-link :to="{name: 'classic', params:{player1, player2, player3, player4}}">Classic</router-link>
       <br>
       <router-link :to="{name: 'seek'}">Seek</router-link>
       <br>
@@ -45,7 +45,7 @@
         player2: '',
         player3: '',
         player4: '',
-        newPlayers:[]
+
 
       }
     },
@@ -53,13 +53,11 @@
 
     },
     computed:{
-      zPlayers(){
-        this.newPlayers = [this.player1, this.player2, this.player3, this.player4]
       }
     }
 
 
-  }
+
 </script>
 
 <style lang="css" scoped>
