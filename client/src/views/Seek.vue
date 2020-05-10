@@ -1,6 +1,5 @@
 <template lang="html">
     <div class="page-container">
-      <div class="game-board-container">
         <div class="game-board" ref="gameBoard">
           <div id="g1" class="grid" v-on:click="checkActive($event)">1</div>
           <div id="g2" class="grid" v-on:click="checkActive($event)">2</div>
@@ -140,7 +139,6 @@
           <div id="player4" class="player4"></div>
 
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -215,25 +213,18 @@
 </script>
 
 <style lang="css" scoped>
-  /* .page-container {
+  .page-container {
   border-style: solid;
   display: block;
   text-align: center;
   width: 100vw;
-  height: 100vh;
-  } */
-
-  /* .game-board-container {
-  border-style: solid;
-  display: inline-block;
-  width: 650px;
-  height: 650px;
-  } */
+  background-color: #8e9aaf;
+  }
 
   .game-board {
-
     display: inline-grid;
     position: relative;
+
   }
 
   .grid {
@@ -242,6 +233,7 @@
     width: 90px;
     height: 89px;
     font-size: 40px;
+    box-shadow: 2px 2px 4px #000000;
   }
 
   .grid:hover {
