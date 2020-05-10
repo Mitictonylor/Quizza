@@ -1,21 +1,21 @@
 <template>
   <div>
-    <nav>
-      <router-link :to="{name: 'newgame'}"> New Game</router-link>
+    <div id="app">
+      <canvas id="canvas"></canvas>
+    </div>
 
-    </nav>
-    <router-view></router-view>
+    <router-link :to="{name: 'newgame'}"> New Game</router-link>
   </div>
 </template>
 
 <script>
 
 
-  export default {
-      components: {
+export default {
+  components: {
 
-      }
-    }
+  }
+}
 </script>
 
 <style scoped>
