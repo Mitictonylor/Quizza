@@ -4,7 +4,11 @@
     <div class="form-container">
       <div class="form">
         <player-form/>
+        <div class="seek-button">
+          <router-link  v-on:click="playSound" :to="{name: 'seek'}"> SEEK </router-link>
+        </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -137,5 +141,9 @@ export default {
 p {
   padding: 0;
   margin: 0;
+}
+
+.seek-button {
+  border-style: border;
 }
 </style>
