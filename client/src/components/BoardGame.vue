@@ -10,81 +10,81 @@
 <!-- at the click of the mouse it create the click event, and gives back the id of the cell we clicked -->
         <div class="game-board-container">
           <div class="game-board">
-            <div id="a1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a2" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a3" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a4" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a5" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a6" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a7" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a8" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a9" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a10" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a11" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a12" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a13" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a14" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a15" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a16" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="a17" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="b1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="b9" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="b17" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="c1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="c9" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="c17" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="d1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="d9" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="d17" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="e1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="e9" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="e17" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f2" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f3" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f4" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f5" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f6" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f7" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f8" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f9" class="tile" v-on:click="checkActive($event)">F9</div>
-            <div id="f10" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f11" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f12" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f13" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f14" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f15" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f16" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f17" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="g1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="g9" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="g17" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="h1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="h9" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="h17" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="i1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="i9" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="i17" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="j1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="j9" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="j17" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k2" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k3" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k4" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k5" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k6" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k7" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k8" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k9" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k10" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k11" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k12" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k13" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k14" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k15" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k16" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="k17" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a1" class="sport" v-on:click="checkActive($event)"></div>
+            <div id="a2" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="a3" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="a4" class="history" v-on:click="checkActive($event)"></div>
+            <div id="a5" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="a6" class="science" v-on:click="checkActive($event)"></div>
+            <div id="a7" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="a8" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="a9" class="history" v-on:click="checkActive($event)"></div>
+            <div id="a10" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="a11" class="science" v-on:click="checkActive($event)"></div>
+            <div id="a12" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="a13" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="a14" class="history" v-on:click="checkActive($event)"></div>
+            <div id="a15" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="a16" class="science" v-on:click="checkActive($event)"></div>
+            <div id="a17" class="sport" v-on:click="checkActive($event)"></div>
+            <div id="b1" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="b9" class="science" v-on:click="checkActive($event)"></div>
+            <div id="b17" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="c1" class="history" v-on:click="checkActive($event)"></div>
+            <div id="c9" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="c17" class="history" v-on:click="checkActive($event)"></div>
+            <div id="d1" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="d9" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="d17" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="e1" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="e9" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="e17" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="f1" class="science" v-on:click="checkActive($event)"></div>
+            <div id="f2" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="f3" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="f4" class="history" v-on:click="checkActive($event)"></div>
+            <div id="f5" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="f6" class="science" v-on:click="checkActive($event)"></div>
+            <div id="f7" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="f8" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="f9" class="history" v-on:click="checkActive($event)">F9</div>
+            <div id="f10" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="f11" class="science" v-on:click="checkActive($event)"></div>
+            <div id="f12" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="f13" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="f14" class="history" v-on:click="checkActive($event)"></div>
+            <div id="f15" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="f16" class="science" v-on:click="checkActive($event)"></div>
+            <div id="f17" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="g1" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="g9" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="g17" class="science" v-on:click="checkActive($event)"></div>
+            <div id="h1" class="history" v-on:click="checkActive($event)"></div>
+            <div id="h9" class="science" v-on:click="checkActive($event)"></div>
+            <div id="h17" class="history" v-on:click="checkActive($event)"></div>
+            <div id="i1" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="i9" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="i17" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="j1" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="j9" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="j17" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="k1" class="sport" v-on:click="checkActive($event)"></div>
+            <div id="k2" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="k3" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="k4" class="history" v-on:click="checkActive($event)"></div>
+            <div id="k5" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="k6" class="science" v-on:click="checkActive($event)"></div>
+            <div id="k7" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="k8" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="k9" class="history" v-on:click="checkActive($event)"></div>
+            <div id="k10" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="k11" class="science" v-on:click="checkActive($event)"></div>
+            <div id="k12" class="geography" v-on:click="checkActive($event)"></div>
+            <div id="k13" class="general-knowledge" v-on:click="checkActive($event)"></div>
+            <div id="k14" class="history" v-on:click="checkActive($event)"></div>
+            <div id="k15" class="animal" v-on:click="checkActive($event)"></div>
+            <div id="k16" class="science" v-on:click="checkActive($event)"></div>
+            <div id="k17" class="sport" v-on:click="checkActive($event)"></div>
 
             <div class="board-content-top-left">
               <div class="dice-container">
@@ -482,11 +482,47 @@
     position: relative;
   }
 
-  .tile {
+  .sport {
     border-style: solid;
     box-sizing: border-box;
     width: 80px;
     height: 80px;
+    background-color: orange
+  }
+  .geography {
+    border-style: solid;
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    background-color: #af8f81
+  }
+  .general-knowledge {
+    border-style: solid;
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    background-color: pink
+  }
+  .history {
+    border-style: solid;
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    background-color: lightgreen
+  }
+  .animal {
+    border-style: solid;
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    background-color: lightblue
+  }
+  .science {
+    border-style: solid;
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    background-color: papayawhip
   }
 
   .tile:hover {
