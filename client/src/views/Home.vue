@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @mousemove="mouseInteraction($event)" v-resize="onResize">
+  <div id="home" @mousemove="mouseInteraction($event)" v-resize="onResize">
     <canvas id="canvas"></canvas>
     <div class="title-container">
       <audio id="audio" :src="button" autoplay="false"></audio>
@@ -181,7 +181,7 @@ export default {
     outline: none;
   }
 
-  #app {
+  #home {
     position: relative;
   }
 

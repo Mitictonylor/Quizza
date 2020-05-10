@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @mousemove="mouseInteraction($event)" v-resize="onResize">
+  <div id="newgame" @mousemove="mouseInteraction($event)" v-resize="onResize">
     <canvas id="canvas"></canvas>
     <div class="form-container">
       <div class="form">
@@ -130,7 +130,7 @@ export default {
   }
 }
 
-#app {
+#newgame {
   position: relative;
 }
 
