@@ -276,7 +276,8 @@
               category: query.category
             } //so we can push it to the player wins
           this.answeredQuestions.push(this.randomQuestion.question);
-        } else if (this.answeredQuestions.length === 49) { //needs to change when we gonna randomize the sel cat
+        } else if (this.answeredQuestions.length === 49) {
+           //needs to change when we gonna randomize the sel cat
             this.loadSelected();
         } else {
             this.randomQuest();

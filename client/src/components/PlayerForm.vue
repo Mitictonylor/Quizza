@@ -19,6 +19,7 @@
       </div>
 
     </form>
+    <p>FRANCESCO's IDEA PUT PICTURE OF THE BOARD GAME ON THE LINKS</p>
     <nav v-if="player1 && player2">
       <router-link :to="{name: 'classic', params:{newPlayers}}">Classic</router-link>
       <br>
