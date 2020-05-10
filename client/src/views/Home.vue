@@ -75,7 +75,10 @@ export default {
       init() {
         this.circleArray()
       }
-    }
+    },
+    directives: {
+      resize,
+    },
   }
 </script>
 
