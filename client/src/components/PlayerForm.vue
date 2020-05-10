@@ -53,7 +53,7 @@
     },
     computed:{
       zPlayers(){
-        this.newPlayers.push([this.player1, this.player2, this.player3, this.player4])
+        this.newPlayers = [this.player1, this.player2, this.player3, this.player4]
       }
     }
 

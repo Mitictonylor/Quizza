@@ -253,10 +253,10 @@
         this.gamePlayers = playersWithName;
       },
       updateNames(){
-        this.players[0].name = this.newPlayers[0][0];
-        this.players[1].name = this.newPlayers[0][1];
-        this.players[2].name = this.newPlayers[0][2];
-        this.players[3].name = this.newPlayers[0][3];
+        this.players[0].name = this.newPlayers[0];
+        this.players[1].name = this.newPlayers[1];
+        this.players[2].name = this.newPlayers[2];
+        this.players[3].name = this.newPlayers[3];
         this.filteredPlayers();
         this.gamePlayers[0].active = true;
       }
