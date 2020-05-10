@@ -1,6 +1,5 @@
 <template lang="html">
-  <div class="form-container">
-    <form class="form" >
+    <form class="form">
       <div class="player1">
         <label for="player1">Player 1: </label>
         <input type="text" v-model="player1" placeholder="Insert name" required/>
@@ -17,21 +16,16 @@
         <label for="player4">Player 4: </label>
         <input type="text" v-model="player4" placeholder="Insert name"/>
       </div>
-
     </form>
-    <p>FRANCESCO's IDEA PUT PICTURE OF THE BOARD GAME ON THE LINKS</p>
-    <nav v-if="player1 && player2">
+    <!-- <p>FRANCESCO's IDEA PUT PICTURE OF THE BOARD GAME ON THE LINKS</p> -->
+    <!-- <nav v-if="player1 && player2">
       <router-link :to="{name: 'classic', params:{player1, player2, player3, player4}}">Classic</router-link>
       <br>
       <router-link :to="{name: 'seek'}">Seek</router-link>
       <br>
       <router-link :to="{name: 'mental'}">Mental</router-link>
       <br>
-    </nav>
-    <router-view></router-view>
-  </div>
-
-
+    </nav> -->
 </template>
 
 <script>
@@ -45,19 +39,9 @@
         player2: '',
         player3: '',
         player4: '',
-
-
       }
     },
-    methods: {
-
-    },
-    computed:{
-      }
-    }
-
-
-
+  }
 </script>
 
 <style lang="css" scoped>
