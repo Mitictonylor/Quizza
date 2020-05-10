@@ -17,8 +17,14 @@ export default {
     return {
       x: Math.random() * innerWidth,
       y: Math.random() * innerHeight,
+      dx: (Math.random() - 0.5) * 10,
+      dy: (Math.random() -0.5) * 10,
       radius: 30,
-      circleArr: []
+      circleArr: [],
+      mouse: {
+        x: null,
+        y: null
+      },
     }
   },
   mounted() {
@@ -59,9 +65,9 @@ export default {
       }
     },
     mouseInteraction(event) {
-    this.mouse.x = event.x;
-    this.mouse.y = event.y;
-  },
+      this.mouse.x = event.x;
+      this.mouse.y = event.y;
+    },
   }
 }
 </script>
