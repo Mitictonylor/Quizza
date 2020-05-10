@@ -16,32 +16,74 @@
             <div id="a5" class="tile" v-on:click="checkActive($event)"></div>
             <div id="a6" class="tile" v-on:click="checkActive($event)"></div>
             <div id="a7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a8" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a10" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a11" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a12" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a13" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a14" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a15" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a16" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="a17" class="tile" v-on:click="checkActive($event)"></div>
             <div id="b1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="b4" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="b7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="b9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="b17" class="tile" v-on:click="checkActive($event)"></div>
             <div id="c1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="c4" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="c7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="c9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="c17" class="tile" v-on:click="checkActive($event)"></div>
             <div id="d1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="d2" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="d3" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="d4" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="d5" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="d6" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="d7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="d9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="d17" class="tile" v-on:click="checkActive($event)"></div>
             <div id="e1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="e4" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="e7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="e9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="e17" class="tile" v-on:click="checkActive($event)"></div>
             <div id="f1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f2" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f3" class="tile" v-on:click="checkActive($event)"></div>
             <div id="f4" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f5" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f6" class="tile" v-on:click="checkActive($event)"></div>
             <div id="f7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f8" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f10" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f11" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f12" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f13" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f14" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f15" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f16" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f17" class="tile" v-on:click="checkActive($event)"></div>
             <div id="g1" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="g2" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="g3" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="g4" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="g5" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="g6" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="g7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="g9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="g17" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="h1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="h9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="h17" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="i1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="i9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="i17" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="j1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="j9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="j17" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k1" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k2" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k3" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k4" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k5" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k6" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k7" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k8" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k10" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k11" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k12" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k13" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k14" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k15" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k16" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="k17" class="tile" v-on:click="checkActive($event)"></div>
 
             <div class="board-content-top-left">
               <div class="dice-container">
@@ -96,7 +138,7 @@
 
   import {eventBus} from '../main.js';
   import Questions from "@/components/Questions.vue";
-  import {TileObjects} from '@/config/TileObjects.js';
+  import {ClassicTileObjects} from '@/config/ClassicTileObjects.js';
 
   export default {
     name: 'board-game',
@@ -182,8 +224,8 @@
         const res = 'roll' + this.diceResult; //roll3
         //trova lindex della posizione attuale del giocatore d4
         const indexOfActivePlayer = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
-        const index = TileObjects.map(x => x.id).indexOf(this.gamePlayers[indexOfActivePlayer].currentPosition);
-        this.moveOptions = TileObjects[index][res]// takes all the possible future position for roll 3
+        const index = ClassicTileObjects.map(x => x.id).indexOf(this.gamePlayers[indexOfActivePlayer].currentPosition);
+        this.moveOptions = ClassicTileObjects[index][res]// takes all the possible future position for roll 3
         return this.moveOptions;
       },
       // shows the possible position from the array and gets them colored in red
@@ -204,14 +246,14 @@
       //brings the raw position for the css
       getNewRowPosition(event) {//click on d1
         const divID = event.currentTarget.id;//d1
-        const index = TileObjects.map(x => x.id).indexOf(divID); //12
-        return TileObjects[index]['row']; //4
+        const index = ClassicTileObjects.map(x => x.id).indexOf(divID); //12
+        return ClassicTileObjects[index]['row']; //4
       },
       //brings the column position for the css
       getNewColPosition(event) {//d1
         const divID = event.currentTarget.id;//d1
-        const index = TileObjects.map(x => x.id).indexOf(divID);//12
-        return TileObjects[index]['column'];//1
+        const index = ClassicTileObjects.map(x => x.id).indexOf(divID);//12
+        return ClassicTileObjects[index]['column'];//1
       },
       movePlayer(event) {
         const activePlayer = document.querySelector(`#${this.activePlayer(this.gamePlayers).alias}`);
@@ -226,9 +268,9 @@
       },
       selectGridCategory(){//Find index of the actual player position
         const indexOfActivePlayer = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
-        const index = TileObjects.map(x => x.id).indexOf(this.gamePlayers[indexOfActivePlayer].currentPosition);
+        const index = ClassicTileObjects.map(x => x.id).indexOf(this.gamePlayers[indexOfActivePlayer].currentPosition);
         //Put in selected category the category of the grid
-        const category = TileObjects[index].category
+        const category = ClassicTileObjects[index].category
         this.selectedCategory = this.categories[category]
       },
       checkActive(event) { //event posizione pedina d4
@@ -421,7 +463,7 @@
   }
 
   .game-board-container {
-    width: 40%;
+    width: 100%;
     float: left;
   }
 
@@ -444,53 +486,65 @@
   }
 
   /* RIGHT Y COL */
-  #a7, #b7, #c7, #d7, #e7, #f7, #g7 {
-    grid-column-start: 7;
+  #a17, #b17, #c17, #d17, #e17, #f17, #g17, #h17, #i17, #j17, #k17  {
+    grid-column-start: 12;
   }
 
   /* BOTTOM X ROW */
-  #g1, #g2, #g3, #g4, #g5, #g6, #g7 {
-    grid-row-start: 7;
+  #k1, #k2, #k3, #k4, #k5, #k6, #k7, #k8, #k9, #k10, #k11, #k12, #k13, #k14, #k15, #k16, #k17{
+    grid-row-start: 18;
   }
 
   /* LEFT Y COL */
-  #a1, #b1, #c1, #d1, #e1, #f1, #g1 {
+  #a1, #b1, #c1, #d1, #e1, #f1, #g1, #h1, #i1, #j1, #k1,  {
     grid-column-start: 1;
+  }
+
+  #j1 {
+    grid-row-start: 10;
+  }
+
+  #i1 {
+    grid-row-start: 9;
+  }
+
+  #h1 {
+    grid-row-start: 8;
+  }
+
+  #g1 {
+    grid-row-start: 7;
   }
 
   #f1 {
     grid-row-start: 6;
   }
-
   #e1 {
     grid-row-start: 5;
   }
-
   #d1 {
     grid-row-start: 4;
   }
-
   #c1 {
     grid-row-start: 3;
   }
-
   #b1 {
     grid-row-start: 2;
   }
   /* LEFT Y COL END */
 
   /* CROSS SECTION X */
-  #d1, #d2, #d3, #d4, #d5, #d6, #d7  {
-    grid-row-start: 4;
+  #f1, #f2, #f3, #f4, #f5, #f6, #f7, #f8, #f9, #f10, #f11, #f12, #f13, #f14, #f15, #f16, #f17{
+    grid-row-start: 9;
   }
 
-  #d4{
-    grid-column-start: 4;
+  #f9{
+    grid-column-start: 9;
   }
 
   /* CROSS SECTION Y */
-  #a4, #b4, #c4, #d4, #e4, #f4, #g4   {
-    grid-column-start: 4;
+  #a9, #b9, #c9, #d9, #e9, #f9, #g9, #h9, #i9, #j9, #k9  {
+    grid-column-start: 9;
   }
 
   .board-content-top-left {
