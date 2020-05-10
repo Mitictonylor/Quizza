@@ -100,7 +100,7 @@
 
   export default {
     name: 'board-game',
-    props:['newPlayers'],
+    props:['player1','player2', 'player3', 'player4'],
     data() {
       return {
         dice: [1,2,3,4,5,6],
@@ -247,16 +247,17 @@
         const dice = document.querySelector(".dice")
         dice.style.pointerEvents = 'auto';
       },
+      //we want just the palyer with the name, so the swich logic can work
       filteredPlayers() {
         const playersWithName = this.players.filter((player) => {
           return player.name !== '' });
         this.gamePlayers = playersWithName;
       },
       updateNames(){
-        this.players[0].name = this.newPlayers[0];
-        this.players[1].name = this.newPlayers[1];
-        this.players[2].name = this.newPlayers[2];
-        this.players[3].name = this.newPlayers[3];
+        this.players[0].name = this.player1;
+        this.players[1].name = this.player2;
+        this.players[2].name = this.player3;
+        this.players[3].name = this.player4;
         this.filteredPlayers();
         this.gamePlayers[0].active = true;
       }

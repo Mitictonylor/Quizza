@@ -26,38 +26,26 @@ const router = new Router({
       component: Home
     },
     {
-      //localhost 8080
       path: '/newgame',
-//name we give to this path
       name:'newgame',
-//which component to render
       component: NewGame,
       props: true
     },
     {
-      //localhost 8080
       path: '/classic',
-//name we give to this path
       name:'classic',
-//which component to render
       component: Classic,
       props: true
     },
     {
-      //localhost 8080
       path: '/seek',
-//name we give to this path
       name:'seek',
-//which component to render
       component: Seek,
       props: true
     },
     {
-      //localhost 8080
       path: '/mental',
-//name we give to this path
       name:'mental',
-//which component to render
       component: Mental,
       props: true
     },
@@ -65,14 +53,12 @@ const router = new Router({
       path: '/about',
       name: 'about',
       component: About,
-      //allow to pass props
       props: true
     },
     {
       path: '/halloffame',
       name: 'halloffame',
       component: HallOfFame,
-      //allow to pass props
       props: true
     }
 
