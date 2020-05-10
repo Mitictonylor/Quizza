@@ -263,9 +263,12 @@
 ,
     //Create a random question from the selected Category
     //will be invoked when the token end up to a piece of the board
+    getRandomQuestion(category){
+      return category[Math.floor(Math.random() * category.length)]
+    },
       randomQuest() {
         // this.loadRandomForSelected(this.categoriesAndId);
-        const query = this.selectedCategory[Math.floor(Math.random() * this.selectedCategory.length)];
+        const query = this.getRandomQuestion(this.selectedCategory);
         const options = query.incorrect_answers.map(answer => answer);
         options.push(query.correct_answer);
         if (!this.answeredQuestions.includes(query.question)) {
@@ -276,9 +279,8 @@
               category: query.category
             } //so we can push it to the player wins
           this.answeredQuestions.push(this.randomQuestion.question);
-        } else if (this.answeredQuestions.length === 49) {
-           //needs to change when we gonna randomize the sel cat
-            this.loadSelected();
+        } else if (this.answeredQuestions.length === 100) {
+          this.loadAllCategories(this.categoriesAndId)
         } else {
             this.randomQuest();
         }
@@ -343,6 +345,7 @@
         // this.loadRandomForSelected(this.categoriesAndId);
 
         this.loadAllCategories(this.categoriesAndId);
+        //put the players name in this.players, and then filters them
         this.updateNames();
 
         //Check if the clicked answer is right if yes should update the score
