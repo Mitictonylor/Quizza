@@ -13,6 +13,13 @@
 
 export default {
   name: 'home',
+  data() {
+    return {
+      x: Math.random() * innerWidth,
+      y: Math.random() * innerHeight,
+      radius: 30,
+    }
+  },
   mounted() {
     this.setCanvasDimensions();
 
@@ -28,15 +35,15 @@ export default {
 </script>
 
 <style scoped>
-  #canvas {
-    background-color: #8e9aaf;
-  }
+#canvas {
+  background-color: #8e9aaf;
+}
 </style>
 
 <style>
-  body {
-    margin: 0;
-    overflow-x: hidden;
-    user-select: none;
-  }
+body {
+  margin: 0;
+  overflow-x: hidden;
+  user-select: none;
+}
 </style>
