@@ -1,13 +1,26 @@
 <template>
   <div id="app" @mousemove="mouseInteraction($event)" v-resize="onResize">
     <canvas id="canvas"></canvas>
-    <router-link :to="{name: 'newgame'}"> New Game</router-link>
+    <div class="title-container">
+      <audio id="audio" :src="button" autoplay="false"></audio>
+      <div class="title">
+        <p>QuizzA</p>
+        <hr>
+        <p class="tagline">A Fra, Toni & Crug jam</p>
+      </div>
+      <div class="button-container">
+        <router-link  v-on:click="playSound" :to="{name: 'newgame'}"> <img class="input" :src="goButton"> </router-link>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 import Circle from '@/helpers/HomePageCanvas.js';
 import resize from 'vue-resize-directive';
+import go from '@/assets/images/go.png';
+import button from '@/assets/sounds/button.wav';
 
 export default {
     name: 'home',
@@ -23,6 +36,8 @@ export default {
           x: null,
           y: null
         },
+        goButton: go,
+        button: button
       }
     },
     mounted() {
@@ -74,18 +89,115 @@ export default {
       },
       init() {
         this.circleArray()
+      },
+      playSound() {
+        var sound = document.getElementById("audio");
+        sound.play();
       }
     },
     directives: {
       resize,
     },
+
   }
 </script>
 
 <style scoped>
-#canvas {
-  background-color: #8e9aaf;
-}
+  #canvas {
+    background-color: #8e9aaf;
+    position: absolute;
+    left: 0;
+    top: 0 ;
+    z-index: 0;
+  }
+
+  .title-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    display: block;
+    text-align: center;
+    border-style: solid;
+    position: absolute;
+    z-index: 1;
+
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .title {
+    margin-top: 250px;
+    display: inline-block;
+    font-size: 200px;
+    color: white;
+    font-family: 'Russo One', sans-serif;
+    text-shadow: 2px 2px 4px #000000;
+    -webkit-animation: fadeIn 4s;
+  }
+
+  .tagline {
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    float: right;
+    text-shadow: 2px 2px 4px #000000;
+    -webkit-animation: fadeIn 8s;
+  }
+
+  .button-container {
+    margin-top: 110px;
+    animation: 4s delayEffect;
+    animation-fill-mode: forwards;
+
+    visibility: hidden;
+  }
+
+  @keyframes delayEffect {
+    99% {
+      visibility: hidden;
+    }
+    100% {
+      visibility: visible;
+    }
+  }
+
+
+  .input {
+    background-color: transparent;
+    color: white;
+    height: 60px;
+    text-shadow: 2px 2px 4px #000000;
+    border-radius: 50%;
+  }
+
+  .input:hover {
+    background-color: #ff70a6;
+    height: 65px;
+  }
+
+  .input:focus {
+    outline: none;
+  }
+
+  #app {
+    position: relative;
+  }
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+
+  hr {
+    padding: 0;
+    margin: 0;
+  }
 </style>
 
 <style>
