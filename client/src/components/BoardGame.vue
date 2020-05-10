@@ -76,8 +76,8 @@
             <p v-if="players[2].name">Collected: {{players[2].score}}</p>
           </div>
           <div class="player4-deets">
-            <p v-if="players[3].name">Player 4: {{players[1].name}}</p>
-            <p v-if="players[3].name">Collected: {{players[1].score}}</p>
+            <p v-if="players[3].name">Player 4: {{players[3].name}}</p>
+            <p v-if="players[3].name">Collected: {{players[3].score}}</p>
           </div>
         </div>
 
