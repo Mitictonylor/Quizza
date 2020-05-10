@@ -115,7 +115,7 @@
             science_and_nature: []
         },
         gamePlayers:[],
-        players: [
+        players: [ //keep it for the initial rendering
             {
               alias: "player1",
               name: '',
