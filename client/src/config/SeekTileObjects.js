@@ -1,4 +1,4 @@
-export const SeekandDestroyTileObjects =  [
+export const SeekTileObjects =  [
   {
     id: 'g1',
     row: 1,
