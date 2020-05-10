@@ -1,20 +1,17 @@
-<template>
-  <div>
+<template lang="html">
+  <div class="">
     <nav>
       <router-link :to="{name: 'home'}">Home</router-link>
-      <br>
       <router-link :to="{name: 'about'}">About</router-link>
-      <br>
-      <router-link :to="{name: 'hallofhame'}">Hall OF Fame</router-link>
     </nav>
     <router-view></router-view>
+
   </div>
 </template>
 
 <script>
-  export default {
-      name: 'app',
-    }
+export default {
+}
 </script>
 
 <style lang="css" scoped>

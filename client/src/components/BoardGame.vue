@@ -87,15 +87,13 @@
       </div>
     </div>
 
-    <div>
-      <player-form v-if="!players[0].name && !players[1].name"></player-form>
-    </div>
+  
 
   </div>
 </template>
 
 <script>
-  import PlayerForm from '@/components/PlayerForm.vue';
+
   import {eventBus} from '../main.js';
   import Questions from "@/components/Questions.vue";
   import {TileObjects} from '@/config/TileObjects.js';
@@ -166,7 +164,7 @@
 
     components: {
       "questions": Questions,
-      'player-form': PlayerForm
+
     },
     methods: {
       randomDice() {
@@ -299,7 +297,7 @@
         return activePlayer;
       },
 
-    
+
 
       //add won categories
       addWonCategory(player, question, arrayOfplayers) {
