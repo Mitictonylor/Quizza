@@ -23,7 +23,8 @@ export default {
   },
   mounted() {
     this.setCanvasDimensions();
-
+    this.circleArray();
+    this.animateClass();
   }
   methods: {
     setCanvasDimensions() {
@@ -46,6 +47,16 @@ export default {
       }
       this.circleArr = circleArray
       return circleArray
+    },
+    animateClass() {
+      const canvas = document.querySelector('#canvas')
+      const c = canvas.getContext('2d');
+      requestAnimationFrame(this.animateClass)
+      c.clearRect(0, 0, innerWidth, innerHeight)
+
+      for (var i = 0; i < this.circleArr.length; i++) {
+        this.circleArr[i].update()
+      }
     },
   }
 }
