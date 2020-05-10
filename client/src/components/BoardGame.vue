@@ -4,6 +4,10 @@
       <div class="playing-area">
         <div class="player-prompt">
           <p v-if="players[0].name && players[1].name">YOUR TURN - {{activePlayer(players).name.toUpperCase()}}</p>
+
+        </div>
+        <div class="questions-container">
+          <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
         </div>
         <!-- <div class="questions-container">
         </div> -->
@@ -161,7 +165,7 @@
             science_and_nature: []
         },
         gamePlayers:[],
-        players: [
+        players: [ //keep it for the initial rendering
             {
               alias: "player1",
               name: '',
