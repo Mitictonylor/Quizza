@@ -1,10 +1,11 @@
 <template>
   <div id="app" @mousemove="mouseInteraction($event)" v-resize="onResize">
     <canvas id="canvas"></canvas>
-    <div class="title-container">
-      <player-form></player-form>
+    <div class="form-container">
+      <div class="form">
+        <player-form/>
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -89,7 +90,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="css" scoped>
 #canvas {
   background-color: #8e9aaf;
   position: absolute;
@@ -98,7 +99,7 @@ export default {
   z-index: 0;
 }
 
-.title-container {
+.form-container {
   width: 100vw;
   height: 100vh;
   overflow: auto;
@@ -106,7 +107,20 @@ export default {
   text-align: center;
   position: absolute;
   z-index: 1;
+  border-style: solid;
+  margin: 0;
+  padding: 0;
+}
 
+.form {
+  width: 50%;
+  height: 50%;
+  display: inline-block;
+  color: white;
+  font-family: 'Russo One', sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+  -webkit-animation: fadeIn 4s;
+  border-style: solid;
 }
 
 @-webkit-keyframes fadeIn {
@@ -125,18 +139,5 @@ export default {
 p {
   padding: 0;
   margin: 0;
-}
-
-hr {
-  padding: 0;
-  margin: 0;
-}
-</style>
-
-<style>
-body {
-  margin: 0;
-  overflow-x: hidden;
-  user-select: none;
 }
 </style>

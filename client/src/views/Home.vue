@@ -12,7 +12,6 @@
         <router-link  v-on:click="playSound" :to="{name: 'newgame'}"> <img class="input" :src="goButton"> </router-link>
       </div>
     </div>
-
   </div>
 </template>
 
