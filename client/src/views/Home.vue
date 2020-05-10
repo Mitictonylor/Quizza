@@ -1,6 +1,6 @@
 <template>
-  <div id="app" @mousemove="mouseInteraction($event)">
-      <canvas id="canvas"></canvas>
+  <div id="app" @mousemove="mouseInteraction($event)" v-resize="onResize">
+    <canvas id="canvas"></canvas>
     <router-link :to="{name: 'newgame'}"> New Game</router-link>
   </div>
 </template>
@@ -65,6 +65,15 @@ export default {
         this.mouse.x = event.x;
         this.mouse.y = event.y;
       },
+      onResize() {
+        const canvas = document.querySelector('#canvas')
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        this.init()
+      },
+      init() {
+        this.circleArray()
+      }
     }
   }
 </script>
