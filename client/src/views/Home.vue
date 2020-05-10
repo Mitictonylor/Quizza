@@ -7,6 +7,7 @@
 
 <script>
 import Circle from '@/helpers/HomePageCanvas.js';
+import resize from 'vue-resize-directive';
 
 export default {
     name: 'home',
