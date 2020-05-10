@@ -87,7 +87,7 @@
       </div>
     </div>
 
-  
+
 
   </div>
 </template>
@@ -100,6 +100,7 @@
 
   export default {
     name: 'board-game',
+    props:['newPlayers'],
     data() {
       return {
         dice: [1,2,3,4,5,6],
@@ -250,6 +251,14 @@
         const playersWithName = this.players.filter((player) => {
           return player.name !== '' });
         this.gamePlayers = playersWithName;
+      },
+      updateNames(){
+        this.players[0].name = this.newPlayers[0][0];
+        this.players[1].name = this.newPlayers[0][1];
+        this.players[2].name = this.newPlayers[0][2];
+        this.players[3].name = this.newPlayers[0][3];
+        this.filteredPlayers();
+        this.gamePlayers[0].active = true;
       }
 ,
     //Create a random question from the selected Category
@@ -333,6 +342,7 @@
         // this.loadRandomForSelected(this.categoriesAndId);
 
         this.loadAllCategories(this.categoriesAndId);
+        this.updateNames();
 
         //Check if the clicked answer is right if yes should update the score
         eventBus.$on('selected-option', (option) => {
@@ -359,14 +369,7 @@
         });
 
         //takes the name from the form
-        eventBus.$on('add-players', (players) => {
-          this.players[0].name = players[0];
-          this.players[1].name = players[1];
-          this.players[2].name = players[2];
-          this.players[3].name = players[3];
-          this.filteredPlayers();
-          this.gamePlayers[0].active = true;
-        });
+
      }
    }
 </script>

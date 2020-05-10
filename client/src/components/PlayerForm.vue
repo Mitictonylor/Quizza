@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="form-container">
-    <form class="form" v-on:submit.prevent="addPlayers">
+    <form class="form" >
       <div class="player1">
         <label for="player1">Player 1: </label>
         <input type="text" v-model="player1" placeholder="Insert name" required/>
@@ -17,9 +17,20 @@
         <label for="player4">Player 4: </label>
         <input type="text" v-model="player4" placeholder="Insert name"/>
       </div>
-      <input type="submit"   value="SUBMIT">
+
     </form>
+    <nav v-if="player1 && player2">
+      <router-link :to="{name: 'classic', params:{newPlayers}}">Classic</router-link>
+      <br>
+      <router-link :to="{name: 'seek'}">Seek</router-link>
+      <br>
+      <router-link :to="{name: 'mental'}">Mental</router-link>
+      <br>
+    </nav>
+    <router-view></router-view>
   </div>
+
+
 </template>
 
 <script>
@@ -32,15 +43,21 @@
         player1: '',//fills those from the input
         player2: '',
         player3: '',
-        player4: ''
+        player4: '',
+        newPlayers:[]
+
       }
     },
     methods: {
-      // create an event bus when the submit has been clicked. Brings the player name to BoardGame
-      addPlayers() {
-        eventBus.$emit('add-players', [this.player1, this.player2, this.player3, this.player4]);
+
+    },
+    computed:{
+      zPlayers(){
+        this.newPlayers.push([this.player1, this.player2, this.player3, this.player4])
       }
     }
+
+
   }
 </script>
 

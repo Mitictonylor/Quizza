@@ -1,11 +1,8 @@
 <template lang="html">
   <div class="">
-    <board-game></board-game>
+    <board-game :newPlayers="newPlayers"></board-game>
     <nav>
     </nav>
-
-
-
 
   </div>
 </template>
@@ -16,6 +13,7 @@
   import BoardGame from '@/components/BoardGame.vue'
 
 export default {
+  props:['newPlayers'],
   components:{
     'board-game': BoardGame
   }
