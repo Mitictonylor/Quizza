@@ -2,10 +2,11 @@
   <div>
     <div class="page-container">
       <div class="playing-area">
-
-        <div class="questions-container">
-          <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
+        <div class="player-prompt">
+          <p v-if="players[0].name && players[1].name">YOUR TURN - {{activePlayer(players).name.toUpperCase()}}</p>
         </div>
+        <!-- <div class="questions-container">
+        </div> -->
 <!-- at the click of the mouse it create the click event, and gives back the id of the cell we clicked -->
         <div class="game-board-container">
           <div class="game-board">
@@ -46,7 +47,7 @@
             <div id="f6" class="tile" v-on:click="checkActive($event)"></div>
             <div id="f7" class="tile" v-on:click="checkActive($event)"></div>
             <div id="f8" class="tile" v-on:click="checkActive($event)"></div>
-            <div id="f9" class="tile" v-on:click="checkActive($event)"></div>
+            <div id="f9" class="tile" v-on:click="checkActive($event)">F9</div>
             <div id="f10" class="tile" v-on:click="checkActive($event)"></div>
             <div id="f11" class="tile" v-on:click="checkActive($event)"></div>
             <div id="f12" class="tile" v-on:click="checkActive($event)"></div>
@@ -91,9 +92,33 @@
               </div>
             </div>
 
-            <div class="board-content-top-right"></div>
+            <div class="board-content-top-right">
+              <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
+
+            </div>
             <div class="board-content-bottom-right"></div>
-            <div class="board-content-bottom-left"></div>
+            <div class="board-content-bottom-left">
+              <div class="players-container">
+                <p>PLAYERS</p>
+                <div class="player1-deets">
+                  <p v-if="players[0].name && players[1].name">Player 1: {{players[0].name}}</p>
+                  <p v-if="players[0].name && players[1].name">Collected: {{players[0].score}}</p>
+                </div>
+                <div class="player2-deets">
+                  <p v-if="players[0].name && players[1].name">Player 2: {{players[1].name}}</p>
+                  <p v-if="players[0].name && players[1].name">Collected: {{players[1].score}}</p>
+                </div>
+                <div class="player3-deets">
+                  <p v-if="players[2].name">Player 3: {{players[2].name}}</p>
+                  <p v-if="players[2].name">Collected: {{players[2].score}}</p>
+                </div>
+                <div class="player4-deets">
+                  <p v-if="players[3].name">Player 4: {{players[3].name}}</p>
+                  <p v-if="players[3].name">Collected: {{players[3].score}}</p>
+                </div>
+              </div>
+
+            </div>
 
             <div id="player1" class="player1" v-if="players[0].name"></div>
             <div id="player2" class="player2" v-if="players[1].name"></div>
@@ -103,29 +128,8 @@
           </div>
         </div>
 
-        <div class="players-container">
-          <p>PLAYERS</p>
-          <div class="player1-deets">
-            <p v-if="players[0].name && players[1].name">Player 1: {{players[0].name}}</p>
-            <p v-if="players[0].name && players[1].name">Collected: {{players[0].score}}</p>
-          </div>
-          <div class="player2-deets">
-            <p v-if="players[0].name && players[1].name">Player 2: {{players[1].name}}</p>
-            <p v-if="players[0].name && players[1].name">Collected: {{players[1].score}}</p>
-          </div>
-          <div class="player3-deets">
-            <p v-if="players[2].name">Player 3: {{players[2].name}}</p>
-            <p v-if="players[2].name">Collected: {{players[2].score}}</p>
-          </div>
-          <div class="player4-deets">
-            <p v-if="players[3].name">Player 4: {{players[3].name}}</p>
-            <p v-if="players[3].name">Collected: {{players[3].score}}</p>
-          </div>
-        </div>
 
-        <div class="player-prompt">
-          <p v-if="players[0].name && players[1].name">YOUR TURN - {{activePlayer(players).name.toUpperCase()}}</p>
-        </div>
+
       </div>
     </div>
 
@@ -164,7 +168,7 @@
               score: [],
               winStreak: 0,
               active: false,
-              currentPosition: 'd4'
+              currentPosition: 'f9'
             },
             {
               alias: "player2",
@@ -172,7 +176,7 @@
               score: [],
               winStreak: 0,
               active: false,
-              currentPosition: 'd4'
+              currentPosition: 'f9'
             },
             {
               alias: "player3",
@@ -180,7 +184,7 @@
               score: [],
               winStreak: 0,
               active: false,
-              currentPosition: 'd4'
+              currentPosition: 'f9'
             },
             {
               alias: "player4",
@@ -188,7 +192,7 @@
               score: [],
               winStreak: 0,
               active: false,
-              currentPosition: 'd4'
+              currentPosition: 'f9'
             }
         ],
         selectedCategory: [], //will be filled when the token will end up to a piece of the board
@@ -224,6 +228,7 @@
         const res = 'roll' + this.diceResult; //roll3
         //trova lindex della posizione attuale del giocatore d4
         const indexOfActivePlayer = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
+        console.log(indexOfActivePlayer);
         const index = ClassicTileObjects.map(x => x.id).indexOf(this.gamePlayers[indexOfActivePlayer].currentPosition);
         this.moveOptions = ClassicTileObjects[index][res]// takes all the possible future position for roll 3
         return this.moveOptions;
@@ -395,6 +400,9 @@
         eventBus.$on('selected-option', (option) => {
           const playerActive = this.activePlayer(this.gamePlayers);
           const question = this.randomQuestion;
+          console.log(question);
+          console.log(option);
+          console.log(question.correct_answer);
 
           if (option === question.correct_answer) {
             alert("well done");
@@ -423,7 +431,7 @@
 
 <style lang="css" scoped>
   .page-container {
-    border-style: solid;
+
     display: block;
     text-align: center;
     margin-top: 70px;
@@ -431,27 +439,28 @@
   }
 
   .playing-area {
-    border-style: solid;
+
     display: inline-block;
-    width: 90%;
+    width: 98%;
   }
 
-  .questions-container {
+  /* .questions-container {
     border-style: solid;
     border-color: red;
     float: left;
     width: 29%;
     height: 565px;
     margin-right: 0.5%;
-  }
+  } */
 
   .players-container {
-    border-style: solid;
-    border-color: red;
-    float: left;
-    width: 29%;
-    height: 565px;
-    margin-left: 0.55%;
+
+    width: 549px;
+    height: 314px;
+    z-index: 2;
+    position: absolute;
+    margin: 0px;
+    bottom: 0;
   }
 
   .player-prompt {
@@ -485,17 +494,18 @@
     color: blue;
   }
 
-  /* RIGHT Y COL */
+  /* RIGHT Y COL element of the right border...where the right column start grid column 17*/
   #a17, #b17, #c17, #d17, #e17, #f17, #g17, #h17, #i17, #j17, #k17  {
-    grid-column-start: 12;
+    grid-column-start: 17;
   }
 
-  /* BOTTOM X ROW */
+  /* BOTTOM X ROW element of the bottom row*/
   #k1, #k2, #k3, #k4, #k5, #k6, #k7, #k8, #k9, #k10, #k11, #k12, #k13, #k14, #k15, #k16, #k17{
-    grid-row-start: 18;
+    grid-row-start: 17;
   }
 
-  /* LEFT Y COL */
+  /* LEFT Y COL  element of the left border, grid column start, starting point column1 and
+  then j1 10 because will be in the 10th position from the bottom*/
   #a1, #b1, #c1, #d1, #e1, #f1, #g1, #h1, #i1, #j1, #k1,  {
     grid-column-start: 1;
   }
@@ -533,24 +543,24 @@
   }
   /* LEFT Y COL END */
 
-  /* CROSS SECTION X */
+  /* CROSS SECTION X middle section and where it starts 6, where the column start(intersection)9 */
   #f1, #f2, #f3, #f4, #f5, #f6, #f7, #f8, #f9, #f10, #f11, #f12, #f13, #f14, #f15, #f16, #f17{
-    grid-row-start: 9;
+    grid-row-start: 6;
   }
 
   #f9{
     grid-column-start: 9;
   }
 
-  /* CROSS SECTION Y */
+  /* CROSS SECTION Y the middle column and where it splits from the top row, at position 9*/
   #a9, #b9, #c9, #d9, #e9, #f9, #g9, #h9, #i9, #j9, #k9  {
     grid-column-start: 9;
   }
 
   .board-content-top-left {
     border-style: solid;
-    width: 160px;
-    height: 160px;
+    width: 554px;
+    height: 319px;
     z-index: 2;
     position: absolute;
     margin: 80px;
@@ -558,29 +568,30 @@
 
   .board-content-top-right {
     border-style: solid;
-    width: 160px;
-    height: 160px;
+    width: 554px;
+    height: 319px;
     z-index: 2;
     position: absolute;
     margin: 80px;
     right: 0;
   }
 
-  .board-content-bottom-right {
+  /* .board-content-bottom-right {
     border-style: solid;
-    width: 160px;
-    height: 160px;
+    width: 554px;
+    height: 319px;
     z-index: 2;
     position: absolute;
     margin: 80px;
     bottom: 0;
     right: 0;
-  }
+
+  } */
 
   .board-content-bottom-left {
     border-style: solid;
-    width: 160px;
-    height: 160px;
+    width: 554px;
+    height: 319px;
     z-index: 2;
     position: absolute;
     margin: 80px;
@@ -609,8 +620,8 @@
     margin: 5px;
     z-index: 2;
     position: absolute;
-    grid-row-start: 4;
-    grid-column-start: 4;
+    grid-row-start: 6;
+    grid-column-start: 9;
   }
 
   .player2 {
@@ -624,8 +635,8 @@
     margin-top: 40px;
     z-index: 2;
     position: absolute;
-    grid-row-start: 4;
-    grid-column-start: 4;
+    grid-row-start: 6;
+    grid-column-start: 9;
   }
 
   .player3 {
@@ -638,8 +649,8 @@
     margin-top: 40px;
     z-index: 2;
     position: absolute;
-    grid-row-start: 4;
-    grid-column-start: 4;
+    grid-row-start: 6;
+    grid-column-start: 9;
   }
 
   .player4 {
@@ -652,8 +663,8 @@
     margin-left: 40px;
     z-index: 2;
     position: absolute;
-    grid-row-start: 4;
-    grid-column-start: 4;
+    grid-row-start: 6;
+    grid-column-start: 9;
   }
 </style>
 

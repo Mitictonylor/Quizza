@@ -46,32 +46,46 @@
 <style lang="css" scoped>
 .question{
   font-family: 'Permanent Marker', cursive;
-  border-style: solid;
-  border-color: yellow
+
+  width: 554px;
+  height: 219px;
+  z-index: 2;
+  position: absolute;
+  top: 100px;
+  margin: 0px;
+  bottom: 0;
+
 }
 
 .question-wrapper{
-  border-style: solid;
-  border-color: red;
-  width: 100;
-  margin:0;
-  padding: 0;
+
+  width: 554px;
+  height: 319px;
+  z-index: 2;
+  position: absolute;
+  margin: 0px;
+  bottom: 0;
+
 
 }
 
 .list-container {
-  border-color: black;
-  border-style: solid;
-  display: block;
-  text-align: center;
-  margin:0;
-  padding: 0;
+
+  width: 540px;
+  height: 249px;
+  z-index: 2;
+  top: 430px;
+  position: absolute;
+  margin: 0px;
+  bottom: 0;
+
+
+
 
 }
 
 .list {
-  border-color: purple;
-  border-style: solid;
+
   margin:0;
   padding: 0;
   width: 100%;

@@ -22,10 +22,8 @@
 
 <style lang="css" scoped>
 .options{
-  width: 30%;
+  width: 90%;
   display: inline-block;
-  border-style: solid;
-  border-color: green;
   font-family: 'Luckiest Guy', cursive;
   font-size: 20px;
   float: center;
