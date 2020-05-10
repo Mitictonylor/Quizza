@@ -15,7 +15,7 @@ import resize from 'vue-resize-directive';
 import PlayerForm from '@/components/PlayerForm.vue'
 
 export default {
-  name: 'home',
+  name: 'newgame',
   components: {
     'player-form': PlayerForm
   },
