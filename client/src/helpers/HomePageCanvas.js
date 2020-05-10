@@ -4,6 +4,7 @@ export default function Circle(x, y, r, dx, dy, c, mouse) {
   this.radius = r;
   this.dx = dx;
   this.dy = dy;
+  this.mouse = mouse
   this.colours = ['#70d6ff', '#ff70a6', '#ff9770', '#907ad6', '#e9ff70', '#6eeb83']
   this.colour = this.colours[Math.floor(Math.random() * 6)];
   this.minRadius = r;
@@ -38,5 +39,4 @@ export default function Circle(x, y, r, dx, dy, c, mouse) {
       this.radius -= 1;
     }
   }
-
 }
