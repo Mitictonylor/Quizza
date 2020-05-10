@@ -24,7 +24,7 @@ export default {
   mounted() {
     this.setCanvasDimensions();
     this.circleArray();
-    this.animateClass();
+    this.animateCircles();
   }
   methods: {
     setCanvasDimensions() {
@@ -48,7 +48,7 @@ export default {
       this.circleArr = circleArray
       return circleArray
     },
-    animateClass() {
+    animateCircles() {
       const canvas = document.querySelector('#canvas')
       const c = canvas.getContext('2d');
       requestAnimationFrame(this.animateClass)
@@ -58,6 +58,10 @@ export default {
         this.circleArr[i].update()
       }
     },
+    mouseInteraction(event) {
+    this.mouse.x = event.x;
+    this.mouse.y = event.y;
+  },
   }
 }
 </script>
