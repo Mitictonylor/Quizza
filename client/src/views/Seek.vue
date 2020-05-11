@@ -172,7 +172,7 @@ export default {
         {
           alias: "player1",
           name: '',
-          score: [],
+          score: 10,
           winStreak: 0,
           active: false,
           currentPosition: 1,
@@ -181,7 +181,7 @@ export default {
         {
           alias: "player2",
           name: '',
-          score: [],
+          score: 20,
           winStreak: 0,
           active: false,
           currentPosition: 1,
@@ -190,7 +190,7 @@ export default {
         {
           alias: "player3",
           name: '',
-          score: [],
+          score: 30,
           winStreak: 0,
           active: false,
           currentPosition: 1,
@@ -199,7 +199,7 @@ export default {
         {
           alias: "player4",
           name: '',
-          score: [],
+          score: 40,
           winStreak: 0,
           active: false,
           currentPosition: 1,
@@ -210,18 +210,51 @@ export default {
       moveOption: null,
       fullscreen: false,
       randomQuestion: null,
-      questionResult: null
+      questionResult: null,
+      killingGrid:[]
     }
   },
   methods: {
     randomDice() {
-      this.diceResult = this.dice[Math.floor(Math.random() * 6)]
+      // this.dice[Math.floor(Math.random() * 6)]
+      this.diceResult = 4
       return this.showMoveOptions()
       this.disableTheDice();
     },
     getDiceFace() {
       return require('@/assets/dice/' + this.diceResult + '.png')
     },
+// se la posizione di acrtive game player dopo ke tiriamo il dado è uguale a quella di un altro player,
+// ruba le sue categorie
+//filtra giocatori nn attivi e
+//filtro x vedere se hanno in comune la posizione dellactive player
+//se la lunghezze dell'array è maggiore di 1
+//prendimi i punti  del giocatore inattivo e mettimele nel giocatore attivo
+//
+  stealPoints(activePlayer, arrayOfPlayers){
+    const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false)
+    console.log(deactivatedPlayers)
+    const checkCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
+    console.log(checkCurrentPosition);
+    console.log('active player score', activePlayer.score);
+    if (checkCurrentPosition.length >=1){
+      checkCurrentPosition.forEach((player) =>  {
+                                    console.log('giocatorenon attivo score prima',player.score)
+                                    activePlayer.score += player.score;
+                                    player.score = 0
+                                    console.log('giocatorenon attivo score dopo',player.score)
+                                    console.log('giocatoreAttivo score dopo',activePlayer.score)
+                                  })
+
+      };
+
+    },
+
+
+
+
+
+
     showMoveOptions() {                   //current position:106 + dice.result 4 =110
       let total = (this.activePlayer(this.gamePlayers).currentPosition + this.diceResult)
       if(total > 107){//yes
@@ -266,7 +299,7 @@ export default {
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
                                     grid-column-start: ${this.getNewColPosition(event)};`
       const index = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
-
+      this.stealPoints(this.activePlayer(this.gamePlayers), this.gamePlayers)
       this.resetMoveOptions()
       const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
       this.loadRandomQuestion(randomCategoryAndId);
@@ -323,12 +356,10 @@ export default {
       this.nextPlayer = activePlayer
       return activePlayer;
     },
-    addWonCategory(player, question, arrayOfplayers) {
-      const index = this.findIndexOfPlayer(player);
-      if (!arrayOfplayers[index].score.includes(question)) {
-        arrayOfplayers[index].score.push(question);
-      }
-    },
+    addPoint(player) {
+    player.score += 1
+  },
+
     checkWinCondition(activePlayer) {
       if (activePlayer.currentPosition === 107) {
         return true //The game finish here
@@ -352,6 +383,7 @@ export default {
       }
     }
   },
+
   mounted() {
     this.updateNames();
 
@@ -366,7 +398,7 @@ export default {
       if (option === question.correct_answer) {
         this.nextPlayer = null
         this.questionResult = "Correct - roll again!"
-        this.addWonCategory(playerActive, question.category, this.gamePlayers);
+        this.addPoint(playerActive);
         if (this.checkWinCondition(playerActive)) {
           this.nextPlayer = null
           this.questionResult = "Congratulations - you've WON!"
