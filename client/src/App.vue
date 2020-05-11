@@ -19,5 +19,6 @@
     overflow-x: hidden;
     user-select: none;
     background-color: #8e9aaf;
+    cursor: pointer;
   }
 </style>
