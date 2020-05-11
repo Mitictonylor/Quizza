@@ -152,13 +152,55 @@ export default {
     return {
       dice: [1,2,3,4,5,6],
       diceResult: 6,
-      questions: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
       player: {
         id: 1,
         currentPosition: 1
       },
       moveOption: null,
-      fullscreen: false
+      fullscreen: false,
+      gamePlayers:[],
+      players: [ //keep it for the initial rendering
+        {
+          alias: "player1",
+          name: '',
+          score: [],
+          winStreak: 0,
+          active: false,
+          currentPosition: 'f9',
+          token: player1
+        },
+        {
+          alias: "player2",
+          name: '',
+          score: [],
+          winStreak: 0,
+          active: false,
+          currentPosition: 'f9',
+          token: player2
+        },
+        {
+          alias: "player3",
+          name: '',
+          score: [],
+          winStreak: 0,
+          active: false,
+          currentPosition: 'f9',
+          token: player3
+        },
+        {
+          alias: "player4",
+          name: '',
+          score: [],
+          winStreak: 0,
+          active: false,
+          currentPosition: 'f9',
+          token: player4
+        }
+      ],
+      answeredQuestions: [], //all the question showed will end up here to avoid duplicates
+      randomQuestion: null, //when the dice will be throwed it will be filled by the event
+      questionResult: null,
+      nextPlayer: null
     }
   },
   methods: {
@@ -200,7 +242,7 @@ export default {
     movePlayer(event) {
       const activePlayer = document.querySelector('#player1');
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
-      grid-column-start: ${this.getNewColPosition(event)};`
+                                    grid-column-start: ${this.getNewColPosition(event)};`
       this.player.currentPosition += this.diceResult
       this.resetMoveOptions();
     },
@@ -208,7 +250,155 @@ export default {
       const element = document.querySelector('#fullscreen');
       element.requestFullscreen();
     },
-  }
+    disableTheDice(){
+      const dice = document.querySelector("#cube")
+      dice.style.pointerEvents = 'none';
+    },//Find the Dice class and re-enable the click event
+    enableTheDice(){
+      const dice = document.querySelector("#cube")
+      dice.style.pointerEvents = 'auto';
+    },
+    //we want just the palyer with the name, so the swich logic can work
+    filteredPlayers() {
+      const playersWithName = this.players.filter((player) => {
+        return player.name !== '' });
+        this.gamePlayers = playersWithName;
+      },
+      updateNames(){
+        this.players[0].name = this.player1;
+        this.players[1].name = this.player2;
+        this.players[2].name = this.player3;
+        this.players[3].name = this.player4;
+        this.filteredPlayers();
+        this.gamePlayers[0].active = true;
+        this.nextPlayer = this.activePlayer(this.gamePlayers)
+      }
+      ,
+      //Create a random question from the selected Category
+      //will be invoked when the token end up to a piece of the board
+      getRandomQuestion(category){
+        return category[Math.floor(Math.random() * category.length)]
+      },
+      randomQuest() {
+        // this.loadRandomForSelected(this.categoriesAndId);
+        const query = this.getRandomQuestion(this.selectedCategory);
+        const options = query.incorrect_answers.map(answer => answer);
+        options.push(query.correct_answer);
+        if (!this.answeredQuestions.includes(query.question)) {
+          this.randomQuestion = {
+            options: options,
+            question: query.question,
+            correct_answer: query.correct_answer,
+            category: query.category
+          } //so we can push it to the player wins
+          this.answeredQuestions.push(this.randomQuestion.question);
+        } else if (this.answeredQuestions.length === 100) {
+          this.loadAllCategories(this.categoriesAndId)
+        } else {
+          this.randomQuest();
+        }
+      },
+      // fetch a category
+      loadCategory(category, category_id) {
+        const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`;
+        fetch(url).then(response => response.json())
+        .then(data => this.categories[category] = data.results)
+      },
+      // fetches all the categories
+      loadAllCategories(categoryArray) {
+        categoryArray.map(element => this.loadCategory(element[0], element[1]));
+      },
+      //JUST FOR TESTING PURPOSE
+      // loadRandomForSelected(categoryArray) {
+      //   const index = Math.floor(Math.random() * 6);
+      //   const catId = categoryArray[index][1];
+      //   const url = `https://opentdb.com/api.php?amount=50&category=${catId}&type=multiple`;
+      //   fetch(url).then(response => response.json())
+      //   .then(data => this.selectedCategory = data.results)
+      // },
+      //find active player
+      activePlayer(players) {
+        const activePlayer = players.find(player => player.active === true);
+        this.nextPlayer = activePlayer
+        return activePlayer;
+      },
+
+
+
+      //add won categories
+      addWonCategory(player, question, arrayOfplayers) {
+        const index = this.findIndexOfPlayer(player);
+        if (!arrayOfplayers[index].score.includes(question)) {
+          arrayOfplayers[index].score.push(question);
+        }
+      },
+      //find index of player
+      findIndexOfPlayer(player) {
+        const index = this.gamePlayers.indexOf(player);
+        return index;
+      },
+      //find me the index of the active player, and change it's acrive to false,
+      //and based on the lenght of the array add one to the player index or start from 0 and turn it to active true
+      switchActivePlayer(player, players) {
+        const index = this.findIndexOfPlayer(player);
+        players[index].active = false;
+        if (index < (players.length - 1)) {
+          players[(index + 1)].active = true;
+        } else {
+          players[0].active = true
+        }
+      },// Check if the Player reaches the win target
+      checkWinCondition(activePlayer){
+        if(activePlayer.score.length === 6){
+          return true  //The game finish here
+        }
+      }
+    },
+    mounted() {
+      //JUST FOR TESTING
+      // this.loadRandomForSelected(this.categoriesAndId);
+
+      this.loadAllCategories(this.categoriesAndId);
+      //put the players name in this.players, and then filters them
+      this.updateNames();
+
+      //Check if the clicked answer is right if yes should update the score
+      eventBus.$on('selected-option', (option) => {
+        const playerActive = this.activePlayer(this.gamePlayers);
+        const question = this.randomQuestion;
+        console.log("Question Answered: ", question);
+        // console.log(option);
+        // console.log(question.correct_answer);
+
+        if (option === question.correct_answer) {
+          this.nextPlayer = null
+          this.questionResult = "Correct - roll again!"
+          this.addWonCategory(playerActive, question.category, this.gamePlayers);
+          if(this.checkWinCondition(playerActive)){
+            this.nextPlayer = null
+            this.questionResult = "Congratulations - you've WON!"
+            this.disableTheDice()
+            this.randomQuestion = null
+          } else {
+            this.nextPlayer = null
+            this.randomQuestion = null;
+            //create a new question in either cases
+            this.enableTheDice();
+          }
+          } else {
+            this.nextPlayer = null
+            this.questionResult = "Boooo - better luck next time!"
+            this.enableTheDice()
+            this.switchActivePlayer(playerActive, this.gamePlayers);
+            console.log("HERE", this.randomQuestion);
+            this.randomQuestion = null;
+            // this.enableTheDice();
+          }
+        });
+
+        //takes the name from the form
+
+      }
 }
 </script>
 
