@@ -118,13 +118,21 @@
           </div>
         </div>
 
+
+
       <div class="board-content-top-right">
+        <div class="question-result">
+          <p v-if="nextPlayer">{{nextPlayer.name}} you're up!</p>
+          <p>{{questionResult}}</p>
+        </div>
+
+      </div>
+
+      <div class="board-content-bottom-right">
         <div class="question">
           <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
         </div>
       </div>
-
-      <div class="board-content-bottom-right"></div>
 
       <div class="board-content-bottom-left">
         <div class="players-container">
@@ -234,6 +242,8 @@ export default {
         ['animal', 27],
         ['science_and_nature', 17]
       ],
+      questionResult: null,
+      nextPlayer: null
     }
   },
 
@@ -246,6 +256,7 @@ export default {
       rollDiceFunction('cube')
       this.diceResult = rollDiceFunction('cube');
       this.showMoveOptions();
+      this.questionResult = null;
       // this.disableTheDice();
     },
     // gives u the options where the player could move on the board
@@ -379,6 +390,7 @@ export default {
       //find active player
       activePlayer(players) {
         const activePlayer = players.find(player => player.active === true);
+        this.nextPlayer = activePlayer
         return activePlayer;
       },
 
@@ -430,19 +442,19 @@ export default {
         console.log(question.correct_answer);
 
         if (option === question.correct_answer) {
-          alert("well done");
+          this.questionResult = "Correct - roll again!"
           this.addWonCategory(playerActive, question.category, this.gamePlayers);
           if(this.checkWinCondition(playerActive)){
-            alert("You won")
+            this.questionResult = "Congratulations - you've WON!"
             this.disableTheDice()
             this.randomQuestion = null
           } else {
             this.randomQuestion = null;
-            alert("Throw the dice again"); //create a new question in either cases
+            //create a new question in either cases
             // this.enableTheDice();
           }
           } else {
-            alert("boooo");
+            this.questionResult = "Boooo - better luck next time!"
             this.switchActivePlayer(playerActive, this.gamePlayers);
             this.randomQuestion = null;
             // this.enableTheDice();
@@ -669,5 +681,15 @@ export default {
     display: inline-block;
     font-family: 'Open Sans', sans-serif;
     color: white;
+  }
+
+  .question-result {
+    margin-top: 60px;
+    width: 80%;
+    font-size: 40px;
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
   }
 </style>
