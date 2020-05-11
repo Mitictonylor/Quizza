@@ -224,12 +224,9 @@ export default {
     },
     showMoveOptions() {                   //current position:105 + dice.result 5 =110
       let total = (this.activePlayer(this.gamePlayers).currentPosition + this.diceResult)
-      console.log('total' + total);
       if(total > 107){//yes
       const difference = total - 107 //3   currentPosition:105 -3 g102
-      console.log('differece' + difference);
       const newDivID = 'g' + (107 - difference)
-      console.log('newDivID' + 'g' +newDivID);
       const moveOption = document.querySelector(`#${newDivID}`);
       moveOption.style.color = 'red';
       this.moveOption = newDivID}
