@@ -20,7 +20,7 @@
     </form>
     <nav class="nav" v-if="player1 && player2">
       <div class="select-container">
-        <p class="select">SELECT GAME</p>
+        <p class="select">SELECT A GAME</p>
       </div>
       <div class="game-container">
           <router-link :to="{name: 'classic', params:{player1, player2, player3, player4}}"> <img class="game" :src="classic"> </router-link>
@@ -156,6 +156,10 @@ input.player4 {
 
 .game {
   width: 200px;
+}
+
+.game:hover {
+  opacity: 70%;
 }
 
 .select-container {
