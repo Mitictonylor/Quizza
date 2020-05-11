@@ -172,37 +172,37 @@ export default {
         {
           alias: "player1",
           name: '',
-          score: 200,
+          score: 0,
           winStreak: 0,
           active: false,
-          currentPosition: 85,
+          currentPosition: 1,
           id: 1
         },
         {
           alias: "player2",
           name: '',
-          score: 5,
+          score: 0,
           winStreak: 0,
           active: false,
-          currentPosition: 0,
+          currentPosition: 1,
           id: 2
         },
         {
           alias: "player3",
           name: '',
-          score: 5,
+          score: 0,
           winStreak: 0,
           active: false,
-          currentPosition: 0,
+          currentPosition: 1,
           id: 3
         },
         {
           alias: "player4",
           name: '',
-          score: 5,
+          score: 0,
           winStreak: 0,
           active: false,
-          currentPosition: 0,
+          currentPosition: 1,
           id: 4
         }
       ],
