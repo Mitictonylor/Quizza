@@ -4,10 +4,6 @@
     <div class="form-container">
       <div class="form">
         <player-form/>
-        <div class="seek-button">
-          <router-link  v-on:click="playSound" :to="{name: 'seek'}"> SEEK </router-link>
-          <router-link  v-on:click="playSound" :to="{name: 'mental'}"> MENTAL </router-link>
-        </div>
       </div>
 
     </div>

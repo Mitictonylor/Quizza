@@ -22,7 +22,8 @@
     </form>
     <nav v-if="player1 && player2">
       <router-link :to="{name: 'classic', params:{player1, player2, player3, player4}}">Classic</router-link>
-
+      <router-link :to="{name: 'seek', params:{player1, player2, player3, player4}}"> SEEK </router-link>
+      <router-link :to="{name: 'mental', params:{player1, player2, player3, player4}}"> MENTAL </router-link>
     </nav>
     </div>
 </template>
