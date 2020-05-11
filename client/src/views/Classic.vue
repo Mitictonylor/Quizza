@@ -147,10 +147,10 @@
         </div>
       </div>
 
-      <div id="player1" class="player1" v-if="players[0].name"></div>
-      <div id="player2" class="player2" v-if="players[1].name"></div>
-      <div id="player3" class="player3" v-if="players[2].name"></div>
-      <div id="player4" class="player4" v-if="players[3].name"></div>
+      <div id="player1" class="player1" v-if="players[0].name"> <img class="token" :src="players[0].token"> </div>
+      <div id="player2" class="player2" v-if="players[1].name"> <img class="token" :src="players[1].token"></div>
+      <div id="player3" class="player3" v-if="players[2].name"> <img class="token" :src="players[2].token"></div>
+      <div id="player4" class="player4" v-if="players[3].name"> <img class="token" :src="players[3].token"></div>
 
     </div>
   </div>
@@ -163,6 +163,10 @@ import Questions from "@/components/Questions.vue";
 import {ClassicTileObjects} from '@/config/ClassicTileObjects.js';
 require('@/assets/css/dice.css');
 const rollDiceFunction = require('@/helpers/Dice.js');
+import player1 from '@/assets/tokens/circle_red.png';
+import player2 from '@/assets/tokens/circle_blue.png';
+import player3 from '@/assets/tokens/circle_yellow.png';
+import player4 from '@/assets/tokens/circle_green.png';
 
 export default {
   name: 'board-game',
@@ -188,7 +192,8 @@ export default {
           score: [],
           winStreak: 0,
           active: false,
-          currentPosition: 'f9'
+          currentPosition: 'f9',
+          token: player1
         },
         {
           alias: "player2",
@@ -196,7 +201,8 @@ export default {
           score: [],
           winStreak: 0,
           active: false,
-          currentPosition: 'f9'
+          currentPosition: 'f9',
+          token: player2
         },
         {
           alias: "player3",
@@ -204,7 +210,8 @@ export default {
           score: [],
           winStreak: 0,
           active: false,
-          currentPosition: 'f9'
+          currentPosition: 'f9',
+          token: player3
         },
         {
           alias: "player4",
@@ -212,7 +219,8 @@ export default {
           score: [],
           winStreak: 0,
           active: false,
-          currentPosition: 'f9'
+          currentPosition: 'f9',
+          token: player4
         }
       ],
       selectedCategory: [], //will be filled when the token will end up to a piece of the board
@@ -225,7 +233,7 @@ export default {
         ['history', 23],
         ['animal', 27],
         ['science_and_nature', 17]
-      ]
+      ],
     }
   },
 
@@ -583,12 +591,6 @@ export default {
   }
 
   .player1 {
-    border-style: solid;
-    border-radius: 50%;
-    background-color: purple;
-    width: 25px;
-    height: 25px;
-    margin: 5px;
     z-index: 2;
     position: absolute;
     grid-row-start: 6;
@@ -596,12 +598,6 @@ export default {
   }
 
   .player2 {
-    border-style: solid;
-    border-radius: 50%;
-    background-color: red;
-    width: 25px;
-    height: 25px;
-    margin: 5px;
     margin-top: 40px;
     z-index: 2;
     position: absolute;
@@ -610,12 +606,6 @@ export default {
   }
 
   .player3 {
-    border-style: solid;
-    border-radius: 50%;
-    background-color: orange;
-    width: 25px;
-    height: 25px;
-    margin: 5px;
     margin-left: 40px;
     z-index: 2;
     position: absolute;
@@ -624,18 +614,17 @@ export default {
   }
 
   .player4 {
-    border-style: solid;
-    border-radius: 50%;
-    background-color: blue;
-    width: 25px;
-    height: 25px;
-    margin: 5px;
     margin-left: 40px;
     margin-top: 40px;
     z-index: 2;
     position: absolute;
     grid-row-start: 6;
     grid-column-start: 9;
+  }
+
+  .token {
+    height: 40px;
+    margin: 5px;
   }
 
   .board-content-top-left {
