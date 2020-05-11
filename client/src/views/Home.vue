@@ -25,11 +25,6 @@ export default {
     name: 'home',
     data() {
       return {
-        x: Math.random() * innerWidth,
-        y: Math.random() * innerHeight,
-        dx: (Math.random() - 0.5) * 10,
-        dy: (Math.random() -0.5) * 10,
-        radius: 30,
         circleArr: [],
         mouse: {
           x: null,
