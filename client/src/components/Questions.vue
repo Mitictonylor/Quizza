@@ -60,7 +60,16 @@
 <style lang="css" scoped>
 .question-container {
   border-style: solid;
+  -webkit-animation: fadeIn 2s;
+}
 
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .question {

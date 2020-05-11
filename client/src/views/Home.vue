@@ -185,6 +185,10 @@ export default {
     position: relative;
   }
 
+  #home {
+    cursor: pointer;
+  }
+
   p {
     padding: 0;
     margin: 0;

@@ -137,20 +137,16 @@
       <div class="board-content-bottom-left">
         <div class="players-container">
           <div class="player1-deets">
-            <p v-if="players[0].name && players[1].name">Player 1: {{players[0].name}}</p>
-            <p v-if="players[0].name && players[1].name">Collected: {{players[0].score}}</p>
+            <p v-if="players[0].name && players[1].name">Player 1: {{players[0].name}} - {{players[0].score}}</p>
           </div>
           <div class="player2-deets">
-            <p v-if="players[0].name && players[1].name">Player 2: {{players[1].name}}</p>
-            <p v-if="players[0].name && players[1].name">Collected: {{players[1].score}}</p>
+            <p v-if="players[0].name && players[1].name">Player 2: {{players[1].name}} - {{players[1].score}}</p>
           </div>
           <div class="player3-deets">
-            <p v-if="players[2].name">Player 3: {{players[2].name}}</p>
-            <p v-if="players[2].name">Collected: {{players[2].score}}</p>
+            <p v-if="players[2].name">Player 3: {{players[2].name}} - {{players[2].score}}</p>
           </div>
           <div class="player4-deets">
-            <p v-if="players[3].name">Player 4: {{players[3].name}}</p>
-            <p v-if="players[3].name">Collected: {{players[3].score}}</p>
+            <p v-if="players[3].name">Player 4: {{players[3].name}} - {{players[3].score}}</p>
           </div>
         </div>
       </div>
@@ -530,6 +526,11 @@ export default {
     box-shadow: 2px 2px 4px #000000;
   }
 
+  .science:hover, .animal:hover, .geography:hover, .history:hover, .general-knowledge:hover {
+    cursor: pointer;
+    opacity: 50%;
+  }
+
   .grid:hover {
     cursor: pointer;
     color: blue;
@@ -687,6 +688,15 @@ export default {
     margin-top: 60px;
     width: 80%;
     font-size: 40px;
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+  }
+
+  .players-container {
+    width: 80%;
+    font-size: 25px;
     display: inline-block;
     font-family: 'Open Sans', sans-serif;
     color: white;
