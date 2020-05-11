@@ -121,7 +121,7 @@
 
       <div class="board-content-3">
         <div class="question-container">
-          <p class="question">QUESTIONS</p>
+          <questions v-if='randomQuestion' :randomQuestion="randomQuestion"class="question"></questions>
         </div>
       </div>
 
@@ -145,20 +145,33 @@
 
 <script>
 import {SeekTileObjects} from '@/config/SeekTileObjects.js'
-
+import  Questions from "@/components/Questions.vue"
 export default {
   name: 'seek',
+  components:{
+    'questions': Questions
+  },
+  props:['player1', 'player2', 'player3', 'player4'],
   data() {
     return {
       dice: [1,2,3,4,5,6],
       diceResult: 6,
-      questions: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
+      categoriesAndId: [
+        ['sport', 21],
+        ['geography', 22],
+        ['general_knowledge', 9],
+        ['history', 23],
+        ['animal', 27],
+        ['science_and_nature', 17]
+      ],
       player: {
         id: 1,
         currentPosition: 1
       },
+      answeredQuestions:[],
       moveOption: null,
-      fullscreen: false
+      fullscreen: false,
+      randomQuestion: null
     }
   },
   methods: {
@@ -208,8 +221,36 @@ export default {
       const element = document.querySelector('#fullscreen');
       element.requestFullscreen();
     },
+    loadRandomQuestion(categoryAndID){
+      const url = `https://opentdb.com/api.php?amount=1&category=${categoryAndID[1]}&type=multiple`;
+      fetch(url).then(response => response.json())
+      .then(data => {const query = data.results[0]
+        const options = query.incorrect_answers.map(answer => answer);
+        options.push(query.correct_answer);
+          if (!this.answeredQuestions.includes(query.question)) {
+            this.randomQuestion = {
+              options: options,
+              question: query.question,
+              correct_answer: query.correct_answer,
+              category: query.category
+            }
+            this.answeredQuestions.push(this.randomQuestion.question)
+          } else {
+            this.loadRandomQuestion(this.getRandomCategory(this.categoriesAndId));
+          }
+        })
+    },
+    getRandomCategory(categoryArray){
+      const category = categoryArray[Math.floor(Math.random() * categoryArray.length)]
+      return category
+    },
+
+    },
+    mounted(){
+      // this.loadRandomQuestion(this.getRandomCategory(this.categoriesAndId))
+    }
   }
-}
+
 </script>
 
 <style lang="css" scoped>
