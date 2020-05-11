@@ -144,6 +144,7 @@
 </template>
 
 <script>
+import {eventBus} from '../main.js'
 import {SeekTileObjects} from '@/config/SeekTileObjects.js'
 
 export default {
@@ -250,6 +251,7 @@ export default {
       const element = document.querySelector('#fullscreen');
       element.requestFullscreen();
     },
+
     disableTheDice(){
       const dice = document.querySelector("#cube")
       dice.style.pointerEvents = 'none';
@@ -276,12 +278,10 @@ export default {
       ,
       //Create a random question from the selected Category
       //will be invoked when the token end up to a piece of the board
-      getRandomQuestion(category){
-        return category[Math.floor(Math.random() * category.length)]
-      },
-      randomQuest() {
+
+      fixAnsers(randomQuestion) {
         // this.loadRandomForSelected(this.categoriesAndId);
-        const query = this.getRandomQuestion(this.selectedCategory);
+        const query = randomQuestion;
         const options = query.incorrect_answers.map(answer => answer);
         options.push(query.correct_answer);
         if (!this.answeredQuestions.includes(query.question)) {
@@ -299,23 +299,14 @@ export default {
         }
       },
       // fetch a category
-      loadCategory(category, category_id) {
-        const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`;
+      loadRandomQuestion() {
+        const url = 'https://opentdb.com/api.php?amount=1';
         fetch(url).then(response => response.json())
-        .then(data => this.categories[category] = data.results)
+        .then(data => this.randomQuestion = data.results);
+
       },
-      // fetches all the categories
-      loadAllCategories(categoryArray) {
-        categoryArray.map(element => this.loadCategory(element[0], element[1]));
-      },
-      //JUST FOR TESTING PURPOSE
-      // loadRandomForSelected(categoryArray) {
-      //   const index = Math.floor(Math.random() * 6);
-      //   const catId = categoryArray[index][1];
-      //   const url = `https://opentdb.com/api.php?amount=50&category=${catId}&type=multiple`;
-      //   fetch(url).then(response => response.json())
-      //   .then(data => this.selectedCategory = data.results)
-      // },
+
+
       //find active player
       activePlayer(players) {
         const activePlayer = players.find(player => player.active === true);
@@ -358,9 +349,9 @@ export default {
       //JUST FOR TESTING
       // this.loadRandomForSelected(this.categoriesAndId);
 
-      this.loadAllCategories(this.categoriesAndId);
+    this.loadRandomQuestion()
       //put the players name in this.players, and then filters them
-      this.updateNames();
+      // this.updateNames();
 
       //Check if the clicked answer is right if yes should update the score
       eventBus.$on('selected-option', (option) => {
