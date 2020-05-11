@@ -195,11 +195,3 @@ export default {
     margin: 0;
   }
 </style>
-
-<style>
-  body {
-    margin: 0;
-    overflow-x: hidden;
-    user-select: none;
-  }
-</style>

@@ -111,7 +111,6 @@
 
           <div class="board-content-1">
             <div class="dice-container">
-              <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()"></input>
             </div>
           </div>
 
@@ -162,13 +161,6 @@
       }
     },
     methods: {
-      randomDice() {
-        this.diceResult = this.dice[Math.floor(Math.random() * 6)];
-        return this.showMoveOptions();
-      },
-      getDiceFace() {
-        return require('@/assets/dice/' + this.diceResult + '.png');
-      },
       showMoveOptions() {
         const divID = 'g' + (this.player.currentPosition + this.diceResult)
         const moveOption = document.querySelector(`#${divID}`);

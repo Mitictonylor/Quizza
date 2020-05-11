@@ -76,7 +76,6 @@
 
           <div class="board-content-1">
           <div class="dice-container">
-            <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()"></input>
           </div>
           CONTENT
           QUESTIONS
@@ -113,13 +112,6 @@ export default {
     }
   },
   methods: {
-    randomDice() {
-      this.diceResult = this.dice[Math.floor(Math.random() * 6)]
-      return this.showMoveOptions();
-    },
-    getDiceFace() {
-      return require('@/assets/dice/' + this.diceResult + '.png')
-    },
     showMoveOptions() {
         const randomGridTile = MentalTileObjects[Math.floor(Math.random() * 72)].id
         const moveOption = document.querySelector(`#${randomGridTile}`);

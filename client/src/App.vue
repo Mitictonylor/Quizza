@@ -12,3 +12,12 @@
 
 <style lang="css" scoped>
 </style>
+
+<style>
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    user-select: none;
+    background-color: #8e9aaf;
+  }
+</style>
