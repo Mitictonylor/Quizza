@@ -125,7 +125,7 @@ export default {
   }
 
   .title {
-    margin-top: 250px;
+    margin-top: 170px;
     display: inline-block;
     font-size: 200px;
     color: white;
