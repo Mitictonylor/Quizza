@@ -39,11 +39,11 @@
       },
 
       checkCategory() {
-        if (this.randomQuestion.category === 'Science & Nature') {
+        if (this.randomQuestion.category === "Science & Nature") {
             return "science"
         } else if (this.randomQuestion.category === 'History') {
             return "history"
-        } else if (this.randomQuestion.category === 'Sport') {
+        } else if (this.randomQuestion.category === 'Sports') {
             return"sport"
         } else if (this.randomQuestion.category === 'Geography') {
             return "geography"
