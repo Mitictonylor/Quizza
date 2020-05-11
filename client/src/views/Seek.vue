@@ -195,9 +195,7 @@ export default {
     },
     getNewRowPosition(event) {
       const divID = event.currentTarget.id;
-      console.log(SeekTileObjects);
       const index = SeekTileObjects.map(x => x.id).indexOf(divID);
-      console.log(index);
       return SeekTileObjects[index]['row'];
     },
     getNewColPosition(event) {
@@ -215,7 +213,9 @@ export default {
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
       grid-column-start: ${this.getNewColPosition(event)};`
       this.player.currentPosition += this.diceResult
-      this.resetMoveOptions();
+      this.resetMoveOptions()
+      const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
+      this.loadRandomQuestion(randomCategoryAndId);
     },
     togglefullScreen () {
       const element = document.querySelector('#fullscreen');
