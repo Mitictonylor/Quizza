@@ -1,4 +1,4 @@
-const rollDiceFunction = function(id) {
+const rollDiceFunction = function (id) {
     var cube = document.getElementById(id);
 
     var min = 1;
