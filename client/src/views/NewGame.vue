@@ -29,6 +29,7 @@ import resize from 'vue-resize-directive';
 import PlayerForm from '@/components/PlayerForm.vue';
 import about from '@/assets/images/about.png';
 import highscore from '@/assets/images/highscore.png';
+import button from '@/assets/sounds/button.wav';
 
 export default {
   name: 'newgame',
@@ -97,6 +98,10 @@ export default {
     init() {
       this.circleArray()
     },
+    playSound() {
+      var sound = document.getElementById("audio");
+      sound.play();
+    }
   },
   directives: {
     resize,
