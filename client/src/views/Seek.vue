@@ -144,9 +144,13 @@
 </template>
 
 <script>
-import {SeekTileObjects} from '@/config/SeekTileObjects.js'
+import {
+  SeekTileObjects
+} from '@/config/SeekTileObjects.js'
 import Questions from "@/components/Questions.vue"
-import {eventBus} from '../main.js';
+import {
+  eventBus
+} from '../main.js';
 
 export default {
   name: 'seek',
@@ -211,108 +215,105 @@ export default {
       fullscreen: false,
       randomQuestion: null,
       questionResult: null,
-      arrayLoose: [[5,10,15],//-1
-                    [20,25,30],//-2
-                    [35,40,45],//-3
-                    [50,55,60,65],//-4
-                    [70,75,80,85],//-5
-                    [90,105]],//-6
+      arrayLoose: [
+        [5, 10, 15], //-1
+        [20, 25, 30], //-2
+        [35, 40, 45], //-3
+        [50, 55, 60, 65], //-4
+        [70, 75, 80, 85], //-5
+        [90, 105]
+      ], //-6
 
-      extraPoint: [[3,6,9,12,14,16,18,21,37,58,62,68],//+1
-                    [4,7,13,19,23,26,29,31,39,63,69],//+2
-                    [17,21,33,36,41,44,76,82,86,92,103],//+3
-                    [49,56,64,71,106],//+4
-                    [74,79,84,89,104],//+5
-                    [91,102]]//+25
-      //creare una funzione ke contraoll ase il giocatorecorrente ha come curent position una di quelle con penalita'
+      extraPoint: [
+        [3, 6, 9, 12, 14, 16, 18, 21, 37, 58, 62, 68], //+1
+        [4, 7, 13, 19, 23, 26, 29, 31, 39, 63, 69], //+2
+        [17, 21, 33, 36, 41, 44, 76, 82, 86, 92, 103], //+3
+        [49, 56, 64, 71, 106], //+4
+        [74, 79, 84, 89, 104], //+5
+        [91, 102]
+      ] //+25
 
     }
   },
   methods: {
-    // this.dice[Math.floor(Math.random() * 6)]
+
     randomDice() {
-      this.diceResult = 5
+      this.diceResult = this.dice[Math.floor(Math.random() * 6)]
       return this.showMoveOptions()
       this.disableTheDice();
     },
     getDiceFace() {
       return require('@/assets/dice/' + this.diceResult + '.png')
     },
-// se la posizione di acrtive game player dopo ke tiriamo il dado è uguale a quella di un altro player,
-// ruba le sue categorie
-//filtra giocatori nn attivi e
-//filtro x vedere se hanno in comune la posizione dellactive player
-//se la lunghezze dell'array è maggiore di 1
-//prendimi i punti  del giocatore inattivo e mettimele nel giocatore attivo
-//
-  stealPoints(activePlayer, arrayOfPlayers){
-    const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false)
-    console.log(deactivatedPlayers)
-    const checkCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
-    console.log(checkCurrentPosition);
-    console.log('active player score', activePlayer.score);
-    if (checkCurrentPosition.length >=1){
-      checkCurrentPosition.forEach((player) =>  {
-                                    console.log('giocatorenon attivo score prima',player.score)
-                                    activePlayer.score += player.score;
-                                    player.score = 0
-                                    console.log('giocatorenon attivo score dopo',player.score)
-                                    console.log('giocatoreAttivo score dopo',activePlayer.score)
-                                  })
+
+    stealPoints(activePlayer, arrayOfPlayers) {
+      const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false)
+      console.log(deactivatedPlayers)
+      const checkCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
+      console.log(checkCurrentPosition);
+      console.log('active player score', activePlayer.score);
+      if (checkCurrentPosition.length >= 1) {
+        checkCurrentPosition.forEach((player) => {
+          console.log('giocatorenon attivo score prima', player.score)
+          activePlayer.score += player.score;
+          player.score = 0
+          console.log('giocatorenon attivo score dopo', player.score)
+          console.log('giocatoreAttivo score dopo', activePlayer.score)
+        })
       };
     },
 
-      loosePoints(array, activePlayer){
-        if(array[0].includes(activePlayer.currentPosition)){
-          activePlayer.score -= 1
-        }else if(array[1].includes(activePlayer.currentPosition)){
-          activePlayer.score -= 2
-        }else if(array[2].includes(activePlayer.currentPosition)){
-          activePlayer.score -= 3
-        }else if(array[3].includes(activePlayer.currentPosition)){
-          activePlayer.score -= 4
-        }else if(array[4].includes(activePlayer.currentPosition)){
-          activePlayer.score -= 5
-        }else if(array[5].includes(activePlayer.currentPosition)){
-          activePlayer.score = 0
-        }
-      },
-      AddPoints(array, activePlayer){
-        if(array[0].includes(activePlayer.currentPosition)){
-          activePlayer.score += 1
-        }else if(array[1].includes(activePlayer.currentPosition)){
-          activePlayer.score += 2
-        }else if(array[2].includes(activePlayer.currentPosition)){
-          activePlayer.score += 3
-        }else if(array[3].includes(activePlayer.currentPosition)){
-          activePlayer.score += 4
-        }else if(array[4].includes(activePlayer.currentPosition)){
-          activePlayer.score += 5
-        }else if(array[5].includes(activePlayer.currentPosition)){
-          activePlayer.score += 25
-        }
-      },
+    loosePoints(array, activePlayer) {
+      if (array[0].includes(activePlayer.currentPosition)) {
+        activePlayer.score -= 1
+      } else if (array[1].includes(activePlayer.currentPosition)) {
+        activePlayer.score -= 2
+      } else if (array[2].includes(activePlayer.currentPosition)) {
+        activePlayer.score -= 3
+      } else if (array[3].includes(activePlayer.currentPosition)) {
+        activePlayer.score -= 4
+      } else if (array[4].includes(activePlayer.currentPosition)) {
+        activePlayer.score -= 5
+      } else if (array[5].includes(activePlayer.currentPosition)) {
+        activePlayer.score = 0
+      }
+    },
+    AddPoints(array, activePlayer) {
+      if (array[0].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 1
+      } else if (array[1].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 2
+      } else if (array[2].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 3
+      } else if (array[3].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 4
+      } else if (array[4].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 5
+      } else if (array[5].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 25
+      }
+    },
 
 
 
-    showMoveOptions() {                   //current position:106 + dice.result 4 =110
+    showMoveOptions() { //current position:106 + dice.result 4 =110
       let total = (this.activePlayer(this.gamePlayers).currentPosition + this.diceResult)
-      if(total > 107){//yes
-            const difference = total - 107 //3   currentPosition:105 -3 g102
-            const newDivID = 'g' + (107 - difference)
-            const moveOption = document.querySelector(`#${newDivID}`);
-            moveOption.style.color = 'red';
-            this.moveOption = newDivID
-            this.activePlayer(this.gamePlayers).currentPosition = 107 - difference
-      }else{
-      //aggiungimi da current position a 107 ed il di piû me lo sotrrai da current poisition
-      const divID = 'g'+ total
-      const moveOption = document.querySelector(`#${divID}`);
-      moveOption.style.color = 'red';
-      this.moveOption = divID
-      this.activePlayer(this.gamePlayers).currentPosition = total
-    }
-    total = 0
+      if (total > 107) { //yes
+        const difference = total - 107 //3   currentPosition:105 -3 g102
+        const newDivID = 'g' + (107 - difference)
+        const moveOption = document.querySelector(`#${newDivID}`);
+        moveOption.style.color = 'red';
+        this.moveOption = newDivID
+        this.activePlayer(this.gamePlayers).currentPosition = 107 - difference
+      } else {
+        //aggiungimi da current position a 107 ed il di piû me lo sotrrai da current poisition
+        const divID = 'g' + total
+        const moveOption = document.querySelector(`#${divID}`);
+        moveOption.style.color = 'red';
+        this.moveOption = divID
+        this.activePlayer(this.gamePlayers).currentPosition = total
+      }
+      total = 0
     },
     resetMoveOptions() {
       const moveOption = document.querySelector(`#${this.moveOption}`);
@@ -398,8 +399,8 @@ export default {
       return activePlayer;
     },
     addPoint(player) {
-    player.score += 1
-  },
+      player.score += 1
+    },
 
     checkWinCondition(activePlayer) {
       if (activePlayer.currentPosition === 107) {
