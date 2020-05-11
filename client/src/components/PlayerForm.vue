@@ -1,35 +1,45 @@
 <template lang="html">
   <div class="">
-
-
     <form class="form">
-      <div class="player1">
-        <label for="player1">Player 1: </label>
-        <input type="text" v-model="player1" placeholder="Insert name" required/>
+      <div class="player">
+        <label class="player1" for="player1">Player 1 </label>
+        <input class="player1" type="text" v-model="player1" placeholder="Enter name" onkeyup="this.value = this.value.toUpperCase();" required/>
       </div>
-      <div class="player2">
-        <label for="player2">Player 2: </label>
-        <input type="text" v-model="player2" placeholder="Insert name" required/>
+      <div class="player">
+        <label class="player2" for="player2">Player 2 </label>
+        <input class="player2" type="text" v-model="player2" placeholder="Enter name" onkeyup="this.value = this.value.toUpperCase();" required/>
       </div>
-      <div class="player3">
-        <label for="player3">Player 3: </label>
-        <input type="text" v-model="player3" placeholder="Insert name"/>
+      <div class="player">
+        <label class="player3" for="player3">Player 3 </label>
+        <input class="player3" type="text" v-model="player3" onkeyup="this.value = this.value.toUpperCase();" placeholder="Enter name"/>
       </div>
-      <div class="player4">
-        <label for="player4">Player 4: </label>
-        <input type="text" v-model="player4" placeholder="Insert name"/>
+      <div class="player">
+        <label class="player4" for="player4">Player 4 </label>
+        <input class="player4" type="text" v-model="player4" onkeyup="this.value = this.value.toUpperCase();" placeholder="Enter name"/>
       </div>
     </form>
-    <nav v-if="player1 && player2">
-      <router-link :to="{name: 'classic', params:{player1, player2, player3, player4}}">Classic</router-link>
-      <router-link :to="{name: 'seek', params:{player1, player2, player3, player4}}"> SEEK </router-link>
-      <router-link :to="{name: 'mental', params:{player1, player2, player3, player4}}"> MENTAL </router-link>
+    <nav class="nav" v-if="player1 && player2">
+      <div class="select-container">
+        <p class="select">SELECT GAME</p>
+      </div>
+      <div class="game-container">
+          <router-link :to="{name: 'classic', params:{player1, player2, player3, player4}}"> <img class="game" :src="classic"> </router-link>
+      </div>
+      <div class="game-container">
+          <router-link :to="{name: 'seek', params:{player1, player2, player3, player4}}"> <img class="game" :src="seek"> </router-link>
+      </div>
+      <div class="game-container">
+          <router-link :to="{name: 'mental', params:{player1, player2, player3, player4}}"> <img class="game" :src="mental"> </router-link>
+      </div>
     </nav>
     </div>
 </template>
 
 <script>
   import {eventBus} from '../main.js';
+  import classic from '@/assets/images/classic.png';
+  import seek from '@/assets/images/seek.png';
+  import mental from '@/assets/images/mental.png';
 
   export default {
     name: 'playerForm',
@@ -39,10 +49,128 @@
         player2: '',
         player3: '',
         player4: '',
+        classic: classic,
+        seek: seek,
+        mental: mental
       }
     },
   }
 </script>
 
 <style lang="css" scoped>
+
+.form {
+  font-size: 25px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.player {
+  margin: 20px;
+}
+
+input {
+  background-color: #8e9aaf;
+  text-align: center;
+  font-size: 20px;
+  height: 25px;
+  width: 40%;
+  border-radius: 4%;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+input:focus {
+  outline-color: #907ad6;
+}
+
+input::placeholder {
+  color: #8e9aaf;
+  text-shadow: none;
+}
+
+input.player1 {
+  color: #ff70a6;
+  text-shadow: 1px 1px 2px #000000;
+}
+
+.player1{
+  color: #ff70a6;
+  text-shadow: 1px 1px 2px #000000;
+  font-weight: 700;
+}
+
+input.player2 {
+  color: #70d6ff;
+  text-shadow: 1px 1px 2px #000000;
+}
+
+.player2{
+  color: #70d6ff;
+  text-shadow: 1px 1px 2px #000000;
+  font-weight: 700;
+}
+
+input.player3 {
+  color: #e9ff70;
+  text-shadow: 1px 1px 2px #000000;
+}
+
+.player3 {
+  color: #e9ff70;
+  text-shadow: 1px 1px 2px #000000;
+  font-weight: 700;
+}
+
+input.player4 {
+  color: #6eeb83;
+  text-shadow: 1px 1px 2px #000000;
+}
+
+.player4 {
+  color: #6eeb83;
+  text-shadow: 1px 1px 2px #000000;
+  font-weight: 700;
+}
+
+.nav {
+  margin-top: 25px;
+  overflow: auto;
+  display: inline-block;
+  width: 100%;
+  -webkit-animation: fadeIn 2s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.game-container {
+  margin: 5px;
+  width: 32%;
+  float: left;
+}
+
+.game {
+  width: 200px;
+}
+
+.select-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.select {
+  font-size: 25px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
 </style>
