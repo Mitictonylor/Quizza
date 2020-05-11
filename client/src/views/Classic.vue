@@ -339,6 +339,7 @@ export default {
         this.players[3].name = this.player4;
         this.filteredPlayers();
         this.gamePlayers[0].active = true;
+        this.nextPlayer = this.activePlayer(this.gamePlayers)
       }
       ,
       //Create a random question from the selected Category
