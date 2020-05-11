@@ -129,8 +129,8 @@
         <p>CATEGORY TYPES</p>
       </div>
 
-      <div class="board-content-5">
-        <p>CONTENT</p>
+      <div class="board-content-5" v-if="questionResult">
+        <p>{{questionResult}}</p>
       </div>
 
       <div id="player1" class="player1"></div>
@@ -222,20 +222,24 @@ export default {
     getDiceFace() {
       return require('@/assets/dice/' + this.diceResult + '.png')
     },
-    showMoveOptions() {                   //current position:105 + dice.result 5 =110
+    showMoveOptions() {                   //current position:106 + dice.result 4 =110
       let total = (this.activePlayer(this.gamePlayers).currentPosition + this.diceResult)
       if(total > 107){//yes
-      const difference = total - 107 //3   currentPosition:105 -3 g102
-      const newDivID = 'g' + (107 - difference)
-      const moveOption = document.querySelector(`#${newDivID}`);
-      moveOption.style.color = 'red';
-      this.moveOption = newDivID}
-      else{
+            const difference = total - 107 //3   currentPosition:105 -3 g102
+            const newDivID = 'g' + (107 - difference)
+            const moveOption = document.querySelector(`#${newDivID}`);
+            moveOption.style.color = 'red';
+            this.moveOption = newDivID
+            this.activePlayer(this.gamePlayers).currentPosition = 107 - difference
+      }else{
       //aggiungimi da current position a 107 ed il di piû me lo sotrrai da current poisition
       const divID = 'g'+ total
       const moveOption = document.querySelector(`#${divID}`);
       moveOption.style.color = 'red';
-      this.moveOption = divID}
+      this.moveOption = divID
+      this.activePlayer(this.gamePlayers).currentPosition = total
+    }
+    total = 0
     },
     resetMoveOptions() {
       const moveOption = document.querySelector(`#${this.moveOption}`);
@@ -262,7 +266,7 @@ export default {
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
                                     grid-column-start: ${this.getNewColPosition(event)};`
       const index = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
-      this.gamePlayers[index].currentPosition += this.diceResult
+
       this.resetMoveOptions()
       const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
       this.loadRandomQuestion(randomCategoryAndId);
