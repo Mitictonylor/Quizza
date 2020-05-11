@@ -324,7 +324,7 @@ export const SeekTileObjects =  [
   },
 
   {
-    d: 'g55',
+    id: 'g55',
     row: 7,
     column: 17
   },

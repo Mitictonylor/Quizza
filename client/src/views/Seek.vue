@@ -172,37 +172,37 @@ export default {
         {
           alias: "player1",
           name: '',
-          score: 10,
+          score: 200,
           winStreak: 0,
           active: false,
-          currentPosition: 1,
+          currentPosition: 85,
           id: 1
         },
         {
           alias: "player2",
           name: '',
-          score: 20,
+          score: 5,
           winStreak: 0,
           active: false,
-          currentPosition: 1,
+          currentPosition: 0,
           id: 2
         },
         {
           alias: "player3",
           name: '',
-          score: 30,
+          score: 5,
           winStreak: 0,
           active: false,
-          currentPosition: 1,
+          currentPosition: 0,
           id: 3
         },
         {
           alias: "player4",
           name: '',
-          score: 40,
+          score: 5,
           winStreak: 0,
           active: false,
-          currentPosition: 1,
+          currentPosition: 0,
           id: 4
         }
       ],
@@ -211,13 +211,27 @@ export default {
       fullscreen: false,
       randomQuestion: null,
       questionResult: null,
-      killingGrid:[]
+      arrayLoose: [[5,10,15],//-1
+                    [20,25,30],//-2
+                    [35,40,45],//-3
+                    [50,55,60,65],//-4
+                    [70,75,80,85],//-5
+                    [90,105]],//-6
+
+      extraPoint: [[3,6,9,12,14,16,18,21,37,58,62,68],//+1
+                    [4,7,13,19,23,26,29,31,39,63,69],//+2
+                    [17,21,33,36,41,44,76,82,86,92,103],//+3
+                    [49,56,64,71,106],//+4
+                    [74,79,84,89,104],//+5
+                    [91,102]]//+25
+      //creare una funzione ke contraoll ase il giocatorecorrente ha come curent position una di quelle con penalita'
+
     }
   },
   methods: {
+    // this.dice[Math.floor(Math.random() * 6)]
     randomDice() {
-      // this.dice[Math.floor(Math.random() * 6)]
-      this.diceResult = 4
+      this.diceResult = 5
       return this.showMoveOptions()
       this.disableTheDice();
     },
@@ -245,13 +259,39 @@ export default {
                                     console.log('giocatorenon attivo score dopo',player.score)
                                     console.log('giocatoreAttivo score dopo',activePlayer.score)
                                   })
-
       };
-
     },
 
-
-
+      loosePoints(array, activePlayer){
+        if(array[0].includes(activePlayer.currentPosition)){
+          activePlayer.score -= 1
+        }else if(array[1].includes(activePlayer.currentPosition)){
+          activePlayer.score -= 2
+        }else if(array[2].includes(activePlayer.currentPosition)){
+          activePlayer.score -= 3
+        }else if(array[3].includes(activePlayer.currentPosition)){
+          activePlayer.score -= 4
+        }else if(array[4].includes(activePlayer.currentPosition)){
+          activePlayer.score -= 5
+        }else if(array[5].includes(activePlayer.currentPosition)){
+          activePlayer.score = 0
+        }
+      },
+      AddPoints(array, activePlayer){
+        if(array[0].includes(activePlayer.currentPosition)){
+          activePlayer.score += 1
+        }else if(array[1].includes(activePlayer.currentPosition)){
+          activePlayer.score += 2
+        }else if(array[2].includes(activePlayer.currentPosition)){
+          activePlayer.score += 3
+        }else if(array[3].includes(activePlayer.currentPosition)){
+          activePlayer.score += 4
+        }else if(array[4].includes(activePlayer.currentPosition)){
+          activePlayer.score += 5
+        }else if(array[5].includes(activePlayer.currentPosition)){
+          activePlayer.score += 25
+        }
+      },
 
 
 
@@ -300,6 +340,7 @@ export default {
                                     grid-column-start: ${this.getNewColPosition(event)};`
       const index = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
       this.stealPoints(this.activePlayer(this.gamePlayers), this.gamePlayers)
+      this.loosePoints(this.arrayLoose, this.activePlayer(this.gamePlayers))
       this.resetMoveOptions()
       const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
       this.loadRandomQuestion(randomCategoryAndId);
