@@ -253,7 +253,7 @@ export default {
       this.diceResult = rollDiceFunction('cube');
       this.showMoveOptions();
       this.questionResult = null;
-      // this.disableTheDice();
+      this.disableTheDice();
     },
     // gives u the options where the player could move on the board
     getMoveOptions() {//dice is
@@ -319,11 +319,11 @@ export default {
       }
     },// Find the Dice class and disable the click event
     disableTheDice(){
-      const dice = document.querySelector("cube")
+      const dice = document.querySelector("#cube")
       dice.style.pointerEvents = 'none';
     },//Find the Dice class and re-enable the click event
     enableTheDice(){
-      const dice = document.querySelector("cube")
+      const dice = document.querySelector("#cube")
       dice.style.pointerEvents = 'auto';
     },
     //we want just the palyer with the name, so the swich logic can work
@@ -447,10 +447,11 @@ export default {
           } else {
             this.randomQuestion = null;
             //create a new question in either cases
-            // this.enableTheDice();
+            this.enableTheDice();
           }
           } else {
             this.questionResult = "Boooo - better luck next time!"
+            this.enableTheDice()
             this.switchActivePlayer(playerActive, this.gamePlayers);
             this.randomQuestion = null;
             // this.enableTheDice();
