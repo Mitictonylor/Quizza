@@ -3,6 +3,19 @@
     <canvas id="canvas"></canvas>
     <div class="form-container">
       <div class="form">
+        <div class="welcome">
+          <div class="about-container">
+            <router-link  v-on:click="playSound" :to="{name: 'about'}"> <img class="about" :src="about"> </router-link>
+          </div>
+          <div class="high-score-container">
+            <router-link  v-on:click="playSound" :to="{name: 'halloffame'}"> <img class="high" :src="highscore"> </router-link>
+          </div>
+          <div class="title-container">
+            <p class="title">QuizzA</p>
+          </div>
+            <p class="sub-text">Welcome to Quizza - the multiplayer browser boardgame.</p>
+            <p class="sub-text">Please select a minimum of two players to continue:</p>
+        </div>
         <player-form/>
       </div>
 
@@ -13,7 +26,9 @@
 <script>
 import Circle from '@/helpers/HomePageCanvas.js';
 import resize from 'vue-resize-directive';
-import PlayerForm from '@/components/PlayerForm.vue'
+import PlayerForm from '@/components/PlayerForm.vue';
+import about from '@/assets/images/about.png';
+import highscore from '@/assets/images/highscore.png';
 
 export default {
   name: 'newgame',
@@ -31,7 +46,10 @@ export default {
       mouse: {
         x: null,
         y: null
-      }
+      },
+      about: about,
+      highscore: highscore,
+
     }
   },
   mounted() {
@@ -113,13 +131,17 @@ export default {
 
 .form {
   width: 50%;
-  height: 50%;
+  height: 70%;
   display: inline-block;
   color: white;
   font-family: 'Russo One', sans-serif;
   text-shadow: 2px 2px 4px #000000;
+  box-shadow: 2px 2px 4px #000000;
   -webkit-animation: fadeIn 4s;
   border-style: solid;
+  border-radius: 5%;
+  margin-top: 120px;
+  background-color: #8e9aaf;
 }
 
 @-webkit-keyframes fadeIn {
@@ -140,7 +162,62 @@ p {
   margin: 0;
 }
 
-.seek-button {
-  border-style: border;
+.welcome {
+  margin-bottom: 50px;
+  margin-top: 20px;
 }
+
+.about-container {
+  width: 10%;
+  float: left;
+}
+
+.about {
+  height: 60px;
+  border-radius: 50%;
+}
+
+.about:hover {
+  background-color: #ff70a6;
+}
+
+.about:focus {
+  outline: none;
+}
+
+.high-score-container {
+  width: 10%;
+  float: left;
+}
+
+.high {
+  height: 60px;
+}
+
+.high:hover {
+  background-color: #907ad6;
+}
+
+.high:focus {
+  outline: none;
+}
+
+.title-container {
+  width: 78%;
+  float: left;
+}
+
+.title {
+  font-family: 'Russo One', sans-serif;
+  font-size: 100px;
+  margin-bottom: 15px;
+  float: left;
+  margin-left: 15%;
+}
+
+.sub-text {
+  font-size: 25px;
+  font-family: 'Open Sans', sans-serif;
+}
+
 </style>
