@@ -21,12 +21,20 @@
 </script>
 
 <style lang="css" scoped>
-.options{
-  width: 90%;
-  display: inline-block;
-  font-family: 'Luckiest Guy', cursive;
-  font-size: 20px;
-  float: center;
-  margin: 5px;
-}
+  li {
+    list-style: none;
+    background-color: white;
+    color: black;
+    font-size: 22px;
+  }
+
+  li:hover {
+    background-color: #8e9aaf;
+    color: white;
+  }
+
+  .options-container {
+    border: dotted 1px;
+    color: black;
+  }
 </style>

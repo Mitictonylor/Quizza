@@ -1,9 +1,7 @@
 <template lang="html">
   <div class="">
-    <div class="question-wrapper">
-      <h1 v-html="randomQuestion.question" class="question">{{randomQuestion.question}}</h1>
-    </div>
-    <div class="list-container">
+    <div class="question-container" v-bind:class="checkCategory()">
+      <p v-html="randomQuestion.question" class="question">{{randomQuestion.question}}</p>
       <answer class='list' v-for="(option, index) in shuffle(randomQuestion.options)" :key='index' :option="option"></answer>
     </div>
   </div>
@@ -39,56 +37,70 @@
         }
         return arra1;
       },
+
+      checkCategory() {
+        if (this.randomQuestion.category === 'Science & Nature') {
+            return "science"
+        } else if (this.randomQuestion.category === 'History') {
+            return "history"
+        } else if (this.randomQuestion.category === 'Sport') {
+            return"sport"
+        } else if (this.randomQuestion.category === 'Geography') {
+            return "geography"
+        } else if (this.randomQuestion.category === 'Animals') {
+            return "animal"
+        } else {
+          return "general-knowledge"
+        }
+      }
     }
   }
 </script>
 
 <style lang="css" scoped>
-.question{
-  font-family: 'Permanent Marker', cursive;
-
-  width: 554px;
-  height: 219px;
-  z-index: 2;
-  position: absolute;
-  top: 100px;
-  margin: 0px;
-  bottom: 0;
+.question-container {
+  border-style: solid;
 
 }
 
-.question-wrapper{
-
-  width: 554px;
-  height: 319px;
-  z-index: 2;
-  position: absolute;
-  margin: 0px;
-  bottom: 0;
-
-
+.question {
+  font-size: 25px;
+  text-shadow: 2px 2px 4px #000000
 }
 
-.list-container {
-
-  width: 540px;
-  height: 249px;
-  z-index: 2;
-  top: 430px;
-  position: absolute;
-  margin: 0px;
-  bottom: 0;
-
-
-
-
+.sport {
+  background-color: #6eeb83;
+  box-shadow: 2px 2px 4px #000000;
 }
 
-.list {
+.geography {
+  background-color: #ff70a6;
+  box-shadow: 2px 2px 4px #000000;
+}
 
-  margin:0;
+.general-knowledge {
+  background-color: #907ad6;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+.history {
+  background-color: #ff9770;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+.animal {
+  background-color: #e9ff70;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+.science {
+  background-color: #70d6ff;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+p {
+  margin: 4;
   padding: 0;
-  width: 100%;
-  display: inline-block;
 }
+
 </style>

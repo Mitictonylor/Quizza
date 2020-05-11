@@ -38,7 +38,7 @@
         <div id="f6" class="science" v-on:click="checkActive($event)"></div>
         <div id="f7" class="geography" v-on:click="checkActive($event)"></div>
         <div id="f8" class="general-knowledge" v-on:click="checkActive($event)"></div>
-        <div id="f9" class="history" v-on:click="checkActive($event)">F9</div>
+        <div id="f9" class="history" v-on:click="checkActive($event)"></div>
         <div id="f10" class="animal" v-on:click="checkActive($event)"></div>
         <div id="f11" class="science" v-on:click="checkActive($event)"></div>
         <div id="f12" class="geography" v-on:click="checkActive($event)"></div>
@@ -119,7 +119,9 @@
         </div>
 
       <div class="board-content-top-right">
-        <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
+        <div class="question">
+          <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
+        </div>
       </div>
 
       <div class="board-content-bottom-right"></div>
@@ -236,7 +238,7 @@ export default {
       rollDiceFunction('cube')
       this.diceResult = rollDiceFunction('cube');
       this.showMoveOptions();
-      this.disableTheDice();
+      // this.disableTheDice();
     },
     // gives u the options where the player could move on the board
     getMoveOptions() {//dice is
@@ -252,7 +254,7 @@ export default {
     showMoveOptions() {
       for (let option of this.getMoveOptions()) {
         const moveOption = document.querySelector(`#${option}`);
-        moveOption.style.color = 'red';
+        moveOption.style.color = "red";
       }
     },
     //make the blocks black again
@@ -429,12 +431,13 @@ export default {
           } else {
             this.randomQuestion = null;
             alert("Throw the dice again"); //create a new question in either cases
-            this.enableTheDice();}
+            // this.enableTheDice();
+          }
           } else {
             alert("boooo");
             this.switchActivePlayer(playerActive, this.gamePlayers);
             this.randomQuestion = null;
-            this.enableTheDice();
+            // this.enableTheDice();
           }
         });
 
@@ -669,5 +672,13 @@ export default {
     position: absolute;
     margin: 90px;
     bottom: 0;
+  }
+
+  .question {
+    margin-top: 60px;
+    width: 80%;
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
   }
 </style>
