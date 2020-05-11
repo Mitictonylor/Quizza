@@ -175,7 +175,7 @@ export default {
           score: [],
           winStreak: 0,
           active: false,
-          currentPosition: 105,
+          currentPosition: 1,
           id: 1
         },
         {
