@@ -258,9 +258,9 @@ export default {
     // gives u the options where the player could move on the board
     getMoveOptions() {//dice is
       const res = 'roll' + this.diceResult; //roll3
-      //trova lindex della posizione attuale del giocatore d4
+      //trova lindex della posizione attuale del giocatore f9
       const indexOfActivePlayer = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
-      console.log(indexOfActivePlayer);
+
       const index = ClassicTileObjects.map(x => x.id).indexOf(this.gamePlayers[indexOfActivePlayer].currentPosition);
       this.moveOptions = ClassicTileObjects[index][res]// takes all the possible future position for roll 3
       return this.moveOptions;
@@ -295,7 +295,7 @@ export default {
     movePlayer(event) {
       const activePlayer = document.querySelector(`#${this.activePlayer(this.gamePlayers).alias}`);
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
-      grid-column-start: ${this.getNewColPosition(event)};`//row 4 colomn 1
+                                    grid-column-start: ${this.getNewColPosition(event)};`//row 4 colomn 1
       const index = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
       this.gamePlayers[index].currentPosition = event.currentTarget.id;//assign the position we clicked on the player d1
       //Needs to load the category of the grid
@@ -434,26 +434,31 @@ export default {
       eventBus.$on('selected-option', (option) => {
         const playerActive = this.activePlayer(this.gamePlayers);
         const question = this.randomQuestion;
-        console.log(question);
-        console.log(option);
-        console.log(question.correct_answer);
+        console.log("Question Answered: ", question);
+        // console.log(option);
+        // console.log(question.correct_answer);
 
         if (option === question.correct_answer) {
+          this.nextPlayer = null
           this.questionResult = "Correct - roll again!"
           this.addWonCategory(playerActive, question.category, this.gamePlayers);
           if(this.checkWinCondition(playerActive)){
+            this.nextPlayer = null
             this.questionResult = "Congratulations - you've WON!"
             this.disableTheDice()
             this.randomQuestion = null
           } else {
+            this.nextPlayer = null
             this.randomQuestion = null;
             //create a new question in either cases
             this.enableTheDice();
           }
           } else {
+            this.nextPlayer = null
             this.questionResult = "Boooo - better luck next time!"
             this.enableTheDice()
             this.switchActivePlayer(playerActive, this.gamePlayers);
+            console.log("HERE", this.randomQuestion);
             this.randomQuestion = null;
             // this.enableTheDice();
           }
@@ -611,7 +616,6 @@ export default {
     grid-row-start: 6;
     grid-column-start: 9;
   }
-
   .player2 {
     margin-top: 40px;
     z-index: 2;
