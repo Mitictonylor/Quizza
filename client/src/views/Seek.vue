@@ -146,6 +146,8 @@
 <script>
 import {SeekTileObjects} from '@/config/SeekTileObjects.js'
 import  Questions from "@/components/Questions.vue"
+import {eventBus} from '../main.js';
+
 export default {
   name: 'seek',
   components:{
@@ -156,6 +158,7 @@ export default {
     return {
       dice: [1,2,3,4,5,6],
       diceResult: 6,
+      nextPlayer: null,
       categoriesAndId: [
         ['sport', 21],
         ['geography', 22],
@@ -164,26 +167,63 @@ export default {
         ['animal', 27],
         ['science_and_nature', 17]
       ],
-      player: {
-        id: 1,
-        currentPosition: 1
-      },
+      gamePlayers:[],
+      players: [ //keep it for the initial rendering
+        {
+          alias: "player1",
+          name: '',
+          score: [],
+          winStreak: 0,
+          active: false,
+          currentPosition: 1,
+          id: 1
+        },
+        {
+          alias: "player2",
+          name: '',
+          score: [],
+          winStreak: 0,
+          active: false,
+          currentPosition: 1,
+          id: 2
+        },
+        {
+          alias: "player3",
+          name: '',
+          score: [],
+          winStreak: 0,
+          active: false,
+          currentPosition: 1,
+          id: 3
+        },
+        {
+          alias: "player4",
+          name: '',
+          score: [],
+          winStreak: 0,
+          active: false,
+          currentPosition: 1,
+          id:4
+        }
+      ],
       answeredQuestions:[],
       moveOption: null,
       fullscreen: false,
-      randomQuestion: null
+      randomQuestion: null,
+      questionResult: null
     }
   },
   methods: {
     randomDice() {
       this.diceResult = this.dice[Math.floor(Math.random() * 6)]
-      return this.showMoveOptions();
+      return this.showMoveOptions()
+      this.disableTheDice();
     },
     getDiceFace() {
       return require('@/assets/dice/' + this.diceResult + '.png')
     },
     showMoveOptions() {
-      const divID = 'g' + (this.player.currentPosition + this.diceResult)
+      const divID = 'g' + (this.activePlayer(this.gamePlayers).currentPosition + this.diceResult)
       const moveOption = document.querySelector(`#${divID}`);
       moveOption.style.color = 'red';
       this.moveOption = divID;
@@ -209,10 +249,11 @@ export default {
       }
     },
     movePlayer(event) {
-      const activePlayer = document.querySelector('#player1');
+      const activePlayer = document.querySelector(`#${this.activePlayer(this.gamePlayers).alias}`);
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
-      grid-column-start: ${this.getNewColPosition(event)};`
-      this.player.currentPosition += this.diceResult
+                                    grid-column-start: ${this.getNewColPosition(event)};`
+      const index = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
+      this.gamePlayers[index].currentPosition += this.diceResult
       this.resetMoveOptions()
       const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
       this.loadRandomQuestion(randomCategoryAndId);
@@ -221,6 +262,24 @@ export default {
       const element = document.querySelector('#fullscreen');
       element.requestFullscreen();
     },
+    filteredPlayers() {
+      const playersWithName = this.players.filter((player) => {
+        return player.name !== '' });
+        this.gamePlayers = playersWithName;
+      },
+      updateNames(){
+        this.players[0].name = this.player1;
+        this.players[1].name = this.player2;
+        this.players[2].name = this.player3;
+        this.players[3].name = this.player4;
+        this.filteredPlayers();
+        this.gamePlayers[0].active = true;
+        this.nextPlayer = this.activePlayer(this.gamePlayers)
+      },
+      findIndexOfPlayer(player) {
+        const index = this.gamePlayers.indexOf(player);
+        return index;
+      },
     loadRandomQuestion(categoryAndID){
       const url = `https://opentdb.com/api.php?amount=1&category=${categoryAndID[1]}&type=multiple`;
       fetch(url).then(response => response.json())
@@ -244,11 +303,77 @@ export default {
       const category = categoryArray[Math.floor(Math.random() * categoryArray.length)]
       return category
     },
-
+    activePlayer(players) {
+      const activePlayer = players.find(player => player.active === true);
+      this.nextPlayer = activePlayer
+      return activePlayer;
+    },
+    addWonCategory(player, question, arrayOfplayers) {
+      const index = this.findIndexOfPlayer(player);
+      if (!arrayOfplayers[index].score.includes(question)) {
+        arrayOfplayers[index].score.push(question);
+      }
+    },
+    checkWinCondition(activePlayer){
+      if(activePlayer.score.length === 6){
+        return true  //The game finish here
+      }
+    },
+    disableTheDice(){
+      const dice = document.querySelector(".dice")
+      dice.style.pointerEvents = 'none';
+    },//Find the Dice class and re-enable the click event
+    enableTheDice(){
+      const dice = document.querySelector(".dice")
+      dice.style.pointerEvents = 'auto';
+    },
+    switchActivePlayer(player, players) {
+      const index = this.findIndexOfPlayer(player);
+      players[index].active = false;
+      if (index < (players.length - 1)) {
+        players[(index + 1)].active = true;
+      } else {
+        players[0].active = true
+      }
+    }
     },
     mounted(){
-      // this.loadRandomQuestion(this.getRandomCategory(this.categoriesAndId))
-    }
+      this.updateNames();
+
+      eventBus.$on('selected-option', (option) => {
+        const playerActive = this.activePlayer(this.gamePlayers);
+        console.log('player Active:' + playerActive.alias);
+        const question = this.randomQuestion;
+        console.log("Question Answered: ", question);
+        // console.log(option);
+        // console.log(question.correct_answer);
+
+        if (option === question.correct_answer) {
+          this.nextPlayer = null
+          this.questionResult = "Correct - roll again!"
+          this.addWonCategory(playerActive, question.category, this.gamePlayers);
+                if(this.checkWinCondition(playerActive)){
+                  this.nextPlayer = null
+                  this.questionResult = "Congratulations - you've WON!"
+                  this.disableTheDice()
+                  this.randomQuestion = null
+                } else {
+                  this.nextPlayer = null
+                  this.randomQuestion = null;
+                  //create a new question in either cases
+                  this.enableTheDice();
+                }
+          } else {
+            this.nextPlayer = null
+            this.questionResult = "Boooo - better luck next time!"
+            this.enableTheDice()
+            this.switchActivePlayer(playerActive, this.gamePlayers);
+            console.log("HERE", playerActive);
+            this.randomQuestion = null;
+            // this.enableTheDice();
+          }
+        })
+        }
   }
 
 </script>
