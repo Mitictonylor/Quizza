@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="page-container">
+  <div id="seek" class="page-container" v-on:click="togglefullScreen()">
     <div class="game-board" ref="gameBoard">
       <div id="g1" class="grid" v-on:click="checkActive($event)">1</div>
       <div id="g2" class="grid" v-on:click="checkActive($event)">2</div>
@@ -347,7 +347,7 @@ export default {
       this.loadRandomQuestion(randomCategoryAndId);
     },
     togglefullScreen() {
-      const element = document.querySelector('#fullscreen');
+      const element = document.querySelector('#seek');
       element.requestFullscreen();
     },
     filteredPlayers() {

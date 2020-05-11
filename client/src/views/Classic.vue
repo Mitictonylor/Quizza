@@ -1,5 +1,5 @@
 <template lang="html">
-    <div class="page-container">
+    <div id="classic" class="page-container" v-on:click="togglefullScreen()">
       <div class="game-board">
         <div id="a1" class="sport" v-on:click="checkActive($event)"></div>
         <div id="a2" class="geography" v-on:click="checkActive($event)"></div>
@@ -171,6 +171,7 @@ import player1 from '@/assets/tokens/circle_red.png';
 import player2 from '@/assets/tokens/circle_blue.png';
 import player3 from '@/assets/tokens/circle_yellow.png';
 import player4 from '@/assets/tokens/circle_green.png';
+import fullscreen from '@/assets/images/fullscreen.png';
 
 export default {
   name: 'board-game',
@@ -420,6 +421,10 @@ export default {
         if(activePlayer.score.length === 6){
           return true  //The game finish here
         }
+      },
+      togglefullScreen () {
+        const element = document.querySelector('#classic');
+        element.requestFullscreen();
       }
     },
     mounted() {

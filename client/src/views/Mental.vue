@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="page-container">
+  <div id="mental" class="page-container" v-on:click="togglefullScreen()">
     <div class="game-board" ref="gameBoard">
       <div id="a1" class="grid" v-on:click="checkActive($event)">a1</div>
       <div id="a3" class="grid" v-on:click="checkActive($event)">a3</div>
@@ -154,7 +154,7 @@ export default {
       this.resetMoveOptions();
     },
     togglefullScreen () {
-      const element = document.querySelector('#fullscreen');
+      const element = document.querySelector('#mental');
       element.requestFullscreen();
     },
   }
