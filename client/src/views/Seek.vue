@@ -110,6 +110,12 @@
       <div id="g107" class="grid" v-on:click="checkActive($event)"></div>
 
       <div class="board-content-1">
+        <div class="np-name">
+          <p v-if="nextPlayer">{{nextPlayer.name.toUpperCase()}}  you're up!</p>
+        </div>
+        <div class="qr">
+          <p>{{questionResult}}</p>
+        </div>
         <div class="dice-container">
           <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()"></input>
         </div>
@@ -153,7 +159,6 @@
       </div>
 
       <div class="board-content-4">
-        <p>CATEGORY TYPES</p>
       </div>
 
       <div class="board-content-5" v-if="questionResult">
@@ -269,7 +274,8 @@ export default {
 
     randomDice() {
       this.diceResult = this.dice[Math.floor(Math.random() * 6)]
-      return this.showMoveOptions()
+      this.showMoveOptions()
+      this.questionResult = null;
       this.disableTheDice();
     },
     getDiceFace() {
@@ -332,14 +338,14 @@ export default {
         const difference = total - 107 //3   currentPosition:105 -3 g102
         const newDivID = 'g' + (107 - difference)
         const moveOption = document.querySelector(`#${newDivID}`);
-        moveOption.style.color = 'red';
+        moveOption.classList.add("flashing");
         this.moveOption = newDivID
         this.activePlayer(this.gamePlayers).currentPosition = 107 - difference
       } else {
         //aggiungimi da current position a 107 ed il di piû me lo sotrrai da current poisition
         const divID = 'g' + total
         const moveOption = document.querySelector(`#${divID}`);
-        moveOption.style.color = 'red';
+        moveOption.classList.add("flashing");
         this.moveOption = divID
         this.activePlayer(this.gamePlayers).currentPosition = total
       }
@@ -347,7 +353,7 @@ export default {
     },
     resetMoveOptions() {
       const moveOption = document.querySelector(`#${this.moveOption}`);
-      moveOption.style.color = 'black';
+      moveOption.classList.remove("flashing");
       this.moveOption = null;
     },
     getNewRowPosition(event) {
@@ -372,7 +378,7 @@ export default {
       const index = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
       this.stealPoints(this.activePlayer(this.gamePlayers), this.gamePlayers)
       this.loosePoints(this.arrayLoose, this.activePlayer(this.gamePlayers))
-      this.resetMoveOptions()
+      this.resetMoveOptions();
       const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
       this.loadRandomQuestion(randomCategoryAndId);
     },
@@ -524,6 +530,16 @@ export default {
 
 .grid:hover {
   cursor: pointer;
+}
+
+.flashing {
+  animation: flash 0.5s ease infinite;
+}
+
+@keyframes flash {
+  50% {
+    opacity: 70%;
+  }
 }
 
 /* c X ROW */
@@ -866,7 +882,7 @@ input:focus {
   height: 81px;
   z-index: 2;
   position: absolute;
-  margin-top: 445px;
+  margin-top: 380px;
 }
 
 .board-content-4 {
@@ -948,6 +964,33 @@ P {
   margin-left: 20px;
   font-size: 20px;
   margin-top: 25px;
+}
+
+.question-container {
+  width: 50%;
+  display: inline-block;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+}
+
+.np-name {
+  float: left;
+  font-family: 'Russo One', sans-serif;
+  font-size: 35px;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+  margin-top: 20px;
+  width: 30%;
+}
+
+.qr {
+  float: left;
+  font-family: 'Russo One', sans-serif;
+  font-size: 35px;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+  margin-top: 20px;
+  width: 40%;
 }
 
 
