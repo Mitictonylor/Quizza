@@ -203,6 +203,7 @@ export default {
         ['animal', 27],
         ['science_and_nature', 17]
       ],
+      message:"",
       gamePlayers: [],
       players: [ //keep it for the initial rendering
         {
@@ -258,7 +259,7 @@ export default {
         [50, 55, 60, 65], //-4
         [70, 75, 80, 85], //-5
         [90, 105]
-      ], //-6
+      ], //-all
 
       extraPoint: [
         [3, 6, 9, 12, 14, 16, 18, 21, 37, 58, 62, 68], //+1
@@ -271,9 +272,9 @@ export default {
     }
   },
   methods: {
-
-    randomDice() {
-      this.diceResult = this.dice[Math.floor(Math.random() * 6)]
+// this.dice[Math.floor(Math.random() * 6)]
+  randomDice() {
+      this.diceResult = 4
       this.showMoveOptions()
       this.questionResult = null;
       this.disableTheDice();
@@ -302,21 +303,29 @@ export default {
     loosePoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 1
+        this.message="BOOOOM! You lost 1 point!!! PUAHAHAHAH"
       } else if (array[1].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 2
+        this.message="BOOOOM! You lost 2 point!!! PUAHAHAHAH"
       } else if (array[2].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 3
+        this.message="BOOOOM! You lost 3 point!!! PUAHAHAHAH"
       } else if (array[3].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 4
+        this.message="BOOOOM! You lost 4 point!!! PUAHAHAHAH"
       } else if (array[4].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 5
+        this.message="BOOOOM! You lost 5 point!!! PUAHAHAHAH"
       } else if (array[5].includes(activePlayer.currentPosition)) {
         activePlayer.score = 0
+        this.message="BOOOOM! You lost 1 point!!! PUAHAHAHAH"
       }
     },
     AddPoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score += 1
+        this.message="BOOOOM! You lost 1 point!!! PUAHAHAHAH"
+
       } else if (array[1].includes(activePlayer.currentPosition)) {
         activePlayer.score += 2
       } else if (array[2].includes(activePlayer.currentPosition)) {
@@ -383,8 +392,8 @@ export default {
       this.loadRandomQuestion(randomCategoryAndId);
     },
     togglefullScreen() {
-      // const element = document.querySelector('#seek');
-      // element.requestFullscreen();
+      const element = document.querySelector('#seek');
+      element.requestFullscreen();
     },
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
@@ -840,20 +849,20 @@ input:focus {
   padding: 0;
 }
 .player2 {
-  z-index: 2;
+  z-index: 3;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
 }
 .player3 {
-  z-index: 2;
+  z-index: 4;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
   margin-left: 25px;
 }
 .player4 {
-  z-index: 2;
+  z-index: 5;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
