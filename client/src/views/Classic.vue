@@ -121,32 +121,74 @@
 
 
       <div class="board-content-top-right">
-        <div class="question-result">
-          <p v-if="nextPlayer">{{nextPlayer.name}} you're up!</p>
-          <p>{{questionResult}}</p>
-        </div>
-
-      </div>
-
-      <div class="board-content-bottom-right">
         <div class="question">
           <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
         </div>
       </div>
 
+      <div class="board-content-bottom-right">
+        <div class="question-result">
+          <p v-if="nextPlayer">{{nextPlayer.name.toUpperCase()}} you're up!</p>
+          <p>{{questionResult}}</p>
+        </div>
+      </div>
+
       <div class="board-content-bottom-left">
         <div class="players-container">
-          <div class="player1-deets">
-            <p v-if="players[0].name && players[1].name">Player 1: {{players[0].name}} - {{players[0].score}}</p>
+          <div class="heading-container">
+            <p class="heading">PLAYER CARD</p>
           </div>
-          <div class="player2-deets">
-            <p v-if="players[0].name && players[1].name">Player 2: {{players[1].name}} - {{players[1].score}}</p>
+          <div class="player1-container">
+            <img class="token-ind" :src="players[0].token">
+            <p class="player-txt" v-if="players[0].name && players[1].name"> {{players[0].name.toUpperCase()}}</p>
+            <div class="score-container">
+              <div class="anim-score"></div>
+              <div class="geo-score"></div>
+              <div class="sci-score"></div>
+              <div class="spo-score"></div>
+              <div class="gk-score"></div>
+              <div class="his-score"></div>
+            </div>
+            <span class="collected" v-for="score in players[0].score">{{score}}</span>
           </div>
-          <div class="player3-deets">
-            <p v-if="players[2].name">Player 3: {{players[2].name}} - {{players[2].score}}</p>
+          <div class="player2-container">
+            <img class="token-ind" :src="players[1].token">
+            <p class="player-txt" v-if="players[0].name && players[1].name"> {{players[1].name.toUpperCase()}}</p>
+            <div class="score-container">
+              <div class="anim-score"></div>
+              <div class="geo-score"></div>
+              <div class="sci-score"></div>
+              <div class="spo-score"></div>
+              <div class="gk-score"></div>
+              <div class="his-score"></div>
+            </div>
+            <span class="collected" v-for="score in players[1].score">{{score}}</span>
           </div>
-          <div class="player4-deets">
-            <p v-if="players[3].name">Player 4: {{players[3].name}} - {{players[3].score}}</p>
+          <div class="player3-container">
+            <img class="token-ind" :src="players[2].token">
+            <p class="player-txt" v-if="players[2].name"> {{players[2].name.toUpperCase()}}</p>
+            <div class="score-container">
+              <div class="anim-score"></div>
+              <div class="geo-score"></div>
+              <div class="sci-score"></div>
+              <div class="spo-score"></div>
+              <div class="gk-score"></div>
+              <div class="his-score"></div>
+            </div>
+            <span class="collected" v-for="score in players[2].score">{{score}}</span>
+          </div>
+          <div class="player4-container">
+            <img class="token-ind" :src="players[3].token">
+            <p class="player-txt" v-if="players[3].name"> {{players[3].name.toUpperCase()}}</p>
+            <div class="score-container">
+              <div class="anim-score"></div>
+              <div class="geo-score"></div>
+              <div class="sci-score"></div>
+              <div class="spo-score"></div>
+              <div class="gk-score"></div>
+              <div class="his-score"></div>
+            </div>
+            <span class="collected" v-for="score in players[3].score">{{score}}</span>
           </div>
         </div>
       </div>
@@ -270,14 +312,14 @@ export default {
     showMoveOptions() {
       for (let option of this.getMoveOptions()) {
         const moveOption = document.querySelector(`#${option}`);
-        moveOption.style.color = "red";
+        moveOption.classList.add("flashing");
       }
     },
     //make the blocks black again
     resetMoveOptions() {
       for (let option of this.moveOptions) {
         const moveOption = document.querySelector(`#${option}`);
-        moveOption.style.color = 'black';
+        moveOption.classList.remove("flashing");
       }
       this.moveOptions = null;
     },
@@ -423,8 +465,8 @@ export default {
         }
       },
       togglefullScreen () {
-        const element = document.querySelector('#classic');
-        element.requestFullscreen();
+        // const element = document.querySelector('#classic');
+        // element.requestFullscreen();
       }
     },
     mounted() {
@@ -548,6 +590,18 @@ export default {
     color: blue;
   }
 
+  .flashing {
+    animation: flash 0.8s linear 5s infinite;
+    z-index: 2;
+  }
+
+  @keyframes flash {
+    50% {
+      background-color: #8e9aaf;
+    }
+  }
+
+
   /* RIGHT Y COL */
   #a17, #b17, #c17, #d17, #e17, #f17, #g17, #h17, #i17, #j17, #k17 {
   grid-column-start: 17;
@@ -610,6 +664,7 @@ export default {
   #b9, #c9, #d9, #e9, #f9, #g9, #h9, #i9, #j9 {
   grid-column-start: 9;
   }
+
 
   input:focus {
     outline: none;
@@ -688,7 +743,7 @@ export default {
   }
 
   .question {
-    margin-top: 60px;
+    margin-top: 20px;
     width: 80%;
     display: inline-block;
     font-family: 'Open Sans', sans-serif;
@@ -708,9 +763,144 @@ export default {
   .players-container {
     width: 80%;
     font-size: 25px;
+    text-align: left;
     display: inline-block;
     font-family: 'Open Sans', sans-serif;
     color: white;
-    text-shadow: 2px 2px 4px #000000;
+    text-shadow: 1px 1px 2px #000000;
+    box-shadow: 2px 2px 4px #000000;
+    border-style: solid;
+    background-color: white;
+    margin-top: 20px;
+  }
+
+  .heading-container {
+    border-style: solid;
+    text-align: center;
+    background-color: #8e9aaf;
+    height: 50px;
+  }
+
+  .heading {
+    color: white;
+    font-size: 30px;
+    margin-top: 5px;
+    font-family: 'Russo One', sans-serif;
+  }
+
+  .token-ind {
+    height: 30px;
+    margin: 5px;
+    float: left;
+  }
+
+  .player1-container {
+    color: #ff70a6;
+    border-style: solid;
+    margin: 10px;
+    overflow: auto;
+  }
+
+  .player2-container {
+    color: #70d6ff;
+    border-style: solid;
+    margin: 10px;
+    overflow: auto;
+  }
+
+  .player3-container {
+    color: #e9ff70;
+    border-style: solid;
+    margin: 10px;
+    overflow: auto;
+  }
+
+  .player4-container {
+    color: #6eeb83;
+    border-style: solid;
+    margin: 10px;
+    overflow: auto;
+  }
+
+  .player-txt {
+    width: 28%;
+    float: left;
+    margin-top: 7px;
+    padding-left: 7px;
+  }
+
+  .score-container {
+    width: 60%;
+    float: left;
+    margin-top: 4px;
+  }
+
+  .anim-score {
+    width: 9%;
+    border-style: solid;
+    border-radius: 50%;
+    height: 25px;
+    color: black;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .his-score {
+    width: 9%;
+    border-style: solid;
+    border-radius: 50%;
+    height: 25px;
+    color: black;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .geo-score {
+    width: 9%;
+    border-style: solid;
+    border-radius: 50%;
+    height: 25px;
+    color: black;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .sci-score {
+    width: 9%;
+    border-style: solid;
+    border-radius: 50%;
+    height: 25px;
+    color: black;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .spo-score {
+    width: 9%;
+    border-style: solid;
+    border-radius: 50%;
+    height: 25px;
+    color: black;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .gk-score {
+    width: 9%;
+    border-style: solid;
+    border-radius: 50%;
+    height: 25px;
+    color: black;
+    float: left;
+    margin-left: 10px;
+  }
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+
+  .collected {
+    margin-left: 15px;
   }
 </style>
