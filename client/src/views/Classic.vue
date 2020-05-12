@@ -516,6 +516,9 @@ export default {
         this.selectedOption = option;
         this.checkSelectedOption()
       });
+  },
+  beforeDestroy() {
+    eventBus.$off()
   }
 }
 </script>
