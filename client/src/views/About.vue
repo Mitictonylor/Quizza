@@ -30,7 +30,7 @@ import highscore from '@/assets/images/highscore.png';
 import back from '@/assets/images/back.png';
 
 export default {
-    name: 'home',
+    name: 'about',
     data() {
       return {
         circleArr: [],
