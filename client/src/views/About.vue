@@ -135,7 +135,7 @@ export default {
     -webkit-animation: fadeIn 4s;
     border-style: solid;
     border-radius: 5%;
-    margin-top: 120px;
+    margin-top: 50px;
     background-color: #8e9aaf;
   }
 

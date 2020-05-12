@@ -65,7 +65,7 @@
 }
 
 .player {
-  margin: 20px;
+  margin: 15px;
 }
 
 input {
@@ -165,7 +165,7 @@ input.player4 {
 .select-container {
   width: 100%;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .select {

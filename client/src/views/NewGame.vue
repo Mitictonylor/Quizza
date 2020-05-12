@@ -162,7 +162,7 @@ p {
 }
 
 .welcome {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   margin-top: 20px;
 }
 

@@ -143,7 +143,7 @@ export default {
   }
 
   .button-container {
-    margin-top: 110px;
+    margin-top: 80px;
     animation: 4s delayEffect;
     animation-fill-mode: forwards;
     visibility: hidden;
