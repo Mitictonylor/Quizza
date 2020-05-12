@@ -277,6 +277,7 @@ export default {
       this.showMoveOptions()
       this.questionResult = null;
       this.disableTheDice();
+
     },
     getDiceFace() {
       return require('@/assets/dice/' + this.diceResult + '.png')
