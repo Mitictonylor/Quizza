@@ -10,10 +10,10 @@ app.use(cors());
 
 MongoClient.connect('mongodb://localhost:27017')
 .then((client) => {
-  const db = client.db('trivia_list');
-  const triviaCollection = db.collection('trivia');
+  const db = client.db('hall_of_fame');
+  const triviaCollection = db.collection('Seek_and_destroy');
   const triviaRouter = createRouter(triviaCollection);
-  app.use('/api/trivia', triviaRouter)
+  app.use('/api/quizza', triviaRouter)
 })
 .catch(console.error);
 
