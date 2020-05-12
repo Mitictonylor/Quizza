@@ -192,7 +192,7 @@ import player4 from '@/assets/tokens/circle_green.png';
 import fullscreen from '@/assets/images/fullscreen.png';
 
 export default {
-  name: 'board-game',
+  name: 'classic',
   props:['player1','player2', 'player3', 'player4'],
   data() {
     return {
@@ -248,7 +248,7 @@ export default {
       ],
       selectedCategory: [], //will be filled when the token will end up to a piece of the board
       answeredQuestions: [], //all the question showed will end up here to avoid duplicates
-      randomQuestion: null, //when the dice will be throwed it will be filled by the event
+      randomQuestion: {}, //when the dice will be throwed it will be filled by the event
       categoriesAndId: [
         ['sport', 21],
         ['geography', 22],
@@ -258,7 +258,8 @@ export default {
         ['science_and_nature', 17]
       ],
       questionResult: null,
-      nextPlayer: null
+      nextPlayer: null,
+      selectedOption: null,
     }
   },
 
@@ -295,7 +296,7 @@ export default {
     resetMoveOptions() {
       for (let option of this.moveOptions) {
         const moveOption = document.querySelector(`#${option}`);
-        moveOption.classList.remove("flashing");
+        moveOption.classList.remove('flashing');
       }
       this.moveOptions = null;
     },
@@ -437,9 +438,17 @@ export default {
       },// Check if the Player reaches the win target
       checkWinCondition(activePlayer){
         if(activePlayer.score.length === 6){
-          return true  //The game finish here
-        }
-      },
+            this.nextPlayer = null
+            this.questionResult = "Congratulations - you've WON!"
+            this.disableTheDice()
+            this.randomQuestion = null
+          } else {
+            this.nextPlayer = null
+            this.randomQuestion = null
+            //create a new question in either cases
+            this.enableTheDice();
+          }
+        },
       togglefullScreen () {
         // const element = document.querySelector('#classic');
         // element.requestFullscreen();
@@ -458,6 +467,28 @@ export default {
         } else if (score === 'General Knowledge') {
             return "gk-score"
         }
+      },
+      checkSelectedOption() {
+        const playerActive = this.activePlayer(this.gamePlayers);
+        const question = this.randomQuestion;
+        console.log("Question Answered: ", question);
+        // console.log(option);
+        // console.log(question.correct_answer);
+
+        if (this.selectedOption === question.correct_answer) {
+          this.nextPlayer = null
+          this.questionResult = "Correct - roll again!"
+          this.addWonCategory(playerActive, question.category, this.gamePlayers);
+          this.checkWinCondition(playerActive);
+          } else {
+            this.nextPlayer = null
+            this.questionResult = "Boooo - better luck next time!"
+            this.enableTheDice()
+            this.switchActivePlayer(playerActive, this.gamePlayers);
+            console.log("HERE", this.randomQuestion);
+            this.randomQuestion = null;
+            // this.enableTheDice();
+          }
       }
     },
     mounted() {
@@ -470,38 +501,9 @@ export default {
 
       //Check if the clicked answer is right if yes should update the score
       eventBus.$on('selected-option', (option) => {
-        const playerActive = this.activePlayer(this.gamePlayers);
-        const question = this.randomQuestion;
-        console.log("Question Answered: ", question);
-        // console.log(option);
-        // console.log(question.correct_answer);
-
-        if (option === question.correct_answer) {
-          this.nextPlayer = null
-          this.questionResult = "Correct - roll again!"
-          this.addWonCategory(playerActive, question.category, this.gamePlayers);
-          if(this.checkWinCondition(playerActive)){
-            this.nextPlayer = null
-            this.questionResult = "Congratulations - you've WON!"
-            this.disableTheDice()
-            this.randomQuestion = null
-          } else {
-            this.nextPlayer = null
-            this.randomQuestion = null;
-            //create a new question in either cases
-            this.enableTheDice();
-          }
-          } else {
-            this.nextPlayer = null
-            this.questionResult = "Boooo - better luck next time!"
-            this.enableTheDice()
-            this.switchActivePlayer(playerActive, this.gamePlayers);
-            console.log("HERE", this.randomQuestion);
-            this.randomQuestion = null;
-            // this.enableTheDice();
-          }
-        });
-
+        this.selectedOption = option;
+        this.checkSelectedOption()
+      });
   }
 }
 </script>
