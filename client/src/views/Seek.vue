@@ -336,9 +336,6 @@ export default {
         this.questionResult = "OMG! You found 25 point!!!"
       }
     },
-
-
-
     showMoveOptions() { //current position:106 + dice.result 4 =110
       let total = (this.activePlayer(this.gamePlayers).currentPosition + this.diceResult)
       if (total > 107) { //yes
@@ -392,8 +389,8 @@ export default {
       this.loadRandomQuestion(randomCategoryAndId);
     },
     togglefullScreen() {
-      const element = document.querySelector('#seek');
-      element.requestFullscreen();
+      // const element = document.querySelector('#seek');
+      // element.requestFullscreen();
     },
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
@@ -473,12 +470,6 @@ export default {
     }
 
 },
-
-
-
-
-
-
   mounted() {
     this.updateNames();
 
@@ -833,7 +824,6 @@ export default {
 }
 
 .dice-container {
-  /* margin-top: 40px; */
   display: inline-block;
   text-align: center;
 }
@@ -849,54 +839,60 @@ input:focus {
 }
 
 .player1 {
-  z-index: 2;
-  position: absolute;
-  grid-row-start: 1;
-  grid-column-start: 1;
-  margin-top: 20px;
-  padding: 0;
-}
-.player2 {
   z-index: 3;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
+  margin-left: 27px;
+  margin-top: 10px;
 }
-.player3 {
-  z-index: 4;
-  position: absolute;
-  grid-row-start: 1;
-  grid-column-start: 1;
-  margin-left: 25px;
-}
-.player4 {
+
+.player2 {
   z-index: 5;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
-  margin-left: 25px;
-  margin-top: 20px;
+  margin-left: 27px;
+  margin-top: 45px;
+
+}
+
+.player3 {
+  z-index: 2;
+  position: absolute;
+  grid-row-start: 1;
+  grid-column-start: 1;
+
+}
+
+.player4 {
+  z-index: 4;
+  position: absolute;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  margin-top: 35px;
 }
 
 .board-content-1 {
   width: 1430px;
-  height: 81px;
+  height: 75px;
   z-index: 2;
   position: absolute;
   margin-top: 89px;
 }
+
 .board-content-2 {
   width: 1430px;
-  height: 81px;
+  height: 75px;
   z-index: 2;
   position: absolute;
-  margin-top: 267px;
-  margin-left: 90px;
+  margin-top: 270px;
+  margin-left: 95px;
 }
 
 .board-content-3 {
   width: 1430px;
-  height: 81px;
+  height: 75px;
   z-index: 2;
   position: absolute;
   margin-top: 380px;
@@ -904,7 +900,7 @@ input:focus {
 
 .board-content-4 {
   width: 1430px;
-  height: 81px;
+  height: 75px;
   z-index: 2;
   position: absolute;
   margin-top: 623px;
@@ -913,7 +909,7 @@ input:focus {
 
 .board-content-5 {
   width: 1430px;
-  height: 81px;
+  height: 75px;
   z-index: 2;
   position: absolute;
   margin-top: 801px;
@@ -931,13 +927,15 @@ P {
 }
 
 .tank {
-  width: 80px;
+  width: 60px;
+  padding: 0 !important;
 }
 
 .tank-id {
   width: 60px;
   float: left;
   margin: 10px;
+  margin-top: 20px;
 }
 
 .player-container {
@@ -946,41 +944,45 @@ P {
   color: white;
   font-family: 'Russo One', sans-serif;
   text-shadow: 2px 2px 4px #000000;
+  margin-top: 4px;
 }
 
 .player-txt1 {
   float: left;
-  font-size: 35PX;
-  margin-top: 20px;
+  width: 70%;
+  text-align: left;
+  font-size: 35px;
   color: #ff70a6;
 }
 
 .player-txt2 {
   float: left;
-  font-size: 35PX;
-  margin-top: 20px;
+  width: 70%;
+  text-align: left;
+  font-size: 35px;
   color: #70d6ff;
 }
 
 .player-txt3 {
   float: left;
+  width: 70%;
+  text-align: left;
   font-size: 35px;
-  margin-top: 20px;
   color: #6eeb83;
 }
 
 .player-txt4 {
   float: left;
+  width: 70%;
+  text-align: left;
   font-size: 35px;
-  margin-top: 20px;
   color: #907ad6;
 }
 
 .score-container {
-  float: left;
-  margin-left: 20px;
+  width: 30%;
   font-size: 20px;
-  margin-top: 25px;
+  overflow: auto;
 }
 
 .question-container {
@@ -1009,7 +1011,4 @@ P {
   margin-top: 20px;
   width: 40%;
 }
-
-
-
 </style>
