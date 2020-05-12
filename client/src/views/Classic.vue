@@ -142,53 +142,29 @@
             <img class="token-ind" :src="players[0].token">
             <p class="player-txt" v-if="players[0].name && players[1].name"> {{players[0].name.toUpperCase()}}</p>
             <div class="score-container">
-              <div class="anim-score"></div>
-              <div class="geo-score"></div>
-              <div class="sci-score"></div>
-              <div class="spo-score"></div>
-              <div class="gk-score"></div>
-              <div class="his-score"></div>
+              <div v-for="score in players[0].score" v-bind:class="checkScore(score)"></div>
             </div>
-            <span class="collected" v-for="score in players[0].score">{{score}}</span>
           </div>
           <div class="player2-container">
             <img class="token-ind" :src="players[1].token">
             <p class="player-txt" v-if="players[0].name && players[1].name"> {{players[1].name.toUpperCase()}}</p>
             <div class="score-container">
-              <div class="anim-score"></div>
-              <div class="geo-score"></div>
-              <div class="sci-score"></div>
-              <div class="spo-score"></div>
-              <div class="gk-score"></div>
-              <div class="his-score"></div>
+              <div v-for="score in players[1].score" v-bind:class="checkScore(score)"></div>
             </div>
-            <span class="collected" v-for="score in players[1].score">{{score}}</span>
           </div>
-          <div class="player3-container">
+          <div v-if="players[2].name" class="player3-container">
             <img class="token-ind" :src="players[2].token">
-            <p class="player-txt" v-if="players[2].name"> {{players[2].name.toUpperCase()}}</p>
+            <p class="player-txt"> {{players[2].name.toUpperCase()}}</p>
             <div class="score-container">
-              <div class="anim-score"></div>
-              <div class="geo-score"></div>
-              <div class="sci-score"></div>
-              <div class="spo-score"></div>
-              <div class="gk-score"></div>
-              <div class="his-score"></div>
+              <div v-for="score in players[2].score" v-bind:class="checkScore(score)"></div>
             </div>
-            <span class="collected" v-for="score in players[2].score">{{score}}</span>
           </div>
-          <div class="player4-container">
+          <div v-if="players[3].name" class="player4-container">
             <img class="token-ind" :src="players[3].token">
-            <p class="player-txt" v-if="players[3].name"> {{players[3].name.toUpperCase()}}</p>
+            <p class="player-txt"> {{players[3].name.toUpperCase()}}</p>
             <div class="score-container">
-              <div class="anim-score"></div>
-              <div class="geo-score"></div>
-              <div class="sci-score"></div>
-              <div class="spo-score"></div>
-              <div class="gk-score"></div>
-              <div class="his-score"></div>
+              <div v-for="score in players[3].score" v-bind:class="checkScore(score)"></div>
             </div>
-            <span class="collected" v-for="score in players[3].score">{{score}}</span>
           </div>
         </div>
       </div>
@@ -467,6 +443,21 @@ export default {
       togglefullScreen () {
         // const element = document.querySelector('#classic');
         // element.requestFullscreen();
+      },
+      checkScore(score) {
+        if (score === "Science & Nature") {
+            return "sci-score"
+        } else if (score === 'History') {
+            return "his-score"
+        } else if (score === 'Sports') {
+            return"spo-score"
+        } else if (score === 'Geography') {
+            return "geo-score"
+        } else if (score === 'Animals') {
+            return "anim-score"
+        } else if (score === 'General Knowledge') {
+            return "gk-score"
+        }
       }
     },
     mounted() {
@@ -511,10 +502,8 @@ export default {
           }
         });
 
-        //takes the name from the form
-
-      }
-    }
+  }
+}
 </script>
 
 <style lang="css" scoped>
@@ -833,6 +822,8 @@ export default {
     width: 60%;
     float: left;
     margin-top: 4px;
+    display: flex;
+    flex-direction: row;
   }
 
   .anim-score {
@@ -843,6 +834,7 @@ export default {
     color: black;
     float: left;
     margin-left: 10px;
+    background-color: #e9ff70;
   }
 
   .his-score {
@@ -853,6 +845,7 @@ export default {
     color: black;
     float: left;
     margin-left: 10px;
+    background-color: #ff9770;
   }
 
   .geo-score {
@@ -863,6 +856,7 @@ export default {
     color: black;
     float: left;
     margin-left: 10px;
+    background-color: #ff70a6;
   }
 
   .sci-score {
@@ -873,6 +867,7 @@ export default {
     color: black;
     float: left;
     margin-left: 10px;
+    background-color: #70d6ff;
   }
 
   .spo-score {
@@ -883,6 +878,7 @@ export default {
     color: black;
     float: left;
     margin-left: 10px;
+    background-color: #6eeb83;
   }
 
   .gk-score {
@@ -893,6 +889,7 @@ export default {
     color: black;
     float: left;
     margin-left: 10px;
+    background-color: #907ad6;
   }
 
   p {
