@@ -28,8 +28,8 @@ const createRouter = function (collection) {
 
   router.post('/', (req, res) => {
     const newTrivia = req.body;
-    collection.insertOne(newTrivia)
-    .then(result => res.json(result.ops[0]))
+    collection.insertMany(newTrivia)
+    .then(result => res.json(result.ops))
   });
 
   router.put('/:id', (req, res) => {

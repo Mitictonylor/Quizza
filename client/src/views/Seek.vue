@@ -176,17 +176,14 @@
 </template>
 
 <script>
-import {
-  SeekTileObjects
-} from '@/config/SeekTileObjects.js'
+import {SeekTileObjects} from '@/config/SeekTileObjects.js'
 import Questions from "@/components/Questions.vue"
-import {
-  eventBus
-} from '../main.js';
+import {eventBus} from '../main.js';
 import tank1 from '@/assets/tanks/tank1.png';
 import tank2 from '@/assets/tanks/tank2.png';
 import tank3 from '@/assets/tanks/tank3.png';
 import tank4 from '@/assets/tanks/tank4.png';
+import QuizzaService from '@/services/QuizzaService.js';
 
 export default {
   name: 'seek',
@@ -213,40 +210,36 @@ export default {
         {
           alias: "player1",
           name: '',
-          score: 0,
-          winStreak: 0,
+          score: 100,
           active: false,
-          currentPosition: 1,
+          currentPosition: 100,
           id: 1,
           token: tank1
         },
         {
           alias: "player2",
           name: '',
-          score: 0,
-          winStreak: 0,
+          score: 40,
           active: false,
-          currentPosition: 1,
+          currentPosition: 100,
           id: 2,
           token: tank2
         },
         {
           alias: "player3",
           name: '',
-          score: 0,
-          winStreak: 0,
+          score: 110,
           active: false,
-          currentPosition: 1,
+          currentPosition: 100,
           id: 3,
           token: tank3
         },
         {
           alias: "player4",
           name: '',
-          score: 0,
-          winStreak: 0,
+          score: 500,
           active: false,
-          currentPosition: 1,
+          currentPosition: 100,
           id: 4,
           token: tank4
         }
@@ -477,7 +470,13 @@ export default {
         players[0].active = true
       }
     }
-  },
+
+},
+
+
+
+
+
 
   mounted() {
     this.updateNames();
@@ -485,17 +484,14 @@ export default {
     eventBus.$on('selected-option', (option) => {
       this.questionResult = null;
       const playerActive = this.activePlayer(this.gamePlayers);
-      console.log('player Active:' + playerActive.alias);
       const question = this.randomQuestion;
-      console.log("Question Answered: ", question);
-      // console.log(option);
-      // console.log(question.correct_answer);
 
       if (option === question.correct_answer) {
         this.nextPlayer = null
         this.questionResult = "Correct! +1 point- roll again!"
         this.addPoint(playerActive);
         if (this.checkWinCondition(playerActive)) {
+          QuizzaService.addScore(this.gamePlayers)
           this.nextPlayer = null
           const allThePage = document.querySelector("#seek");
           allThePage.classList.add("flashing");
