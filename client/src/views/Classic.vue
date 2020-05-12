@@ -191,7 +191,6 @@
 </template>
 
 <script>
-
 import {eventBus} from '../main.js';
 import Questions from "@/components/Questions.vue";
 import {ClassicTileObjects} from '@/config/ClassicTileObjects.js';
@@ -205,10 +204,10 @@ import fullscreen from '@/assets/images/fullscreen.png';
 
 export default {
   name: 'classic',
-  props:['player1','player2', 'player3', 'player4'],
+  props: ['player1', 'player2', 'player3', 'player4'],
   data() {
     return {
-      dice: [1,2,3,4,5,6],
+      dice: [1, 2, 3, 4, 5, 6],
       diceResult: 6,
       moveOptions: null,
       categories: {
@@ -219,13 +218,12 @@ export default {
         animal: [],
         science_and_nature: []
       },
-      gamePlayers:[],
+      gamePlayers: [],
       players: [ //keep it for the initial rendering
         {
           alias: "player1",
           name: '',
           score: [],
-          winStreak: 0,
           active: false,
           currentPosition: 'f9',
           token: player1
@@ -234,7 +232,6 @@ export default {
           alias: "player2",
           name: '',
           score: [],
-          winStreak: 0,
           active: false,
           currentPosition: 'f9',
           token: player2
@@ -243,7 +240,6 @@ export default {
           alias: "player3",
           name: '',
           score: [],
-          winStreak: 0,
           active: false,
           currentPosition: 'f9',
           token: player3
@@ -252,7 +248,6 @@ export default {
           alias: "player4",
           name: '',
           score: [],
-          winStreak: 0,
           active: false,
           currentPosition: 'f9',
           token: player4
@@ -274,10 +269,8 @@ export default {
       selectedOption: null,
     }
   },
-
   components: {
     "questions": Questions,
-
   },
   methods: {
     rollDice() {
@@ -288,13 +281,13 @@ export default {
       this.disableTheDice();
     },
     // gives u the options where the player could move on the board
-    getMoveOptions() {//dice is
-      const res = 'roll' + this.diceResult; //roll3
-      //trova lindex della posizione attuale del giocatore f9
+    getMoveOptions() {
+      const res = 'roll' + this.diceResult;
+      //find the position of the active player
       const indexOfActivePlayer = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
-
+      //goes in ClassicTileObjects and find the index where the id is the same as the active player index
       const index = ClassicTileObjects.map(x => x.id).indexOf(this.gamePlayers[indexOfActivePlayer].currentPosition);
-      this.moveOptions = ClassicTileObjects[index][res]// takes all the possible future position for roll 3
+      this.moveOptions = ClassicTileObjects[index][res] // takes all the possible future position for the result of the dice for that position
       return this.moveOptions;
     },
     // shows the possible position from the array and gets them colored in red
@@ -313,29 +306,29 @@ export default {
       this.moveOptions = null;
     },
     //brings the raw position for the css
-    getNewRowPosition(event) {//click on d1
-      const divID = event.currentTarget.id;//d1
+    getNewRowPosition(event) { //click on d1
+      const divID = event.currentTarget.id; //d1
       const index = ClassicTileObjects.map(x => x.id).indexOf(divID); //12
       return ClassicTileObjects[index]['row']; //4
     },
     //brings the column position for the css
-    getNewColPosition(event) {//d1
-      const divID = event.currentTarget.id;//d1
-      const index = ClassicTileObjects.map(x => x.id).indexOf(divID);//12
-      return ClassicTileObjects[index]['column'];//1
+    getNewColPosition(event) { //d1
+      const divID = event.currentTarget.id; //d1
+      const index = ClassicTileObjects.map(x => x.id).indexOf(divID); //12
+      return ClassicTileObjects[index]['column']; //1
     },
     movePlayer(event) {
       const activePlayer = document.querySelector(`#${this.activePlayer(this.gamePlayers).alias}`);
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
-                                    grid-column-start: ${this.getNewColPosition(event)};`//row 4 colomn 1
+                                    grid-column-start: ${this.getNewColPosition(event)};` //row 4 colomn 1
       const index = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
-      this.gamePlayers[index].currentPosition = event.currentTarget.id;//assign the position we clicked on the player d1
+      this.gamePlayers[index].currentPosition = event.currentTarget.id; //assign the position we clicked on the player d1
       //Needs to load the category of the grid
       this.selectGridCategory();
       this.resetMoveOptions();
       this.randomQuest();
     },
-    selectGridCategory(){//Find index of the actual player position
+    selectGridCategory() { //Find index of the actual player position
       const indexOfActivePlayer = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
       const index = ClassicTileObjects.map(x => x.id).indexOf(this.gamePlayers[indexOfActivePlayer].currentPosition);
       //Put in selected category the category of the grid
@@ -349,173 +342,173 @@ export default {
           return this.movePlayer(event)
         }
       }
-    },// Find the Dice class and disable the click event
-    disableTheDice(){
+    }, // Find the Dice class and disable the click event
+    disableTheDice() {
       const dice = document.querySelector("#cube")
       dice.style.pointerEvents = 'none';
-    },//Find the Dice class and re-enable the click event
-    enableTheDice(){
+    }, //Find the Dice class and re-enable the click event
+    enableTheDice() {
       const dice = document.querySelector("#cube")
       dice.style.pointerEvents = 'auto';
     },
     //we want just the palyer with the name, so the swich logic can work
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
-        return player.name !== '' });
-        this.gamePlayers = playersWithName;
-      },
-      updateNames(){
-        this.players[0].name = this.player1;
-        this.players[1].name = this.player2;
-        this.players[2].name = this.player3;
-        this.players[3].name = this.player4;
-        this.filteredPlayers();
-        this.gamePlayers[0].active = true;
-        this.nextPlayer = this.activePlayer(this.gamePlayers)
-      }
-      ,
-      //Create a random question from the selected Category
-      //will be invoked when the token end up to a piece of the board
-      getRandomQuestion(category){
-        return category[Math.floor(Math.random() * category.length)]
-      },
-      randomQuest() {
-        // this.loadRandomForSelected(this.categoriesAndId);
-        const query = this.getRandomQuestion(this.selectedCategory);
-        const options = query.incorrect_answers.map(answer => answer);
-        options.push(query.correct_answer);
-        if (!this.answeredQuestions.includes(query.question)) {
-          this.randomQuestion = {
-            options: options,
-            question: query.question,
-            correct_answer: query.correct_answer,
-            category: query.category
-          } //so we can push it to the player wins
-          this.answeredQuestions.push(this.randomQuestion.question);
-        } else if (this.answeredQuestions.length === 100) {
-          this.loadAllCategories(this.categoriesAndId)
-        } else {
-          this.randomQuest();
-        }
-      },
-      // fetch a category
-      loadCategory(category, category_id) {
-        const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`;
-        fetch(url).then(response => response.json())
-        .then(data => this.categories[category] = data.results)
-      },
-      // fetches all the categories
-      loadAllCategories(categoryArray) {
-        categoryArray.map(element => this.loadCategory(element[0], element[1]));
-      },
-      //JUST FOR TESTING PURPOSE
-      // loadRandomForSelected(categoryArray) {
-      //   const index = Math.floor(Math.random() * 6);
-      //   const catId = categoryArray[index][1];
-      //   const url = `https://opentdb.com/api.php?amount=50&category=${catId}&type=multiple`;
-      //   fetch(url).then(response => response.json())
-      //   .then(data => this.selectedCategory = data.results)
-      // },
-      //find active player
-      activePlayer(players) {
-        const activePlayer = players.find(player => player.active === true);
-        this.nextPlayer = activePlayer
-        return activePlayer;
-      },
-
-
-
-      //add won categories
-      addWonCategory(player, question, arrayOfplayers) {
-        const index = this.findIndexOfPlayer(player);
-        if (!arrayOfplayers[index].score.includes(question)) {
-          arrayOfplayers[index].score.push(question);
-        }
-      },
-      //find index of player
-      findIndexOfPlayer(player) {
-        const index = this.gamePlayers.indexOf(player);
-        return index;
-      },
-      //find me the index of the active player, and change it's acrive to false,
-      //and based on the lenght of the array add one to the player index or start from 0 and turn it to active true
-      switchActivePlayer(player, players) {
-        const index = this.findIndexOfPlayer(player);
-        players[index].active = false;
-        if (index < (players.length - 1)) {
-          players[(index + 1)].active = true;
-        } else {
-          players[0].active = true
-        }
-      },// Check if the Player reaches the win target
-      checkWinCondition(activePlayer){
-        if(activePlayer.score.length === 6){
-            this.nextPlayer = null
-            this.questionResult = "Congratulations - you've WON!"
-            this.disableTheDice()
-            this.randomQuestion = null
-          } else {
-            this.nextPlayer = null
-            this.randomQuestion = null
-            //create a new question in either cases
-            this.enableTheDice();
-          }
-        },
-      togglefullScreen () {
-        // const element = document.querySelector('#classic');
-        // element.requestFullscreen();
-      },
-      checkScore(score) {
-        if (score === "Science & Nature") {
-            return "sci-score"
-        } else if (score === 'History') {
-            return "his-score"
-        } else if (score === 'Sports') {
-            return"spo-score"
-        } else if (score === 'Geography') {
-            return "geo-score"
-        } else if (score === 'Animals') {
-            return "anim-score"
-        } else if (score === 'General Knowledge') {
-            return "gk-score"
-        }
-      },
-      checkSelectedOption() {
-        const playerActive = this.activePlayer(this.gamePlayers);
-        const question = this.randomQuestion;
-        console.log("Question Answered: ", question);
-        // console.log(option);
-        // console.log(question.correct_answer);
-
-        if (this.selectedOption === question.correct_answer) {
-          this.nextPlayer = null
-          this.questionResult = "Correct - roll again!"
-          this.addWonCategory(playerActive, question.category, this.gamePlayers);
-          this.checkWinCondition(playerActive);
-          } else {
-            this.nextPlayer = null
-            this.questionResult = "Boooo - better luck next time!"
-            this.enableTheDice()
-            this.switchActivePlayer(playerActive, this.gamePlayers);
-            console.log("HERE", this.randomQuestion);
-            this.randomQuestion = null;
-            // this.enableTheDice();
-          }
+        return player.name !== ''
+      });
+      this.gamePlayers = playersWithName;
+    },
+    updateNames() {
+      this.players[0].name = this.player1;
+      this.players[1].name = this.player2;
+      this.players[2].name = this.player3;
+      this.players[3].name = this.player4;
+      this.filteredPlayers();
+      this.gamePlayers[0].active = true;
+      this.nextPlayer = this.activePlayer(this.gamePlayers)
+    },
+    //Create a random question from the selected Category
+    //will be invoked when the token end up to a piece of the board
+    getRandomQuestion(category) {
+      return category[Math.floor(Math.random() * category.length)]
+    },
+    randomQuest() {
+      // this.loadRandomForSelected(this.categoriesAndId);
+      const query = this.getRandomQuestion(this.selectedCategory);
+      const options = query.incorrect_answers.map(answer => answer);
+      options.push(query.correct_answer);
+      if (!this.answeredQuestions.includes(query.question)) {
+        this.randomQuestion = {
+          options: options,
+          question: query.question,
+          correct_answer: query.correct_answer,
+          category: query.category
+        } //so we can push it to the player wins
+        this.answeredQuestions.push(this.randomQuestion.question);
+      } else if (this.answeredQuestions.length === 100) {
+        this.loadAllCategories(this.categoriesAndId)
+      } else {
+        this.randomQuest();
       }
     },
-    mounted() {
-      //JUST FOR TESTING
-      // this.loadRandomForSelected(this.categoriesAndId);
+    // fetch a category
+    loadCategory(category, category_id) {
+      const url = `https://opentdb.com/api.php?amount=50&category=${category_id}&type=multiple`;
+      fetch(url).then(response => response.json())
+        .then(data => this.categories[category] = data.results)
+    },
+    // fetches all the categories
+    loadAllCategories(categoryArray) {
+      categoryArray.map(element => this.loadCategory(element[0], element[1]));
+    },
+    //JUST FOR TESTING PURPOSE
+    // loadRandomForSelected(categoryArray) {
+    //   const index = Math.floor(Math.random() * 6);
+    //   const catId = categoryArray[index][1];
+    //   const url = `https://opentdb.com/api.php?amount=50&category=${catId}&type=multiple`;
+    //   fetch(url).then(response => response.json())
+    //   .then(data => this.selectedCategory = data.results)
+    // },
+    //find active player
+    activePlayer(players) {
+      const activePlayer = players.find(player => player.active === true);
+      this.nextPlayer = activePlayer
+      return activePlayer;
+    },
 
-      this.loadAllCategories(this.categoriesAndId);
-      //put the players name in this.players, and then filters them
-      this.updateNames();
 
-      //Check if the clicked answer is right if yes should update the score
-      eventBus.$on('selected-option', (option) => {
-        this.selectedOption = option;
-        this.checkSelectedOption()
-      });
+
+    //add won categories
+    addWonCategory(player, question, arrayOfplayers) {
+      const index = this.findIndexOfPlayer(player);
+      if (!arrayOfplayers[index].score.includes(question)) {
+        arrayOfplayers[index].score.push(question);
+      }
+    },
+    //find index of player
+    findIndexOfPlayer(player) {
+      const index = this.gamePlayers.indexOf(player);
+      return index;
+    },
+    //find me the index of the active player, and change it's acrive to false,
+    //and based on the lenght of the array add one to the player index or start from 0 and turn it to active true
+    switchActivePlayer(player, players) {
+      const index = this.findIndexOfPlayer(player);
+      players[index].active = false;
+      if (index < (players.length - 1)) {
+        players[(index + 1)].active = true;
+      } else {
+        players[0].active = true
+      }
+    }, // Check if the Player reaches the win target
+    checkWinCondition(activePlayer) {
+      if (activePlayer.score.length === 6) {
+        this.nextPlayer = null
+        this.questionResult = "Congratulations - you've WON!"
+        this.disableTheDice()
+        this.randomQuestion = null
+      } else {
+        this.nextPlayer = null
+        this.randomQuestion = null
+        //create a new question in either cases
+        this.enableTheDice();
+      }
+    },
+    togglefullScreen() {
+      // const element = document.querySelector('#classic');
+      // element.requestFullscreen();
+    },
+    checkScore(score) {
+      if (score === "Science & Nature") {
+        return "sci-score"
+      } else if (score === 'History') {
+        return "his-score"
+      } else if (score === 'Sports') {
+        return "spo-score"
+      } else if (score === 'Geography') {
+        return "geo-score"
+      } else if (score === 'Animals') {
+        return "anim-score"
+      } else if (score === 'General Knowledge') {
+        return "gk-score"
+      }
+    },
+    checkSelectedOption() {
+      const playerActive = this.activePlayer(this.gamePlayers);
+      const question = this.randomQuestion;
+      console.log("Question Answered: ", question);
+      // console.log(option);
+      // console.log(question.correct_answer);
+
+      if (this.selectedOption === question.correct_answer) {
+        this.nextPlayer = null
+        this.questionResult = "Correct - roll again!"
+        this.addWonCategory(playerActive, question.category, this.gamePlayers);
+        this.checkWinCondition(playerActive);
+      } else {
+        this.nextPlayer = null
+        this.questionResult = "Boooo - better luck next time!"
+        this.enableTheDice()
+        this.switchActivePlayer(playerActive, this.gamePlayers);
+        console.log("HERE", this.randomQuestion);
+        this.randomQuestion = null;
+        // this.enableTheDice();
+      }
+    }
+  },
+  mounted() {
+    //JUST FOR TESTING
+    // this.loadRandomForSelected(this.categoriesAndId);
+
+    this.loadAllCategories(this.categoriesAndId);
+    //put the players name in this.players, and then filters them
+    this.updateNames();
+
+    //Check if the clicked answer is right if yes should update the score
+    eventBus.$on('selected-option', (option) => {
+      this.selectedOption = option;
+      this.checkSelectedOption()
+    });
   },
   beforeDestroy() {
     eventBus.$off()
