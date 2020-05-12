@@ -113,7 +113,7 @@
         <div class="np-name">
           <p v-if="nextPlayer">{{nextPlayer.name.toUpperCase()}}  you're up!</p>
         </div>
-        <div class="qr">
+        <div class="qr" v-if="questionResult">
           <p>{{questionResult}}</p>
         </div>
         <div class="dice-container">
@@ -161,8 +161,8 @@
       <div class="board-content-4">
       </div>
 
-      <div class="board-content-5" v-if="questionResult">
-        <p>{{questionResult}}</p>
+      <div class="board-content-5" >
+
       </div>
 
       <div id="player1" class="player1" v-if="players[0].name"> <img class="tank" :src="players[0].token"> </div>
@@ -176,9 +176,13 @@
 </template>
 
 <script>
-import {SeekTileObjects} from '@/config/SeekTileObjects.js'
+import {
+  SeekTileObjects
+} from '@/config/SeekTileObjects.js'
 import Questions from "@/components/Questions.vue"
-import {eventBus} from '../main.js';
+import {
+  eventBus
+} from '../main.js';
 import tank1 from '@/assets/tanks/tank1.png';
 import tank2 from '@/assets/tanks/tank2.png';
 import tank3 from '@/assets/tanks/tank3.png';
@@ -203,7 +207,7 @@ export default {
         ['animal', 27],
         ['science_and_nature', 17]
       ],
-      message:"",
+      message: "",
       gamePlayers: [],
       players: [ //keep it for the initial rendering
         {
@@ -262,19 +266,18 @@ export default {
       ], //-all
 
       extraPoint: [
-        [3, 6, 9, 12, 14, 16, 18, 21, 37, 58, 62, 68], //+1
-        [4, 7, 13, 19, 23, 26, 29, 31, 39, 63, 69], //+2
-        [17, 21, 33, 36, 41, 44, 76, 82, 86, 92, 103], //+3
-        [49, 56, 64, 71, 106], //+4
-        [74, 79, 84, 89, 104], //+5
-        [91, 102]
-      ],//+25
+        [3, 6, 9, 12, 14, 16, 18, 37, 58, 62, 68], //+1
+        [4, 7, 13, 19, 23, 26, 29, 31, 39, 42, 47, 63, 69], //+2
+        [17, 21, 28, 33, 36, 41, 44, 76, 82, 86, 92, 103], //+3
+        [8, 49, 17, 24, 56, 64, 71, 106], //+4
+        [2, 11, 22, 32, 51, 74, 79, 84, 89, 104], //+5
+        [27, 91, 102]
+      ], //+25
     }
   },
   methods: {
-// this.dice[Math.floor(Math.random() * 6)]
-  randomDice() {
-      this.diceResult = 4
+    randomDice() {
+      this.diceResult = this.dice[Math.floor(Math.random() * 6)]
       this.showMoveOptions()
       this.questionResult = null;
       this.disableTheDice();
@@ -285,17 +288,14 @@ export default {
 
     stealPoints(activePlayer, arrayOfPlayers) {
       const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false)
-      console.log(deactivatedPlayers)
-      const checkCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
-      console.log(checkCurrentPosition);
-      console.log('active player score', activePlayer.score);
-      if (checkCurrentPosition.length >= 1) {
-        checkCurrentPosition.forEach((player) => {
-          console.log('giocatorenon attivo score prima', player.score)
-          activePlayer.score += player.score;
-          player.score = 0
-          console.log('giocatorenon attivo score dopo', player.score)
-          console.log('giocatoreAttivo score dopo', activePlayer.score)
+      const sameCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
+      if (sameCurrentPosition.length >= 1) {
+        sameCurrentPosition.forEach((player) => {
+          if (player.score > 0) {
+            this.questionResult = `You stole all ${player.name}'s points!`
+            activePlayer.score += player.score;
+            player.score = 0
+          }
         })
       };
     },
@@ -303,39 +303,43 @@ export default {
     loosePoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 1
-        this.message="BOOOOM! You lost 1 point!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost 1 point!!! PUAHAHAHAH"
       } else if (array[1].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 2
-        this.message="BOOOOM! You lost 2 point!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost 2 points!!! PUAHAHAHAH"
       } else if (array[2].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 3
-        this.message="BOOOOM! You lost 3 point!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost 3 points!!! PUAHAHAHAH"
       } else if (array[3].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 4
-        this.message="BOOOOM! You lost 4 point!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost 4 points!!! PUAHAHAHAH"
       } else if (array[4].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 5
-        this.message="BOOOOM! You lost 5 point!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost 5 points!!! PUAHAHAHAH"
       } else if (array[5].includes(activePlayer.currentPosition)) {
         activePlayer.score = 0
-        this.message="BOOOOM! You lost 1 point!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost all your points!!! PUAHAHAHAH"
       }
     },
-    AddPoints(array, activePlayer) {
+    addPoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score += 1
-        this.message="BOOOOM! You lost 1 point!!! PUAHAHAHAH"
-
+        this.questionResult = "YAASSS! You found 1 point!!!"
       } else if (array[1].includes(activePlayer.currentPosition)) {
         activePlayer.score += 2
+        this.questionResult = "YAASSS! You found 2 point!!!"
       } else if (array[2].includes(activePlayer.currentPosition)) {
         activePlayer.score += 3
+        this.questionResult = "YAASSS! You found 3 point!!!"
       } else if (array[3].includes(activePlayer.currentPosition)) {
         activePlayer.score += 4
+        this.questionResult = "YAASSS! You found 4 point!!!"
       } else if (array[4].includes(activePlayer.currentPosition)) {
         activePlayer.score += 5
+        this.questionResult = "YAASSS! You found 5 point!!!"
       } else if (array[5].includes(activePlayer.currentPosition)) {
         activePlayer.score += 25
+        this.questionResult = "OMG! You found 25 point!!!"
       }
     },
 
@@ -387,8 +391,10 @@ export default {
       const index = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
       this.stealPoints(this.activePlayer(this.gamePlayers), this.gamePlayers)
       this.loosePoints(this.arrayLoose, this.activePlayer(this.gamePlayers))
+      this.addPoints(this.extraPoint, this.activePlayer(this.gamePlayers))
       this.resetMoveOptions();
       const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
+
       this.loadRandomQuestion(randomCategoryAndId);
     },
     togglefullScreen() {
@@ -454,10 +460,12 @@ export default {
     },
     disableTheDice() {
       const dice = document.querySelector(".dice")
+      console.log(dice);
       dice.style.pointerEvents = 'none';
     }, //Find the Dice class and re-enable the click event
     enableTheDice() {
       const dice = document.querySelector(".dice")
+      console.log(dice);
       dice.style.pointerEvents = 'auto';
     },
     switchActivePlayer(player, players) {
@@ -475,6 +483,7 @@ export default {
     this.updateNames();
 
     eventBus.$on('selected-option', (option) => {
+      this.questionResult = null;
       const playerActive = this.activePlayer(this.gamePlayers);
       console.log('player Active:' + playerActive.alias);
       const question = this.randomQuestion;
@@ -484,10 +493,12 @@ export default {
 
       if (option === question.correct_answer) {
         this.nextPlayer = null
-        this.questionResult = "Correct - roll again!"
+        this.questionResult = "Correct! +1 point- roll again!"
         this.addPoint(playerActive);
         if (this.checkWinCondition(playerActive)) {
           this.nextPlayer = null
+          const allThePage = document.querySelector("#seek");
+          allThePage.classList.add("flashing");
           this.questionResult = "Congratulations - you've WON!"
           this.disableTheDice()
           this.randomQuestion = null
