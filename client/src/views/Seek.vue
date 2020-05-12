@@ -1,113 +1,113 @@
 <template lang="html">
   <div id="seek" class="page-container" v-on:click="togglefullScreen()">
     <div class="game-board" ref="gameBoard">
-      <div id="g1" class="grid" v-on:click="checkActive($event)">1</div>
-      <div id="g2" class="grid" v-on:click="checkActive($event)">2</div>
-      <div id="g3" class="grid" v-on:click="checkActive($event)">3</div>
-      <div id="g4" class="grid" v-on:click="checkActive($event)">4</div>
-      <div id="g5" class="grid" v-on:click="checkActive($event)">5</div>
-      <div id="g6" class="grid" v-on:click="checkActive($event)">6</div>
-      <div id="g7" class="grid" v-on:click="checkActive($event)">7</div>
-      <div id="g8" class="grid" v-on:click="checkActive($event)">8</div>
-      <div id="g9" class="grid" v-on:click="checkActive($event)">9</div>
-      <div id="g10" class="grid" v-on:click="checkActive($event)">10</div>
-      <div id="g11" class="grid" v-on:click="checkActive($event)">11</div>
-      <div id="g12" class="grid" v-on:click="checkActive($event)">12</div>
-      <div id="g13" class="grid" v-on:click="checkActive($event)">13</div>
-      <div id="g14" class="grid" v-on:click="checkActive($event)">14</div>
-      <div id="g15" class="grid" v-on:click="checkActive($event)">15</div>
-      <div id="g16" class="grid" v-on:click="checkActive($event)">16</div>
-      <div id="g17" class="grid" v-on:click="checkActive($event)">17</div>
-      <div id="g18" class="grid" v-on:click="checkActive($event)">18</div>
-      <div id="g19" class="grid" v-on:click="checkActive($event)">19</div>
-      <div id="g20" class="grid" v-on:click="checkActive($event)">20</div>
-      <div id="g21" class="grid" v-on:click="checkActive($event)">21</div>
-      <div id="g22" class="grid" v-on:click="checkActive($event)">22</div>
-      <div id="g23" class="grid" v-on:click="checkActive($event)">23</div>
-      <div id="g24" class="grid" v-on:click="checkActive($event)">24</div>
-      <div id="g25" class="grid" v-on:click="checkActive($event)">25</div>
-      <div id="g26" class="grid" v-on:click="checkActive($event)">26</div>
-      <div id="g27" class="grid" v-on:click="checkActive($event)">27</div>
-      <div id="g28" class="grid" v-on:click="checkActive($event)">28</div>
-      <div id="g29" class="grid" v-on:click="checkActive($event)">29</div>
-      <div id="g30" class="grid" v-on:click="checkActive($event)">30</div>
-      <div id="g31" class="grid" v-on:click="checkActive($event)">31</div>
-      <div id="g32" class="grid" v-on:click="checkActive($event)">32</div>
-      <div id="g33" class="grid" v-on:click="checkActive($event)">33</div>
-      <div id="g34" class="grid" v-on:click="checkActive($event)">34</div>
-      <div id="g35" class="grid" v-on:click="checkActive($event)">35</div>
-      <div id="g36" class="grid" v-on:click="checkActive($event)">36</div>
-      <div id="g37" class="grid" v-on:click="checkActive($event)">37</div>
-      <div id="g38" class="grid" v-on:click="checkActive($event)">38</div>
-      <div id="g39" class="grid" v-on:click="checkActive($event)">39</div>
-      <div id="g40" class="grid" v-on:click="checkActive($event)">40</div>
-      <div id="g41" class="grid" v-on:click="checkActive($event)">41</div>
-      <div id="g42" class="grid" v-on:click="checkActive($event)">42</div>
-      <div id="g43" class="grid" v-on:click="checkActive($event)">43</div>
-      <div id="g44" class="grid" v-on:click="checkActive($event)">44</div>
-      <div id="g45" class="grid" v-on:click="checkActive($event)">45</div>
-      <div id="g46" class="grid" v-on:click="checkActive($event)">46</div>
-      <div id="g47" class="grid" v-on:click="checkActive($event)">47</div>
-      <div id="g48" class="grid" v-on:click="checkActive($event)">48</div>
-      <div id="g49" class="grid" v-on:click="checkActive($event)">49</div>
-      <div id="g50" class="grid" v-on:click="checkActive($event)">50</div>
-      <div id="g51" class="grid" v-on:click="checkActive($event)">51</div>
-      <div id="g52" class="grid" v-on:click="checkActive($event)">52</div>
-      <div id="g53" class="grid" v-on:click="checkActive($event)">53</div>
-      <div id="g54" class="grid" v-on:click="checkActive($event)">54</div>
-      <div id="g55" class="grid" v-on:click="checkActive($event)">55</div>
-      <div id="g56" class="grid" v-on:click="checkActive($event)">56</div>
-      <div id="g57" class="grid" v-on:click="checkActive($event)">57</div>
-      <div id="g58" class="grid" v-on:click="checkActive($event)">58</div>
-      <div id="g59" class="grid" v-on:click="checkActive($event)">59</div>
-      <div id="g60" class="grid" v-on:click="checkActive($event)">60</div>
-      <div id="g61" class="grid" v-on:click="checkActive($event)">61</div>
-      <div id="g62" class="grid" v-on:click="checkActive($event)">62</div>
-      <div id="g63" class="grid" v-on:click="checkActive($event)">63</div>
-      <div id="g64" class="grid" v-on:click="checkActive($event)">64</div>
-      <div id="g65" class="grid" v-on:click="checkActive($event)">65</div>
-      <div id="g66" class="grid" v-on:click="checkActive($event)">66</div>
-      <div id="g67" class="grid" v-on:click="checkActive($event)">67</div>
-      <div id="g68" class="grid" v-on:click="checkActive($event)">68</div>
-      <div id="g69" class="grid" v-on:click="checkActive($event)">69</div>
-      <div id="g70" class="grid" v-on:click="checkActive($event)">70</div>
-      <div id="g71" class="grid" v-on:click="checkActive($event)">71</div>
-      <div id="g72" class="grid" v-on:click="checkActive($event)">72</div>
-      <div id="g73" class="grid" v-on:click="checkActive($event)">73</div>
-      <div id="g74" class="grid" v-on:click="checkActive($event)">74</div>
-      <div id="g75" class="grid" v-on:click="checkActive($event)">75</div>
-      <div id="g76" class="grid" v-on:click="checkActive($event)">76</div>
-      <div id="g77" class="grid" v-on:click="checkActive($event)">77</div>
-      <div id="g78" class="grid" v-on:click="checkActive($event)">78</div>
-      <div id="g79" class="grid" v-on:click="checkActive($event)">79</div>
-      <div id="g80" class="grid" v-on:click="checkActive($event)">80</div>
-      <div id="g81" class="grid" v-on:click="checkActive($event)">81</div>
-      <div id="g82" class="grid" v-on:click="checkActive($event)">82</div>
-      <div id="g83" class="grid" v-on:click="checkActive($event)">83</div>
-      <div id="g84" class="grid" v-on:click="checkActive($event)">84</div>
-      <div id="g85" class="grid" v-on:click="checkActive($event)">85</div>
-      <div id="g86" class="grid" v-on:click="checkActive($event)">86</div>
-      <div id="g87" class="grid" v-on:click="checkActive($event)">87</div>
-      <div id="g88" class="grid" v-on:click="checkActive($event)">88</div>
-      <div id="g89" class="grid" v-on:click="checkActive($event)">89</div>
-      <div id="g90" class="grid" v-on:click="checkActive($event)">90</div>
-      <div id="g91" class="grid" v-on:click="checkActive($event)">91</div>
-      <div id="g92" class="grid" v-on:click="checkActive($event)">92</div>
-      <div id="g93" class="grid" v-on:click="checkActive($event)">93</div>
-      <div id="g94" class="grid" v-on:click="checkActive($event)">94</div>
-      <div id="g95" class="grid" v-on:click="checkActive($event)">95</div>
-      <div id="g96" class="grid" v-on:click="checkActive($event)">96</div>
-      <div id="g97" class="grid" v-on:click="checkActive($event)">97</div>
-      <div id="g98" class="grid" v-on:click="checkActive($event)">98</div>
-      <div id="g99" class="grid" v-on:click="checkActive($event)">99</div>
-      <div id="g100" class="grid" v-on:click="checkActive($event)">100</div>
-      <div id="g101" class="grid" v-on:click="checkActive($event)">101</div>
-      <div id="g102" class="grid" v-on:click="checkActive($event)">102</div>
-      <div id="g103" class="grid" v-on:click="checkActive($event)">103</div>
-      <div id="g104" class="grid" v-on:click="checkActive($event)">104</div>
-      <div id="g105" class="grid" v-on:click="checkActive($event)">105</div>
-      <div id="g106" class="grid" v-on:click="checkActive($event)">106</div>
-      <div id="g107" class="grid" v-on:click="checkActive($event)">107</div>
+      <div id="g1" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g2" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g3" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g4" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g5" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g6" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g7" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g8" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g9" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g10" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g11" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g12" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g13" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g14" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g15" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g16" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g17" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g18" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g19" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g20" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g21" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g22" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g23" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g24" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g25" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g26" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g27" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g28" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g29" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g30" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g31" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g32" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g33" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g34" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g35" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g36" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g37" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g38" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g39" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g40" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g41" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g42" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g43" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g44" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g45" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g46" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g47" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g48" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g49" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g50" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g51" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g52" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g53" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g54" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g55" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g56" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g57" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g58" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g59" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g60" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g61" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g62" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g63" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g64" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g65" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g66" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g67" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g68" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g69" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g70" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g71" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g72" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g73" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g74" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g75" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g76" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g77" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g78" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g79" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g80" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g81" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g82" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g83" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g84" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g85" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g86" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g87" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g88" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g89" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g90" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g91" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g92" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g93" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g94" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g95" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g96" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g97" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g98" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g99" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g100" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g101" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g102" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g103" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g104" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g105" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g106" class="grid" v-on:click="checkActive($event)"></div>
+      <div id="g107" class="grid" v-on:click="checkActive($event)"></div>
 
       <div class="board-content-1">
         <div class="dice-container">
@@ -116,7 +116,34 @@
       </div>
 
       <div class="board-content-2">
-        <p>PLAYERS</p>
+        <div class="player-container">
+          <img class="tank-id" :src="players[0].token">
+          <p class="player-txt1" v-if="players[0].name && players[1].name"> {{players[0].name.toUpperCase()}}</p>
+          <div class="score-container">
+            <p>SCORE: {{players[0].score}}</p>
+          </div>
+        </div>
+        <div class="player-container">
+          <img class="tank-id" :src="players[1].token">
+          <p class="player-txt2" v-if="players[0].name && players[1].name"> {{players[1].name.toUpperCase()}}</p>
+          <div class="score-container">
+            <p>SCORE: {{players[1].score}}</p>
+          </div>
+        </div>
+        <div v-if="players[2].name" class="player-container">
+          <img class="tank-id" :src="players[2].token">
+          <p class="player-txt3"> {{players[2].name.toUpperCase()}}</p>
+          <div class="score-container">
+            <p>SCORE: {{players[2].score}}</p>
+          </div>
+        </div>
+        <div v-if="players[3].name" class="player-container">
+          <img class="tank-id" :src="players[3].token">
+          <p class="player-txt4"> {{players[3].name.toUpperCase()}}</p>
+          <div class="score-container">
+            <p>SCORE: {{players[3].score}}</p>
+          </div>
+      </div>
       </div>
 
       <div class="board-content-3">
@@ -133,10 +160,10 @@
         <p>{{questionResult}}</p>
       </div>
 
-      <div id="player1" class="player1"></div>
-      <div id="player2" class="player2"></div>
-      <div id="player3" class="player3"></div>
-      <div id="player4" class="player4"></div>
+      <div id="player1" class="player1" v-if="players[0].name"> <img class="tank" :src="players[0].token"> </div>
+      <div id="player2" class="player2" v-if="players[1].name"> <img class="tank" :src="players[1].token"></div>
+      <div id="player3" class="player3" v-if="players[2].name"> <img class="tank" :src="players[2].token"></div>
+      <div id="player4" class="player4" v-if="players[3].name"> <img class="tank" :src="players[3].token"></div>
 
     </div>
   </div>
@@ -144,13 +171,13 @@
 </template>
 
 <script>
-import {
-  SeekTileObjects
-} from '@/config/SeekTileObjects.js'
+import {SeekTileObjects} from '@/config/SeekTileObjects.js'
 import Questions from "@/components/Questions.vue"
-import {
-  eventBus
-} from '../main.js';
+import {eventBus} from '../main.js';
+import tank1 from '@/assets/tanks/tank1.png';
+import tank2 from '@/assets/tanks/tank2.png';
+import tank3 from '@/assets/tanks/tank3.png';
+import tank4 from '@/assets/tanks/tank4.png';
 
 export default {
   name: 'seek',
@@ -180,7 +207,8 @@ export default {
           winStreak: 0,
           active: false,
           currentPosition: 1,
-          id: 1
+          id: 1,
+          token: tank1
         },
         {
           alias: "player2",
@@ -189,7 +217,8 @@ export default {
           winStreak: 0,
           active: false,
           currentPosition: 1,
-          id: 2
+          id: 2,
+          token: tank2
         },
         {
           alias: "player3",
@@ -198,7 +227,8 @@ export default {
           winStreak: 0,
           active: false,
           currentPosition: 1,
-          id: 3
+          id: 3,
+          token: tank3
         },
         {
           alias: "player4",
@@ -207,7 +237,8 @@ export default {
           winStreak: 0,
           active: false,
           currentPosition: 1,
-          id: 4
+          id: 4,
+          token: tank4
         }
       ],
       answeredQuestions: [],
@@ -231,8 +262,7 @@ export default {
         [49, 56, 64, 71, 106], //+4
         [74, 79, 84, 89, 104], //+5
         [91, 102]
-      ] //+25
-
+      ],//+25
     }
   },
   methods: {
@@ -347,8 +377,8 @@ export default {
       this.loadRandomQuestion(randomCategoryAndId);
     },
     togglefullScreen() {
-      const element = document.querySelector('#seek');
-      element.requestFullscreen();
+      // const element = document.querySelector('#seek');
+      // element.requestFullscreen();
     },
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
@@ -478,7 +508,8 @@ export default {
 .game-board {
   display: inline-grid;
   position: relative;
-
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .grid {
@@ -488,11 +519,11 @@ export default {
   height: 89px;
   font-size: 40px;
   box-shadow: 2px 2px 4px #000000;
+  background-image: url('../assets/Tiles/10.png');
 }
 
 .grid:hover {
   cursor: pointer;
-  color: blue;
 }
 
 /* c X ROW */
@@ -785,56 +816,33 @@ input:focus {
 }
 
 .player1 {
-  border-style: solid;
-  border-radius: 50%;
-  background-color: purple;
-  width: 25px;
-  height: 25px;
-  margin: 5px;
   z-index: 2;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
+  margin-top: 20px;
+  padding: 0;
 }
 .player2 {
-  border-style: solid;
-  border-radius: 50%;
-  background-color: red;
-  width: 25px;
-  height: 25px;
-  margin: 5px;
-  margin-top: 40px;
   z-index: 2;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
 }
 .player3 {
-  border-style: solid;
-  border-radius: 50%;
-  background-color: orange;
-  width: 25px;
-  height: 25px;
-  margin: 5px;
-  margin-left: 40px;
   z-index: 2;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
+  margin-left: 25px;
 }
 .player4 {
-  border-style: solid;
-  border-radius: 50%;
-  background-color: blue;
-  width: 25px;
-  height: 25px;
-  margin: 5px;
-  margin-left: 40px;
-  margin-top: 40px;
   z-index: 2;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
+  margin-left: 25px;
+  margin-top: 20px;
 }
 
 .board-content-1 {
@@ -879,9 +887,69 @@ input:focus {
 }
 
 P {
-  font-size: 25px;
-  font-weight: bold;
-  color: blue;
+  padding: 0;
+  margin: 0;
 }
+
+#seek {
+  background-image: url('../assets/images/grass.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.tank {
+  width: 80px;
+}
+
+.tank-id {
+  width: 60px;
+  float: left;
+  margin: 10px;
+}
+
+.player-container {
+  width: 25%;
+  float: left;
+  color: white;
+  font-family: 'Russo One', sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.player-txt1 {
+  float: left;
+  font-size: 35PX;
+  margin-top: 20px;
+  color: #ff70a6;
+}
+
+.player-txt2 {
+  float: left;
+  font-size: 35PX;
+  margin-top: 20px;
+  color: #70d6ff;
+}
+
+.player-txt3 {
+  float: left;
+  font-size: 35px;
+  margin-top: 20px;
+  color: #6eeb83;
+}
+
+.player-txt4 {
+  float: left;
+  font-size: 35px;
+  margin-top: 20px;
+  color: #907ad6;
+}
+
+.score-container {
+  float: left;
+  margin-left: 20px;
+  font-size: 20px;
+  margin-top: 25px;
+}
+
+
 
 </style>
