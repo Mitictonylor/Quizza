@@ -113,9 +113,6 @@
         <div class="np-name">
           <p v-if="nextPlayer">{{nextPlayer.name.toUpperCase()}}  you're up!</p>
         </div>
-        <div class="qr" v-if="questionResult">
-          <p>{{questionResult}}</p>
-        </div>
         <div class="dice-container">
           <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()"></input>
         </div>
@@ -152,23 +149,30 @@
       </div>
       </div>
 
-      <div class="board-content-3">
+      <div v-if="randomQuestion" class="board-content-3">
         <div class="question-container">
-          <questions v-if='randomQuestion' :randomQuestion="randomQuestion"class="question"></questions>
+          <questions :randomQuestion="randomQuestion" class="question"></questions>
         </div>
       </div>
 
       <div class="board-content-4">
       </div>
 
-      <div class="board-content-5" >
-
+      <div v-if="questionResult" class="board-content-5">
+        <div class="general-container">
+          <img class="general" :src="general">
+        </div>
+        <div class="qr-container">
+          <p class="qr-result">{{questionResult}}</p>
+        </div>
       </div>
 
       <div id="player1" class="player1" v-if="players[0].name"> <img class="tank" :src="players[0].token"> </div>
       <div id="player2" class="player2" v-if="players[1].name"> <img class="tank" :src="players[1].token"></div>
       <div id="player3" class="player3" v-if="players[2].name"> <img class="tank" :src="players[2].token"></div>
       <div id="player4" class="player4" v-if="players[3].name"> <img class="tank" :src="players[3].token"></div>
+
+
 
     </div>
   </div>
@@ -183,6 +187,7 @@ import tank1 from '@/assets/tanks/tank1.png';
 import tank2 from '@/assets/tanks/tank2.png';
 import tank3 from '@/assets/tanks/tank3.png';
 import tank4 from '@/assets/tanks/tank4.png';
+import general from '@/assets/images/general.png';
 import QuizzaService from '@/services/QuizzaService.js';
 
 export default {
@@ -266,6 +271,7 @@ export default {
         [2, 11, 22, 32, 51, 74, 79, 84, 89, 104], //+5
         [27, 91, 102]
       ], //+25
+      general: general
     }
   },
   methods: {
@@ -297,43 +303,43 @@ export default {
     loosePoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 1
-        this.questionResult = "BOOOOM! You lost 1 point!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost 1 point! PUAHAHA HAHAHA HAHAHA"
       } else if (array[1].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 2
-        this.questionResult = "BOOOOM! You lost 2 points!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost 2 points! PUAHAHA HAHAHA HAHAHA"
       } else if (array[2].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 3
-        this.questionResult = "BOOOOM! You lost 3 points!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost 3 points! PUAHAHA HAHAHA HAHAHA"
       } else if (array[3].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 4
-        this.questionResult = "BOOOOM! You lost 4 points!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost 4 points! PUAHAHA HAHAHA HAHAHA"
       } else if (array[4].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 5
-        this.questionResult = "BOOOOM! You lost 5 points!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost 5 points! PUAHAHA HAHAHA HAHAHA"
       } else if (array[5].includes(activePlayer.currentPosition)) {
         activePlayer.score = 0
-        this.questionResult = "BOOOOM! You lost all your points!!! PUAHAHAHAH"
+        this.questionResult = "BOOOOM! You lost all your points! PUAHAHA HAHAHA HAHAHA"
       }
     },
     addPoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score += 1
-        this.questionResult = "YAASSS! You found 1 point!!!"
+        this.questionResult = "You found 1 point MAGGOT! Answer the gawd damn question!"
       } else if (array[1].includes(activePlayer.currentPosition)) {
         activePlayer.score += 2
-        this.questionResult = "YAASSS! You found 2 point!!!"
+        this.questionResult = "You found 2 points MAGGOT! Answer the gawd damn question!"
       } else if (array[2].includes(activePlayer.currentPosition)) {
         activePlayer.score += 3
-        this.questionResult = "YAASSS! You found 3 point!!!"
+        this.questionResult = "You found 3 points MAGGOT! Answer the gawd damn question!"
       } else if (array[3].includes(activePlayer.currentPosition)) {
         activePlayer.score += 4
-        this.questionResult = "YAASSS! You found 4 point!!!"
+        this.questionResult = "You found 4 points MAGGOT! Answer the gawd damn question!"
       } else if (array[4].includes(activePlayer.currentPosition)) {
         activePlayer.score += 5
-        this.questionResult = "YAASSS! You found 5 point!!!"
+        this.questionResult = "You found 5 points MAGGOT! Answer the gawd damn question!"
       } else if (array[5].includes(activePlayer.currentPosition)) {
         activePlayer.score += 25
-        this.questionResult = "OMG! You found 25 point!!!"
+        this.questionResult = "GAWD DAMMIT! You found 25 points!!!"
       }
     },
     showMoveOptions() { //current position:106 + dice.result 4 =110
@@ -480,14 +486,14 @@ export default {
 
       if (option === question.correct_answer) {
         this.nextPlayer = null
-        this.questionResult = "Correct! +1 point- roll again!"
+        this.questionResult = " CORRECT! You got 1 point. Roll again numb nuts!"
         this.addPoint(playerActive);
         if (this.checkWinCondition(playerActive)) {
           QuizzaService.addScore(this.gamePlayers)
           this.nextPlayer = null
           const allThePage = document.querySelector("#seek");
           allThePage.classList.add("flashing");
-          this.questionResult = "Congratulations - you've WON!"
+          this.questionResult = "Well I'll be damned! You've only went and WON!"
           this.disableTheDice()
           this.randomQuestion = null
         } else {
@@ -498,7 +504,7 @@ export default {
         }
       } else {
         this.nextPlayer = null
-        this.questionResult = "Boooo - better luck next time!"
+        this.questionResult = "INCORRECT! What's your major malfunction numb nuts?"
         this.enableTheDice()
         this.switchActivePlayer(playerActive, this.gamePlayers);
         console.log("HERE", playerActive);
@@ -829,9 +835,9 @@ export default {
 }
 
 .dice {
-  width: 50px;
-  height: 50px;
-  margin: 20px;
+  width: 60px;
+  height: 60px;
+  margin-top: 15px;
 }
 
 input:focus {
@@ -854,7 +860,6 @@ input:focus {
   grid-column-start: 1;
   margin-left: 27px;
   margin-top: 45px;
-
 }
 
 .player3 {
@@ -862,7 +867,6 @@ input:focus {
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
-
 }
 
 .player4 {
@@ -879,6 +883,7 @@ input:focus {
   z-index: 2;
   position: absolute;
   margin-top: 89px;
+  color: white;
 }
 
 .board-content-2 {
@@ -888,31 +893,31 @@ input:focus {
   position: absolute;
   margin-top: 270px;
   margin-left: 95px;
+  color: white;
 }
 
 .board-content-3 {
-  width: 1430px;
-  height: 75px;
-  z-index: 2;
+  width: 720px;
+  z-index: 20;
   position: absolute;
-  margin-top: 380px;
-}
-
-.board-content-4 {
-  width: 1430px;
-  height: 75px;
-  z-index: 2;
-  position: absolute;
-  margin-top: 623px;
+  margin-top: 450px;
   margin-left: 90px;
+  color: white;
+  border-style: solid;
 }
 
 .board-content-5 {
-  width: 1430px;
-  height: 75px;
-  z-index: 2;
+  width: 620px;
+  height: 350px;
+  z-index: 20;
   position: absolute;
-  margin-top: 801px;
+  margin-top: 620px;
+  margin-left: 900px;
+  color: black;
+  border: solid;
+  box-shadow: 16px 16px 32px #000000;
+  background-color: #bfc0c0;
+  border-style: solid;
 }
 
 P {
@@ -928,7 +933,6 @@ P {
 
 .tank {
   width: 60px;
-  padding: 0 !important;
 }
 
 .tank-id {
@@ -980,26 +984,28 @@ P {
 }
 
 .score-container {
-  width: 30%;
+  width: 35%;
   font-size: 20px;
   overflow: auto;
+  text-align: left;
 }
 
 .question-container {
-  width: 50%;
-  display: inline-block;
   font-family: 'Open Sans', sans-serif;
   color: white;
+  border: solid;
+  z-index: 10;
 }
 
 .np-name {
   float: left;
   font-family: 'Russo One', sans-serif;
-  font-size: 35px;
+  font-size: 55px;
   color: white;
   text-shadow: 2px 2px 4px #000000;
-  margin-top: 20px;
-  width: 30%;
+  margin-top: 8px;
+  width: 50%;
+  margin-left: 180px;
 }
 
 .qr {
@@ -1010,5 +1016,30 @@ P {
   text-shadow: 2px 2px 4px #000000;
   margin-top: 20px;
   width: 40%;
+}
+
+.general-container {
+  width: 55%;
+  float: right;
+  overflow: auto;
+}
+
+.general {
+  height: 345px;
+}
+
+.qr-container {
+  width: 40%;
+  float: right;
+  border-style: solid;
+  background-color: white;
+  margin-top: 20px;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+.qr-result {
+  font-family: 'Russo One', sans-serif;
+  color: black;
+  font-size: 40px;
 }
 </style>

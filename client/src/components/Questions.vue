@@ -74,7 +74,7 @@
 
 .question {
   font-size: 25px;
-  text-shadow: 2px 2px 4px #000000
+  text-shadow: 2px 2px 2px #000000
 }
 
 .sport {
