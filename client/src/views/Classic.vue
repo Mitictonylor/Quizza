@@ -594,8 +594,7 @@ export default {
   }
 
   .flashing {
-    animation: flash 0.8s linear 5s infinite;
-    z-index: 2;
+    animation: flash 0.7s ease 5s infinite;
   }
 
   @keyframes flash {
