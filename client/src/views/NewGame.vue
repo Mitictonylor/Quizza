@@ -13,7 +13,7 @@
           <div class="title-container">
             <p class="title">QuizzA</p>
           </div>
-            <p class="sub-text">Welcome to Quizza - the multiplayer browser boardgame.</p>
+            <p class="sub-text">Welcome to QuizzA - the multiplayer browser boardgame.</p>
             <p class="sub-text">Please select a minimum of two players to continue:</p>
         </div>
         <player-form/>

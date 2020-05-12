@@ -212,7 +212,7 @@ export default {
 
   .sub-text {
     font-size: 25px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Russo One', sans-serif;
   }
 
   #about {

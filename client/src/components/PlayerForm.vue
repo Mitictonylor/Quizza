@@ -61,7 +61,7 @@
 
 .form {
   font-size: 25px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Russo One', sans-serif;
 }
 
 .player {
@@ -71,11 +71,12 @@
 input {
   background-color: #8e9aaf;
   text-align: center;
-  font-size: 20px;
+  font-size: 25px;
   height: 25px;
   width: 40%;
   border-radius: 4%;
   box-shadow: 2px 2px 4px #000000;
+  font-family: 'Open Sans', sans-serif;
 }
 
 input:focus {
@@ -152,6 +153,10 @@ input.player4 {
   margin: 5px;
   width: 32%;
   float: left;
+}
+
+.game:focus {
+  outline-color: #907ad6;
 }
 
 .game {
