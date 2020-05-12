@@ -210,36 +210,36 @@ export default {
         {
           alias: "player1",
           name: '',
-          score: 100,
+          score: 0,
           active: false,
-          currentPosition: 100,
+          currentPosition: 1,
           id: 1,
           token: tank1
         },
         {
           alias: "player2",
           name: '',
-          score: 40,
+          score: 0,
           active: false,
-          currentPosition: 100,
+          currentPosition: 1,
           id: 2,
           token: tank2
         },
         {
           alias: "player3",
           name: '',
-          score: 110,
+          score: 0,
           active: false,
-          currentPosition: 100,
+          currentPosition: 1,
           id: 3,
           token: tank3
         },
         {
           alias: "player4",
           name: '',
-          score: 500,
+          score: 0,
           active: false,
-          currentPosition: 100,
+          currentPosition: 1,
           id: 4,
           token: tank4
         }
