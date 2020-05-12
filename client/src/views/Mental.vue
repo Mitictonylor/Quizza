@@ -77,17 +77,48 @@
       <div class="board-content-1">
         <div class="dice-container">
           <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()"></input>
+          <div class="qr" v-if="questionResult">
+            <p>{{questionResult}}</p>
+          </div>
+            <div class="player-container">
+              <img class="token-id" :src="players[0].token">
+              <p class="player-txt1" v-if="players[0].name && players[1].name"> {{players[0].name.toUpperCase()}}</p>
+              <div class="score-container">
+                <p>SCORE: {{players[0].score}}</p>
+              </div>
+            </div>
+            <div class="player-container">
+              <img class="token-id" :src="players[1].token">
+              <p class="player-txt2" v-if="players[0].name && players[1].name"> {{players[1].name.toUpperCase()}}</p>
+              <div class="score-container">
+                <p>SCORE: {{players[1].score}}</p>
+              </div>
+            </div>
+            <div v-if="players[2].name" class="player-container">
+              <img class="token-id" :src="players[2].token">
+              <p class="player-txt3"> {{players[2].name.toUpperCase()}}</p>
+              <div class="score-container">
+                <p>SCORE: {{players[2].score}}</p>
+              </div>
+            </div>
+            <div v-if="players[3].name" class="player-container">
+              <img class="token-id" :src="players[3].token">
+              <p class="player-txt4"> {{players[3].name.toUpperCase()}}</p>
+              <div class="score-container">
+                <p>SCORE: {{players[3].score}}</p>
+              </div>
+          </div>
+
         </div>
-        CONTENT
-        QUESTIONS
+
+        <questions v-if='randomQuestion' :randomQuestion="randomQuestion"class="question"></questions>
       </div>
 
 
-      <div id="player1" class="player1"></div>
-      <div id="player2" class="player2"></div>
-      <div id="player3" class="player3"></div>
-      <div id="player4" class="player4"></div>
-
+      <div id="player1" class="player1" v-if="players[0].name"> <img class="token" :src="players[0].token"> </div>
+      <div id="player2" class="player2" v-if="players[1].name"> <img class="token" :src="players[1].token"></div>
+      <div id="player3" class="player3" v-if="players[2].name"> <img class="token" :src="players[2].token"></div>
+      <div id="player4" class="player4" v-if="players[3].name"> <img class="token" :src="players[3].token"></div>
     </div>
   </div>
 </div>
@@ -95,41 +126,123 @@
 
 <script>
 import {MentalTileObjects} from '@/config/MentalTileObjects.js'
+import player1 from '@/assets/tokens/circle_red.png';
+import player2 from '@/assets/tokens/circle_blue.png';
+import player3 from '@/assets/tokens/circle_yellow.png';
+import player4 from '@/assets/tokens/circle_green.png';
+import Questions from "@/components/Questions.vue"
+import {eventBus} from '../main.js';
 
 export default {
   name: 'mental',
+  components: {
+    'questions': Questions
+  },
+  props: ['player1', 'player2', 'player3', 'player4'],
   data() {
     return {
       dice: [1,2,3,4,5,6],
       diceResult: 6,
-      questions: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
+
       player: {
         id: 1,
         currentPosition: 'f9'
       },
+      questionResult: null,
+      answeredQuestions:[],
+      randomQuestion: null,
       moveOptions: null,
       fullscreen: false,
-      currentTile: 'a1'
+      currentTile: 'a1',
+      gamePlayers: [],
+      players: [ //keep it for the initial rendering
+        {
+          alias: "player1",
+          name: '',
+          score: 0,
+          active: false,
+          currentPosition: 'a1',
+          id: 1,
+          token: player1
+        },
+        {
+          alias: "player2",
+          name: '',
+          score: 0,
+          active: false,
+          currentPosition: 'k17',
+          id: 2,
+          token: player2
+        },
+        {
+          alias: "player3",
+          name: '',
+          score: 0,
+          active: false,
+          currentPosition: 'a17',
+          id: 3,
+          token: player3
+        },
+        {
+          alias: "player4",
+          name: '',
+          score: 0,
+          active: false,
+          currentPosition: 'k17',
+          id: 4,
+          token: player4
+        }
+      ],
+      categoriesAndId: [
+        ['sport', 21],
+        ['geography', 22],
+        ['general_knowledge', 9],
+        ['history', 23],
+        ['animal', 27],
+        ['science_and_nature', 17]
+      ],
+
+
+      extraPoint: [
+        ["c9", "k7", "c1", "e3", "k1", "i1", "a13"], //+3
+        ["f2", "c5", "j4", "i9", "g17", "k5"], //+5
+        ["j2", "h2", "g15", "j6", "d2", "a9"], //+9
+        ["j12", "i11", "a1", "j16",  "b12"], //+17
+        ["b4", "i15","k17", "c13", "j8", "c17"], //+33
+        ["b4", "i15"]//+100
+      ],
+      arrayLoose: [
+        ["k17", "c13", "j8", "c17"], //-4
+        ["e15", "i5", "a17", "k11"], //-7
+        ["i3", "b2", "i17", "c15"], //-13
+        ["h16","a15", "c11", "g3", "a3"], //-17
+        ["j10", "b16", "d14", "b14", "d16","k3", "h4", "d4"], //-25
+        ["a5", "f16", "g1", "a11","e17", "k13", "c7", "i13","e1", "b10", "c3", "k9", "f4","b6", "a7", "j14", "i7", "k15","f14", "h14","b8"],
+      ], //-all
+
+
     }
   },
   methods: {
     randomDice() {
       this.diceResult = this.dice[Math.floor(Math.random() * 6)]
-      return this.showMoveOptions();
+      return this.showMoveOptions()
+      this.disableTheDice();
     },
     getDiceFace() {
       return require('@/assets/dice/' + this.diceResult + '.png')
     },
     showMoveOptions() {
+      this.disableTheDice()
       const randomGridTile = MentalTileObjects[Math.floor(Math.random() * 72)].id
       const moveOption = document.querySelector(`#${randomGridTile}`);
       moveOption.style.color = 'red';
-      this.currentTile = randomGridTile
+      this.activePlayer(this.gamePlayers).currentPosition = randomGridTile
     },
     resetMoveOptions() {
-      const moveOption = document.querySelector(`#${this.currentTile}`);
+      const active = this.activePlayer(this.gamePlayers).currentPosition
+      const moveOption = document.querySelector(`#${active}`);
       moveOption.style.color = 'black';
-      this.currentTile = null;
     },
     getNewRowPosition(event) {
       const divID = event.currentTarget.id;
@@ -142,26 +255,208 @@ export default {
       return MentalTileObjects[index]['column'];
     },
     checkActive(event) {
-      if (this.currentTile === event.currentTarget.id) {
+      if (this.activePlayer(this.gamePlayers).currentPosition === event.currentTarget.id) {
         return this.movePlayer(event)
       }
     },
     movePlayer(event) {
-      const activePlayer = document.querySelector('#player1');
+      const activePlayer = document.querySelector(`#${this.activePlayer(this.gamePlayers).alias}`);
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
-      grid-column-start: ${this.getNewColPosition(event)};`
-      this.player.currentPosition = event.currentTarget.id;
-      this.resetMoveOptions();
+                                    grid-column-start: ${this.getNewColPosition(event)};`
+      this.activePlayer(this.gamePlayers).currentPosition = event.currentTarget.id;
+      this.resetMoveOptions()
+      this.stealPoints(this.activePlayer(this.gamePlayers), this.gamePlayers)
+      this.loosePoints(this.arrayLoose, this.activePlayer(this.gamePlayers))
+      this.addPoints(this.extraPoint, this.activePlayer(this.gamePlayers))
+      const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
+      this.loadRandomQuestion(randomCategoryAndId);
+;
     },
     togglefullScreen () {
       const element = document.querySelector('#mental');
       element.requestFullscreen();
     },
+    filteredPlayers() {
+      const playersWithName = this.players.filter((player) => {
+        return player.name !== ''
+      });
+      this.gamePlayers = playersWithName;
+    },
+    activePlayer(players) {
+      const activePlayer = players.find(player => player.active === true);
+      this.nextPlayer = activePlayer
+      return activePlayer;
+    },
+    stealPoints(activePlayer, arrayOfPlayers) {
+      const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false)
+      const sameCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
+      if (sameCurrentPosition.length >= 1) {
+        sameCurrentPosition.forEach((player) => {
+            this.questionResult = `You and ${player.name} lost all the points!`
+            activePlayer.score = 0
+            player.score = 0
+          })
+        }
+      },
+
+    loosePoints(array, activePlayer) {
+      if (array[0].includes(activePlayer.currentPosition)) {
+        activePlayer.score -= 4
+        this.questionResult = "PUAHAHAHAH You lost 4 point!!! PUAHAHAHAH"
+      } else if (array[1].includes(activePlayer.currentPosition)) {
+        activePlayer.score -= 7
+        this.questionResult = "PUAHAHAHAH You lost 7 points!!! PUAHAHAHAH"
+      } else if (array[2].includes(activePlayer.currentPosition)) {
+        activePlayer.score -= 13
+        this.questionResult = "PUAHAHAHAH You lost 13 points!!! PUAHAHAHAH"
+      } else if (array[3].includes(activePlayer.currentPosition)) {
+        activePlayer.score -= 17
+        this.questionResult = "PUAHAHAHAH You lost 17 points!!! PUAHAHAHAH"
+      } else if (array[4].includes(activePlayer.currentPosition)) {
+        activePlayer.score -= 25
+        this.questionResult = "PUAHAHAHAH You lost 25 points!!! PUAHAHAHAH"
+      } else if (array[5].includes(activePlayer.currentPosition)) {
+        if (activePlayer.score > 0){
+        activePlayer.score = 0
+        this.questionResult = "SHOCKING!!!You lost all your points!!! PUAHAHAHAH"}
+        else {
+          activePlayer.score = 0
+          this.questionResult = "YOU LUCKY BUM ur debit has been removed"
+        }
+      }
+    },
+    addPoints(array, activePlayer) {
+      if (array[0].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 3
+        this.questionResult = "YAASSS! You found 3 point!!!"
+      } else if (array[1].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 5
+        this.questionResult = "YAASSS! You found 5 point!!!"
+      } else if (array[2].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 9
+        this.questionResult = "YAASSS! You found 9 point!!!"
+      } else if (array[3].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 17
+        this.questionResult = "YAASSS! You found 17 point!!!"
+      } else if (array[4].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 33
+        this.questionResult = "YAASSS! You found 33 point!!!"
+      } else if (array[5].includes(activePlayer.currentPosition)) {
+        activePlayer.score += 100
+        this.questionResult = "OMG! You found 100 point!!!"
+      }
+    },
+
+    updateNames() {
+      this.players[0].name = this.player1;
+      this.players[1].name = this.player2;
+      this.players[2].name = this.player3;
+      this.players[3].name = this.player4;
+      this.filteredPlayers();
+      this.gamePlayers[0].active = true;
+      this.nextPlayer = this.activePlayer(this.gamePlayers)
+    },
+    loadRandomQuestion(categoryAndID) {
+      const url = `https://opentdb.com/api.php?amount=1&category=${categoryAndID[1]}&type=multiple`;
+      fetch(url).then(response => response.json())
+        .then(data => {
+          const query = data.results[0]
+          const options = query.incorrect_answers.map(answer => answer);
+          options.push(query.correct_answer);
+          if (!this.answeredQuestions.includes(query.question)) {
+            this.randomQuestion = {
+              options: options,
+              question: query.question,
+              correct_answer: query.correct_answer,
+              category: query.category
+            }
+            this.answeredQuestions.push(this.randomQuestion.question)
+          } else {
+            this.loadRandomQuestion(this.getRandomCategory(this.categoriesAndId));
+          }
+        })
+    },
+    getRandomCategory(categoryArray) {
+      const category = categoryArray[Math.floor(Math.random() * categoryArray.length)]
+      return category
+    },
+    addPoint(player) {
+      player.score += 1
+    },
+    checkWinCondition(activePlayer) {
+      if (activePlayer.score === 666) {
+        return true //The game finish here
+      }
+  },
+  disableTheDice() {
+    const dice = document.querySelector(".dice")
+    dice.style.pointerEvents = 'none';
+  }, //Find the Dice class and re-enable the click event
+  enableTheDice() {
+    const dice = document.querySelector(".dice")
+    dice.style.pointerEvents = 'auto';
+
+  },
+  findIndexOfPlayer(player) {
+    const index = this.gamePlayers.indexOf(player);
+    return index;
+  },
+  switchActivePlayer(player, players) {
+    const index = this.findIndexOfPlayer(player);
+    players[index].active = false;
+    if (index < (players.length - 1)) {
+      players[(index + 1)].active = true;
+    } else {
+      players[0].active = true
+    }
+  }
+},
+  mounted(){
+    this.updateNames()
+
+    eventBus.$on('selected-option', (option) => {
+      this.questionResult = null;
+      const playerActive = this.activePlayer(this.gamePlayers);
+      const question = this.randomQuestion;
+
+      if (option === question.correct_answer) {
+        this.nextPlayer = null
+        this.questionResult = "Correct! +1 point- roll again!"
+        this.addPoint(playerActive);
+        if (this.checkWinCondition(playerActive)) {
+          this.nextPlayer = null
+          this.questionResult = "Congratulations - you've WON!"
+          this.disableTheDice()
+          this.randomQuestion = null
+        } else {
+          this.nextPlayer = null
+          this.randomQuestion = null;
+          //create a new question in either cases
+          this.enableTheDice();
+        }
+      } else {
+        this.nextPlayer = null
+        this.questionResult = "Boooo - better luck next time!"
+        this.enableTheDice()
+        this.switchActivePlayer(playerActive, this.gamePlayers);
+        this.randomQuestion = null;
+
+      }
+    })
   }
 }
 </script>
 
 <style lang="css" scoped>
+.token {
+  height: 40px;
+  margin: 5px;
+}
+.token-id {
+  height: 20px;
+  float: left;
+  margin: 10px;
+}
 .page-container {
   border-style: solid;
   display: block;
@@ -578,60 +873,36 @@ input:focus {
 }
 
 .player1 {
-  border-style: solid;
-  border-radius: 50%;
-  background-color: purple;
-  width: 25px;
-  height: 25px;
-  margin: 5px;
   z-index: 2;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
 }
-
 .player2 {
-  border-style: solid;
-  border-radius: 50%;
-  background-color: red;
-  width: 25px;
-  height: 25px;
-  margin: 5px;
   margin-top: 40px;
   z-index: 2;
   position: absolute;
-  grid-row-start: 1;
-  grid-column-start: 1;
+  grid-row-start: 11;
+  grid-column-start: 17;
 }
 
 .player3 {
-  border-style: solid;
-  border-radius: 50%;
-  background-color: orange;
-  width: 25px;
-  height: 25px;
-  margin: 5px;
   margin-left: 40px;
   z-index: 2;
   position: absolute;
   grid-row-start: 1;
-  grid-column-start: 1;
+  grid-column-start: 17;
 }
 
 .player4 {
-  border-style: solid;
-  border-radius: 50%;
-  background-color: blue;
-  width: 25px;
-  height: 25px;
-  margin: 5px;
   margin-left: 40px;
   margin-top: 40px;
   z-index: 2;
   position: absolute;
-  grid-row-start: 1;
+  grid-row-start: 11;
   grid-column-start: 1;
 }
+
 
 .board-content-1 {
   width: 810px;
