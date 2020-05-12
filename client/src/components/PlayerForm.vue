@@ -3,19 +3,19 @@
     <form class="form">
       <div class="player">
         <label class="player1" for="player1">Player 1 </label>
-        <input class="player1" type="text" v-model="player1" placeholder="Enter name" onkeyup="this.value = this.value.toUpperCase();" required/>
+        <input class="player1" type="text" v-model="player1" placeholder="Enter name (max 7 chars)" onkeyup="this.value = this.value.toUpperCase();" maxlength="7" required/>
       </div>
       <div class="player">
         <label class="player2" for="player2">Player 2 </label>
-        <input class="player2" type="text" v-model="player2" placeholder="Enter name" onkeyup="this.value = this.value.toUpperCase();" required/>
+        <input class="player2" type="text" v-model="player2"  onkeyup="this.value = this.value.toUpperCase();" maxlength="7" required/>
       </div>
       <div class="player">
         <label class="player3" for="player3">Player 3 </label>
-        <input class="player3" type="text" v-model="player3" onkeyup="this.value = this.value.toUpperCase();" placeholder="Enter name"/>
+        <input class="player3" type="text" v-model="player3" maxlength="7" onkeyup="this.value = this.value.toUpperCase();"/>
       </div>
       <div class="player">
         <label class="player4" for="player4">Player 4 </label>
-        <input class="player4" type="text" v-model="player4" onkeyup="this.value = this.value.toUpperCase();" placeholder="Enter name"/>
+        <input class="player4" type="text" v-model="player4" maxlength="7" onkeyup="this.value = this.value.toUpperCase();"/>
       </div>
     </form>
     <nav class="nav" v-if="player1 && player2">
@@ -84,8 +84,9 @@ input:focus {
 }
 
 input::placeholder {
-  color: #8e9aaf;
+  color: white;
   text-shadow: none;
+  font-size: 20px;
 }
 
 input.player1 {
