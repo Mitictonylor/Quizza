@@ -12,6 +12,8 @@
           </div>
           <div class="title-container">
             <p class="title">Hall of Fame</p>
+
+            <score-board  v-if="scoreBoard" v-for="(list,index) in sortScores(scoreBoard)" :key="index" :list="list"></score-board>
           </div>
         </div>
       </div>
@@ -25,9 +27,15 @@ import resize from 'vue-resize-directive';
 import button from '@/assets/sounds/button.wav';
 import about from '@/assets/images/about.png';
 import back from '@/assets/images/back.png';
+import QuizzaService from '@/services/QuizzaService.js';
+import ScoreBoard from '@/components/ScoreBoard.vue'
+
 
 export default {
     name: 'halloffame',
+    components:{
+      'score-board': ScoreBoard
+    },
     data() {
       return {
         circleArr: [],
@@ -37,15 +45,33 @@ export default {
         },
         button: button,
         about: about,
-        back: back
+        back: back,
+        scoreBoard: []
       }
     },
     mounted() {
+      this.getScores()
       this.setCanvasDimensions();
       this.circleArray();
       this.animateCircles();
     },
+
     methods: {
+      getScores(){
+        QuizzaService.getScores()
+        .then(score => this.scoreBoard = score)
+        console.log(this.scoreBoard);
+      },
+      sortScores(board){
+      const newBoard= board.sort(function (a, b) {
+        return b.score - a.score;
+          });
+        return newBoard
+        console.log('sorted',this.newBoard);
+      },
+
+
+
       setCanvasDimensions() {
         const canvas = document.querySelector('#canvas')
         canvas.width = window.innerWidth;
