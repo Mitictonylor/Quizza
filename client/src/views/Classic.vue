@@ -594,12 +594,12 @@ export default {
   }
 
   .flashing {
-    animation: flash 0.7s ease 5s infinite;
+    animation: flash 0.5s ease 5s infinite;
   }
 
   @keyframes flash {
     50% {
-      background-color: #8e9aaf;
+      background-color: #cad0eb;
     }
   }
 
