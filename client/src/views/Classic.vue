@@ -118,8 +118,6 @@
           </div>
         </div>
 
-
-
       <div class="board-content-top-right">
         <div class="question">
           <questions v-if="selectedCategory.length > 0 && randomQuestion" :randomQuestion="randomQuestion"></questions>
@@ -128,10 +126,24 @@
 
       <div class="board-content-bottom-right">
         <div class="question-result">
-          <p v-if="nextPlayer">{{nextPlayer.name.toUpperCase()}} you're up!</p>
-          <p>{{questionResult}}</p>
+            <div class="category-list">
+              <div class="cl-left">
+                <div class="spo"></div><p class="cat-name">Sports</p>
+                <div class="sci"></div><p class="cat-name">Science & Nature</p>
+                <div class="geo"></div><p class="cat-name">Geography</p>
+              </div>
+              <div class="cl-right">
+              <div class="his"></div><p class="cat-name">History</p>
+              <div class="gk"></div><p class="cat-name">General Knowledge</p>
+              <div class="anim"></div><p class="cat-name">Animals</p>
+              </div>
+            </div>
+            <div class="np-name">
+              <p v-if="nextPlayer">{{nextPlayer.name.toUpperCase()}}  you're up!</p>
+              <p>{{questionResult}}</p>
+            </div>
+          </div>
         </div>
-      </div>
 
       <div class="board-content-bottom-left">
         <div class="players-container">
@@ -742,7 +754,6 @@ export default {
   }
 
   .question-result {
-    margin-top: 60px;
     width: 80%;
     font-size: 40px;
     display: inline-block;
@@ -786,31 +797,39 @@ export default {
   }
 
   .player1-container {
-    color: #ff70a6;
+    color: white;
+    background-color: #ff70a6;
     border-style: solid;
     margin: 10px;
     overflow: auto;
+    font-family: 'Russo One', sans-serif;
   }
 
   .player2-container {
-    color: #70d6ff;
+    background-color: #70d6ff;
+    color: white;
     border-style: solid;
     margin: 10px;
     overflow: auto;
+    font-family: 'Russo One', sans-serif;
   }
 
   .player3-container {
-    color: #e9ff70;
+    background-color: #e9ff70;
+    color: white;
     border-style: solid;
     margin: 10px;
     overflow: auto;
+    font-family: 'Russo One', sans-serif;
   }
 
   .player4-container {
-    color: #6eeb83;
+    background-color: #6eeb83;
+    color: white;
     border-style: solid;
     margin: 10px;
     overflow: auto;
+    font-family: 'Russo One', sans-serif;
   }
 
   .player-txt {
@@ -902,4 +921,91 @@ export default {
   .collected {
     margin-left: 15px;
   }
+
+  .category-list {
+    overflow: auto;
+    margin-top: 50px;
+    margin-left: 25px;
+    margin-bottom: 80px;
+  }
+
+  .cl-left {
+    width: 49%;
+    float: left;
+  }
+
+  .cl-right {
+    width: 49%;
+    float: left;
+  }
+
+  .spo {
+    background-color: #6eeb83;
+    height: 20px;
+    width: 20px;
+    width: 10%;
+    float: left;
+    margin-right: 10px;
+    margin-top: 4px;
+  }
+
+  .sci {
+    background-color: #70d6ff;
+    height: 20px;
+    width: 20px;
+    width: 10%;
+    float: left;
+    margin-right: 10px;
+    margin-top: 4px;
+  }
+
+  .his {
+    background-color: #ff9770;
+    height: 20px;
+    width: 20px;
+    width: 10%;
+    float: left;
+    margin-right: 10px;
+    margin-top: 4px;
+  }
+
+  .gk {
+    background-color: #907ad6;
+    height: 20px;
+    width: 20px;
+    width: 10%;
+    float: left;
+    margin-right: 10px;
+    margin-top: 4px;
+  }
+
+  .geo {
+    background-color: #ff70a6;
+    height: 20px;
+    width: 20px;
+    width: 10%;
+    float: left;
+    margin-right: 10px;
+    margin-top: 4px;
+  }
+
+  .anim {
+    background-color: #e9ff70;
+    height: 20px;
+    width: 20px;
+    width: 10%;
+    float: left;
+    margin-right: 10px;
+    margin-top: 4px;
+  }
+
+  .cat-name {
+    font-size: 20px;
+    text-align: left;
+  }
+
+  .np-name {
+    font-family: 'Russo One', sans-serif;
+  }
+
 </style>
