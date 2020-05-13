@@ -526,6 +526,9 @@ export default {
         // this.enableTheDice();
       }
     })
+  },
+  beforeDestroy() {
+    eventBus.$off();
   }
 }
 </script>

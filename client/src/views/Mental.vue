@@ -447,6 +447,9 @@ export default {
 
       }
     })
+  },
+  beforeDestroy() {
+    eventBus.$off();
   }
 }
 </script>
