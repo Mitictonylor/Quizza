@@ -262,6 +262,7 @@ export default {
       randomQuestion: null,
       questionResult: null,
       stealPointsResponse: null,
+      fullScreen: false,
       arrayLoose: [
         [5, 10, 15], //-1
         [20, 25, 30], //-2
@@ -404,8 +405,11 @@ export default {
       this.loadRandomQuestion(randomCategoryAndId);
     },
     togglefullScreen() {
-      const element = document.querySelector('#seek');
-      element.requestFullscreen();
+      if (this.fullScreen === false) {
+        const element = document.querySelector('#seek');
+        element.requestFullscreen();
+        this.fullScreen = true;
+      }
     },
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
@@ -458,7 +462,6 @@ export default {
     addPoint(player) {
       player.score += 1
     },
-
     checkWinCondition(activePlayer) {
       if (activePlayer.currentPosition === 107) {
         return true //The game finish here
@@ -483,7 +486,6 @@ export default {
         players[0].active = true
       }
     }
-
 },
   mounted() {
     this.updateNames();

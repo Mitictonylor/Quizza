@@ -219,6 +219,7 @@ export default {
         ["j10", "b16", "d14", "b14", "d16","k3", "h4", "d4"], //-25
         ["a5", "f16", "g1", "a11","e17", "k13", "c7", "i13","e1", "b10", "c3", "k9", "f4","b6", "a7", "j14", "i7", "k15","f14", "h14","b8"],
       ], //-all
+      fullScreen: false
 
 
     }
@@ -273,8 +274,11 @@ export default {
 ;
     },
     togglefullScreen () {
-      const element = document.querySelector('#mental');
-      element.requestFullscreen();
+      if (this.fullScreen === false) {
+        const element = document.querySelector('#mental');
+        element.requestFullscreen();
+        this.fullScreen = true;
+      }
     },
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {

@@ -1,5 +1,5 @@
 <template lang="html">
-    <div id="classic" class="page-container" v-on:click="togglefullScreen()">
+    <div id="classic" class="page-container" v-on:click="togglefullScreen()" :disabled="fullScreen">
       <div class="game-board">
         <div id="a1" class="sport" v-on:click="checkActive($event)"></div>
         <div id="a2" class="geography" v-on:click="checkActive($event)"></div>
@@ -79,8 +79,9 @@
 
         <div class="board-content-top-left">
           <div class="back-container">
-            <router-link :to="{name: 'newgame'}"> <img class="back" :src="back"> </router-link>
+            <router-link :to="{name: 'newgame'}"> <img class="back" :src="back" v-on:click=""> </router-link>
           </div>
+
           <div class="container">
 
             <div id="cube" v-on:click="rollDice">
@@ -271,7 +272,8 @@ export default {
       questionResult: null,
       nextPlayer: null,
       selectedOption: null,
-      back: back
+      back: back,
+      fullScreen: false
     }
   },
   components: {
@@ -471,8 +473,11 @@ export default {
       }
     },
     togglefullScreen() {
-      const element = document.querySelector('#classic');
-      element.requestFullscreen();
+      if (this.fullScreen === false) {
+        const element = document.querySelector('#classic');
+        element.requestFullscreen();
+        this.fullScreen = true;
+      }
     },
     checkScore(score) {
       if (score === "Science & Nature") {
@@ -523,7 +528,7 @@ export default {
     });
   },
   beforeDestroy() {
-    eventBus.$off()
+    eventBus.$off();
   }
 }
 </script>
