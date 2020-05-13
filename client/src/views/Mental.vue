@@ -111,7 +111,7 @@
               <div class="score-container">
                 <p>SCORE: {{players[1].score}}</p>
               </div>
-            </div> -->
+            </div>
             <div v-if="players[2].name" class="player-container">
               <img class="token-id" :src="players[2].token">
               <p class="player-txt3"> {{players[2].name.toUpperCase()}}</p>
@@ -149,10 +149,6 @@
 
 <script>
 import {MentalTileObjects} from '@/config/MentalTileObjects.js'
-import player1 from '@/assets/tokens/circle_red.png';
-import player2 from '@/assets/tokens/circle_blue.png';
-import player3 from '@/assets/tokens/circle_yellow.png';
-import player4 from '@/assets/tokens/circle_green.png';
 import Questions from "@/components/Questions.vue"
 import {eventBus} from '../main.js';
 require('@/assets/css/skull.css');
@@ -185,8 +181,7 @@ export default {
           score: 0,
           active: false,
           currentPosition: 'a1',
-          id: 1,
-          token: player1
+          id: 1
         },
         {
           alias: "player2",
@@ -194,8 +189,7 @@ export default {
           score: 0,
           active: false,
           currentPosition: 'k17',
-          id: 2,
-          token: player2
+          id: 2
         },
         {
           alias: "player3",
@@ -203,8 +197,7 @@ export default {
           score: 0,
           active: false,
           currentPosition: 'a17',
-          id: 3,
-          token: player3
+          id: 3
         },
         {
           alias: "player4",
@@ -212,8 +205,7 @@ export default {
           score: 0,
           active: false,
           currentPosition: 'k17',
-          id: 4,
-          token: player4
+          id: 4
         }
       ],
       categoriesAndId: [
@@ -253,7 +245,7 @@ export default {
       this.disableTheDice()
       const randomGridTile = MentalTileObjects[Math.floor(Math.random() * 72)].id
       const moveOption = document.querySelector(`#${randomGridTile}`);
-      moveOption.style.color = 'red';
+      moveOption.style.color = 'white';
       this.activePlayer(this.gamePlayers).currentPosition = randomGridTile
     },
     resetMoveOptions() {
@@ -468,10 +460,12 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 .page-container {
   display: block;
   text-align: center;
   width: 100vw;
+  background-color: black;
 }
 
 .game-board {
@@ -990,4 +984,43 @@ P {
   color: white;
   font-size: 40px;
 }
+
+#a1, #a13, #b8, #c3, #c15, #e1, #f4, #g17, #i3, #i15, #j10, #k5, #k17  {
+  background-color: purple;
+  animation: flash 0.2s linear infinite;
+}
+
+#a3, #a15, #b10, #c5, #c17, #e3, #f14, #h2, #i5, #i17, #j12, #k7 {
+  background-color: green;
+  animation: flash 0.2s linear infinite;
+}
+#a5, #a17, #b12, #c7, #d2, #e5, #f16, #h4, #i7, #j2, #j14, #k9 {
+  background-color: red;
+  animation: flash 0.2s linear infinite;
+}
+#a7, #b2, #b14, #c9, #d4, #e15, #g1, #h14, #i9, #j4, #j16, #k11 {
+  background-color: blue;
+  animation: flash 0.2s linear infinite;
+}
+#a9, #b4, #b16, #c11, #d14, #e17, #g3, #h16, #i11, #j6, #k1, #k13 {
+  background-color: yellow;
+  animation: flash 0.2s linear infinite;
+}
+#a11, #b6, #c1, #c13, #d16, #f2, #g15, #i1, #i13, #j8, #k3, #k15 {
+  background-color: orange;
+  animation: flash 0.2s linear infinite;
+}
+
+@keyframes flash {
+  50% {
+    opacity: 0;
+    background-color: white;
+  }
+}
+</style>
+
+<style media="screen">
+  body {
+        background-color: black;
+  }
 </style>
