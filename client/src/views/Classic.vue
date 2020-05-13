@@ -78,8 +78,8 @@
         <div id="k17" class="sport" v-on:click="checkActive($event)"></div>
 
         <div class="board-content-top-left">
-          <div class="back-container">
-            <router-link :to="{name: 'newgame'}"> <img class="back" :src="back" v-on:click=""> </router-link>
+          <div class="back-button-container">
+            <router-link :to="{name: 'newgame'}"> <img class="back-button" :src="back" v-on:click=""> </router-link>
           </div>
 
           <div class="dice-container">
@@ -536,7 +536,6 @@ export default {
     text-align: center;
     width: 100vw;
     background-color: #8e9aaf;
-    cursor: pointer;
   }
 
   .game-board {
@@ -544,6 +543,7 @@ export default {
     position: relative;
     margin-top: 10px;
     margin-bottom: 10px;
+    cursor: pointer;
   }
 
   .sport {
@@ -1027,22 +1027,22 @@ export default {
     font-family: 'Russo One', sans-serif;
   }
 
-  .back-container {
+  .back-button-container {
     width: 10%;
     float: left;
     margin: 20px;
   }
 
-  .back {
+  .back-button {
     height: 60px;
   }
 
-  .back:hover {
+  .back-button:hover {
     background-color: #ff70a6;
     border-radius: 50%;
   }
 
-  .back:focus {
+  .back-button:focus {
     outline: none;
   }
 </style>
