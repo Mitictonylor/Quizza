@@ -287,12 +287,10 @@ export default {
       this.showMoveOptions()
       this.questionResult = null;
       this.disableTheDice();
-
     },
     getDiceFace() {
       return require('@/assets/dice/' + this.diceResult + '.png')
     },
-
     stealPoints(activePlayer, arrayOfPlayers) {
       const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false)
       const sameCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
@@ -306,7 +304,6 @@ export default {
         })
       };
     },
-
     loosePoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 1

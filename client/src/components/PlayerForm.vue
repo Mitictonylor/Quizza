@@ -58,7 +58,6 @@
 </script>
 
 <style lang="css" scoped>
-
 .form {
   font-size: 25px;
   font-family: 'Russo One', sans-serif;

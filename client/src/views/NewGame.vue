@@ -211,5 +211,4 @@ p {
   font-size: 25px;
   font-family: 'Open Sans', sans-serif;
 }
-
 </style>

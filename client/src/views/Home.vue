@@ -151,7 +151,6 @@ export default {
     }
   }
 
-
   .input {
     background-color: transparent;
     color: white;

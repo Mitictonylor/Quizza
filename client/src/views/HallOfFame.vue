@@ -17,8 +17,8 @@
         <div class="scoreboard-container">
           <div class="scoreboard">
             <div class="heading-container">
-                 <th class="player-heading">Player</th>
-                 <th class="high-heading">High Score</th>
+              <th class="player-heading">Player</th>
+              <th class="high-heading">High Score</th>
           </div>
             <score-board  v-if="scoreBoard" v-for="(list,index) in sortScores(scoreBoard)" :key="index" :list="list"></score-board>
           </div>

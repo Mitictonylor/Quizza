@@ -428,14 +428,12 @@ export default {
     loadAllCategories(categoryArray) {
       categoryArray.map(element => this.loadCategory(element[0], element[1]));
     },
-
     //find active player
     activePlayer(players) {
       const activePlayer = players.find(player => player.active === true);
       this.nextPlayer = activePlayer
       return activePlayer;
     },
-
     //add won categories, no duplicates allowed
     addWonCategory(player, question, arrayOfplayers) {
       const index = this.findIndexOfPlayer(player);
@@ -494,7 +492,6 @@ export default {
         return "gk-score"
       }
     },
-
     checkSelectedOption() {
       const playerActive = this.activePlayer(this.gamePlayers);
       const question = this.randomQuestion;
@@ -616,7 +613,6 @@ export default {
     }
   }
 
-
   /* RIGHT Y COL */
   #a17, #b17, #c17, #d17, #e17, #f17, #g17, #h17, #i17, #j17, #k17 {
   grid-column-start: 17;
@@ -669,7 +665,6 @@ export default {
   }
   /* LEFT Y COL END */
 
-
   /* CROSS SECTION X */
   #f1, #f2, #f3, #f4, #f5, #f6, #f7, #f8, #f9, #f10, #f11, #f12, #f13, #f14,#f15, #f16, #f17 {
   grid-row-start: 6;
@@ -679,7 +674,6 @@ export default {
   #b9, #c9, #d9, #e9, #f9, #g9, #h9, #i9, #j9 {
   grid-column-start: 9;
   }
-
 
   input:focus {
     outline: none;

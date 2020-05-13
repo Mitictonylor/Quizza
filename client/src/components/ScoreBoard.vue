@@ -5,14 +5,13 @@
       <td class = "column-score">{{list.score}}</td>
     </tr>
   </table>
-
 </template>
 
 <script>
-export default {
-  name: 'ScoreBoard',
-  props:['list']
-}
+  export default {
+    name: 'ScoreBoard',
+    props:['list']
+  }
 </script>
 
 <style lang="css" scoped>
@@ -37,6 +36,7 @@ export default {
   padding: 8px;
   width: 19%;
 }
+
 .row:nth-child(even) {
   background-color: #dddddd;
 }

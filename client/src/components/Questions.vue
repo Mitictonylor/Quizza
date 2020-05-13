@@ -37,7 +37,6 @@
         }
         return arra1;
       },
-
       checkCategory() {
         if (this.randomQuestion.category === "Science & Nature") {
             return "science"
@@ -111,5 +110,4 @@ p {
   margin: 4;
   padding: 0;
 }
-
 </style>
