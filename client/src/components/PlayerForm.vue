@@ -29,7 +29,7 @@
           <router-link :to="{name: 'seek', params:{player1, player2, player3, player4}}"> <img class="game" :src="seek"> </router-link>
       </div>
       <div class="game-container">
-          <router-link :to="{name: 'mental', params:{player1, player2, player3, player4}}"> <img class="mental-game" :src="mental"></router-link>
+          <router-link :to="{name: 'warning', params:{player1, player2, player3, player4}}"> <img class="mental-game" :src="mental"></router-link>
       </div>
     </nav>
     </div>

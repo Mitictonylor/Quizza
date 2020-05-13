@@ -10,6 +10,7 @@ import Classic from '@/views/Classic.vue';
 import Seek from '@/views/Seek.vue';
 import Mental from '@/views/Mental.vue';
 import HallOfFame from '@/views/HallOfFame';
+import Warning from '@/views/Warning';
 import DevBoard from '@/views/DevBoard';
 
 //we need to define a roter object, that takes in an object with the routes
@@ -60,6 +61,12 @@ const router = new Router({
       path: '/halloffame',
       name: 'halloffame',
       component: HallOfFame,
+      props: true
+    },
+    {
+      path: '/warning',
+      name:'warning',
+      component: Warning,
       props: true
     },
     {
