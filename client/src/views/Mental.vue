@@ -1,5 +1,6 @@
 <template lang="html">
   <div id="mental" class="page-container" v-on:click="togglefullScreen()">
+
     <div class="game-board" ref="gameBoard">
       <div id="a1" class="grid" v-on:click="checkActive($event)"></div>
       <div id="a3" class="grid" v-on:click="checkActive($event)"></div>
@@ -76,6 +77,19 @@
 
 
       <div class="board-content-1">
+        <div class="player1-container">
+          <p class="player-txt1" v-if="players[0].name && players[1].name"> {{players[0].name.toUpperCase()}}</p>
+          <div class="score-container">
+            <p>SCORE: {{players[0].score}}</p>
+          </div>
+        </div>
+        <div class="player2-container">
+          <p class="player-txt2" v-if="players[0].name && players[1].name"> {{players[1].name.toUpperCase()}}</p>
+          <div class="score-container">
+            <p>SCORE: {{players[1].score}}</p>
+          </div>
+        </div>
+
           <div class="skull" v-on:click="randomDice()">
             <div class="eye"></div>
             <div class="eye"></div>
@@ -98,29 +112,13 @@
             </div>
           </div>
 
-            <div class="player-container">
-              <img class="token-id" :src="players[0].token">
-              <p class="player-txt1" v-if="players[0].name && players[1].name"> {{players[0].name.toUpperCase()}}</p>
-              <div class="score-container">
-                <p>SCORE: {{players[0].score}}</p>
-              </div>
-            </div>
-            <div class="player-container">
-              <img class="token-id" :src="players[1].token">
-              <p class="player-txt2" v-if="players[0].name && players[1].name"> {{players[1].name.toUpperCase()}}</p>
-              <div class="score-container">
-                <p>SCORE: {{players[1].score}}</p>
-              </div>
-            </div>
-            <div v-if="players[2].name" class="player-container">
-              <img class="token-id" :src="players[2].token">
+            <div v-if="players[2].name" class="player3-container">
               <p class="player-txt3"> {{players[2].name.toUpperCase()}}</p>
               <div class="score-container">
                 <p>SCORE: {{players[2].score}}</p>
               </div>
             </div>
-            <div v-if="players[3].name" class="player-container">
-              <img class="token-id" :src="players[3].token">
+            <div v-if="players[3].name" class="player4-container">
               <p class="player-txt4"> {{players[3].name.toUpperCase()}}</p>
               <div class="score-container">
                 <p>SCORE: {{players[3].score}}</p>
@@ -142,6 +140,7 @@
       <div id="player2" class="player2" v-if="players[1].name"></div>
       <div id="player3" class="player3" v-if="players[2].name"></div>
       <div id="player4" class="player4" v-if="players[3].name"></div>
+
     </div>
   </div>
 </div>
@@ -167,7 +166,7 @@ export default {
         id: 1,
         currentPosition: 'f9'
       },
-      questionResult: null,
+      questionResult: "PRESS THE BIG MAD MENTAL SKULL TO START!!!!",
       answeredQuestions:[],
       randomQuestion: null,
       moveOptions: null,
@@ -240,18 +239,19 @@ export default {
       this.diceResult = this.dice[Math.floor(Math.random() * 6)]
       this.showMoveOptions()
       this.disableTheDice();
+      this.questionResult = null;
     },
     showMoveOptions() {
       this.disableTheDice()
       const randomGridTile = MentalTileObjects[Math.floor(Math.random() * 72)].id
       const moveOption = document.querySelector(`#${randomGridTile}`);
-      moveOption.style.color = 'white';
+      moveOption.classList.add("flashing");
       this.activePlayer(this.gamePlayers).currentPosition = randomGridTile
     },
     resetMoveOptions() {
       const active = this.activePlayer(this.gamePlayers).currentPosition
       const moveOption = document.querySelector(`#${active}`);
-      moveOption.style.color = 'black';
+      moveOption.classList.remove("flashing");
     },
     getNewRowPosition(event) {
       const divID = event.currentTarget.id;
@@ -281,11 +281,11 @@ export default {
       this.loadRandomQuestion(randomCategoryAndId);
     },
     togglefullScreen () {
-      // if (this.fullScreen === false) {
-      //   const element = document.querySelector('#mental');
-      //   element.requestFullscreen();
-      //   this.fullScreen = true;
-      // }
+      if (this.fullScreen === false) {
+        const element = document.querySelector('#mental');
+        element.requestFullscreen();
+        this.fullScreen = true;
+      }
     },
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
@@ -303,7 +303,7 @@ export default {
       const sameCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
       if (sameCurrentPosition.length >= 1) {
         sameCurrentPosition.forEach((player) => {
-            this.questionResult = `You n ${player.name} lost aw yer points!`
+            this.questionResult = `You & ${player.name} lost aw yer points!`
             activePlayer.score = 0
             player.score = 0
           })
@@ -312,26 +312,26 @@ export default {
     loosePoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 4
-        this.questionResult = "Nae Joy! You lost 4 points!!!"
+        this.questionResult = "NAE JOY! You lost 4 points!!!"
       } else if (array[1].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 7
-        this.questionResult = "Nae Joy! You lost 7 points!!!"
+        this.questionResult = "NAE JOY! You lost 7 points!!!"
       } else if (array[2].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 13
-        this.questionResult = "Nae Joy! You lost 13 points!!!"
+        this.questionResult = "NAE JOY! You lost 13 points!!!"
       } else if (array[3].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 17
-        this.questionResult = "Nae Joy! You lost 17 points!!!"
+        this.questionResult = "NAE JOY! You lost 17 points!!!"
       } else if (array[4].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 25
-        this.questionResult = "Nae Joy! You lost 25 points!!!"
+        this.questionResult = "NAE JOY! You lost 25 points!!!"
       } else if (array[5].includes(activePlayer.currentPosition)) {
         if (activePlayer.score > 0){
         activePlayer.score = 0
-        this.questionResult = "Sake man!!! Ye lost aw yer points!!!"}
+        this.questionResult = "SAKE!!! Ye lost aw yer points!!!"}
         else {
           activePlayer.score = 0
-          this.questionResult = "Jammy! Yer back to zero!"
+          this.questionResult = "JAMMY!"
         }
       }
     },
@@ -353,7 +353,7 @@ export default {
         this.questionResult = "YAASSS! Ye fun 33 points!!!"
       } else if (array[5].includes(activePlayer.currentPosition)) {
         activePlayer.score += 100
-        this.questionResult = "Nae Danger! Ye fun 100 points!!!"
+        this.questionResult = "NAE DANGER! Ye fun 100 points!!!"
       }
     },
     updateNames() {
@@ -430,7 +430,7 @@ export default {
 
       if (option === question.correct_answer) {
         this.nextPlayer = null
-        this.questionResult = "YAS! +1 point - go again!"
+        this.questionResult = "YAS! Ye got a point! Go again!"
         this.addPoint(playerActive);
         if (this.checkWinCondition(playerActive)) {
           this.nextPlayer = null
@@ -445,11 +445,10 @@ export default {
         }
       } else {
         this.nextPlayer = null
-        this.questionResult = "NUT - WRANG!"
+        this.questionResult = "BOLT - WRANG ANSWER!"
         this.enableTheDice()
         this.switchActivePlayer(playerActive, this.gamePlayers);
         this.randomQuestion = null;
-
       }
     })
   },
@@ -485,7 +484,7 @@ export default {
 
 .grid:hover {
   cursor: pointer;
-  color: blue;
+  color: white;
 }
 
 /* ROW A */
@@ -860,7 +859,6 @@ export default {
   grid-column-start: 17;
 }
 
-
 .dice-container {
   display: inline-block;
   text-align: center;
@@ -877,25 +875,48 @@ input:focus {
 }
 
 .player1 {
+  margin-top: 5px;
+  margin-left: 5px;
   z-index: 2;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
+  border: solid;
+  color: white;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: #ff70a6;
 }
+
 .player2 {
   margin-top: 40px;
+  margin-left: 5px;
   z-index: 2;
   position: absolute;
   grid-row-start: 11;
   grid-column-start: 17;
+  border: solid;
+  color: white;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: #70d6ff;
 }
 
 .player3 {
   margin-left: 40px;
+  margin-top: 5px;
   z-index: 2;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 17;
+  border: solid;
+  color: white;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: #6eeb83;
 }
 
 .player4 {
@@ -905,6 +926,12 @@ input:focus {
   position: absolute;
   grid-row-start: 11;
   grid-column-start: 1;
+  border: solid;
+  color: white;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: #907ad6;
 }
 
 .token {
@@ -927,19 +954,71 @@ input:focus {
   margin-left: 360px;
 }
 
-.player-container {
-  width: 25%;
+.player1-container {
+  width: 300px;
+  margin-top: 20px;
   float: left;
   color: white;
   font-family: 'Russo One', sans-serif;
   text-shadow: 2px 2px 4px #000000;
-  margin-top: 4px;
 }
 
-P {
-  font-size: 25px;
-  font-weight: bold;
-  color: blue;
+.player2-container {
+  width: 300px;
+  float: left;
+  color: white;
+  font-family: 'Russo One', sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+  margin-top: 20px;
+  margin-left: 200px;
+}
+
+.player3-container {
+  width: 300px;
+  float: left;
+  color: white;
+  font-family: 'Russo One', sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+  margin-top: 60px;
+}
+
+.player4-container {
+  width: 300px;
+  float: left;
+  color: white;
+  font-family: 'Russo One', sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+  margin-top: 60px;
+  margin-left: 200px;
+}
+
+.flashing {
+  border: solid 10px;
+  color: white;
+}
+
+.player-txt1 {
+  font-size: 45px;
+  color: #ff70a6;
+}
+
+.player-txt2 {
+  font-size: 45px;
+  color: #70d6ff;
+}
+
+.player-txt3 {
+  font-size: 45px;
+  color: #6eeb83;
+}
+
+.player-txt4 {
+  font-size: 45px;
+  color: #907ad6;
+}
+
+.score-container {
+  font-size: 30px;
 }
 
 .board-content-2 {
@@ -960,14 +1039,14 @@ P {
 
 .board-content-3 {
   width: 620px;
-  height: 180px;
+  height: 110px;
   z-index: 20;
   position: absolute;
-  margin-top: 800px;
+  margin-top: 840px;
   margin-left: 450px;
   color: white;
   border: solid;
-  box-shadow: 8px 8px 16px #ffffff;
+  box-shadow: 2px 2px 4px #ffffff;
   background-color: black;
   border-style: solid;
 }
@@ -987,28 +1066,28 @@ P {
 
 #a1, #a13, #b8, #c3, #c15, #e1, #f4, #g17, #i3, #i15, #j10, #k5, #k17  {
   background-color: purple;
-  animation: flash 0.2s linear infinite;
+  animation: flash 0.8s linear infinite;
 }
 
 #a3, #a15, #b10, #c5, #c17, #e3, #f14, #h2, #i5, #i17, #j12, #k7 {
   background-color: green;
-  animation: flash 0.2s linear infinite;
+  animation: flash 0.6s linear infinite;
 }
 #a5, #a17, #b12, #c7, #d2, #e5, #f16, #h4, #i7, #j2, #j14, #k9 {
   background-color: red;
-  animation: flash 0.2s linear infinite;
+  animation: flash 0.4s linear infinite;
 }
 #a7, #b2, #b14, #c9, #d4, #e15, #g1, #h14, #i9, #j4, #j16, #k11 {
   background-color: blue;
-  animation: flash 0.2s linear infinite;
+  animation: flash 0.3s linear infinite;
 }
 #a9, #b4, #b16, #c11, #d14, #e17, #g3, #h16, #i11, #j6, #k1, #k13 {
   background-color: yellow;
-  animation: flash 0.2s linear infinite;
+  animation: flash 0.8s linear infinite;
 }
 #a11, #b6, #c1, #c13, #d16, #f2, #g15, #i1, #i13, #j8, #k3, #k15 {
   background-color: orange;
-  animation: flash 0.2s linear infinite;
+  animation: flash 1s linear infinite;
 }
 
 @keyframes flash {
@@ -1017,6 +1096,12 @@ P {
     background-color: white;
   }
 }
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
 </style>
 
 <style media="screen">

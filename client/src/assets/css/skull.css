@@ -135,18 +135,21 @@
 
 @keyframes rainbow {
   0% {
-    background: red;
+    background: purple;
   }
-  25% {
-    background: blue;
-  }
-  50% {
+  20% {
     background: green;
   }
-  75% {
+  40% {
+    background: red;
+  }
+  60% {
     background: yellow;
   }
+  80% {
+    background: blue;
+  }
   100% {
-    background: red;
+    background: orange;
   }
 }
