@@ -461,6 +461,8 @@ export default {
       if (activePlayer.score.length === 6) {
         this.nextPlayer = null
         this.questionResult = "Congratulations - you've WON!"
+        const allThePage = document.querySelector("#classic");
+        allThePage.classList.add("flashing");
         this.disableTheDice()
         this.randomQuestion = null
       } else {
