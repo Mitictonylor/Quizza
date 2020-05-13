@@ -5,10 +5,10 @@
       <div class="halloffame">
         <div class="menu">
           <div class="back-container">
-            <router-link  v-on:click="playSound" :to="{name: 'newgame'}"> <img class="back" :src="back"> </router-link>
+            <router-link :to="{name: 'newgame'}"> <img class="back" :src="back"> </router-link>
           </div>
           <div class="about-container">
-            <router-link  v-on:click="playSound" :to="{name: 'about'}"> <img class="about" :src="about"> </router-link>
+            <router-link :to="{name: 'about'}"> <img class="about" :src="about"> </router-link>
           </div>
           <div class="title-container">
             <p class="title">Hall of Fame</p>
@@ -31,7 +31,6 @@
 <script>
 import Circle from '@/helpers/HomePageCanvas.js';
 import resize from 'vue-resize-directive';
-import button from '@/assets/sounds/button.wav';
 import about from '@/assets/images/about.png';
 import back from '@/assets/images/back.png';
 import QuizzaService from '@/services/QuizzaService.js';
@@ -50,7 +49,6 @@ export default {
           x: null,
           y: null
         },
-        button: button,
         about: about,
         back: back,
         scoreBoard: []
@@ -76,9 +74,6 @@ export default {
         return newBoard
         console.log('sorted',this.newBoard);
       },
-
-
-
       setCanvasDimensions() {
         const canvas = document.querySelector('#canvas')
         canvas.width = window.innerWidth;
@@ -122,10 +117,6 @@ export default {
       },
       init() {
         this.circleArray()
-      },
-      playSound() {
-        var sound = document.getElementById("audio");
-        sound.play();
       }
     },
     directives: {

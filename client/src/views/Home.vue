@@ -9,7 +9,7 @@
         <p class="tagline">A Fra, Toni & Crug jam</p>
       </div>
       <div class="button-container">
-        <router-link  v-on:click="playSound" :to="{name: 'newgame'}"> <img class="input" :src="goButton"> </router-link>
+        <router-link :to="{name: 'newgame'}"> <img class="input" :src="goButton"> </router-link>
       </div>
     </div>
   </div>
@@ -19,7 +19,6 @@
 import Circle from '@/helpers/HomePageCanvas.js';
 import resize from 'vue-resize-directive';
 import go from '@/assets/images/go.png';
-import button from '@/assets/sounds/button.wav';
 
 export default {
     name: 'home',
@@ -30,8 +29,7 @@ export default {
           x: null,
           y: null
         },
-        goButton: go,
-        button: button
+        goButton: go
       }
     },
     mounted() {
@@ -83,10 +81,6 @@ export default {
       },
       init() {
         this.circleArray()
-      },
-      playSound() {
-        var sound = document.getElementById("audio");
-        sound.play();
       }
     },
     directives: {

@@ -5,10 +5,10 @@
       <div class="form">
         <div class="welcome">
           <div class="about-container">
-            <router-link  v-on:click="playSound" :to="{name: 'about'}"> <img class="about" :src="about"> </router-link>
+            <router-link :to="{name: 'about'}"> <img class="about" :src="about"> </router-link>
           </div>
           <div class="high-score-container">
-            <router-link  v-on:click="playSound" :to="{name: 'halloffame'}"> <img class="high" :src="highscore"> </router-link>
+            <router-link :to="{name: 'halloffame'}"> <img class="high" :src="highscore"> </router-link>
           </div>
           <div class="title-container">
             <p class="title">QuizzA</p>
@@ -18,7 +18,6 @@
         </div>
         <player-form/>
       </div>
-
     </div>
   </div>
 </template>
@@ -29,7 +28,6 @@ import resize from 'vue-resize-directive';
 import PlayerForm from '@/components/PlayerForm.vue';
 import about from '@/assets/images/about.png';
 import highscore from '@/assets/images/highscore.png';
-import button from '@/assets/sounds/button.wav';
 
 export default {
   name: 'newgame',
@@ -44,7 +42,7 @@ export default {
         y: null
       },
       about: about,
-      highscore: highscore,
+      highscore: highscore
     }
   },
   mounted() {
@@ -96,10 +94,6 @@ export default {
     },
     init() {
       this.circleArray()
-    },
-    playSound() {
-      var sound = document.getElementById("audio");
-      sound.play();
     }
   },
   directives: {

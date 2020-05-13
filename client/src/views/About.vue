@@ -5,10 +5,10 @@
       <div class="about">
         <div class="rules">
           <div class="back-container">
-            <router-link  v-on:click="playSound" :to="{name: 'newgame'}"> <img class="back" :src="back"> </router-link>
+            <router-link :to="{name: 'newgame'}"> <img class="back" :src="back"> </router-link>
           </div>
           <div class="high-score-container">
-            <router-link  v-on:click="playSound" :to="{name: 'halloffame'}"> <img class="high" :src="highscore"> </router-link>
+            <router-link :to="{name: 'halloffame'}"> <img class="high" :src="highscore"> </router-link>
           </div>
           <div class="title-container">
             <p class="title">Rules</p>
@@ -25,7 +25,6 @@
 <script>
 import Circle from '@/helpers/HomePageCanvas.js';
 import resize from 'vue-resize-directive';
-import button from '@/assets/sounds/button.wav';
 import highscore from '@/assets/images/highscore.png';
 import back from '@/assets/images/back.png';
 
@@ -38,7 +37,6 @@ export default {
           x: null,
           y: null
         },
-        button: button,
         highscore: highscore,
         back: back,
       }
@@ -92,10 +90,6 @@ export default {
       },
       init() {
         this.circleArray()
-      },
-      playSound() {
-        var sound = document.getElementById("audio");
-        sound.play();
       }
     },
     directives: {

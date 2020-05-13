@@ -78,6 +78,9 @@
         <div id="k17" class="sport" v-on:click="checkActive($event)"></div>
 
         <div class="board-content-top-left">
+          <div class="back-container">
+            <router-link  v-on:click="playSound" :to="{name: 'newgame'}"> <img class="back" :src="back"> </router-link>
+          </div>
           <div class="container">
 
             <div id="cube" v-on:click="rollDice">
@@ -201,6 +204,7 @@ import player2 from '@/assets/tokens/circle_blue.png';
 import player3 from '@/assets/tokens/circle_yellow.png';
 import player4 from '@/assets/tokens/circle_green.png';
 import fullscreen from '@/assets/images/fullscreen.png';
+import back from '@/assets/images/back.png';
 
 export default {
   name: 'classic',
@@ -267,6 +271,7 @@ export default {
       questionResult: null,
       nextPlayer: null,
       selectedOption: null,
+      back: back
     }
   },
   components: {
@@ -1010,4 +1015,22 @@ export default {
     font-family: 'Russo One', sans-serif;
   }
 
+  .back-container {
+    width: 10%;
+    float: left;
+    margin: 20px;
+  }
+
+  .back {
+    height: 60px;
+    border-radius: 50%;
+  }
+
+  .back:hover {
+    background-color: #ff70a6;
+  }
+
+  .back:focus {
+    outline: none;
+  }
 </style>
