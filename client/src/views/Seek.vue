@@ -160,7 +160,7 @@
 
       <div class="board-content-4">
         <div class="back-container">
-          <router-link  v-on:click="playSound" :to="{name: 'newgame'}"> <img class="back" :src="back"> </router-link>
+          <router-link :to="{name: 'newgame'}"> <img class="back" :src="back"> </router-link>
         </div>
       </div>
 
@@ -258,7 +258,6 @@ export default {
       ],
       answeredQuestions: [],
       moveOption: null,
-      fullscreen: false,
       randomQuestion: null,
       questionResult: null,
       stealPointsResponse: null,
