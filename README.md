@@ -17,7 +17,7 @@ A full stack Trivia browser board game built using:
 
 **Markup/Styling**: HTML5/CSS3
 
-The app has 3 board game types with each allowing a maximum of 4 players. The boardgames are turn based with each player having the ability to roll a dice, move position on the board and answer a question. The questions are sourced from a HTTP REST API. The app also boasts a Hall of Fame page, which stores a player's name with their high score. This data is stored locally, using MongoDb. The app was completed in a week.
+The app has 3 board game types with each allowing a maximum of 4 players. The board games are turn based with each player having the ability to roll a dice, move position on the board and answer a question. The questions are sourced from a HTTP REST API. The app also boasts a Hall of Fame page, which stores a player's name with their high score. This data is stored locally, using MongoDb. The app was completed in a week.
 
 This was a group exercise, completed with two other devs. It was tasked to us by CodeClan, Glasgow where we studied towards a PDA Level 8 in Professional Software Development. The exercise brief can be found below.
 
@@ -36,7 +36,7 @@ Based on the Trivial Pursuit board game, each player must correctly answer a que
 - General Knowledge
 - History
 
-Each category has a corresponding colour and each tile on the board, prompts a question from a specific category. When a player answers a category correctly, they collect the categories token. First player to collect all 6 wins.
+Each category has a corresponding colour and each tile on the board, prompts a question from a specific category. When a player answers a question correctly, they collect a token from that question's category. First player to collect all 6 wins.
 
 **Seek**
 
