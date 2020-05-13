@@ -20,7 +20,7 @@
               <th class="player-heading">Player</th>
               <th class="high-heading">High Score</th>
           </div>
-            <score-board  v-if="scoreBoard" v-for="(list,index) in sortScores(scoreBoard)" :key="index" :list="list"></score-board>
+            <score-board  v-if="scoreBoard" v-for="(list,index) in sortScores" :key="index" :list="list"></score-board>
           </div>
         </div>
       </div>
@@ -65,14 +65,6 @@ export default {
       getScores(){
         QuizzaService.getScores()
         .then(score => this.scoreBoard = score)
-        console.log(this.scoreBoard);
-      },
-      sortScores(board){
-      const newBoard= board.sort(function (a, b) {
-        return b.score - a.score;
-          });
-        return newBoard
-        console.log('sorted',this.newBoard);
       },
       setCanvasDimensions() {
         const canvas = document.querySelector('#canvas')
@@ -119,6 +111,22 @@ export default {
         this.circleArray()
       }
     },
+    computed: {
+      sortScores(){
+      const newBoard = this.scoreBoard.sort(function (a, b) {
+        return b.score - a.score;
+          });
+        const topScores = [];
+        if (newBoard.length > 5) {
+          for(let i=0; i <= 5; i++){
+            topScores.push(newBoard[i])
+          }
+          return topScores;
+        } else {
+          return newBoard;
+        }
+    }
+  },
     directives: {
       resize,
     }
@@ -145,8 +153,8 @@ export default {
   }
 
   .halloffame {
-    width: 50%;
-    height: 70%;
+    width: 750px;
+    height: 550px;
     display: inline-block;
     color: white;
     font-family: 'Russo One', sans-serif;
@@ -221,6 +229,7 @@ export default {
   .title-container {
     width: 78%;
     float: left;
+    margin-bottom: 10px;
   }
 
   .title {

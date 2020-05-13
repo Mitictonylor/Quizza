@@ -19,7 +19,7 @@
   font-family: 'Open Sans', sans-serif;
   border-collapse: collapse;
   width: 100%;
-  font-size: 17px;
+  font-size: 20px;
 
 }
 
