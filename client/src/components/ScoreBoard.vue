@@ -20,7 +20,6 @@
   border-collapse: collapse;
   width: 100%;
   font-size: 20px;
-
 }
 
 .column {

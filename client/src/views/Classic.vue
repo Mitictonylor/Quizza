@@ -536,6 +536,7 @@ export default {
     text-align: center;
     width: 100vw;
     background-color: #8e9aaf;
+    cursor: pointer;
   }
 
   .game-board {
