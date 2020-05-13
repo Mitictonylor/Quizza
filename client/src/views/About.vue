@@ -15,7 +15,7 @@
           </div>
           <div class="rule-details-container">
             <p class="sub-text">Classic</p>
-            <p class="details">Each player must correctly answer a question from one of six categories: Sport, Science & Nature, Geography, Animals, General Knowledge & History. Each category has a corresponding colour and each tile on the board, prompts a question from a specific category. When a player correctly answers a question from all 6 categories - they WIN!</p>
+            <p class="details">Each player must correctly answer questions from six categories: Sport, Science & Nature, Geography, Animals, General Knowledge & History. Each category has a corresponding colour and each tile on the board, prompts a question from a specific category. When a player correctly answers a question from all 6 categories - they WIN!</p>
             <p class="sub-text">Seek</p>
             <p class="details">Each player must race to the end of the board, while avoiding point deduction traps. Players can collect points by answering questions correctly or landing on bonus tiles, which allocate points. The game is concluded and points tallied when a player lands on the finishing line and answers a question correctly.</p>
             <p class="sub-text">Mental</p>
