@@ -159,6 +159,9 @@
       </div>
 
       <div class="board-content-4">
+        <div class="back-container">
+          <router-link  v-on:click="playSound" :to="{name: 'newgame'}"> <img class="back" :src="back"> </router-link>
+        </div>
       </div>
 
       <div v-if="questionResult" class="board-content-5">
@@ -192,6 +195,7 @@ import tank3 from '@/assets/tanks/tank3.png';
 import tank4 from '@/assets/tanks/tank4.png';
 import general from '@/assets/images/general.png';
 import QuizzaService from '@/services/QuizzaService.js';
+import back from '@/assets/images/back.png';
 
 export default {
   name: 'seek',
@@ -275,12 +279,13 @@ export default {
         [2, 11, 22, 32, 51, 74, 79, 84, 89, 104], //+5
         [27, 91, 102]
       ], //+25
-      general: general
+      general: general,
+      back: back
     }
   },
   methods: {
     randomDice() {
-      this.diceResult = 6;
+      this.diceResult = this.dice[Math.floor(Math.random() * 6)]
       this.showMoveOptions()
       this.questionResult = null;
       this.disableTheDice();
@@ -399,8 +404,8 @@ export default {
       this.loadRandomQuestion(randomCategoryAndId);
     },
     togglefullScreen() {
-      // const element = document.querySelector('#seek');
-      // element.requestFullscreen();
+      const element = document.querySelector('#seek');
+      element.requestFullscreen();
     },
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
@@ -922,7 +927,6 @@ input:focus {
   z-index: 2;
   position: absolute;
   margin-top: 89px;
-  color: white;
 }
 
 .board-content-2 {
@@ -932,7 +936,6 @@ input:focus {
   position: absolute;
   margin-top: 270px;
   margin-left: 95px;
-  color: white;
 }
 
 .board-content-3 {
@@ -943,6 +946,13 @@ input:focus {
   margin-left: 90px;
   color: white;
   border-style: solid;
+}
+
+.board-content-4 {
+  width: 720px;
+  z-index: 15;
+  position: absolute;
+  margin-top: 460px;
 }
 
 .board-content-5 {
@@ -1056,8 +1066,8 @@ P {
 }
 
 .thief {
-  color: black;
-  text-shadow: 2px 2px 4px GREEN;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
   float: left;
   font-family: 'Russo One', sans-serif;
   font-size: 45px;
@@ -1097,5 +1107,23 @@ P {
   font-family: 'Russo One', sans-serif;
   color: black;
   font-size: 40px;
+}
+
+.back-container {
+  width: 10%;
+  float: left;
+}
+
+.back {
+  height: 60px;
+  border-radius: 50%;
+}
+
+.back:hover {
+  background-color: #4b5320;
+}
+
+.back:focus {
+  outline: none;
 }
 </style>
