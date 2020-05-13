@@ -74,12 +74,32 @@
       <div id="k15" class="grid" v-on:click="checkActive($event)">k15</div>
       <div id="k17" class="grid" v-on:click="checkActive($event)">k17</div>
 
+
       <div class="board-content-1">
-        <div class="dice-container">
-          <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()"></input>
-          <div class="qr" v-if="questionResult">
-            <p>{{questionResult}}</p>
+          <div class="skull">
+            <div class="eye"></div>
+            <div class="eye"></div>
+            <div class="nose"></div>
           </div>
+          <div class="teeth">
+          <div class="tooth"></div>
+          <div class="tooth"></div>
+          <div class="tooth"></div>
+          <div class="tooth"></div>
+          </div>
+          <div class="bones">
+            <div class="bone">
+              <div class="bone-inner"></div>
+              <div class="bone-inner"></div>
+            </div>
+            <div class="bone">
+              <div class="bone-inner"></div>
+              <div class="bone-inner"></div>
+            </div>
+          </div>
+              <!-- <div class="dice-container"> -->
+          <!-- <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()"></input>
+        </div>
             <div class="player-container">
               <img class="token-id" :src="players[0].token">
               <p class="player-txt1" v-if="players[0].name && players[1].name"> {{players[0].name.toUpperCase()}}</p>
@@ -93,8 +113,8 @@
               <div class="score-container">
                 <p>SCORE: {{players[1].score}}</p>
               </div>
-            </div>
-            <div v-if="players[2].name" class="player-container">
+            </div> -->
+            <!-- <div v-if="players[2].name" class="player-container">
               <img class="token-id" :src="players[2].token">
               <p class="player-txt3"> {{players[2].name.toUpperCase()}}</p>
               <div class="score-container">
@@ -106,14 +126,23 @@
               <p class="player-txt4"> {{players[3].name.toUpperCase()}}</p>
               <div class="score-container">
                 <p>SCORE: {{players[3].score}}</p>
-              </div>
+              </div> -->
           </div>
-
-        </div>
-
-        <questions v-if='randomQuestion' :randomQuestion="randomQuestion"class="question"></questions>
       </div>
 
+      <div class="board-content-2" v-if='randomQuestion'>
+        <div class="question-container">
+          <questions  :randomQuestion="randomQuestion"class="question"></questions>
+        </div>
+      </div>
+
+      <div v-if="questionResult" class="board-content-3">
+        <div class="general-container">
+        </div>
+        <div class="qr-container">
+          <p class="qr-result">{{questionResult}}</p>
+        </div>
+      </div>
 
       <div id="player1" class="player1" v-if="players[0].name"> <img class="token" :src="players[0].token"> </div>
       <div id="player2" class="player2" v-if="players[1].name"> <img class="token" :src="players[1].token"></div>
@@ -132,6 +161,7 @@ import player3 from '@/assets/tokens/circle_yellow.png';
 import player4 from '@/assets/tokens/circle_green.png';
 import Questions from "@/components/Questions.vue"
 import {eventBus} from '../main.js';
+require('@/assets/css/skull.css');
 
 export default {
   name: 'mental',
@@ -274,11 +304,11 @@ export default {
 ;
     },
     togglefullScreen () {
-      if (this.fullScreen === false) {
-        const element = document.querySelector('#mental');
-        element.requestFullscreen();
-        this.fullScreen = true;
-      }
+      // if (this.fullScreen === false) {
+      //   const element = document.querySelector('#mental');
+      //   element.requestFullscreen();
+      //   this.fullScreen = true;
+      // }
     },
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
@@ -455,17 +485,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.token {
-  height: 40px;
-  margin: 5px;
-}
-.token-id {
-  height: 20px;
-  float: left;
-  margin: 10px;
-}
+
 .page-container {
-  border-style: solid;
   display: block;
   text-align: center;
   width: 100vw;
@@ -473,7 +494,7 @@ export default {
 }
 
 .game-board {
-
+  margin-top: 10px;
   display: inline-grid;
   position: relative;
 }
@@ -910,6 +931,16 @@ input:focus {
   grid-column-start: 1;
 }
 
+.token {
+  height: 40px;
+  margin: 5px;
+}
+
+.token-id {
+  height: 20px;
+  float: left;
+  margin: 10px;
+}
 
 .board-content-1 {
   width: 810px;
@@ -920,9 +951,61 @@ input:focus {
   margin-left: 360px;
 }
 
+.player-container {
+  width: 25%;
+  float: left;
+  color: white;
+  font-family: 'Russo One', sans-serif;
+  text-shadow: 2px 2px 4px #000000;
+  margin-top: 4px;
+}
+
 P {
   font-size: 25px;
   font-weight: bold;
   color: blue;
+}
+
+.board-content-2 {
+  width: 720px;
+  z-index: 20;
+  position: absolute;
+  margin-left: 405px;
+  color: white;
+  border-style: solid;
+}
+
+.question-container {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  border: solid;
+  z-index: 10;
+}
+
+.board-content-3 {
+  width: 620px;
+  height: 350px;
+  z-index: 20;
+  position: absolute;
+  margin-top: 620px;
+  margin-left: 450px;
+  color: white;
+  border: solid;
+  box-shadow: 8px 8px 16px #ffffff;
+  background-color: black;
+  border-style: solid;
+}
+
+.qr-container {
+  float: left;
+  background-color: black;
+  margin-top: 20px;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+.qr-result {
+  font-family: 'Russo One', sans-serif;
+  color: white;
+  font-size: 40px;
 }
 </style>
