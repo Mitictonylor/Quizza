@@ -29,7 +29,7 @@
           <router-link :to="{name: 'seek', params:{player1, player2, player3, player4}}"> <img class="game" :src="seek"> </router-link>
       </div>
       <div class="game-container">
-          <router-link :to="{name: 'mental', params:{player1, player2, player3, player4}}"> <img class="game" :src="mental"> </router-link>
+          <router-link :to="{name: 'mental', params:{player1, player2, player3, player4}}"> <img class="mental-game" :src="mental"> </router-link>
       </div>
     </nav>
     </div>
@@ -165,6 +165,26 @@ input.player4 {
 }
 
 .game:hover {
+  opacity: 70%;
+}
+
+.mental-game:focus {
+  outline-color: #907ad6;
+}
+
+.mental-game {
+  width: 200px;
+  animation: flash 0.5s linear infinite;
+}
+
+
+@keyframes flash {
+  50% {
+    opacity: 50%;
+  }
+}
+
+.mental-game:hover {
   opacity: 70%;
 }
 
