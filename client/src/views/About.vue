@@ -158,11 +158,11 @@ export default {
 
   .rules {
     margin-bottom: 50px;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   .back-container {
-    width: 10%;
+    width: 80px;
     float: left;
   }
 
@@ -180,7 +180,7 @@ export default {
   }
 
   .high-score-container {
-    width: 10%;
+    width: 60px;
     float: left;
   }
 
@@ -204,7 +204,7 @@ export default {
   .title {
     font-family: 'Russo One', sans-serif;
     font-size: 100px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     float: left;
     margin-left: 15%;
   }
