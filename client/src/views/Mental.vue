@@ -78,13 +78,13 @@
 
       <div class="board-content-1">
         <div class="player1-container">
-          <p class="player-txt1" v-if="players[0].name && players[1].name"> {{players[0].name.toUpperCase()}}</p>
+          <p class="player1-txt" v-if="players[0].name && players[1].name"> {{players[0].name.toUpperCase()}}</p>
           <div class="score-container">
             <p>SCORE: {{players[0].score}}</p>
           </div>
         </div>
         <div class="player2-container">
-          <p class="player-txt2" v-if="players[0].name && players[1].name"> {{players[1].name.toUpperCase()}}</p>
+          <p class="player2-txt" v-if="players[0].name && players[1].name"> {{players[1].name.toUpperCase()}}</p>
           <div class="score-container">
             <p>SCORE: {{players[1].score}}</p>
           </div>
@@ -113,13 +113,13 @@
           </div>
 
             <div v-if="players[2].name" class="player3-container">
-              <p class="player-txt3"> {{players[2].name.toUpperCase()}}</p>
+              <p class="player3-txt"> {{players[2].name.toUpperCase()}}</p>
               <div class="score-container">
                 <p>SCORE: {{players[2].score}}</p>
               </div>
             </div>
             <div v-if="players[3].name" class="player4-container">
-              <p class="player-txt4"> {{players[3].name.toUpperCase()}}</p>
+              <p class="player4-txt"> {{players[3].name.toUpperCase()}}</p>
               <div class="score-container">
                 <p>SCORE: {{players[3].score}}</p>
               </div>
@@ -247,15 +247,18 @@ export default {
       const randomGridTile = MentalTileObjects[Math.floor(Math.random() * 72)].id
       //fint the position in the html and add the flashing in it's css
       const moveOption = document.querySelector(`#${randomGridTile}`);
-      moveOption.classList.add("flashing");
+      moveOption.classList.add("show-border");
       //assign the position to the active player
       this.activePlayer(this.gamePlayers).currentPosition = randomGridTile
+
+      const playerPrompt = document.querySelector(`.${this.activePlayer(this.gamePlayers).alias}` + '-txt');
+      playerPrompt.classList.add("flashing");
     },
     resetMoveOptions() {
       //once the player is on the flashing tile, the tile stop flashing
       const active = this.activePlayer(this.gamePlayers).currentPosition
       const moveOption = document.querySelector(`#${active}`);
-      moveOption.classList.remove("flashing");
+      moveOption.classList.remove("show-border");
     },
     getNewRowPosition(event) {
     //  find the row position from MentalTileObjects of the clicked tile
@@ -472,6 +475,9 @@ export default {
         this.enableTheDice()
         this.switchActivePlayer(playerActive, this.gamePlayers);
         this.randomQuestion = null;
+
+        const playerPrompt = document.querySelector(`.${playerActive.alias}` + '-txt');
+        playerPrompt.classList.remove("flashing");
       }
     })
   },
@@ -1015,27 +1021,27 @@ input:focus {
   margin-left: 200px;
 }
 
-.flashing {
+.show-border {
   border: solid 10px;
   color: white;
 }
 
-.player-txt1 {
+.player1-txt {
   font-size: 45px;
   color: #ff70a6;
 }
 
-.player-txt2 {
+.player2-txt {
   font-size: 45px;
   color: #70d6ff;
 }
 
-.player-txt3 {
+.player3-txt {
   font-size: 45px;
   color: #6eeb83;
 }
 
-.player-txt4 {
+.player4-txt {
   font-size: 45px;
   color: #907ad6;
 }
@@ -1117,6 +1123,16 @@ input:focus {
   50% {
     opacity: 0;
     background-color: white;
+  }
+}
+
+.flashing {
+  animation: flashing 0.5s linear infinite;
+}
+
+@keyframes flashing {
+  50% {
+    color: white;
   }
 }
 
