@@ -79,7 +79,7 @@
 
         <div class="board-content-top-left">
           <div class="back-container">
-            <router-link  v-on:click="playSound" :to="{name: 'newgame'}"> <img class="back" :src="back"> </router-link>
+            <router-link :to="{name: 'newgame'}"> <img class="back" :src="back"> </router-link>
           </div>
           <div class="container">
 
@@ -1023,11 +1023,11 @@ export default {
 
   .back {
     height: 60px;
-    border-radius: 50%;
   }
 
   .back:hover {
     background-color: #ff70a6;
+    border-radius: 50%;
   }
 
   .back:focus {
