@@ -2,7 +2,6 @@
   <div id="home" @mousemove="mouseInteraction($event)" v-resize="onResize">
     <canvas id="canvas"></canvas>
     <div class="title-container">
-      <audio id="audio" :src="button" autoplay="false"></audio>
       <div class="title">
         <p>QuizzA</p>
         <hr>
