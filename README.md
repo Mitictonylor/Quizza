@@ -50,6 +50,8 @@ A novel game designed by us.
 
 A tongue-in-cheek board game, which uses Glasgow slang as prompts. As the name suggests, the game is mental with random point allocations and deductions, random board positioning and lots of flashing tiles. The game is un-winnable.... well not quite as a player can be declared a winner by collecting 666 points.
 
+(WARNING: The 'Mental' game board contains flashing/strobing tiles, which may adversely effect photosensitive users. Please do not play this game type if you feel you are at risk.)
+
 ---
 
 # Brief
