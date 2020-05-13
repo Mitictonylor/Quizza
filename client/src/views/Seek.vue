@@ -268,7 +268,6 @@ export default {
         [70, 75, 80, 85], //-5
         [90, 105]
       ], //-all
-
       extraPoint: [
         [3, 6, 9, 12, 14, 16, 18, 37, 58, 62, 68], //+1
         [4, 7, 13, 19, 23, 26, 29, 31, 39, 42, 47, 63, 69], //+2
@@ -307,22 +306,22 @@ export default {
     loosePoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 1
-        this.questionResult = "BOOOOM! You lost 1 point! PUAHAHA HAHAHA HAHAHA"
+        this.questionResult = "BOOOOM! You lost 1 point! PUAHAHA HAHAHA "
       } else if (array[1].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 2
-        this.questionResult = "BOOOOM! You lost 2 points! PUAHAHA HAHAHA HAHAHA"
+        this.questionResult = "BOOOOM! You lost 2 points! PUAHAHA HAHAHA "
       } else if (array[2].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 3
-        this.questionResult = "BOOOOM! You lost 3 points! PUAHAHA HAHAHA HAHAHA"
+        this.questionResult = "BOOOOM! You lost 3 points! PUAHAHA HAHAHA "
       } else if (array[3].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 4
-        this.questionResult = "BOOOOM! You lost 4 points! PUAHAHA HAHAHA HAHAHA"
+        this.questionResult = "BOOOOM! You lost 4 points! PUAHAHA HAHAHA "
       } else if (array[4].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 5
-        this.questionResult = "BOOOOM! You lost 5 points! PUAHAHA HAHAHA HAHAHA"
+        this.questionResult = "BOOOOM! You lost 5 points! PUAHAHA HAHAHA "
       } else if (array[5].includes(activePlayer.currentPosition)) {
         activePlayer.score = 0
-        this.questionResult = "BOOOOM! You lost all your points! PUAHAHA HAHAHA HAHAHA"
+        this.questionResult = "BOOOOM! You lost all your points! PUAHAHA HAHAHA "
       }
     },
     addPoints(array, activePlayer) {
