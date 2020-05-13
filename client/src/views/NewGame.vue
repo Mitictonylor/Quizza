@@ -6,7 +6,7 @@
         <div class="welcome">
           <div class="about-container">
             <router-link :to="{name: 'about'}"> <img class="about" :src="about"> </router-link>
-            
+
           </div>
           <div class="high-score-container">
             <router-link :to="{name: 'halloffame'}"> <img class="high" :src="highscore"> </router-link>
@@ -123,8 +123,8 @@ export default {
 }
 
 .form {
-  width: 50%;
-  height: 85%;
+  width: 770px;
+  height: 700px;
   display: inline-block;
   color: white;
   font-family: 'Russo One', sans-serif;
