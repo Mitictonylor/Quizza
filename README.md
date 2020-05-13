@@ -27,7 +27,7 @@ This was a group exercise, completed with two other devs. It was tasked to us by
 
 **Classic**
 
-Based on the Trivial Pursuit board game, each player must correctly answer a question from one of six categories:
+Based on the Trivial Pursuit board game, each player must correctly answer questions from the following six categories:
 
 - Sport
 - Science & Nature
