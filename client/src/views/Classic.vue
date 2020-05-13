@@ -538,7 +538,6 @@ export default {
     display: block;
     text-align: center;
     width: 100vw;
-    height: 100vh;
     background-color: #8e9aaf;
   }
 
@@ -546,6 +545,7 @@ export default {
     display: inline-grid;
     position: relative;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .sport {
@@ -860,7 +860,9 @@ export default {
   }
 
   .anim-score {
-    width: 9%;
+    width: 30px;
+    height: 30px;
+    margin-top: 4px;
     border-style: solid;
     border-radius: 50%;
     height: 25px;
@@ -871,7 +873,9 @@ export default {
   }
 
   .his-score {
-    width: 9%;
+    width: 30px;
+    height: 30px;
+    margin-top: 4px;
     border-style: solid;
     border-radius: 50%;
     height: 25px;
@@ -882,7 +886,9 @@ export default {
   }
 
   .geo-score {
-    width: 9%;
+    width: 30px;
+    height: 30px;
+    margin-top: 4px;
     border-style: solid;
     border-radius: 50%;
     height: 25px;
@@ -893,7 +899,9 @@ export default {
   }
 
   .sci-score {
-    width: 9%;
+    width: 30px;
+    height: 30px;
+    margin-top: 4px;
     border-style: solid;
     border-radius: 50%;
     height: 25px;
@@ -904,7 +912,9 @@ export default {
   }
 
   .spo-score {
-    width: 9%;
+    width: 30px;
+    height: 30px;
+    margin-top: 4px;
     border-style: solid;
     border-radius: 50%;
     height: 25px;
@@ -915,7 +925,9 @@ export default {
   }
 
   .gk-score {
-    width: 9%;
+    width: 30px;
+    height: 30px;
+    margin-top: 4px;
     border-style: solid;
     border-radius: 50%;
     height: 25px;

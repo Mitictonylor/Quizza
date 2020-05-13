@@ -2,7 +2,6 @@
 *:before,
 *:after {
   box-sizing: border-box;
-  background-clip: padding-box;
 }
 
 .container {

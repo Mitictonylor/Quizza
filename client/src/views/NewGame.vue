@@ -119,7 +119,6 @@ export default {
   text-align: center;
   position: absolute;
   z-index: 1;
-  border-style: solid;
 }
 
 .form {

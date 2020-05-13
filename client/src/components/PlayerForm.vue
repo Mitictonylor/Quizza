@@ -72,7 +72,7 @@ input {
   background-color: #8e9aaf;
   text-align: center;
   font-size: 25px;
-  height: 25px;
+  height: 30px;
   width: 40%;
   border-radius: 4%;
   box-shadow: 2px 2px 4px #000000;

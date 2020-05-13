@@ -130,7 +130,7 @@ export default {
     background-color: #8e9aaf;
     position: absolute;
     left: 0;
-    top: 0 ;
+    top: 0;
     z-index: 0;
   }
 
@@ -263,15 +263,15 @@ export default {
 
   .player-heading {
     border-style: solid;
-    width: 317px;
+    width: 325px;
     float: left;
     font-size: 30px;
   }
 
   .high-heading {
     border-style: solid;
-    width: 149px;
-    height: 30px;
+    width: 155px;
+    height: 45px;
     float: right;
     font-size: 20px;
     padding-top: 8px;
