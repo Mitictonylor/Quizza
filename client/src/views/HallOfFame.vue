@@ -12,7 +12,14 @@
           </div>
           <div class="title-container">
             <p class="title">Hall of Fame</p>
-
+          </div>
+        </div>
+        <div class="scoreboard-container">
+          <div class="scoreboard">
+            <div class="heading-container">
+                 <th class="player-heading">Player</th>
+                 <th class="high-heading">High Score</th>
+          </div>
             <score-board  v-if="scoreBoard" v-for="(list,index) in sortScores(scoreBoard)" :key="index" :list="list"></score-board>
           </div>
         </div>
@@ -231,7 +238,7 @@ export default {
     font-size: 70px;
     margin-bottom: 15px;
     float: left;
-    margin-left: 15%;
+    margin-left: 7%;
   }
 
   .sub-text {
@@ -246,5 +253,38 @@ export default {
   p {
     padding: 0;
     margin: 0;
+  }
+
+  .scoreboard-container {
+    width: 100%;
+    overflow: auto;
+  }
+
+  .scoreboard {
+    width: 60%;
+    display: inline-block;
+    margin-left: 6%;
+    margin-top: 20px;
+  }
+
+  .heading-container {
+    width: 100%;
+    overflow: auto;
+  }
+
+  .player-heading {
+    border-style: solid;
+    width: 66.2%;
+    float: left;
+    font-size: 30px;
+  }
+
+  .high-heading {
+    border-style: solid;
+    width: 31%;
+    height: 30px;
+    float: right;
+    font-size: 20px;
+    padding-top: 8px;
   }
 </style>

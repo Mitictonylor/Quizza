@@ -1,13 +1,9 @@
 <template lang="html">
   <table class="table-cover" border="1">
-
-
     <tr class="row">
       <td class = "column">{{list.name}}</td>
       <td class = "column-score">{{list.score}}</td>
     </tr>
-
-
   </table>
 
 </template>
@@ -21,17 +17,20 @@ export default {
 
 <style lang="css" scoped>
 .table-cover {
-  font-family: arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   border-collapse: collapse;
-  width: 60%;
+  width: 100%;
+  font-size: 20px;
+
 }
 
 .column {
   border: 1px solid #dddddd;
-  text-align: left;
+  text-align: center;
   padding: 8px;
   width: 40%;
 }
+
 .column-score{
   border: 1px solid #dddddd;
   text-align: center;
