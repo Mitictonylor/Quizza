@@ -1,4 +1,4 @@
-<img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza1.png" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza2.png" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza6.png" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza3.png" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza4.png" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza5.png" width="300">
+<img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza1.png" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza2.png" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza6.jpeg" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza3.png" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza4.png" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/quizza/quizza5.png" width="300">
 
 
 # QuizzA
