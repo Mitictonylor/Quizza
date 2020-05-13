@@ -226,7 +226,6 @@ export default {
   .title {
     font-family: 'Russo One', sans-serif;
     font-size: 70px;
-    margin-bottom: 15px;
     float: left;
     margin-left: 5.5%;
   }
