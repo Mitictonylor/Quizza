@@ -33,14 +33,14 @@
   translateZ(50px);
 }
 
-.container {
+.dice-container {
   width: 100px;
   height: 100px;
   position: relative;
-  margin: 0 auto 40px;
-
+  margin: 0 auto 45px;
   perspective: 1000px;
   perspective-origin: 50% 100%;
+  margin-top: 20px;
 }
 
 #cube {
@@ -48,9 +48,7 @@
   height: 100%;
   top: 100px;
   position: absolute;
-
   transform-style: preserve-3d;
-
   transition: transform 6s;
 }
 
@@ -65,9 +63,7 @@
   width: 100px;
   height: 100px;
   border: 2px solid #907ad6;
-
   margin: 0 auto;
-
   font-family: Arial, Helvetica, sans-serif;
   font-size: 500%;
   text-align: center;

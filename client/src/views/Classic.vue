@@ -82,7 +82,7 @@
             <router-link :to="{name: 'newgame'}"> <img class="back" :src="back" v-on:click=""> </router-link>
           </div>
 
-          <div class="container">
+          <div class="dice-container">
 
             <div id="cube" v-on:click="rollDice">
               <div class="front" value="1">
