@@ -264,6 +264,7 @@ export default {
   .player-heading {
     border-style: solid;
     width: 325px;
+    height: 45px;
     float: left;
     font-size: 30px;
   }
