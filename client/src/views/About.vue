@@ -13,9 +13,14 @@
           <div class="title-container">
             <p class="title">Rules</p>
           </div>
+          <div class="rule-details-container">
             <p class="sub-text">Classic</p>
+            <p class="details">Each player must correctly answer a question from one of six categories: Sport, Science & Nature, Geography, Animals, General Knowledge & History. Each category has a corresponding colour and each tile on the board, prompts a question from a specific category. When a player correctly answers a question from all 6 categories - they WIN!</p>
             <p class="sub-text">Seek</p>
+            <p class="details">Each player must race to the end of the board, while avoiding point deduction traps. Players can collect points by answering questions correctly or landing on bonus tiles, which allocate points. The game is concluded and points tallied when a player lands on the finishing line and answers a question correctly.</p>
             <p class="sub-text">Mental</p>
+            <p class="details"> A tongue-in-cheek board game. As the name suggests, the game is mental with random point allocations and deductions, random board positioning and lots of flashing tiles. The game is un-winnable.... unless you think you can collect 666 points</p>
+          </div>
         </div>
       </div>
     </div>
@@ -119,8 +124,8 @@ export default {
   }
 
   .about {
-    width: 50%;
-    height: 70%;
+    width: 750px;
+    height: 700px;
     display: inline-block;
     color: white;
     font-family: 'Russo One', sans-serif;
@@ -205,12 +210,25 @@ export default {
   }
 
   .sub-text {
-    font-size: 25px;
+    font-size: 35px;
     font-family: 'Russo One', sans-serif;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .details {
+    font-size: 18px;
+    font-family: 'Open Sans';
   }
 
   #about {
     position: relative;
+  }
+
+  .rule-details-container {
+    width: 90%;
+    display: inline-block;
+    text-align: justify;
   }
 
   p {
