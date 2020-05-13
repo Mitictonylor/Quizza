@@ -151,7 +151,6 @@ export default {
     text-align: center;
     position: absolute;
     z-index: 1;
-    border-style: solid;
   }
 
   .halloffame {
@@ -238,7 +237,7 @@ export default {
     font-size: 70px;
     margin-bottom: 15px;
     float: left;
-    margin-left: 7%;
+    margin-left: 5.5%;
   }
 
   .sub-text {
@@ -261,9 +260,8 @@ export default {
   }
 
   .scoreboard {
-    width: 60%;
+    width: 480px;
     display: inline-block;
-    margin-left: 6%;
     margin-top: 20px;
   }
 
@@ -274,14 +272,14 @@ export default {
 
   .player-heading {
     border-style: solid;
-    width: 66.2%;
+    width: 317px;
     float: left;
     font-size: 30px;
   }
 
   .high-heading {
     border-style: solid;
-    width: 31%;
+    width: 149px;
     height: 30px;
     float: right;
     font-size: 20px;
