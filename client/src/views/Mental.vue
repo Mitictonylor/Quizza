@@ -243,32 +243,40 @@ export default {
     },
     showMoveOptions() {
       this.disableTheDice()
+      //get a random position from the MentalTileObjects
       const randomGridTile = MentalTileObjects[Math.floor(Math.random() * 72)].id
+      //fint the position in the html and add the flashing in it's css
       const moveOption = document.querySelector(`#${randomGridTile}`);
       moveOption.classList.add("flashing");
+      //assign the position to the active player
       this.activePlayer(this.gamePlayers).currentPosition = randomGridTile
     },
     resetMoveOptions() {
+      //once the player is on the flashing tile, the tile stop flashing
       const active = this.activePlayer(this.gamePlayers).currentPosition
       const moveOption = document.querySelector(`#${active}`);
       moveOption.classList.remove("flashing");
     },
     getNewRowPosition(event) {
+    //  find the row position from MentalTileObjects of the clicked tile
       const divID = event.currentTarget.id;
       const index = MentalTileObjects.map(x => x.id).indexOf(divID);
       return MentalTileObjects[index]['row'];
     },
     getNewColPosition(event) {
+        //  find the column position from MentalTileObjects of the clicked tile
       const divID = event.currentTarget.id;
       const index = MentalTileObjects.map(x => x.id).indexOf(divID);
       return MentalTileObjects[index]['column'];
     },
     checkActive(event) {
+      //check if the player is on the clicked tile
       if (this.activePlayer(this.gamePlayers).currentPosition === event.currentTarget.id) {
         return this.movePlayer(event)
       }
     },
     movePlayer(event) {
+      //assign the active player token and obkject the new css position
       const activePlayer = document.querySelector(`#${this.activePlayer(this.gamePlayers).alias}`);
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
                                     grid-column-start: ${this.getNewColPosition(event)};`
@@ -278,8 +286,10 @@ export default {
       this.loosePoints(this.arrayLoose, this.activePlayer(this.gamePlayers))
       this.addPoints(this.extraPoint, this.activePlayer(this.gamePlayers))
       const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
+      //load a random question from a randomcategory
       this.loadRandomQuestion(randomCategoryAndId);
     },
+    //as soon as you clik on the display the fullscreen mode is on
     togglefullScreen () {
       if (this.fullScreen === false) {
         const element = document.querySelector('#mental');
@@ -287,17 +297,20 @@ export default {
         this.fullScreen = true;
       }
     },
+    //filters the player arrived from the form, and take them just the one with a name
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
         return player.name !== ''
       });
       this.gamePlayers = playersWithName;
     },
+    //find the player with their status active
     activePlayer(players) {
       const activePlayer = players.find(player => player.active === true);
       this.nextPlayer = activePlayer
       return activePlayer;
     },
+    //check if active and non active player got the same position, if yes both players lose their points
     stealPoints(activePlayer, arrayOfPlayers) {
       const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false)
       const sameCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
@@ -309,6 +322,7 @@ export default {
           })
         }
       },
+      //check if the current position of the player is included in the minus list
     loosePoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 4
@@ -335,6 +349,7 @@ export default {
         }
       }
     },
+    //check if the active player position is included in the plusarray
     addPoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score += 3
@@ -356,6 +371,8 @@ export default {
         this.questionResult = "NAE DANGER! Ye fun 100 points!!!"
       }
     },
+    //we associate the props to the premade object in the data, and then we filter it and
+    //we assign the first player as active, so the game can start
     updateNames() {
       this.players[0].name = this.player1;
       this.players[1].name = this.player2;
@@ -365,6 +382,7 @@ export default {
       this.gamePlayers[0].active = true;
       this.nextPlayer = this.activePlayer(this.gamePlayers)
     },
+    //fetch the randomQuestion
     loadRandomQuestion(categoryAndID) {
       const url = `https://opentdb.com/api.php?amount=1&category=${categoryAndID[1]}&type=multiple`;
       fetch(url).then(response => response.json())
@@ -385,6 +403,7 @@ export default {
           }
         })
     },
+    //get a random category from the array in the data
     getRandomCategory(categoryArray) {
       const category = categoryArray[Math.floor(Math.random() * categoryArray.length)]
       return category
@@ -404,18 +423,22 @@ export default {
   enableTheDice() {
     const dice = document.querySelector(".skull")
     dice.style.pointerEvents = 'auto';
-
   },
+  //find the index(of the active player)
   findIndexOfPlayer(player) {
     const index = this.gamePlayers.indexOf(player);
     return index;
   },
+  //given an active player and the array of players, find me the index of the active, and set it as false
   switchActivePlayer(player, players) {
     const index = this.findIndexOfPlayer(player);
     players[index].active = false;
+    //if the index is less then the array length minus 1 find the player with
+    //the index after the active one and set it as true
     if (index < (players.length - 1)) {
       players[(index + 1)].active = true;
     } else {
+      //otherwise set the first player as active
       players[0].active = true
     }
   }

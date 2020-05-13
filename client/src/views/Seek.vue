@@ -281,6 +281,7 @@ export default {
     }
   },
   methods: {
+    //get a random value from the dice
     randomDice() {
       this.diceResult = this.dice[Math.floor(Math.random() * 6)]
       this.showMoveOptions()
@@ -290,6 +291,7 @@ export default {
     getDiceFace() {
       return require('@/assets/dice/' + this.diceResult + '.png')
     },
+    //if the active player share his position with another player, he steals all the other player points
     stealPoints(activePlayer, arrayOfPlayers) {
       const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false)
       const sameCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
@@ -303,6 +305,8 @@ export default {
         })
       };
     },
+    //given an array of loosing point position tiles, and the active player,
+    //check if their positions are the same and assign the loose
     loosePoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score -= 1
@@ -324,6 +328,8 @@ export default {
         this.questionResult = "BOOOOM! You lost all your points! PUAHAHA HAHAHA "
       }
     },
+    //given an array of extra point position tiles, and the active player,
+    //check if their positions are the same and assign the extra
     addPoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
         activePlayer.score += 1
@@ -345,6 +351,7 @@ export default {
         this.questionResult = "GAWD DAMMIT! You found 25 points!!!"
       }
     },
+    //we want the player to win when it arrives straight to 107
     showMoveOptions() { //current position:106 + dice.result 4 =110
       let total = (this.activePlayer(this.gamePlayers).currentPosition + this.diceResult)
       if (total > 107) { //yes
@@ -355,7 +362,7 @@ export default {
         this.moveOption = newDivID
         this.activePlayer(this.gamePlayers).currentPosition = 107 - difference
       } else {
-        //aggiungimi da current position a 107 ed il di piû me lo sotrrai da current poisition
+        //add da current position a 107 and the extra remove it from current poisition and flash them
         const divID = 'g' + total
         const moveOption = document.querySelector(`#${divID}`);
         moveOption.classList.add("flashing");
@@ -364,26 +371,31 @@ export default {
       }
       total = 0
     },
+    //once the player is on the flashing tile, the tile stop flashing
     resetMoveOptions() {
       const moveOption = document.querySelector(`#${this.moveOption}`);
       moveOption.classList.remove("flashing");
       this.moveOption = null;
     },
+    //  find the row position from MentalTileObjects of the clicked tile
     getNewRowPosition(event) {
       const divID = event.currentTarget.id;
       const index = SeekTileObjects.map(x => x.id).indexOf(divID);
       return SeekTileObjects[index]['row'];
     },
+    //  find the column position from MentalTileObjects of the clicked tile
     getNewColPosition(event) {
       const divID = event.currentTarget.id;
       const index = SeekTileObjects.map(x => x.id).indexOf(divID);
       return SeekTileObjects[index]['column'];
     },
+    //check if the player move option  is the clicked tile
     checkActive(event) {
       if (this.moveOption === event.currentTarget.id) {
         return this.movePlayer(event)
       }
     },
+    //assign the active player token and obkject the new css position
     movePlayer(event) {
       const activePlayer = document.querySelector(`#${this.activePlayer(this.gamePlayers).alias}`);
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
@@ -394,9 +406,10 @@ export default {
       this.addPoints(this.extraPoint, this.activePlayer(this.gamePlayers))
       this.resetMoveOptions();
       const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
-
+      //load a random question from a randomcategory
       this.loadRandomQuestion(randomCategoryAndId);
     },
+    //as soon as you clik on the display the fullscreen mode is on
     togglefullScreen() {
       if (this.fullScreen === false) {
         const element = document.querySelector('#seek');
@@ -404,12 +417,15 @@ export default {
         this.fullScreen = true;
       }
     },
+    //filters the player arrived from the form, and take them just the one with a name
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
         return player.name !== ''
       });
       this.gamePlayers = playersWithName;
     },
+    //we associate the props to the premade object in the data, and then we filter it and
+    //we assign the first player as active, so the game can start
     updateNames() {
       this.players[0].name = this.player1;
       this.players[1].name = this.player2;
@@ -419,10 +435,12 @@ export default {
       this.gamePlayers[0].active = true;
       this.nextPlayer = this.activePlayer(this.gamePlayers)
     },
+    //find the index(of the active player)
     findIndexOfPlayer(player) {
       const index = this.gamePlayers.indexOf(player);
       return index;
     },
+    //fetch the randomQuestion drom a random category
     loadRandomQuestion(categoryAndID) {
       const url = `https://opentdb.com/api.php?amount=1&category=${categoryAndID[1]}&type=multiple`;
       fetch(url).then(response => response.json())
@@ -443,10 +461,12 @@ export default {
           }
         })
     },
+    //gives us back a random category from the data
     getRandomCategory(categoryArray) {
       const category = categoryArray[Math.floor(Math.random() * categoryArray.length)]
       return category
     },
+    //find the player with their status active
     activePlayer(players) {
       const activePlayer = players.find(player => player.active === true);
       this.nextPlayer = activePlayer
@@ -470,12 +490,16 @@ export default {
       console.log(dice);
       dice.style.pointerEvents = 'auto';
     },
+    //given an active player and the array of players, find me the index of the active, and set it as false
     switchActivePlayer(player, players) {
       const index = this.findIndexOfPlayer(player);
       players[index].active = false;
+      //if the index is less then the array length minus 1 find the player with
+      //the index after the active one and set it as true
       if (index < (players.length - 1)) {
         players[(index + 1)].active = true;
       } else {
+        //otherwise set the first player as active
         players[0].active = true
       }
     }
