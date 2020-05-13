@@ -1,7 +1,7 @@
 <template lang="html">
   <table class="table-cover" border="1">
     <tr class="row">
-      <td class = "column">{{list.name}}</td>
+      <td class = "column">{{list.name.toUpperCase()}}</td>
       <td class = "column-score">{{list.score}}</td>
     </tr>
   </table>
