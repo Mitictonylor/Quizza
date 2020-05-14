@@ -165,7 +165,7 @@ export default {
       answeredQuestions:[],
       randomQuestion: null,
       moveOptions: null,
-      fullscreen: false,
+      fullScreen: false,
       currentTile: 'a1',
       gamePlayers: [],
       selectedOption: null,
@@ -414,12 +414,12 @@ export default {
     },
     checkWinCondition(activePlayer) {
       if (activePlayer.score === 666) {
-          this.nextPlayer = null
-          this.questionResult = "NO WAY MAN - ye've WON!"
-          this.disableTheDice()
-          this.randomQuestion = null
+          this.nextPlayer = null;
+          this.questionResult = "NO WAY MAN - ye've WON!";
+          this.disableTheDice();
+          this.randomQuestion = null;
         } else {
-          this.nextPlayer = null
+          this.nextPlayer = null;
           this.randomQuestion = null;
           //create a new question in either cases
           this.enableTheDice();
@@ -459,6 +459,8 @@ export default {
           this.nextPlayer = null;
           this.questionResult = "YAS! Ye got a point! Go again!";
           this.addPoint(playerActive);
+          this.randomQuestion = null;
+          this.enableTheDice();
         } else {
           this.nextPlayer = null;
           this.questionResult = "BOLT - WRANG ANSWER!";
