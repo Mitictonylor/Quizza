@@ -173,10 +173,10 @@
         </div>
       </div>
 
-      <div id="player1" class="player1" v-if="players[0].name"> <img class="tank" :src="players[0].token"> </div>
-      <div id="player2" class="player2" v-if="players[1].name"> <img class="tank" :src="players[1].token"></div>
-      <div id="player3" class="player3" v-if="players[2].name"> <img class="tank" :src="players[2].token"></div>
-      <div id="player4" class="player4" v-if="players[3].name"> <img class="tank" :src="players[3].token"></div>
+      <div id="player1" v-bind:class="flipTank1()" v-if="players[0].name"> <img class="tank" :src="players[0].token"> </div>
+      <div id="player2" v-bind:class="flipTank2()" v-if="players[1].name"> <img class="tank" :src="players[1].token"></div>
+      <div id="player3" v-bind:class="flipTank3()" v-if="players[2].name"> <img class="tank" :src="players[2].token"></div>
+      <div id="player4" v-bind:class="flipTank4()" v-if="players[3].name"> <img class="tank" :src="players[3].token"></div>
 
     </div>
   </div>
@@ -278,7 +278,15 @@ export default {
         [8, 49, 17, 24, 56, 64, 71, 106], //+4
         [2, 11, 22, 32, 51, 74, 79, 84, 89, 104], //+5
         [27, 91, 102]
-      ] //+25
+      ], //+25
+      flipPositions: [
+        19, 20, 21, 22, 23, 24, 25, 26, 27,
+        28, 29, 30, 31, 32, 33, 34, 35,
+        55, 56, 57, 58, 59, 60, 61, 62,
+        63, 64, 65, 66, 67, 68, 69, 70, 71,
+        91, 92, 93, 94, 95, 96, 97, 98,
+        99, 100, 101, 102, 103, 104, 105, 106, 107
+      ]
     }
   },
   methods: {
@@ -535,7 +543,47 @@ export default {
         this.stealPointsResponse = null;
         // this.enableTheDice();
       }
-    }
+    },
+    checkTankPosition1() {
+      for (let i=0; i < this.flipPositions.length; i++) {
+        if (this.gamePlayers[0].currentPosition === this.flipPositions[i]) {
+          return true;
+        }
+      }
+    },
+    checkTankPosition2() {
+      for (let i=0; i < this.flipPositions.length; i++) {
+        if (this.gamePlayers[1].currentPosition === this.flipPositions[i]) {
+          return true;
+        }
+      }
+    },
+    checkTankPosition3() {
+      for (let i=0; i < this.flipPositions.length; i++) {
+        if (this.gamePlayers[2].currentPosition === this.flipPositions[i]) {
+          return true;
+        }
+      }
+    },
+    checkTankPosition4() {
+      for (let i=0; i < this.flipPositions.length; i++) {
+        if (this.gamePlayers[3].currentPosition === this.flipPositions[i]) {
+          return true;
+        }
+      }
+    },
+    flipTank1() {
+      return this.checkTankPosition1() ? 'player1-flipped' : 'player1';
+    },
+    flipTank2() {
+      return this.checkTankPosition2() ? 'player2-flipped' : 'player2';
+    },
+    flipTank3() {
+      return this.checkTankPosition3() ? 'player3-flipped' : 'player3';
+    },
+    flipTank4() {
+      return this.checkTankPosition4() ? 'player4-flipped' : 'player4';
+    },
   },
   mounted() {
     this.updateNames();
@@ -919,6 +967,17 @@ input:focus {
   margin-top: 10px;
 }
 
+.player1-flipped {
+  z-index: 3;
+  position: absolute;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  margin-left: 27px;
+  margin-top: 10px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
 .player2 {
   z-index: 5;
   position: absolute;
@@ -928,11 +987,31 @@ input:focus {
   margin-top: 45px;
 }
 
+.player2-flipped {
+  z-index: 5;
+  position: absolute;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  margin-left: 27px;
+  margin-top: 45px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
 .player3 {
   z-index: 2;
   position: absolute;
   grid-row-start: 1;
   grid-column-start: 1;
+}
+
+.player3-flipped {
+  z-index: 2;
+  position: absolute;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .player4 {
@@ -941,6 +1020,16 @@ input:focus {
   grid-row-start: 1;
   grid-column-start: 1;
   margin-top: 35px;
+}
+
+.player4-flipped {
+  z-index: 4;
+  position: absolute;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  margin-top: 35px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .board-content-1 {
