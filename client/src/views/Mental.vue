@@ -75,7 +75,6 @@
       <div id="k15" class="grid" v-on:click="checkActive($event)"></div>
       <div id="k17" class="grid" v-on:click="checkActive($event)"></div>
 
-
       <div class="board-content-1">
         <div class="player1-container">
           <p class="player1-txt" v-if="players[0].name && players[1].name"> {{players[0].name.toUpperCase()}}</p>
@@ -162,10 +161,6 @@ export default {
     return {
       dice: [1,2,3,4,5,6],
       diceResult: 6,
-      player: {
-        id: 1,
-        currentPosition: 'f9'
-      },
       questionResult: "PRESS THE BIG MAD MENTAL SKULL TO START!!!!",
       answeredQuestions:[],
       randomQuestion: null,
@@ -173,6 +168,11 @@ export default {
       fullscreen: false,
       currentTile: 'a1',
       gamePlayers: [],
+      selectedOption: null,
+      player: {
+        id: 1,
+        currentPosition: 'f9'
+      },
       players: [ //keep it for the initial rendering
         {
           alias: "player1",
@@ -230,33 +230,31 @@ export default {
         ["h16","a15", "c11", "g3", "a3"], //-17
         ["j10", "b16", "d14", "b14", "d16","k3", "h4", "d4"], //-25
         ["a5", "f16", "g1", "a11","e17", "k13", "c7", "i13","e1", "b10", "c3", "k9", "f4","b6", "a7", "j14", "i7", "k15","f14", "h14","b8"],
-      ], //-all
-      fullScreen: false
+      ] //-all
     }
   },
   methods: {
     randomDice() {
-      this.diceResult = this.dice[Math.floor(Math.random() * 6)]
-      this.showMoveOptions()
+      this.diceResult = this.dice[Math.floor(Math.random() * 6)];
+      this.showMoveOptions();
       this.disableTheDice();
       this.questionResult = null;
     },
     showMoveOptions() {
-      this.disableTheDice()
+      this.disableTheDice();
       //get a random position from the MentalTileObjects
-      const randomGridTile = MentalTileObjects[Math.floor(Math.random() * 72)].id
+      const randomGridTile = MentalTileObjects[Math.floor(Math.random() * 72)].id;
       //fint the position in the html and add the flashing in it's css
       const moveOption = document.querySelector(`#${randomGridTile}`);
       moveOption.classList.add("show-border");
       //assign the position to the active player
-      this.activePlayer(this.gamePlayers).currentPosition = randomGridTile
-
+      this.activePlayer(this.gamePlayers).currentPosition = randomGridTile;
       const playerPrompt = document.querySelector(`.${this.activePlayer(this.gamePlayers).alias}` + '-txt');
       playerPrompt.classList.add("flashing");
     },
     resetMoveOptions() {
       //once the player is on the flashing tile, the tile stop flashing
-      const active = this.activePlayer(this.gamePlayers).currentPosition
+      const active = this.activePlayer(this.gamePlayers).currentPosition;
       const moveOption = document.querySelector(`#${active}`);
       moveOption.classList.remove("show-border");
     },
@@ -275,20 +273,20 @@ export default {
     checkActive(event) {
       //check if the player is on the clicked tile
       if (this.activePlayer(this.gamePlayers).currentPosition === event.currentTarget.id) {
-        return this.movePlayer(event)
+        return this.movePlayer(event);
       }
     },
     movePlayer(event) {
       //assign the active player token and obkject the new css position
       const activePlayer = document.querySelector(`#${this.activePlayer(this.gamePlayers).alias}`);
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
-                                    grid-column-start: ${this.getNewColPosition(event)};`
+                                    grid-column-start: ${this.getNewColPosition(event)};`;
       this.activePlayer(this.gamePlayers).currentPosition = event.currentTarget.id;
-      this.resetMoveOptions()
-      this.stealPoints(this.activePlayer(this.gamePlayers), this.gamePlayers)
-      this.loosePoints(this.arrayLoose, this.activePlayer(this.gamePlayers))
-      this.addPoints(this.extraPoint, this.activePlayer(this.gamePlayers))
-      const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
+      this.resetMoveOptions();
+      this.stealPoints(this.activePlayer(this.gamePlayers), this.gamePlayers);
+      this.loosePoints(this.arrayLoose, this.activePlayer(this.gamePlayers));
+      this.addPoints(this.extraPoint, this.activePlayer(this.gamePlayers));
+      const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId);
       //load a random question from a randomcategory
       this.loadRandomQuestion(randomCategoryAndId);
     },
@@ -303,75 +301,75 @@ export default {
     //filters the player arrived from the form, and take them just the one with a name
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
-        return player.name !== ''
+        return player.name !== '';
       });
       this.gamePlayers = playersWithName;
     },
     //find the player with their status active
     activePlayer(players) {
       const activePlayer = players.find(player => player.active === true);
-      this.nextPlayer = activePlayer
+      this.nextPlayer = activePlayer;
       return activePlayer;
     },
     //check if active and non active player got the same position, if yes both players lose their points
     stealPoints(activePlayer, arrayOfPlayers) {
-      const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false)
-      const sameCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
+      const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false);
+      const sameCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition);
       if (sameCurrentPosition.length >= 1) {
         sameCurrentPosition.forEach((player) => {
-            this.questionResult = `You & ${player.name} lost aw yer points!`
-            activePlayer.score = 0
-            player.score = 0
-          })
+            this.questionResult = `You & ${player.name} lost aw yer points!`;
+            activePlayer.score = 0;
+            player.score = 0;
+          });
         }
       },
       //check if the current position of the player is included in the minus list
     loosePoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
-        activePlayer.score -= 4
-        this.questionResult = "NAE JOY! You lost 4 points!!!"
+        activePlayer.score -= 4;
+        this.questionResult = "NAE JOY! You lost 4 points!!!";
       } else if (array[1].includes(activePlayer.currentPosition)) {
-        activePlayer.score -= 7
-        this.questionResult = "NAE JOY! You lost 7 points!!!"
+        activePlayer.score -= 7;
+        this.questionResult = "NAE JOY! You lost 7 points!!!";
       } else if (array[2].includes(activePlayer.currentPosition)) {
-        activePlayer.score -= 13
-        this.questionResult = "NAE JOY! You lost 13 points!!!"
+        activePlayer.score -= 13;
+        this.questionResult = "NAE JOY! You lost 13 points!!!";
       } else if (array[3].includes(activePlayer.currentPosition)) {
-        activePlayer.score -= 17
-        this.questionResult = "NAE JOY! You lost 17 points!!!"
+        activePlayer.score -= 17;
+        this.questionResult = "NAE JOY! You lost 17 points!!!";
       } else if (array[4].includes(activePlayer.currentPosition)) {
-        activePlayer.score -= 25
-        this.questionResult = "NAE JOY! You lost 25 points!!!"
+        activePlayer.score -= 25;
+        this.questionResult = "NAE JOY! You lost 25 points!!!";
       } else if (array[5].includes(activePlayer.currentPosition)) {
         if (activePlayer.score > 0){
-        activePlayer.score = 0
-        this.questionResult = "SAKE!!! Ye lost aw yer points!!!"}
-        else {
-          activePlayer.score = 0
-          this.questionResult = "JAMMY!"
-        }
-      }
+        activePlayer.score = 0;
+        this.questionResult = "SAKE!!! Ye lost aw yer points!!!"
+      } else {
+          activePlayer.score = 0;
+          this.questionResult = "JAMMY!";
+       }
+     }
     },
     //check if the active player position is included in the plusarray
     addPoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 3
-        this.questionResult = "YAASSS! Ye fun 3 points!!!"
+        activePlayer.score += 3;
+        this.questionResult = "YAASSS! Ye fun 3 points!!!";
       } else if (array[1].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 5
-        this.questionResult = "YAASSS! Ye fun 5 points!!!"
+        activePlayer.score += 5;
+        this.questionResult = "YAASSS! Ye fun 5 points!!!";
       } else if (array[2].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 9
-        this.questionResult = "YAASSS! Ye fun 9 points!!!"
+        activePlayer.score += 9;
+        this.questionResult = "YAASSS! Ye fun 9 points!!!";
       } else if (array[3].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 17
-        this.questionResult = "YAASSS! Ye fun 17 points!!!"
+        activePlayer.score += 17;
+        this.questionResult = "YAASSS! Ye fun 17 points!!!";
       } else if (array[4].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 33
-        this.questionResult = "YAASSS! Ye fun 33 points!!!"
+        activePlayer.score += 33;
+        this.questionResult = "YAASSS! Ye fun 33 points!!!";
       } else if (array[5].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 100
-        this.questionResult = "NAE DANGER! Ye fun 100 points!!!"
+        activePlayer.score += 100;
+        this.questionResult = "NAE DANGER! Ye fun 100 points!!!";
       }
     },
     //we associate the props to the premade object in the data, and then we filter it and
@@ -383,14 +381,14 @@ export default {
       this.players[3].name = this.player4;
       this.filteredPlayers();
       this.gamePlayers[0].active = true;
-      this.nextPlayer = this.activePlayer(this.gamePlayers)
+      this.nextPlayer = this.activePlayer(this.gamePlayers);
     },
     //fetch the randomQuestion
     loadRandomQuestion(categoryAndID) {
       const url = `https://opentdb.com/api.php?amount=1&category=${categoryAndID[1]}&type=multiple`;
       fetch(url).then(response => response.json())
         .then(data => {
-          const query = data.results[0]
+          const query = data.results[0];
           const options = query.incorrect_answers.map(answer => answer);
           options.push(query.correct_answer);
           if (!this.answeredQuestions.includes(query.question)) {
@@ -400,7 +398,7 @@ export default {
               correct_answer: query.correct_answer,
               category: query.category
             }
-            this.answeredQuestions.push(this.randomQuestion.question)
+            this.answeredQuestions.push(this.randomQuestion.question);
           } else {
             this.loadRandomQuestion(this.getRandomCategory(this.categoriesAndId));
           }
@@ -408,57 +406,14 @@ export default {
     },
     //get a random category from the array in the data
     getRandomCategory(categoryArray) {
-      const category = categoryArray[Math.floor(Math.random() * categoryArray.length)]
-      return category
+      const category = categoryArray[Math.floor(Math.random() * categoryArray.length)];
+      return category;
     },
     addPoint(player) {
-      player.score += 1
+      player.score += 1;
     },
     checkWinCondition(activePlayer) {
       if (activePlayer.score === 666) {
-        return true //The game finish here
-      }
-  },
-  disableTheDice() {
-    const dice = document.querySelector(".skull")
-    dice.style.pointerEvents = 'none';
-  }, //Find the Dice class and re-enable the click event
-  enableTheDice() {
-    const dice = document.querySelector(".skull")
-    dice.style.pointerEvents = 'auto';
-  },
-  //find the index(of the active player)
-  findIndexOfPlayer(player) {
-    const index = this.gamePlayers.indexOf(player);
-    return index;
-  },
-  //given an active player and the array of players, find me the index of the active, and set it as false
-  switchActivePlayer(player, players) {
-    const index = this.findIndexOfPlayer(player);
-    players[index].active = false;
-    //if the index is less then the array length minus 1 find the player with
-    //the index after the active one and set it as true
-    if (index < (players.length - 1)) {
-      players[(index + 1)].active = true;
-    } else {
-      //otherwise set the first player as active
-      players[0].active = true
-    }
-  }
-},
-  mounted(){
-    this.updateNames()
-
-    eventBus.$on('selected-option', (option) => {
-      this.questionResult = null;
-      const playerActive = this.activePlayer(this.gamePlayers);
-      const question = this.randomQuestion;
-
-      if (option === question.correct_answer) {
-        this.nextPlayer = null
-        this.questionResult = "YAS! Ye got a point! Go again!"
-        this.addPoint(playerActive);
-        if (this.checkWinCondition(playerActive)) {
           this.nextPlayer = null
           this.questionResult = "NO WAY MAN - ye've WON!"
           this.disableTheDice()
@@ -469,17 +424,59 @@ export default {
           //create a new question in either cases
           this.enableTheDice();
         }
-      } else {
-        this.nextPlayer = null
-        this.questionResult = "BOLT - WRANG ANSWER!"
-        this.enableTheDice()
-        this.switchActivePlayer(playerActive, this.gamePlayers);
-        this.randomQuestion = null;
-
-        const playerPrompt = document.querySelector(`.${playerActive.alias}` + '-txt');
-        playerPrompt.classList.remove("flashing");
+      },
+      disableTheDice() {
+        const dice = document.querySelector(".skull");
+        dice.style.pointerEvents = 'none';
+      }, //Find the Dice class and re-enable the click event
+      enableTheDice() {
+        const dice = document.querySelector(".skull");
+        dice.style.pointerEvents = 'auto';
+      },
+      //find the index(of the active player)
+      findIndexOfPlayer(player) {
+        const index = this.gamePlayers.indexOf(player);
+        return index;
+      },
+      //given an active player and the array of players, find me the index of the active, and set it as false
+      switchActivePlayer(player, players) {
+        const index = this.findIndexOfPlayer(player);
+        players[index].active = false;
+        //if the index is less then the array length minus 1 find the player with
+        //the index after the active one and set it as true
+        if (index < (players.length - 1)) {
+          players[(index + 1)].active = true;
+        } else {
+          //otherwise set the first player as active
+          players[0].active = true;
+        }
+      },
+      checkSelectedOption() {
+        this.questionResult = null;
+        const playerActive = this.activePlayer(this.gamePlayers);
+        const question = this.randomQuestion;
+        if (this.selectedOption === question.correct_answer) {
+          this.nextPlayer = null;
+          this.questionResult = "YAS! Ye got a point! Go again!";
+          this.addPoint(playerActive);
+        } else {
+          this.nextPlayer = null;
+          this.questionResult = "BOLT - WRANG ANSWER!";
+          this.enableTheDice();
+          this.switchActivePlayer(playerActive, this.gamePlayers);
+          this.randomQuestion = null;
+          const playerPrompt = document.querySelector(`.${playerActive.alias}` + '-txt');
+          playerPrompt.classList.remove("flashing");
+        }
       }
-    })
+  },
+  mounted(){
+    this.updateNames();
+
+    eventBus.$on('selected-option', (option) => {
+      this.selectedOption = option;
+      this.checkSelectedOption();
+    });
   },
   beforeDestroy() {
     eventBus.$off();
