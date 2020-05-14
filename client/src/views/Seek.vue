@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="seek" class="page-container" v-on:click="togglefullScreen()">
+  <div id="seek" class="page-container">
     <div class="game-board" ref="gameBoard">
       <div id="g1" class="grid" v-on:click="checkActive($event)"></div>
       <div id="g2" class="grid" v-on:click="checkActive($event)"></div>
@@ -110,7 +110,7 @@
       <div id="g107" class="grid-finish" v-on:click="checkActive($event)"></div>
 
       <div class="board-content-1">
-        <div class="seek-dice-container">
+        <div class="seek-dice-container" v-on:click="togglefullScreen()">
           <input class="dice" type="image" :src="getDiceFace()" v-on:click="randomDice()"></input>
         </div>
         <div class="np-name">
@@ -177,7 +177,7 @@
       <div id="player2" v-bind:class="flipTank2()" v-if="players[1].name"> <img class="tank" :src="players[1].token"></div>
       <div id="player3" v-bind:class="flipTank3()" v-if="players[2].name"> <img class="tank" :src="players[2].token"></div>
       <div id="player4" v-bind:class="flipTank4()" v-if="players[3].name"> <img class="tank" :src="players[3].token"></div>
-
+      
     </div>
   </div>
 </div>

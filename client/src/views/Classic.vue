@@ -1,5 +1,5 @@
 <template lang="html">
-    <div id="classic" class="page-container" v-on:click="togglefullScreen()" :disabled="fullScreen">
+    <div id="classic" class="page-container">
       <div class="game-board">
         <div id="a1" class="sport" v-on:click="checkActive($event)"></div>
         <div id="a2" class="geography" v-on:click="checkActive($event)"></div>
@@ -82,7 +82,7 @@
             <router-link :to="{name: 'newgame'}"> <img class="back-button" :src="back" v-on:click=""> </router-link>
           </div>
 
-          <div class="dice-container">
+          <div class="dice-container" v-on:click="togglefullScreen()">
 
             <div id="cube" v-on:click="rollDice">
               <div class="front" value="1">

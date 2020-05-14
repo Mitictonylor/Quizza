@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="mental" class="page-container" v-on:click="togglefullScreen()">
+  <div id="mental" class="page-container">
 
     <div class="game-board" ref="gameBoard">
       <div id="a1" class="grid" v-on:click="checkActive($event)"></div>
@@ -93,7 +93,7 @@
           </div>
         </div>
 
-          <div class="skull" v-on:click="randomDice()">
+          <div class="skull" v-on:click="randomDice(); togglefullScreen()">
             <div class="eye"></div>
             <div class="eye"></div>
             <div class="nose"></div>
