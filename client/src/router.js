@@ -11,7 +11,6 @@ import Seek from '@/views/Seek.vue';
 import Mental from '@/views/Mental.vue';
 import HallOfFame from '@/views/HallOfFame';
 import Warning from '@/views/Warning';
-import DevBoard from '@/views/DevBoard';
 
 //we need to define a roter object, that takes in an object with the routes
 const router = new Router({
@@ -68,14 +67,7 @@ const router = new Router({
       name:'warning',
       component: Warning,
       props: true
-    },
-    {
-      path: '/devboard',
-      name:'devboard',
-      component: DevBoard,
-      props: true
     }
-
   ]
 });
 //export the router object in line 9
