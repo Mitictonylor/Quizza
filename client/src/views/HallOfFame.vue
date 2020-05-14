@@ -236,7 +236,7 @@ export default {
     font-family: 'Russo One', sans-serif;
     font-size: 70px;
     float: left;
-    margin-left: 5.5%;
+    margin-left: 10px;
   }
 
   .sub-text {
