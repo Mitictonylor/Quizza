@@ -463,7 +463,7 @@ export default {
         this.questionResult = "Congratulations - you've WON!"
         const allThePage = document.querySelector("#classic");
         allThePage.classList.add("flashing");
-        this.disableTheDice()
+        this.disableTheDice();
         this.randomQuestion = null
       } else {
         this.nextPlayer = null

@@ -115,10 +115,10 @@
         </div>
         <div class="np-name">
           <p v-if="nextPlayer">{{nextPlayer.name.toUpperCase()}}  lock & load!</p>
-            </div>
-          <div class="thief-container">
-            <span v-if="stealPointsResponse" class="thief"> {{stealPointsResponse}}</span>
-          </div>
+        </div>
+        <div class="thief-container">
+          <span v-if="stealPointsResponse" class="thief"> {{stealPointsResponse}}</span>
+        </div>
       </div>
 
       <div class="board-content-2">
@@ -149,7 +149,7 @@
           <div class="score-container">
             <p>SCORE: {{players[3].score}}</p>
           </div>
-      </div>
+        </div>
       </div>
 
       <div v-if="randomQuestion" class="board-content-3">
@@ -206,6 +206,15 @@ export default {
       dice: [1, 2, 3, 4, 5, 6],
       diceResult: 6,
       nextPlayer: null,
+      answeredQuestions: [],
+      moveOption: null,
+      randomQuestion: null,
+      questionResult: null,
+      stealPointsResponse: null,
+      fullScreen: false,
+      general: general,
+      back: back,
+      selectedOption: null,
       categoriesAndId: [
         ['sport', 21],
         ['geography', 22],
@@ -254,12 +263,6 @@ export default {
           token: tank4
         }
       ],
-      answeredQuestions: [],
-      moveOption: null,
-      randomQuestion: null,
-      questionResult: null,
-      stealPointsResponse: null,
-      fullScreen: false,
       arrayLoose: [
         [5, 10, 15], //-1
         [20, 25, 30], //-2
@@ -275,32 +278,30 @@ export default {
         [8, 49, 17, 24, 56, 64, 71, 106], //+4
         [2, 11, 22, 32, 51, 74, 79, 84, 89, 104], //+5
         [27, 91, 102]
-      ], //+25
-      general: general,
-      back: back
+      ] //+25
     }
   },
   methods: {
     //get a random value from the dice
     randomDice() {
-      this.diceResult = this.dice[Math.floor(Math.random() * 6)]
-      this.showMoveOptions()
+      this.diceResult = this.dice[Math.floor(Math.random() * 6)];
+      this.showMoveOptions();
       this.questionResult = null;
       this.disableTheDice();
     },
     getDiceFace() {
-      return require('@/assets/dice/' + this.diceResult + '.png')
+      return require('@/assets/dice/' + this.diceResult + '.png');
     },
     //if the active player share his position with another player, he steals all the other player points
     stealPoints(activePlayer, arrayOfPlayers) {
-      const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false)
-      const sameCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition)
+      const deactivatedPlayers = arrayOfPlayers.filter(player => player.active === false);
+      const sameCurrentPosition = deactivatedPlayers.filter(player => player.currentPosition === activePlayer.currentPosition);
       if (sameCurrentPosition.length >= 1) {
         sameCurrentPosition.forEach((player) => {
           if (player.score > 0) {
-            this.stealPointsResponse = `You stole ${player.name}'s points!`
+            this.stealPointsResponse = `You stole ${player.name}'s points!`;
             activePlayer.score += player.score;
-            player.score = 0
+            player.score = 0;
           }
         })
       };
@@ -309,67 +310,67 @@ export default {
     //check if their positions are the same and assign the loose
     loosePoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
-        activePlayer.score -= 1
-        this.questionResult = "BOOOOM! You lost 1 point! PUAHAHA HAHAHA "
+        activePlayer.score -= 1;
+        this.questionResult = "BOOOOM! You lost 1 point! PUAHAHA HAHAHA";
       } else if (array[1].includes(activePlayer.currentPosition)) {
-        activePlayer.score -= 2
-        this.questionResult = "BOOOOM! You lost 2 points! PUAHAHA HAHAHA "
+        activePlayer.score -= 2;
+        this.questionResult = "BOOOOM! You lost 2 points! PUAHAHA HAHAHA";
       } else if (array[2].includes(activePlayer.currentPosition)) {
-        activePlayer.score -= 3
-        this.questionResult = "BOOOOM! You lost 3 points! PUAHAHA HAHAHA "
+        activePlayer.score -= 3;
+        this.questionResult = "BOOOOM! You lost 3 points! PUAHAHA HAHAHA";
       } else if (array[3].includes(activePlayer.currentPosition)) {
-        activePlayer.score -= 4
-        this.questionResult = "BOOOOM! You lost 4 points! PUAHAHA HAHAHA "
+        activePlayer.score -= 4;
+        this.questionResult = "BOOOOM! You lost 4 points! PUAHAHA HAHAHA";
       } else if (array[4].includes(activePlayer.currentPosition)) {
-        activePlayer.score -= 5
-        this.questionResult = "BOOOOM! You lost 5 points! PUAHAHA HAHAHA "
+        activePlayer.score -= 5;
+        this.questionResult = "BOOOOM! You lost 5 points! PUAHAHA HAHAHA";
       } else if (array[5].includes(activePlayer.currentPosition)) {
-        activePlayer.score = 0
-        this.questionResult = "BOOOOM! You lost all your points! PUAHAHA HAHAHA "
+        activePlayer.score = 0;
+        this.questionResult = "BOOOOM! You lost all your points! PUAHAHA HAHAHA";
       }
     },
     //given an array of extra point position tiles, and the active player,
     //check if their positions are the same and assign the extra
     addPoints(array, activePlayer) {
       if (array[0].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 1
-        this.questionResult = "You found 1 point MAGGOT! Answer the gawd damn question!"
+        activePlayer.score += 1;
+        this.questionResult = "You found 1 point MAGGOT! Answer the gawd damn question!";
       } else if (array[1].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 2
-        this.questionResult = "You found 2 points MAGGOT! Answer the gawd damn question!"
+        activePlayer.score += 2;
+        this.questionResult = "You found 2 points MAGGOT! Answer the gawd damn question!";
       } else if (array[2].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 3
-        this.questionResult = "You found 3 points MAGGOT! Answer the gawd damn question!"
+        activePlayer.score += 3;
+        this.questionResult = "You found 3 points MAGGOT! Answer the gawd damn question!";
       } else if (array[3].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 4
-        this.questionResult = "You found 4 points MAGGOT! Answer the gawd damn question!"
+        activePlayer.score += 4;
+        this.questionResult = "You found 4 points MAGGOT! Answer the gawd damn question!";
       } else if (array[4].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 5
-        this.questionResult = "You found 5 points MAGGOT! Answer the gawd damn question!"
+        activePlayer.score += 5;
+        this.questionResult = "You found 5 points MAGGOT! Answer the gawd damn question!";
       } else if (array[5].includes(activePlayer.currentPosition)) {
-        activePlayer.score += 25
-        this.questionResult = "GAWD DAMMIT! You found 25 points!!!"
+        activePlayer.score += 25;
+        this.questionResult = "GAWD DAMMIT! You found 25 points!!!";
       }
     },
     //we want the player to win when it arrives straight to 107
     showMoveOptions() { //current position:106 + dice.result 4 =110
-      let total = (this.activePlayer(this.gamePlayers).currentPosition + this.diceResult)
+      let total = (this.activePlayer(this.gamePlayers).currentPosition + this.diceResult);
       if (total > 107) { //yes
-        const difference = total - 107 //3   currentPosition:105 -3 g102
-        const newDivID = 'g' + (107 - difference)
+        const difference = total - 107; //3   currentPosition:105 -3 g102
+        const newDivID = 'g' + (107 - difference);
         const moveOption = document.querySelector(`#${newDivID}`);
         moveOption.classList.add("flashing");
-        this.moveOption = newDivID
-        this.activePlayer(this.gamePlayers).currentPosition = 107 - difference
+        this.moveOption = newDivID;
+        this.activePlayer(this.gamePlayers).currentPosition = 107 - difference;
       } else {
         //add da current position a 107 and the extra remove it from current poisition and flash them
-        const divID = 'g' + total
+        const divID = 'g' + total;
         const moveOption = document.querySelector(`#${divID}`);
         moveOption.classList.add("flashing");
-        this.moveOption = divID
-        this.activePlayer(this.gamePlayers).currentPosition = total
+        this.moveOption = divID;
+        this.activePlayer(this.gamePlayers).currentPosition = total;
       }
-      total = 0
+      total = 0;
     },
     //once the player is on the flashing tile, the tile stop flashing
     resetMoveOptions() {
@@ -392,7 +393,7 @@ export default {
     //check if the player move option  is the clicked tile
     checkActive(event) {
       if (this.moveOption === event.currentTarget.id) {
-        return this.movePlayer(event)
+        return this.movePlayer(event);
       }
     },
     //assign the active player token and obkject the new css position
@@ -400,12 +401,12 @@ export default {
       const activePlayer = document.querySelector(`#${this.activePlayer(this.gamePlayers).alias}`);
       activePlayer.style.cssText = `grid-row-start: ${this.getNewRowPosition(event)};
                                     grid-column-start: ${this.getNewColPosition(event)};`
-      const index = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers))
-      this.stealPoints(this.activePlayer(this.gamePlayers), this.gamePlayers)
-      this.loosePoints(this.arrayLoose, this.activePlayer(this.gamePlayers))
-      this.addPoints(this.extraPoint, this.activePlayer(this.gamePlayers))
+      const index = this.findIndexOfPlayer(this.activePlayer(this.gamePlayers));
+      this.stealPoints(this.activePlayer(this.gamePlayers), this.gamePlayers);
+      this.loosePoints(this.arrayLoose, this.activePlayer(this.gamePlayers));
+      this.addPoints(this.extraPoint, this.activePlayer(this.gamePlayers));
       this.resetMoveOptions();
-      const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId)
+      const randomCategoryAndId = this.getRandomCategory(this.categoriesAndId);
       //load a random question from a randomcategory
       this.loadRandomQuestion(randomCategoryAndId);
     },
@@ -420,7 +421,7 @@ export default {
     //filters the player arrived from the form, and take them just the one with a name
     filteredPlayers() {
       const playersWithName = this.players.filter((player) => {
-        return player.name !== ''
+        return player.name !== '';
       });
       this.gamePlayers = playersWithName;
     },
@@ -433,7 +434,7 @@ export default {
       this.players[3].name = this.player4;
       this.filteredPlayers();
       this.gamePlayers[0].active = true;
-      this.nextPlayer = this.activePlayer(this.gamePlayers)
+      this.nextPlayer = this.activePlayer(this.gamePlayers);
     },
     //find the index(of the active player)
     findIndexOfPlayer(player) {
@@ -444,50 +445,61 @@ export default {
     loadRandomQuestion(categoryAndID) {
       const url = `https://opentdb.com/api.php?amount=1&category=${categoryAndID[1]}&type=multiple`;
       fetch(url).then(response => response.json())
-        .then(data => {
-          const query = data.results[0]
-          const options = query.incorrect_answers.map(answer => answer);
-          options.push(query.correct_answer);
-          if (!this.answeredQuestions.includes(query.question)) {
-            this.randomQuestion = {
-              options: options,
-              question: query.question,
-              correct_answer: query.correct_answer,
-              category: query.category
-            }
-            this.answeredQuestions.push(this.randomQuestion.question)
-          } else {
-            this.loadRandomQuestion(this.getRandomCategory(this.categoriesAndId));
+      .then(data => {
+        const query = data.results[0];
+        const options = query.incorrect_answers.map(answer => answer);
+        options.push(query.correct_answer);
+        if (!this.answeredQuestions.includes(query.question)) {
+          this.randomQuestion = {
+            options: options,
+            question: query.question,
+            correct_answer: query.correct_answer,
+            category: query.category
           }
-        })
+          this.answeredQuestions.push(this.randomQuestion.question);
+        } else {
+          this.loadRandomQuestion(this.getRandomCategory(this.categoriesAndId));
+        }
+      });
     },
     //gives us back a random category from the data
     getRandomCategory(categoryArray) {
-      const category = categoryArray[Math.floor(Math.random() * categoryArray.length)]
-      return category
+      const category = categoryArray[Math.floor(Math.random() * categoryArray.length)];
+      return category;
     },
     //find the player with their status active
     activePlayer(players) {
       const activePlayer = players.find(player => player.active === true);
-      this.nextPlayer = activePlayer
+      this.nextPlayer = activePlayer;
       return activePlayer;
     },
     addPoint(player) {
-      player.score += 1
+      player.score += 1;
     },
     checkWinCondition(activePlayer) {
       if (activePlayer.currentPosition === 107) {
-        return true //The game finish here
-      }
+        QuizzaService.addScore(this.gamePlayers);
+        this.nextPlayer = null;
+        const allThePage = document.querySelector("#seek");
+        allThePage.classList.add("flashing");
+        this.questionResult = "Well I'll be damned! You've only went and WON!";
+        this.disableTheDice();
+        this.randomQuestion = null;
+        this.stealPointsResponse = null;
+      } else {
+        this.nextPlayer = null;
+        this.randomQuestion = null;
+        this.stealPointsResponse = null;
+        //create a new question in either cases
+        this.enableTheDice();
+      } //The game finish here
     },
     disableTheDice() {
-      const dice = document.querySelector(".dice")
-      console.log(dice);
+      const dice = document.querySelector(".dice");
       dice.style.pointerEvents = 'none';
     }, //Find the Dice class and re-enable the click event
     enableTheDice() {
-      const dice = document.querySelector(".dice")
-      console.log(dice);
+      const dice = document.querySelector(".dice");
       dice.style.pointerEvents = 'auto';
     },
     //given an active player and the array of players, find me the index of the active, and set it as false
@@ -500,50 +512,38 @@ export default {
         players[(index + 1)].active = true;
       } else {
         //otherwise set the first player as active
-        players[0].active = true
+        players[0].active = true;
       }
-    }
-},
-  mounted() {
-    this.updateNames();
-
-    eventBus.$on('selected-option', (option) => {
+    },
+    checkSelectedOption() {
       this.questionResult = null;
       const playerActive = this.activePlayer(this.gamePlayers);
       const question = this.randomQuestion;
 
-      if (option === question.correct_answer) {
+      if (this.selectedOption === question.correct_answer) {
         this.nextPlayer = null;
         this.stealPointsResponse = null;
-        this.questionResult = " CORRECT! You got 1 point. Roll again MAGGOT!"
+        this.questionResult = " CORRECT! You got 1 point. Roll again MAGGOT!";
         this.addPoint(playerActive);
-        if (this.checkWinCondition(playerActive)) {
-          QuizzaService.addScore(this.gamePlayers)
-          this.nextPlayer = null
-          const allThePage = document.querySelector("#seek");
-          allThePage.classList.add("flashing");
-          this.questionResult = "Well I'll be damned! You've only went and WON!"
-          this.disableTheDice()
-          this.randomQuestion = null;
-          this.stealPointsResponse = null;
-        } else {
-          this.nextPlayer = null
-          this.randomQuestion = null;
-          this.stealPointsResponse = null;
-          //create a new question in either cases
-          this.enableTheDice();
-        }
+        this.checkWinCondition(playerActive);
       } else {
-        this.nextPlayer = null
-        this.questionResult = "INCORRECT! What's your major malfunction numb nuts?"
-        this.enableTheDice()
+        this.nextPlayer = null;
+        this.questionResult = "INCORRECT! What's your major malfunction numb nuts?";
+        this.enableTheDice();
         this.switchActivePlayer(playerActive, this.gamePlayers);
-        console.log("HERE", playerActive);
         this.randomQuestion = null;
         this.stealPointsResponse = null;
         // this.enableTheDice();
       }
-    })
+    }
+  },
+  mounted() {
+    this.updateNames();
+
+    eventBus.$on('selected-option', (option) => {
+      this.selectedOption = option;
+      this.checkSelectedOption();
+    });
   },
   beforeDestroy() {
     eventBus.$off();
