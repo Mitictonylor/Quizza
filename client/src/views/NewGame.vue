@@ -205,7 +205,7 @@ p {
   font-size: 100px;
   margin-bottom: 15px;
   float: left;
-  margin-left: 15%;
+  margin-left: 60px;
 }
 
 .sub-text {
