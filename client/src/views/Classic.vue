@@ -204,7 +204,6 @@ import player1 from '@/assets/tokens/circle_red.png';
 import player2 from '@/assets/tokens/circle_blue.png';
 import player3 from '@/assets/tokens/circle_yellow.png';
 import player4 from '@/assets/tokens/circle_green.png';
-import fullscreen from '@/assets/images/fullscreen.png';
 import back from '@/assets/images/back.png';
 
 export default {

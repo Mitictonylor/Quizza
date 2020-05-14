@@ -75,6 +75,10 @@
       <div id="k15" class="grid" v-on:click="checkActive($event)"></div>
       <div id="k17" class="grid" v-on:click="checkActive($event)"></div>
 
+      <div id="f1" class="back-button-container">
+        <router-link :to="{name: 'newgame'}"> <img class="back-button" :src="back" v-on:click=""> </router-link>
+      </div>
+
       <div class="board-content-1">
         <div class="player1-container">
           <p class="player1-txt" v-if="players[0].name && players[1].name"> {{players[0].name.toUpperCase()}}</p>
@@ -150,6 +154,7 @@ import {MentalTileObjects} from '@/config/MentalTileObjects.js'
 import Questions from "@/components/Questions.vue"
 import {eventBus} from '../main.js';
 require('@/assets/css/skull.css');
+import back from '@/assets/images/purple_back.png';
 
 export default {
   name: 'mental',
@@ -169,6 +174,7 @@ export default {
       currentTile: 'a1',
       gamePlayers: [],
       selectedOption: null,
+      back: back,
       player: {
         id: 1,
         currentPosition: 'f9'
@@ -691,6 +697,11 @@ export default {
 }
 
 /* ROW F */
+#f1 {
+  grid-row-start: 6;
+  grid-column-start: 1;
+}
+
 #f2 {
   grid-row-start: 6;
   grid-column-start: 2;
@@ -1140,6 +1151,25 @@ p {
   margin: 0;
 }
 
+.back-button-container {
+  width: 10%;
+  float: left;
+  margin-left: 15px;
+  margin-top: 13px;
+}
+
+.back-button {
+  height: 60px;
+}
+
+.back-button:hover {
+  background-color: orange;
+  border-radius: 50%;
+}
+
+.back-button:focus {
+  outline: none;
+}
 </style>
 
 <style media="screen">
